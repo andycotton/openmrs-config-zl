@@ -1,6 +1,7 @@
 {
   "components": [
     "visitManagement",
+    "activeVisits",
     "checkIn",
     "checkInHomepageApp",
     "uhmVitals",
