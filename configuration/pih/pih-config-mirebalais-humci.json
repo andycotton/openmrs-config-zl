@@ -31,6 +31,7 @@
     "patientRegistration",
     "allergies",
     "clinicianDashboard",
+    "homeVisitsOnClinicianDashboard",
     "visitNote",
     "mentalHealth",
     "edTriage",
