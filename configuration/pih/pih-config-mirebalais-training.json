@@ -44,7 +44,8 @@
     "biometricsFingerPrints",
     "patientDocuments",
     "socioEconomics",
-    "mch"
+    "mch",
+    "growthChart"
   ],
 
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",

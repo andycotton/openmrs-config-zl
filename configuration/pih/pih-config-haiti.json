@@ -32,7 +32,8 @@
         "socioEconomics",
         "vct",
         "edTriage",
-        "edTriageQueue"
+        "edTriageQueue",
+        "growthChart"
     ],
 
     "globalProperties": {

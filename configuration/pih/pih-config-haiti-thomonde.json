@@ -27,7 +27,8 @@
     "vitals",
     "mentalHealth",
     "ncd",
-    "socioEconomics"
+    "socioEconomics",
+    "growthChart"
   ],
 
   "globalProperties": {

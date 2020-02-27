@@ -30,7 +30,8 @@
       "vct",
       "ncd",
       "edTriage",
-      "edTriageQueue"
+      "edTriageQueue",
+      "growthChart"
   ],
 
   "globalProperties": {

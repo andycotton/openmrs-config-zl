@@ -36,6 +36,7 @@
 	"vct",
     "edTriage",
     "edTriageQueue",
-    "chwApp"
+    "chwApp",
+    "growthChart"
 	]
 }

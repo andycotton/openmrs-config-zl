@@ -42,7 +42,8 @@
     "socioEconomics",
     "zika",
     "biometricsFingerPrints",
-    "patientDocuments"
+    "patientDocuments",
+    "growthChart"
   ],
 
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
