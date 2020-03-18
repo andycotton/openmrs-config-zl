@@ -16,3 +16,13 @@ If the configuration package you are building will be depended upon by another c
 in order for the other package to be able to pick it up.
 
 `mvn clean install` - Will compile and package as above, and install as an available dependency on your system
+
+##### To enable watching, you run the following:
+
+* in the parent project (openmrs-config-pihemr) directory:  
+`mvn clean openmrs-packager:watch`
+* in the current openmr-config-zl directory:  
+`mvn clean openmrs-packager:watch -Dgoal=compile -DserverId=SERVER_ID -DdelaySeconds=3`
+
+For more details regarding the available commands please see:
+https://github.com/openmrs/openmrs-contrib-packager-maven-plugin 
