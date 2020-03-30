@@ -51,7 +51,8 @@
     "vct",
     "mch",
     "vaccination",
-    "growthChart"
+    "growthChart",
+    "j9"
   ],
 
   "scheduleMonthlyDataExports": true,
