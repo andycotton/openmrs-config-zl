@@ -45,7 +45,8 @@
     "patientDocuments",
     "socioEconomics",
     "mch",
-    "growthChart"
+    "growthChart",
+    "j9"
   ],
 
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
