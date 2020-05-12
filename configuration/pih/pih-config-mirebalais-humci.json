@@ -52,7 +52,8 @@
     "mch",
     "vaccination",
     "growthChart",
-    "j9"
+    "j9",
+    "covid19"
   ],
 
   "scheduleMonthlyDataExports": true,
