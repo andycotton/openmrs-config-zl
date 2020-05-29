@@ -1,12 +1,7 @@
 {
-  "biometricsConfig": {
-    "biometricEngine": "restBiometricEngine",
-    "templateFormat": "PROPRIETARY",
-    "subjectUrl": "http://humci.pih-emr.org:9000/subject",
-    "matchUrl": "http://humci.pih-emr.org:9000/match",
-    "scanUrl": "https://localhost:9443/fingerprint/scan",
-    "devicesUrl": "https://localhost:9443/fingerprint/devices"
-  },
+  "welcomeMessage": "Bienvenue dans l'EMR de Hôpital Saint-Nicolas",
+  "site": "THOMONDE",
+  "dossierIdentifierPrefix": "HS",
 
   "components": [
     "clinicianDashboard",
@@ -39,5 +34,18 @@
     "edTriageQueue",
     "chwApp",
     "growthChart"
-	]
+	],
+
+  "globalProperties": {
+    "coreapps.defaultPatientIdentifierLocation": "97c241a0-eaec-11e5-a837-0800200c9a66"
+  },
+
+  "biometricsConfig": {
+    "biometricEngine": "restBiometricEngine",
+    "templateFormat": "PROPRIETARY",
+    "subjectUrl": "http://humci.pih-emr.org:9000/subject",
+    "matchUrl": "http://humci.pih-emr.org:9000/match",
+    "scanUrl": "https://localhost:9443/fingerprint/scan",
+    "devicesUrl": "https://localhost:9443/fingerprint/devices"
+  }
 }
