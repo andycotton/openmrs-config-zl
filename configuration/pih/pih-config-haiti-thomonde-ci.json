@@ -1,3 +1,7 @@
+"welcomeMessage": "Bienvenue dans l'EMR de Hôpital Saint-Nicolas",
+"site": "THOMONDE",
+"dossierIdentifierPrefix": "HS",
+
 {
   "biometricsConfig": {
     "biometricEngine": "restBiometricEngine",
@@ -28,7 +32,7 @@
     "programs",
     "exportPatients",
     "importPatients",
-    "biometricsFingerPrints",
+    // "biometricsFingerPrints",
     "vitals",
     "mentalHealth",
     "ncd",
