@@ -1,8 +1,8 @@
-"welcomeMessage": "Bienvenue dans l'EMR de Hôpital Saint-Nicolas",
-"site": "THOMONDE",
-"dossierIdentifierPrefix": "HS",
-
 {
+  "welcomeMessage": "Bienvenue dans l'EMR de Hôpital Saint-Nicolas",
+  "site": "THOMONDE",
+  "dossierIdentifierPrefix": "HS",
+
   "biometricsConfig": {
     "biometricEngine": "restBiometricEngine",
     "templateFormat": "PROPRIETARY",
