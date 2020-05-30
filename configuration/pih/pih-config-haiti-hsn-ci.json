@@ -1,7 +1,7 @@
 {
   "welcomeMessage": "Bienvenue dans l'EMR de Hôpital Saint-Nicolas",
-  "site": "THOMONDE",
-  "dossierIdentifierPrefix": "HS",
+  "site": "HSN_SAINT_MARC",
+  "dossierIdentifierPrefix": "SM",
 
   "components": [
     "clinicianDashboard",
@@ -14,7 +14,6 @@
     "systemAdministration",
     "myAccount",
     "waitingForConsult",
-    "primaryCare",
     "overviewReports",
     "dataExports",
     "monitoringReports",
@@ -26,13 +25,14 @@
     "biometricsFingerPrints",
     "vitals",
     "mentalHealth",
-    "ncd",
     "covid19",
     "socioEconomics",
 	"vct",
     "edTriage",
     "edTriageQueue",
     "chwApp",
+    "ncd",
+    "primaryCare",
     "growthChart"
 	],
 
