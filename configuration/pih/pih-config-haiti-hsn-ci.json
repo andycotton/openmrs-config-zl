@@ -26,14 +26,8 @@
     "vitals",
     "mentalHealth",
     "covid19",
-    "socioEconomics",
-	"vct",
     "edTriage",
-    "edTriageQueue",
-    "chwApp",
-    "ncd",
-    "primaryCare",
-    "growthChart"
+    "edTriageQueue"
 	],
 
   "globalProperties": {
