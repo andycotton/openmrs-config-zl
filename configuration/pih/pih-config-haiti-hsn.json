@@ -1,7 +1,7 @@
 {
   "welcomeMessage": "Bienvenue dans l'EMR de Hôpital Saint-Nicolas",
   "site": "HSN_SAINT_MARC",
-  "dossierIdentifierPrefix": "SM",
+  "dossierIdentifierPrefix": "HSN",
 
   "components": [
     "clinicianDashboard",
