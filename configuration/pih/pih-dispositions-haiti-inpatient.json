@@ -57,39 +57,33 @@
     "type": "DISCHARGE",
     "name": "disposition.emrapi.discharge",
     "conceptCode": "PIH:DISCHARGED",
-    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","ca65f5d3-6312-4143-ae4e-0237427f339e","5e82bea0-fd7b-47f9-858a-91be87521073"],
+    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","ca65f5d3-6312-4143-ae4e-0237427f339e"],
     "actions": [
       "dischargeIfAdmittedDispositionAction"
     ],
     "additionalObs": []
   },
   {
-    "uuid": "dischargeWithoutIsolation",
-    "type": "DISCHARGE",
-    "name": "pihcore.disposition.dischargeWithoutIsolation",
-    "conceptCode": "PIH:DISCHARGED",
-    "encounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81", "5e82bea0-fd7b-47f9-858a-91be87521073"],
-    "actions": [
-      "dischargeIfAdmittedDispositionAction"
-    ],
+    "uuid": "homeQuarantine",
+    "name": "pihcore.disposition.homeQuarantine",
+    "conceptCode": "CIEL:165901",
+    "encounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81", "ca65f5d3-6312-4143-ae4e-0237427f339e"],
+    "actions": [],
     "additionalObs": []
   },
   {
-    "uuid": "dischargeToHomeIsolation",
-    "type": "DISCHARGE",
-    "name": "pihcore.disposition.dischargeToHomeIsolation",
-    "conceptCode": "PIH:DISCHARGED",
-    "encounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81", "5e82bea0-fd7b-47f9-858a-91be87521073"],
-    "actions": [
-      "dischargeIfAdmittedDispositionAction"
-    ],
+    "uuid": "facilityQuarantine",
+    "name": "pihcore.disposition.facilityQuarantine",
+    "conceptCode": "PIH:Quarantine facility",
+    "encounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81", "ca65f5d3-6312-4143-ae4e-0237427f339e"],
+    "actions": [],
     "additionalObs": []
   },
   {
     "uuid": "leftWithoutSeeingAClinician",
     "name": "disposition.emrapi.leftWithoutSeeingAClinician",
     "conceptCode": "PIH:Left without seeing a clinician",
-    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e","5e82bea0-fd7b-47f9-858a-91be87521073"],
+    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","ca65f5d3-6312-4143-ae4e-0237427f339e","5e82bea0-fd7b-47f9-858a-91be87521073"],
     "actions": [
       "dischargeIfAdmittedDispositionAction"
     ],
@@ -99,7 +93,17 @@
     "uuid": "leftWithoutCompletionOfTreatment",
     "name": "disposition.emrapi.leftWithoutCompletionOfTreatment",
     "conceptCode": "PIH:Departed without medical discharge",
-    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e"],
+    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","ca65f5d3-6312-4143-ae4e-0237427f339e","5e82bea0-fd7b-47f9-858a-91be87521073"],
+    "actions": [
+      "dischargeIfAdmittedDispositionAction"
+    ],
+    "additionalObs": []
+  },
+  {
+    "uuid": "leftAgainstMedicalAdvice",
+    "name": "pihcore.disposition.leftAgainstMedicalAdvice",
+    "conceptCode": "CIEL:1694",
+    "encounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","ca65f5d3-6312-4143-ae4e-0237427f339e"],
     "actions": [
       "dischargeIfAdmittedDispositionAction"
     ],
@@ -109,7 +113,6 @@
     "uuid": "transferOutOfHospital",
     "name": "disposition.emrapi.transferOutOfHospital",
     "conceptCode": "PIH:Transfer out of hospital",
-    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e"],
     "actions": [
       "dischargeIfAdmittedDispositionAction"
     ],
@@ -127,7 +130,7 @@
     "uuid": "transferWithinHospital",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",
-    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","5e82bea0-fd7b-47f9-858a-91be87521073"],
+    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e","8d50b938-dcf9-4b8e-9938-e625bd2f0a81","5e82bea0-fd7b-47f9-858a-91be87521073"],
     "actions": [
       "transferToSpecificLocationDispositionAction"
     ],
@@ -148,7 +151,7 @@
     "name": "disposition.mirebalais.stillHospitalized",
     "conceptCode": "PIH:Still hospitalized",
     "keepsVisitOpen": "true",
-    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","5e82bea0-fd7b-47f9-858a-91be87521073"],
+    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e","8d50b938-dcf9-4b8e-9938-e625bd2f0a81","5e82bea0-fd7b-47f9-858a-91be87521073"],
     "actions": [],
     "additionalObs": []
   },
@@ -165,7 +168,7 @@
     "uuid": "markPatientDead",
     "name": "disposition.emrapi.death",
     "conceptCode": "PIH:DEATH",
-    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e"],
+    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","ca65f5d3-6312-4143-ae4e-0237427f339e"],
     "actions": [
       "dischargeIfAdmittedDispositionAction",
       "markPatientDeadDispositionAction"
