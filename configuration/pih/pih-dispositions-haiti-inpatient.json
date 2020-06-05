@@ -130,7 +130,7 @@
     "uuid": "transferWithinHospital",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",
-    "excludedEncounterTypes": ["ca65f5d3-6312-4143-ae4e-0237427f339e","8d50b938-dcf9-4b8e-9938-e625bd2f0a81","5e82bea0-fd7b-47f9-858a-91be87521073"],
+    "excludedEncounterTypes": ["8d50b938-dcf9-4b8e-9938-e625bd2f0a81","5e82bea0-fd7b-47f9-858a-91be87521073"],
     "actions": [
       "transferToSpecificLocationDispositionAction"
     ],
