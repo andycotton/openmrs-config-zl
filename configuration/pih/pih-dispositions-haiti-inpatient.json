@@ -25,6 +25,33 @@
     ]
   },
   {
+    "uuid": "admitToHospitalWithAutomaticAdmission",
+    "type": "ADMIT",
+    "careSettingTypes": [
+      "OUTPATIENT"
+    ],
+    "name": "disposition.emrapi.admitToHospital",
+    "conceptCode": "PIH:Automatic hospital admission",
+    "encounterTypes": [
+      "ca65f5d3-6312-4143-ae4e-0237427f339e",
+      "5e82bea0-fd7b-47f9-858a-91be87521073"
+    ],
+    "actions": [
+      "admitToSpecificLocationDispositionAction"
+    ],
+    "additionalObs": [
+      {
+        "label": "disposition.emrapi.admitToHospital.admissionLocation",
+        "conceptCode": "org.openmrs.module.emrapi: Admission Location",
+        "params": {
+          "id": "admissionLocation",
+          "style": "location",
+          "answerLocationTags": "Admission Location"
+        }
+      }
+    ]
+  },
+  {
     "uuid": "discharge",
     "type": "DISCHARGE",
     "name": "disposition.emrapi.discharge",
