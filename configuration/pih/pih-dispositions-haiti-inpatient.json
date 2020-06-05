@@ -8,6 +8,7 @@
     "name": "disposition.emrapi.admitToHospital",
     "conceptCode": "PIH:ADMIT TO HOSPITAL",
     "excludedEncounterTypes": [
+      "8d50b938-dcf9-4b8e-9938-e625bd2f0a81",
       "ca65f5d3-6312-4143-ae4e-0237427f339e",
       "5e82bea0-fd7b-47f9-858a-91be87521073"
     ],
@@ -33,8 +34,8 @@
     "name": "disposition.emrapi.admitToHospital",
     "conceptCode": "PIH:Automatic hospital admission",
     "encounterTypes": [
-      "ca65f5d3-6312-4143-ae4e-0237427f339e",
-      "5e82bea0-fd7b-47f9-858a-91be87521073"
+      "8d50b938-dcf9-4b8e-9938-e625bd2f0a81",
+      "ca65f5d3-6312-4143-ae4e-0237427f339e"
     ],
     "actions": [
       "admitToSpecificLocationDispositionAction"
