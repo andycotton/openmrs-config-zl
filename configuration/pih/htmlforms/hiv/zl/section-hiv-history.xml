@@ -16,6 +16,11 @@
                 -moz-column-count: 2;
             }
 
+            form fieldset {
+                min-width: 90%;
+                display: block;
+            }
+
             .section-container {
                 background: #F2F2F2;
                 box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
@@ -334,33 +339,66 @@
         <div class="section-container">
             <div class="two-columns">
                 <!-- Tobacco use -->
-                <p class="radio">
-                    <label><uimessage code="pihcore.habits.smoking"/>:
+                <div>
+                    <label>
+                        <uimessage code="pihcore.habits.smoking"/>:
                     </label>
                     <obs conceptId="CIEL:163731" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
-                    <br/>
+
+                    <br/><br/><br/>
+                    <label>
+                        <uimessage code="pihcore.habits.ifyesSince"/>
+                    </label>
+                    <span class="small">
+                        <field>
+                            <obs conceptId="CIEL:159931" showUnits="pihcore.units.years" />
+                        </field>
+                    </span>
+
                     <label>
                         <uimessage code="pihcore.habits.packsPerYear"/>
                     </label>
-                    <obs conceptId="PIH:11949"/>
-                </p>
+                    <span class="small">
+                        <field>
+                            <obs conceptId="PIH:11949" showUnits="false"/>
+                        </field>
+                    </span>
+                </div>
 
-                <!-- Secondhand smoke exposure -->
-                <p class="radio">
-                    <label><uimessage code="pihcore.habits.secondhandSmoke"/>:
-                    </label>
-                    <obs conceptId="CIEL:152721" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
-                         answerSeparator="" style="radio"/>
-                </p>
+                <!-- Removed Secondhand smoke exposure -->
+            </div>
+        </div>
 
+        <div class="section-container">
+            <div class="two-columns">
                 <!-- Alcohol use -->
                 <p class="radio">
-                    <label><uimessage code="pihcore.habits.alcohol"/>:
+                    <label>
+                        <uimessage code="pihcore.habits.alcohol"/>:
                     </label>
                     <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
+                    <br/><br/><br/><br/><br/>
+                    <label>
+                        <uimessage code="pihcore.habits.daysPerWeek"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:2243" showUnits="pihcore.units.daysPerWeek" />
+                    </span>
+
+                    <label>
+                        <uimessage code="pihcore.habits.drinksPerDay"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:2246" showUnits="pihcore.units.drinksPerDay" />
+                    </span>
                 </p>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <div class="two-columns">
 
                 <!-- Drug use -->
                 <p class="radio">
@@ -368,11 +406,21 @@
                     </label>
                     <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
-                    <br/>
+
+                    <br/><br/><br/>
+                    <label>
+                        <uimessage code="pihcore.habits.ifyesSince"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
+                    </span>
+
                     <label>
                         <uimessage code="pihcore.habits.drugName"/>
                     </label>
-                    <obs conceptId="PIH:6489"/>
+                    <span class="small">
+                        <obs conceptId="PIH:6489"/>
+                    </span>
                 </p>
             </div>
         </div>
