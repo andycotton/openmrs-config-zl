@@ -17,30 +17,30 @@
             }
 
             .section-container {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 10px 5px 10px 15px;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
+                background: #F2F2F2;
+                box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+                padding: 10px 5px 10px 15px;
+                line-height: 1.5em; /*add this for vertical spacing between elements*/
             }
 
             .section-container-color {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 10px 5px 10px 15px;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
+                background: #F2F2F2;
+                box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+                padding: 10px 5px 10px 15px;
+                line-height: 1.5em; /*add this for vertical spacing between elements*/
             }
 
             .section-container input[type="checkbox"] {
-            margin: 0px 5px; /*changed values to vertical, horizontal*/
-            top:5px; /*added to offset the checkbox position to line up*/
+                margin: 0px 5px; /*changed values to vertical, horizontal*/
+                top:5px; /*added to offset the checkbox position to line up*/
             }
 
             .section-container label { /*new definition to override labels inside section-containers*/
-            margin: 0px;
+                margin: 0px;
             }
 
             .section {
-            width: 95%;
+                width: 95%;
         </ifMode>
     </style>
 
@@ -214,6 +214,75 @@
             </div>
         </section>
     </includeIf>
+
+    <section id="hiv-adverse-event" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.adverseEvent">
+        <div class="section-container">
+            <p>
+                <label>
+                    <b>
+                        <uimessage code="pihcore.adverseEvent"/>?
+                    </b>
+                </label>
+                <obsgroup groupingConceptId="PIH:1295">
+                    <obs conceptId="PIH:1297" style="checkbox"
+                         answerConceptId="CIEL:121764"
+                         answerCode="yes" toggle="ae" />
+                </obsgroup>
+            </p>
+
+            <div id="ae">
+                <table>
+                    <tr>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.ncd.meds"/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.adverseEvent"/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                Date
+                            </label>
+                        </th>
+                    </tr>
+
+                    <repeat with="[1],[2],[3]">
+                        <obsgroup groupingConceptId="PIH:1295">
+                            <tr>
+                                <td id="ae-med-{0}">
+                                    <obs conceptId="CIEL:160632" />
+                                </td>
+                                <td id="ae-{0}">
+                                    <repeat>
+                                        <template>
+                                            <obs conceptId="PIH:1297"
+                                                 answerConceptId="{concept}"
+                                                 style="checkbox" />
+                                        </template>
+                                        <render concept="CIEL:512" name="Rash" />
+                                        <render concept="PIH:998"  name="Anaphylaxis"/> <!-- ToDo:  CIEL:148888 -->
+                                        <render concept="CIEL:148787" name="Angioedema"/>
+                                        <render concept="CIEL:118983" name="Neuropathy"/>
+                                        <render concept="CIEL:116986" name="Hepatitis" />
+                                    </repeat>
+                                    <obs conceptId="PIH:1297" answerConceptId="CIEL:5622"
+                                         commentFieldCode="zl.ifOtherSpecify" style="checkbox" />
+                                </td>
+                                <td id="ae-date-{0}">
+                                    <obs conceptId="PIH:1300" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </repeat>
+                </table>
+            </div>
+        </div>
+    </section>
 
     <section id="patient-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="zl.consultNote.patientHistory.title">
