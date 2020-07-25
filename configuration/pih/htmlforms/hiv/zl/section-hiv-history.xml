@@ -40,12 +40,14 @@
                 top:5px; /*added to offset the checkbox position to line up*/
             }
 
-            .section-container label { /*new definition to override labels inside section-containers*/
+            .section-container label {
                 margin: 0px;
             }
 
             .section {
                 width: 95%;
+            }
+
         </ifMode>
     </style>
 
@@ -219,6 +221,133 @@
             </div>
         </section>
     </includeIf>
+
+    <section id="transmission" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.modeOfTransmission">
+    <div class="section-container">
+        <table>
+            <tr>
+                <th>
+                    Mode
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <repeat>
+                <template>
+                    <obsgroup groupingConceptId="CIEL:163288">
+                    <tr>
+                        <td>
+                            <obs conceptId="CIEL:160581"
+                                 answerConceptId="{cId}"
+                                 style="checkbox"
+                                 toggle="{id: '{toggle}-trans-date', style: 'dim'}"/>
+                        </td>
+                        <td id="{toggle}-trans-date">
+                            <obs conceptId="CIEL:162601" allowTime="false" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                </template>
+                <render mode="Rapports sexuels avec un homme" cId="CIEL:163290" toggle="men" />
+                <render mode="Rapports sexuels avec une femme" cId="CIEL:163291" toggle="women" />
+                <render mode="Injection de drogues" cId="CIEL:105" toggle="drugs"/>
+                <render mode="Bénéficier de sang/dérivé sanguin" cId="CIEL:1063" toggle="blood" />
+                <render mode="Transmission mère a enfant" cId="CIEL:163273" toggle="pmtct "/>
+                <render mode="Accident d'exposition au sang" cId="CIEL:163274" toggle="accident-blood"/>
+                <render mode="Rapports hétérosexuelles avec personne SIDA/VIH+" cId="CIEL:163289" toggle="hiv-person" />
+                <render mode="Rapports hétérosexuelles avec personne qui s'injecte de la drogue" cId="PIH:11534" toggle="with-drug-person" />
+                <render mode="Rapports hétérosexuelles avec personne homme bisexuel" cId="CIEL:165433" toggle="with-bisexual" />
+                <render mode="Rapports hétérosexuelles avec personne bénéficier de sang/dérivé sanguin" cId="CIEL:165434" toggle="with-blood-person" />
+            </repeat>
+
+            <obsgroup groupingConceptId="CIEL:163288">
+                <tr>
+                    <td>
+                        <obs conceptId="CIEL:160581"
+                             answerConceptId="CIEL:5622"
+                             style="checkbox" commentFieldCode=""
+                             toggle="{id: 'other-trans-date', style: 'dim'}"/>
+                    </td>
+                    <td id="other-trans-date">
+                        <obs conceptId="CIEL:162601" allowTime="false" />
+                    </td>
+                </tr>
+            </obsgroup>
+        </table>
+    </div>
+    </section>
+
+    <section id="risk" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.otherRiskFactors">
+        <div class="section-container">
+            <table>
+                <tr>
+                    <th colspan="2">
+                        <uimessage code="pihcore.otherRiskFactors"/>
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:163292">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <uimessage code="pihcore.{toggle}" />
+                                    </label>
+                                </td>
+                                <td>
+                                    <!-- ToDo: style the radio buttons; toggle/radio doesn't work for date-->
+                                    <obs conceptId="{cId}"
+                                         answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
+                                         answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
+                                         style="radio" answerSeparator=""
+                                         toggle="{id: '{toggle}-risk-date', style: 'dim'}"/>
+                                </td>
+                                <td id="{toggle}-risk-date">
+                                    <obs conceptId="CIEL:162601" allowTime="false" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render mode="syph" cId="CIEL:163276" toggle="hxSyphilis" />
+                    <render mode="IST" cId="CIEL:156660" toggle="hxOtherSTI" />
+                    <render mode="violence" cId="CIEL:123160" toggle="victimGBV"/>
+                    <render mode="multi" cId="CIEL:5567" toggle="multipleSexPartners" />
+                    <render mode="no condom" cId="CIEL:159218" toggle="withoutCondom"/>
+                    <render mode="anal" cId="CIEL:163278" toggle="analSex"/>
+                    <render mode="withprosex" cId="CIEL:160580" toggle="withSexWorker" />
+                    <render mode="pro" cId="CIEL:160579" toggle="sexWorker" />
+                </repeat>
+
+                <obsgroup groupingConceptId="CIEL:163288">
+                    <tr>
+                        <td colspan="2">
+                            <obs conceptId="CIEL:160581"
+                                 answerConceptId="PIH:11406"
+                                 style="checkbox" commentFieldCode=""
+                                 toggle="{id: 'other-risk--date', style: 'dim'}"/>
+                        </td>
+                        <td id="other-risk-date">
+                            <obs conceptId="CIEL:162601" allowTime="false" />
+                        </td>
+                    </tr>
+                </obsgroup>
+            </table>
+
+            <div>
+                <label>
+                    <uimessage code="pihcore.comment"/>
+                </label>
+                <obs conceptId="PIH:12999" rows="2" />
+            </div>
+
+        </div>
+    </section>
 
     <section id="hiv-adverse-event" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.adverseEvent">
