@@ -686,8 +686,56 @@
                     </tr>
                 </repeat>
             </table>
+            <br/>
+            <p>
+                <label>
+                    <uimessage code="pihcore.tbSuspectedMessage" />
+                </label>
+            </p>
         </div>
     </section>
+
+    <section id="psych" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+              headerCode="pihcore.psycState">
+         <div class="section-container">
+             <p class="radio">
+                 <label>
+                     <uimessage code="pihcore.receivedPostTestCounsel" />
+                 </label>
+                 <obs conceptId="CIEL:159382" answerConceptIds="CIEL:1066,CIEL:1065"
+                      answerSeparator="" style="radio" />
+             </p>
+
+             <p>
+                 <label>
+                     <uimessage code="pihcore.patientReceivedAdvice" />
+                 </label>
+
+                 <repeat>
+                     <template>
+                         <obs conceptId="CIEL:163560"
+                              answerConceptId="{response}"
+                              answerCode="{text}"
+                              style="checkbox" />
+                     </template>
+                     <render response="CIEL:151185" text="pihcore.cervicalCancerScreeningTreatment"/>
+                     <render response="CIEL:165489" text="pihcore.lowRiskBehavior" />
+                     <render response="CIEL:1382"   text="pihcore.fpCounseling" />
+                     <render response="CIEL:163559" text="pihcore.stiScreening" />
+                     <render response="CIEL:159381" text="pihcore.partnerScreening" />
+                 </repeat>
+             </p>
+
+             <p class="radio">
+                 <label>
+                     <uimessage code="pihcore.referredMH" />
+                 </label>
+                 <obs conceptId="PIH:13002" answerConceptIds="CIEL:1066,CIEL:1065"
+                      answerSeparator="" style="radio" />
+
+             </p>
+         </div>
+     </section>
 
     <br/>
 
