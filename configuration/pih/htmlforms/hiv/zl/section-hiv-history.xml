@@ -477,7 +477,7 @@
 
                     <br/><br/><br/>
                     <label>
-                        <uimessage code="pihcore.habits.ifyesSince"/>
+                        <uimessage code="pihcore.habits.ifYesDuration"/>
                     </label>
                     <span class="small">
                         <field>
@@ -538,7 +538,7 @@
 
                     <br/><br/><br/>
                     <label>
-                        <uimessage code="pihcore.habits.ifyesSince"/>
+                        <uimessage code="pihcore.habits.ifYesDuration"/>
                     </label>
                     <span class="small">
                         <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
