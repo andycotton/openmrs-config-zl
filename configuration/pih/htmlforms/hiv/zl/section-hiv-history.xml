@@ -555,6 +555,62 @@
         </div>
     </section>
 
+    <section id="previous-prophylaxis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.prophylaxis">
+
+    <div class="section-container-color">
+        <table>
+            <tr>
+                <td>
+                    <label>
+                        <uimessage code="pihcore.treatment" />
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <uimessage code="pihcore.startDate" />
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <uimessage code="pihcore.endDate" />
+                    </label>
+                </td>
+            </tr>
+
+            <repeat>
+                <template>
+                    <!-- ToDo:  Replace the group id -->
+                    <obsgroup groupingConceptId="CIEL:160741">
+                        <tr>
+                            <td>
+                                <obs conceptId="CIEL:1282" answerConceptId="{concept}"
+                                     answerLabel="{drugname}" />
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:1190" />
+                            </td>
+                            <td>
+                                <obs conceptId="CIEL:1191" allowFutureDates="true" />
+                            </td>
+                        </tr>
+                    </obsgroup>
+                </template>
+                <render concept="CIEL:105281" drugname="Cotrimoxazole" />
+                <render concept="CIEL:78280" drugname="Isoniazide" />
+                <render concept="CIEL:76488" drugname="Fluconazole" />
+            </repeat>
+
+            <tr>
+                <td colspan="3">
+                    <!-- ToDo: Replace with free-text box -->
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    </section>
+
     <section id="sexual-activities" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.sexualReproHistory.label">
         <div class="section-container">
@@ -657,6 +713,16 @@
             </table>
         </div>
     </section>
+
+    <section id="presenting-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.history.presentingHistory.title">
+        <div class="section-container">
+            <p>
+                <obs conceptId="PIH:PRESENTING HISTORY" style="textarea" id="presenting-history"/>
+            </p>
+        </div>
+    </section>
+
     
     <section id="tb-screen" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.tbscreen.title">
