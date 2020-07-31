@@ -555,6 +555,33 @@
         </div>
     </section>
 
+    <section id="tb-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.tb.historyTB">
+        <div class="section-container">
+            <p class="radio">
+                <label>
+                    <uimessage code="pihcore.tb.patientActiveTB" />
+                </label>
+                <!-- ToDo:  Fix css style -->
+                <obs conceptId="CIEL:1389" style="no_yes"
+                     answerSeparator="" />
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="pihcore.ifYesTestDate" />
+                </label>
+                <obs conceptId="PIH:11526" />
+            </p>
+
+            <p>
+            <label>
+                <uimessage code="pihcore.longActiveTBTreatmentComment" />
+            </label>
+            </p>
+        </div>
+    </section>
+
     <section id="previous-meds" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.therapyHistory">
         <div class="section-container">
