@@ -364,7 +364,7 @@
                 <obsgroup groupingConceptId="PIH:1295">
                     <obs conceptId="PIH:1297" style="checkbox"
                          answerConceptId="CIEL:121764"
-                         answerCode="yes" toggle="ae" />
+                         answerCode="emr.yes" toggle="ae" />
                 </obsgroup>
             </p>
 
@@ -561,90 +561,95 @@
     <section id="tb-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.tb.historyTB">
         <div class="section-container">
-            <p class="radio">
+            <p>
                 <label>
                     <uimessage code="pihcore.tb.patientActiveTB" />
                 </label>
-                <!-- ToDo:  Fix css style -->
-                <obs conceptId="CIEL:1389" style="no_yes"
-                     answerSeparator="" />
+                <obs conceptId="CIEL:1389" style="checkbox"
+                     answerConceptId="CIEL:1065"
+                     answerCode="emr.yes"
+                     toggle="activeTB" />
             </p>
 
-            <p>
-                <label>
-                    <uimessage code="pihcore.ifYesTestDate" />
-                </label>
-                <obs conceptId="PIH:11526" />
-            </p>
+            <div id="activeTB">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.ifYesTestDate" />
+                    </label>
+                    <obs conceptId="PIH:11526" />
+                </p>
 
-            <p>
-            <label>
-                <uimessage code="pihcore.longActiveTBTreatmentComment" />
-            </label>
-            </p>
+                <p>
+                    <label>
+                        <uimessage code="pihcore.longActiveTBTreatmentComment" />
+                    </label>
+                </p>
+
+                <h3>
+                    <uimessage code="pihcore.tbTreatmentHistory"/>
+                </h3>
+                <table>
+                    <tr>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.treatment"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.startDate"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.endDate"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.treatmentResult"/>
+                            </label>
+                        </td>
+                    </tr>
+
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:1589">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:1282" answerConceptId="{concept}"
+                                             answerLabel="{regimen}"
+                                             toggle="{id: '{tbMed}', style: 'dim'}" />
+                                    </td>
+                                    <td class="{tbMed}">
+                                        <obs conceptId="CIEL:1190"/>
+                                    </td>
+                                    <td class="{tbMed}">
+                                        <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                                    </td>
+                                    <td id="{tbMed}">
+                                        <p class="radio">
+                                            <obs conceptId="CIEL:6098" style="radio"
+                                                 answerConceptIds="CIEL:159791,CIEL:843,CIEL:160031"
+                                                 answerCodes="pihcore.cured,pihcore.failure,pihcore.defaulted"
+                                                 answerSeparator=""/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render concept="PIH:2125"  regimen="2 HRZE / 4 RH"   tbMed="2HRZE" />
+                        <render concept="PIH:13011" regimen="3 HRZE / 5 HR+E" tbMed="3HRZE" />
+                    </repeat>
+                </table>
+
+            </div>
         </div>
     </section>
 
     <section id="previous-meds" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.therapyHistory">
         <div class="section-container">
-            <h3>
-                <uimessage code="pihcore.tbTreatmentHistory"/>
-            </h3>
-            <table>
-                <tr>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.treatment"/>
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.startDate"/>
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.endDate"/>
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.treatmentResult"/>
-                        </label>
-                    </td>
-                </tr>
-
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="PIH:1589">
-                            <tr>
-                                <td>
-                                    <obs conceptId="CIEL:1282" answerConceptId="{concept}"
-                                         answerLabel="{regimen}"/>
-                                </td>
-                                <td>
-                                    <obs conceptId="CIEL:1190"/>
-                                </td>
-                                <td>
-                                    <obs conceptId="CIEL:1191" allowFutureDates="true"/>
-                                </td>
-                                <td>
-                                    <p class="radio">
-                                        <obs conceptId="CIEL:6098" style="radio"
-                                             answerConceptIds="CIEL:159791,CIEL:843,CIEL:160031"
-                                             answerCodes="pihcore.cured,pihcore.failure,pihcore.defaulted"
-                                             answerSeparator=""/>
-                                    </p>
-                                </td>
-                            </tr>
-                        </obsgroup>
-                    </template>
-                    <render concept="PIH:2125" regimen="2 HRZE / 4 RH"/>
-                    <render concept="PIH:13011" regimen="3 HRZE / 5 HR+E"/>
-                </repeat>
-            </table>
-
             <h3>
                 <uimessage code="pihcore.prophylaxis"/>
             </h3>
@@ -673,12 +678,13 @@
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{concept}"
-                                         answerLabel="{drugname}"/>
+                                         answerLabel="{drugname}"
+                                         toggle="{id: '{drugname}', style: 'dim'}" />
                                 </td>
-                                <td>
+                                <td class="{drugname}">
                                     <obs conceptId="CIEL:1190"/>
                                 </td>
-                                <td>
+                                <td class="{drugname}">
                                     <obs conceptId="CIEL:1191" allowFutureDates="true"/>
                                 </td>
                             </tr>
