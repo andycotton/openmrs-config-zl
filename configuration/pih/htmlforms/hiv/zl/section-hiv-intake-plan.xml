@@ -538,6 +538,35 @@
             <h4>
                 <uimessage code="pihcore.tbTreatment"/>
             </h4>
+            <div class="two-columns">
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.tb.needTreatment" />
+                    </label>
+                    <br/>
+
+                    <obs conceptId="PIH:1559" style="radio"
+                         answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,PIH:1432"
+                         answerCodes="pihcore.ongoingExam,emr.no,emr.yes,pihcore.yesTreatmentStarted"
+                         answerSeparator="&lt;br /&gt;" />
+                </p>
+
+                <label>
+                    <uimessage code="pihcore.startDate" />
+                </label>
+                <obs conceptId="CIEL:1113" />
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.tb.startTBTreatmentComment" />
+                    </label>
+                    <br/>
+                    <obs conceptId="PIH:6150" style="radio"
+                         answerConceptIds="PIH:2125,PIH:13011,CIEL:159909"
+                         answerCodes="pihcore.tb.initialTreatment,pihcore.tb.retreatment,pihcore.tb.mdrtbTreatment"
+                         answerSeparator="&lt;br /&gt;" />
+                </p>
+            </div>
 
             <h4>
                 <uimessage code="pihcore.stiTreatment"/>
