@@ -78,7 +78,18 @@
     </ifMode>
 
     <!-- Program enrollment (if the patient hasn't already been enrolled)-->
-    <enrollInProgram programId="HIV"/>
+    <section id="hiv-program" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.hiv.programEnroll.title">
+        <div class="section-container">
+            <div class="two-columns">
+                <label>
+                    <uimessage code="pihcore.progEnrollDate"/>
+                </label>
+                <enrollInProgram programId="HIV" showDate="true"/>
+                <br/><br/><br/>
+            </div>
+        </div>
+    </section>
 
     <section id="hiv-serology" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.hiv.serology.title">
@@ -203,7 +214,7 @@
                         </label>
                         <span class="small">
                             <field>
-                                <!-- ToDo: Fix units to show on the right-side of the box - not the next line -->
+                                <!-- ToDo: Fix units to show on the right-side of the box - not the next line css -->
                                 <obs conceptId="CIEL:5916" showUnits="false" />
                             </field>
                         </span>
@@ -302,7 +313,7 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <!-- ToDo: style the radio buttons; toggle/radio doesn't work for date-->
+                                    <!-- ToDo: style the radio buttons; toggle/radio doesn't work for date css -->
                                     <obs conceptId="{cId}"
                                          answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
                                          answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
@@ -399,8 +410,8 @@
                                                  answerConceptId="{concept}"
                                                  style="checkbox" />
                                         </template>
-                                        <render concept="CIEL:512" name="Rash" />
-                                        <render concept="PIH:998"  name="Anaphylaxis"/> <!-- ToDo:  CIEL:148888 -->
+                                        <render concept="CIEL:512"    name="Rash" />
+                                        <render concept="CIEL:148888" name="Anaphylaxis"/>
                                         <render concept="CIEL:148787" name="Angioedema"/>
                                         <render concept="CIEL:118983" name="Neuropathy"/>
                                         <render concept="CIEL:116986" name="Hepatitis" />
@@ -692,12 +703,6 @@
                     <render concept="CIEL:78280" drugname="Isoniazide"/>
                     <render concept="CIEL:76488" drugname="Fluconazole"/>
                 </repeat>
-
-                <tr>
-                    <td colspan="3">
-                        <!-- ToDo: Replace with free-text box -->
-                    </td>
-                </tr>
             </table>
 
             <h3>

@@ -58,9 +58,6 @@
         </script>
     </ifMode>
 
-    <!-- Program enrollment (if the patient hasn't already been enrolled)-->
-    <enrollInProgram programId="HIV"/>
-
     <p>
         <label>
             <b>
@@ -167,16 +164,18 @@
                     <uimessage code="pihcore.oi.title" />
                 </b>
             </label>
-            <!-- ToDo:  Add PIH:6900 to mds package and replace diagnosis? -->
-            <obs conceptId="PIH:DIAGNOSIS"
-                 answerConceptSetIds="PIH:HUM opportunistic infection"
-                 style="autocomplete" />
-            <obs conceptId="PIH:DIAGNOSIS"
-                 answerConceptSetIds="PIH:HUM opportunistic infection"
-                 style="autocomplete" />
-            <obs conceptId="PIH:DIAGNOSIS"
-                 answerConceptSetIds="PIH:HUM opportunistic infection"
-                 style="autocomplete" />
+            <div class="two-columns">
+                <repeat with="['One'],
+                              ['Two'],
+                              ['Three'],
+                              ['Four']">
+                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                        <obs conceptId="PIH:DIAGNOSIS"
+                             answerConceptSetIds="PIH:HUM opportunistic infection"
+                             style="autocomplete"/>
+                    </obsgroup>
+                </repeat>
+            </div>
         </p>
 
     </div>
