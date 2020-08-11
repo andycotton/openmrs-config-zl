@@ -78,6 +78,9 @@
     </ifMode>
 
     <!-- Program enrollment (if the patient hasn't already been enrolled)-->
+    <enrollInProgram programId="HIV" />
+
+    <!-- ToDo:  Add when enrollment date is fixed
     <section id="hiv-program" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.hiv.programEnroll.title">
         <div class="section-container">
@@ -90,6 +93,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <section id="hiv-serology" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.hiv.serology.title">

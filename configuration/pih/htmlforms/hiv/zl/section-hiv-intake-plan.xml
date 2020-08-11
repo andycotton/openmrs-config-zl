@@ -603,7 +603,7 @@
                                 <label><uimessage code="providermanagement.startDate" /></label>
                             </td>
                         </tr>
-                        <!-- ToDo:  Add STI treatment construct including CIEL:1428-->
+
                         <repeat with="['1'],['2'],['3']">
                             <obsgroup groupingConceptId="PIH:13027">
                                 <tr>
