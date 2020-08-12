@@ -61,15 +61,7 @@
     "actions": [
       "dischargeIfAdmittedDispositionAction"
     ],
-    "additionalObs": [
-      {
-        "label": "pihcore.consult.returnVisitDate",
-        "conceptCode": "CIEL:5096",
-        "params": {
-          "id": "returnVisitDate"
-        }
-      }
-    ]
+    "additionalObs": []
   },
   {
     "uuid": "homeQuarantine",
