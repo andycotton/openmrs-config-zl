@@ -447,29 +447,31 @@
                     <render concept="CIEL:76488" drugname="Fluconazole" />
                 </repeat>
 
-                <tr>
-                    <td>
-                        <obs conceptId="CIEL:1282" answerConceptId="CIEL:5622"
-                             toggle="{id: '{other-pro}', style: 'dim'}"
-                             commentFieldLabel="specify:" />
-                    </td>
-                    <td class="other-pro">
-                        <obs conceptId="CIEL:1190" />
-                    </td>
-                    <td class="other-pro">
-                        <obs conceptId="CIEL:1191" />
-                    </td>
-                    <td class="other-pro">
-                        <obs conceptId="CIEL:1282" answerConceptId="CIEL:159367"
-                             answerLabel=""/>
-                    </td>
-                    <td class="other-pro">
-                        <small>
-                            <obs conceptId="CIEL:6098"
-                                 answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
-                        </small>
-                    </td>
-                </tr>
+                <obsgroup groupingConceptId="CIEL:160741">
+                    <tr>
+                        <td>
+                            <obs conceptId="CIEL:1282" answerConceptId="CIEL:5622"
+                                 toggle="{id: '{other-pro}', style: 'dim'}"
+                                 commentFieldLabel="specify:" />
+                        </td>
+                        <td class="other-pro">
+                            <obs conceptId="CIEL:1190" />
+                        </td>
+                        <td class="other-pro">
+                            <obs conceptId="CIEL:1191" />
+                        </td>
+                        <td class="other-pro">
+                            <obs conceptId="CIEL:1282" answerConceptId="CIEL:159367"
+                                 answerLabel=""/>
+                        </td>
+                        <td class="other-pro">
+                            <small>
+                                <obs conceptId="CIEL:6098"
+                                     answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
+                            </small>
+                        </td>
+                    </tr>
+                </obsgroup>
             </table>
 
             <!-- ARV Treatment -->
