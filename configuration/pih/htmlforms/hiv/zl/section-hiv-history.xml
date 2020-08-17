@@ -16,6 +16,13 @@
                 -moz-column-count: 2;
             }
 
+
+            p.radio > * {
+                display: inline;
+                float: none !important;
+                min-width: initial;
+            }
+
             form fieldset {
                 min-width: 90%;
                 display: block;
@@ -50,6 +57,58 @@
 
         </ifMode>
     </style>
+
+    <ifMode mode="VIEW" include="false" >
+        <script type="text/javascript">
+
+            jq(function() {
+
+                var updateEdd = function() {
+
+                var lastPeriodDate = htmlForm.getValueIfLegal('lastPeriodDate.value');
+                if (typeof lastPeriodDate !== "undefined" &amp;&amp; lastPeriodDate !== null &amp;&amp; (lastPeriodDate.length > 0)) {
+
+                var today = new Date();
+                var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
+                    // calculate the gestational age at the time of the encounter
+                    today = new Date(+currentEncounterDate);
+                    }
+
+                    var dateObj = getField('lastPeriodDate.value').datepicker('getDate');
+                    var newDate = new Date(dateObj);
+                    // time difference
+                    var timeDiff = Math.abs(today.getTime() - newDate.getTime());
+                    // weeks difference = gestational age
+                    var diffWeeks = Math.ceil(timeDiff / (1000 * 3600 * 24 * 7));
+
+                    // Estimated Delivery Date = (LMP - 3 months) + 12 months + 7 days
+                    newDate.setMonth(newDate.getMonth() - 3);
+                    newDate.setFullYear(newDate.getFullYear() + 1);
+                    newDate.setDate(newDate.getDate() + 7);
+
+                    var widgetDate = getField('lastPeriodDate.value').datepicker('setDate', newDate).val();
+                    getField('lastPeriodDate.value').datepicker('setDate', dateObj);
+
+                    jq('#calculated-edd-and-gestational').show();
+                    jq('#calculated-edd').text(widgetDate);
+                    jq('#calculated-gestational-age-value').text(diffWeeks + " " + '<uimessage code="pihcore.weeks"/>');
+
+                } else {
+                    jq('#calculated-edd-and-gestational').hide();
+                }
+            };
+
+            jq('#calculated-edd-and-gestational').hide();
+
+            jq("#lastPeriodDate input[type='hidden']").change(function() {
+                updateEdd();
+            });
+
+            updateEdd();
+            });
+        </script>
+    </ifMode>
 
     <ifMode mode="VIEW" include="false">
         <h3>
@@ -157,23 +216,47 @@
                          style="checkbox"/>
 
                     <div id="pregnant">
-                    <div class="two-columns">
-                        <!-- DPA/EDD -->
-                        <p>
-                            <label>
-                                <uimessage code="pihcore.pregnancy.dueDate"/>
-                            </label>
-                        </p>
-                        <obs conceptId="CIEL:5596" allowFutureDates="true" />
+                        <div class="two-columns">
+                            <!-- Last menstrual period (LMP or DDR) -->
+                            <p>
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                                </label>
+                                <span class="small">
+                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                                </span>
+                            </p>
 
-                        <!-- DPR/LMP -->
-                        <p>
-                            <label>
-                                <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                            </label>
-                        </p>
-                        <obs conceptId="CIEL:1427"/>
-                    </div>
+                            <!-- Due date (DPA) -->
+                            <p>
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.dueDate"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div id="calculated-edd-and-gestational" class="two-columns hidden">
+                            <p>
+                                <span id="calculated-gestational-age-wrapper">
+                                    <span id="calculated-gestational-age-label">
+                                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                                    </span>
+                                    <span id='calculated-gestational-age-value' class="value"></span>
+                                </span>
+                            </p>
+                            <p>
+                                <span id="calculated-edd-wrapper">
+                                    <span id="calculated-edd-label">
+                                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                                    </span>
+                                    <span id='calculated-edd' class="value"></span>
+                                </span>
+                            </p>
+
+                        </div>
 
                         <!-- ToDo: Add PMTCT program enrollment but lookup/show -->
                         <!-- ToDo: Is PMTCT also for infants? -->
@@ -318,11 +401,13 @@
                                 </td>
                                 <td>
                                     <!-- ToDo: style the radio buttons; toggle/radio doesn't work for date css -->
-                                    <obs conceptId="{cId}"
-                                         answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
-                                         answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
-                                         style="radio" answerSeparator=""
-                                         toggle="{id: '{toggle}-risk-date', style: 'dim'}"/>
+                                    <p class="small">
+                                        <obs conceptId="{cId}"
+                                             answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
+                                             answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
+                                             style="radio" answerSeparator=""
+                                             toggle="{id: '{toggle}-risk-date', style: 'dim'}"/>
+                                    </p>
                                 </td>
                                 <td id="{toggle}-risk-date">
                                     <obs conceptId="CIEL:162601" allowTime="false" />
@@ -690,22 +775,22 @@
                         <obsgroup groupingConceptId="PIH:1501">
                             <tr>
                                 <td>
-                                    <obs conceptId="CIEL:1282" answerConceptId="{concept}"
+                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
                                          answerLabel="{drugname}"
-                                         toggle="{id: '{drugname}', style: 'dim'}" />
+                                         toggle="{id: '{drugname}-hx', style: 'dim'}" />
                                 </td>
-                                <td class="{drugname}">
+                                <td class="{drugname}-hx">
                                     <obs conceptId="CIEL:1190"/>
                                 </td>
-                                <td class="{drugname}">
-                                    <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1191" />
                                 </td>
                             </tr>
                         </obsgroup>
                     </template>
-                    <render concept="CIEL:105281" drugname="Cotrimoxazole"/>
-                    <render concept="CIEL:78280" drugname="Isoniazide"/>
-                    <render concept="CIEL:76488" drugname="Fluconazole"/>
+                    <render conceptH="CIEL:105281" drugname="Cotrimoxazole"/>
+                    <render conceptH="CIEL:78280" drugname="Isoniazide"/>
+                    <render conceptH="CIEL:76488" drugname="Fluconazole"/>
                 </repeat>
             </table>
 
@@ -918,10 +1003,10 @@
          <div class="section-container">
              <p class="radio">
                  <label>
-                     <uimessage code="pihcore.receivedPostTestCounsel" />
+                    <uimessage code="pihcore.receivedPostTestCounsel" />
                  </label>
                  <obs conceptId="CIEL:159382" answerConceptIds="CIEL:1066,CIEL:1065"
-                      answerSeparator="" style="radio" />
+                      style="radio" />
              </p>
 
              <p>

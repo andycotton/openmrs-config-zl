@@ -416,24 +416,24 @@
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="CIEL:160741">
+                        <obsgroup groupingConceptId="PIH:10742">
                             <tr>
                                 <td>
-                                    <obs conceptId="CIEL:1282" answerConceptId="{concept}"
+                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptMap}"
                                          answerLabel="{drugname}"
-                                         toggle="{id: '{drugname}', style: 'dim'}"/>
+                                         toggle="{id: '{drugname}-treat', style: 'dim'}"/>
                                 </td>
-                                <td class="{drugname}">
-                                    <obs conceptId="CIEL:1190" />
+                                <td class="{drugname}-treat">
+                                    <obs conceptId="CIEL:163526" />
                                 </td>
-                                <td class="{drugname}">
-                                    <obs conceptId="CIEL:1191" allowFutureDates="true" />
+                                <td class="{drugname}-treat">
+                                    <obs conceptId="CIEL:164384" allowFutureDates="true" />
                                 </td>
-                                <td class="{drugname}">
-                                    <obs conceptId="CIEL:1282" answerConceptId="CIEL:159367"
+                                <td class="{drugname}-treat">
+                                    <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
                                          answerLabel=""/>
                                 </td>
-                                <td class="{drugname}">
+                                <td class="{drugname}-treat">
                                     <small>
                                         <obs conceptId="CIEL:6098"
                                              answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
@@ -442,29 +442,30 @@
                             </tr>
                         </obsgroup>
                     </template>
-                    <render concept="CIEL:105281" drugname="Cotrimoxazole" />
-                    <render concept="CIEL:78280" drugname="Isoniazide" />
-                    <render concept="CIEL:76488" drugname="Fluconazole" />
+                    <render conceptMap="CIEL:105281" drugname="Cotrimoxazole" />
+                    <render conceptMap="CIEL:78280" drugname="Isoniazide" />
+                    <render conceptMap="CIEL:76488" drugname="Fluconazole" />
                 </repeat>
 
-                <obsgroup groupingConceptId="CIEL:160741">
+                <obsgroup groupingConceptId="PIH:10742">
                     <tr>
                         <td>
-                            <obs conceptId="CIEL:1282" answerConceptId="CIEL:5622"
-                                 toggle="{id: '{other-pro}', style: 'dim'}"
+                            <obs conceptId="CIEL:1282"
+                                 answerConceptId="PIH:3120" answerCode="pihcore.other"
+                                 toggle="{id: '{other-pro-treat}', style: 'dim'}"
                                  commentFieldLabel="specify:" />
                         </td>
-                        <td class="other-pro">
-                            <obs conceptId="CIEL:1190" />
+                        <td class="other-pro-treat">
+                            <obs conceptId="CIEL:163526" />
                         </td>
-                        <td class="other-pro">
-                            <obs conceptId="CIEL:1191" />
+                        <td class="other-pro-treat">
+                            <obs conceptId="CIEL:164384" allowFutureDates="true" />
                         </td>
-                        <td class="other-pro">
-                            <obs conceptId="CIEL:1282" answerConceptId="CIEL:159367"
+                        <td class="other-pro-treat">
+                            <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
                                  answerLabel=""/>
                         </td>
-                        <td class="other-pro">
+                        <td class="other-pro-treat">
                             <small>
                                 <obs conceptId="CIEL:6098"
                                      answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
@@ -510,17 +511,13 @@
                     </label>
                     <br/>
                     <!-- ARV medications -->
-                    <obsgroup groupingConceptId="CIEL:160741">
+                    <obsgroup groupingConceptId="PIH:10742">
                         <obs conceptId="CIEL:1282" style="radio"
-                             answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:164512,CIEL:162201,CIEL:5622"
+                             answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:164512,CIEL:162201,CIEL:5424"
                              answerSeparator="&lt;br /&gt;"/>
-                        <!-- answerLabels="AZT+3TC+NVP,TDF+3TC+NVP,TDF+3TC+EFV,AZT+3TC+EFV,TDF+3TC+ATV/r,TDF+3TC+LPV/r,Other" -->
                     </obsgroup>
 
                     <!-- Other ARV -->
-                    <label>
-                        ARV:
-                    </label>
                     <obs conceptId="CIEL:5424"/>
                 </p>
             </div>
@@ -766,7 +763,7 @@
             <label>
                 <uimessage code="pihcore.consult.clinicalImpressions"/>
             </label>
-            <obs conceptId="CIEL:159395" style="text"/>
+            <obs conceptId="CIEL:162749" style="text"/>
 
             <label>
                 <uimessage code="pihcore.actionPlan"/>
