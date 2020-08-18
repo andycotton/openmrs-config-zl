@@ -94,28 +94,147 @@
 
     <section id="hiv-surveillance" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.labSurveillance">
+        <!-- ToDo:  UHM-4784 Needs analysis -->
         <div class="section-container">
-            CD4%, CD4 count, VL, Resistance test (TB?)
+            <table>
+                <tr>
+                    <th></th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.result"/>
+                        </label>
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:1361">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:162087"
+                                         answerConceptId="{concept}"
+                                         answerCode="pihcore.lab.{name}"
+                                         style="checkbox"
+                                         toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
+                                </td>
+                                <td id="{name}-lab-toggle">
+                                    <obs conceptId="{concept}" />
+                                </td>
+                                <td id="{name}-lab-toggle">
+                                    <obs conceptId="PIH:3267" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render concept="CIEL:730" name="cd4Percent"/>
+                    <render concept="CIEL:5497" name="cd4Count" />
+                    <render concept="CIEL:856" name="viralLoad" />
+                    <render concept="CIEL:307" name="tbSmear" />
+                </repeat>
+            </table>
         </div>
     </section>
 
     <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.treatment">
-
+             headerCode="pihcore.currentTreatment">
         <div class="section-container">
+            <!-- ARV Treatment -->
+            <h4>
+                <uimessage code="pihcore.arvTreatment"/>
+            </h4>
+
+            <p class="radio">
+                <!-- ToDo: Add reverse toggle for none -->
+                <obs conceptId="CIEL:160117" style="checkbox"
+                     answerConceptId="CIEL:1107"
+                     answerCode="pihcore.none.label" />
+            </p>
+
+            <div class="two-columns">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.hiv.startDateARV"/>
+                    </label>
+                    <obs conceptId="CIEL:159599"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.firstLineReg"/>:
+                    </label>
+                    <br/>
+                    <!-- ARV medications: 1st line -->
+                    <obs conceptId="CIEL:1088" style="radio"
+                         answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:5424"
+                         answerSeparator="&lt;br /&gt;"/>
+
+                    <!-- Other ARV -->
+                    <obs conceptId="CIEL:5424"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.secondLineReg"/>:
+                    </label>
+                    <br/>
+                    <!-- ARV medications: 2nd line -->
+                    <obs conceptId="CIEL:1088" style="radio"
+                         answerConceptIds="CIEL:164512,CIEL:162201,CIEL:164511,CIEL:162561,PIH:13062"
+                         answerSeparator="&lt;br /&gt;"/>
+
+                    <!-- Other 2nd line ARV -->
+                    <obs conceptId="PIH:13062"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.thirdLineReg"/>:
+                    </label>
+                    <br/>
+                    <!-- ARV medications: 3rd line -->
+                    <obs conceptId="CIEL:1088" style="checkbox"
+                         answerConceptId="PIH:13063"
+                         answerCode="pihcore.other"/>
+
+                    <!-- Other 3rd line ARV -->
+                    <obs conceptId="PIH:13063"/>
+                </p>
+            </div>
+
+            <h4>
+                <uimessage code="pihcore.antiTbTreatment"/>
+            </h4>
+
+            <p class="radio">
+                <obs conceptId="CIEL:159798" style="checkbox"
+                     answerConceptId="CIEL:1066"
+                     answerCode="pihcore.none.label" />
+            </p>
+
+            <div class="two-columns">
+                <label>
+                    <uimessage code="pihcore.startDate" />
+                </label>
+                <obs conceptId="CIEL:1113" />
+                <br/>
+
+                <p class="radio">
+                    <obs conceptId="CIEL:1111" style="radio"
+                         answerConceptIds="PIH:2125,PIH:13011,CIEL:159909"
+                         answerCodes="pihcore.tb.initialTreatment,pihcore.tb.retreatment,pihcore.tb.mdrtbTreatment"
+                         answerSeparator="&lt;br /&gt;" />
+                    <obs conceptId="CIEL:160136" />
+                </p>
+            </div>
 
             <h4>
                 <uimessage code="pihcore.prophylaxis"/>
             </h4>
 
-            <p>
-                <!-- Added yes NOT 'not indicated' to toggle this section -->
-                <obs conceptId="PIH:2740"
-                     answerConceptId="CIEL:1065"
-                     toggle="prophylaxisIndicated" />
-            </p>
-
-            <table class="prophylaxisIndicated">
+            <table>
                 <tr>
                     <td>
                         <label>
@@ -132,218 +251,55 @@
                             <uimessage code="pihcore.endDate" />
                         </label>
                     </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.currentUse" />
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.stopReason" />
-                        </label>
-                    </td>
                 </tr>
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:10742">
+                        <obsgroup groupingConceptId="PIH:2739">
                             <tr>
                                 <td>
-                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptMap}"
+                                    <obs conceptId="PIH:2289" answerConceptId="{conceptMap}"
                                          answerLabel="{drugname}"
-                                         toggle="{id: '{drugname}-treat', style: 'dim'}"/>
+                                         toggle="{id: '{drugname}-current-treat', style: 'dim'}"/>
                                 </td>
-                                <td class="{drugname}-treat">
+                                <td class="{drugname}-current-treat">
                                     <obs conceptId="CIEL:163526" />
                                 </td>
-                                <td class="{drugname}-treat">
+                                <td class="{drugname}-current-treat">
                                     <obs conceptId="CIEL:164384" allowFutureDates="true" />
-                                </td>
-                                <td class="{drugname}-treat">
-                                    <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
-                                         answerLabel=""/>
-                                </td>
-                                <td class="{drugname}-treat">
-                                    <small>
-                                        <obs conceptId="CIEL:6098"
-                                             answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
-                                    </small>
                                 </td>
                             </tr>
                         </obsgroup>
                     </template>
                     <render conceptMap="CIEL:105281" drugname="Cotrimoxazole" />
-                    <render conceptMap="CIEL:78280" drugname="Isoniazide" />
-                    <render conceptMap="CIEL:76488" drugname="Fluconazole" />
+                    <render conceptMap="CIEL:78280"  drugname="Isoniazide" />
+                    <render conceptMap="CIEL:76488"  drugname="Fluconazole" />
                 </repeat>
 
-                <obsgroup groupingConceptId="PIH:10742">
+                <obsgroup groupingConceptId="PIH:2739">
                     <tr>
                         <td>
-                            <obs conceptId="CIEL:1282"
+                            <obs conceptId="PIH:2289"
                                  answerConceptId="PIH:3120" answerCode="pihcore.other"
-                                 toggle="{id: '{other-pro-treat}', style: 'dim'}"
+                                 toggle="{id: '{other-current-pro-treat}', style: 'dim'}"
                                  commentFieldLabel="specify:" />
                         </td>
-                        <td class="other-pro-treat">
+                        <td class="other-current-pro-treat">
                             <obs conceptId="CIEL:163526" />
                         </td>
-                        <td class="other-pro-treat">
+                        <td class="other-current-pro-treat">
                             <obs conceptId="CIEL:164384" allowFutureDates="true" />
-                        </td>
-                        <td class="other-pro-treat">
-                            <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
-                                 answerLabel=""/>
-                        </td>
-                        <td class="other-pro-treat">
-                            <small>
-                                <obs conceptId="CIEL:6098"
-                                     answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
-                            </small>
                         </td>
                     </tr>
                 </obsgroup>
             </table>
-
-            <!-- ARV Treatment -->
-            <h4>
-                <uimessage code="pihcore.arvTreatment"/>
-            </h4>
-
-            <div class="two-columns">
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.hiv.needsART" />
-                    </label>
-                    <br/>
-
-                    <obs conceptId="CIEL:162703" style="radio"
-                         answerConceptIds="CIEL:1066,CIEL:127750,PIH:2222,PIH:1619,PIH:1432,PIH:7262"
-                         answerCodes="pihcore.noNotIndicated,pihcore.yesButRefused,pihcore.yesAfterCHW,pihcore.yesStartNow,pihcore.yesTreatmentStarted,pihcore.yesDelayed"
-                         answerSeparator="&lt;br /&gt;" />
-                    <!-- Reason about delay -->
-                    <label>
-                        <uimessage code="pihcore.ifYesReason"/>
-                    </label>
-                    <obs conceptId="PIH:13021" style="text"/>
-                </p>
-
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.startDateARV"/>
-                    </label>
-                    <obs conceptId="CIEL:159599"/>
-                </p>
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.hiv.startRegimenName"/>:
-                    </label>
-                    <br/>
-                    <!-- ARV medications -->
-                    <obsgroup groupingConceptId="PIH:10742">
-                        <obs conceptId="CIEL:1282" style="radio"
-                             answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:164512,CIEL:162201,CIEL:5424"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </obsgroup>
-
-                    <!-- Other ARV -->
-                    <obs conceptId="CIEL:5424"/>
-                </p>
-            </div>
-
-            <h4>
-                <uimessage code="pihcore.tbTreatment"/>
-            </h4>
-            <div class="two-columns">
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.tb.needTreatment" />
-                    </label>
-                    <br/>
-
-                    <obs conceptId="PIH:1559" style="radio"
-                         answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,PIH:1432"
-                         answerCodes="pihcore.ongoingExam,emr.no,emr.yes,pihcore.treatmentStarted"
-                         answerSeparator="&lt;br /&gt;" />
-                </p>
-
-                <label>
-                    <uimessage code="pihcore.startDate" />
-                </label>
-                <obs conceptId="CIEL:1113" />
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.tb.startTBTreatmentComment" />
-                    </label>
-                    <br/>
-                    <obs conceptId="PIH:6150" style="radio"
-                         answerConceptIds="PIH:2125,PIH:13011,CIEL:159909"
-                         answerCodes="pihcore.tb.initialTreatment,pihcore.tb.retreatment,pihcore.tb.mdrtbTreatment"
-                         answerSeparator="&lt;br /&gt;" />
-                </p>
-            </div>
-
-            <h4>
-                <uimessage code="pihcore.stiTreatment"/>
-            </h4>
-
-            <div class="two-columns">
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.syph.needTreatment" />
-                    </label>
-                    <br/>
-                    <obs conceptId="CIEL:165331" style="radio"
-                         answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,PIH:1432"
-                         answerCodes="pihcore.ongoingExam,emr.no,emr.yes,pihcore.treatmentStarted"
-                         answerSeparator="&lt;br /&gt;" />
-                </p>
-
-                <label>
-                    <uimessage code="pihcore.startDate" />
-                </label>
-                <obs conceptId="PIH:13023" />
-
-                <br/><br/>
-                <p>
-                    <label>
-                        <uimessage code="pihcore.syph.patientNeedsOtherTreatment" />
-                    </label>
-                    <table>
-                        <tr>
-                            <td>
-                                <label><uimessage code="pihcore.regimen" /></label>
-                            </td>
-                            <td>
-                                <label><uimessage code="providermanagement.startDate" /></label>
-                            </td>
-                        </tr>
-
-                        <repeat with="['1'],['2'],['3']">
-                            <obsgroup groupingConceptId="PIH:13027">
-                                <tr>
-                                    <td>
-                                        <obs conceptId="PIH:10637" style="text"/>
-                                    </td>
-                                    <td>
-                                        <obs conceptId="CIEL:1428" />
-                                    </td>
-                                </tr>
-                            </obsgroup>
-                        </repeat>
-                    </table>
-                </p>
-            </div>
         </div>
     </section>
 
-    <section id="presenting-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.history.presentingHistory.title">
+    <section id="complaint" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.chiefComplaint.title">
         <div class="section-container">
             <p>
-                <obs conceptId="PIH:PRESENTING HISTORY" style="textarea" id="presenting-history"/>
+                <obs conceptId="CIEL:160531" style="textarea" id="chief-complaint"/>
             </p>
         </div>
     </section>
@@ -388,14 +344,6 @@
     <section id="psych" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.psycState">
         <div class="section-container">
-            <p class="radio">
-                <label>
-                    <uimessage code="pihcore.receivedPostTestCounsel" />
-                </label>
-                <obs conceptId="CIEL:159382" answerConceptIds="CIEL:1066,CIEL:1065"
-                     style="radio" />
-            </p>
-
             <p>
                 <label>
                     <uimessage code="pihcore.patientReceivedAdvice" />
@@ -430,7 +378,7 @@
     </section>
 
     <section id="hiv-adherence" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.evalAdherence">
+             headerCode="pihcore.arvAdherence">
         <div class="section-container">
         </div>
     </section>
@@ -515,7 +463,7 @@
     </section>
 
     <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.evolutionStateCD4">
+             headerCode="pihcore.progress">
         <div class="boxed">
             <p>
                 <label>
