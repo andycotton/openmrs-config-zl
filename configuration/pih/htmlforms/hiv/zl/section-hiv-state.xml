@@ -66,6 +66,58 @@
         </ifMode>
     </style>
 
+    <ifMode mode="VIEW" include="false" >
+        <script type="text/javascript">
+
+            jq(function() {
+
+                var updateEdd = function() {
+
+                    var lastPeriodDate = htmlForm.getValueIfLegal('lastPeriodDate.value');
+                    if (typeof lastPeriodDate !== "undefined" &amp;&amp; lastPeriodDate !== null &amp;&amp; (lastPeriodDate.length > 0)) {
+
+                        var today = new Date();
+                        var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                        if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
+                            // calculate the gestational age at the time of the encounter
+                            today = new Date(+currentEncounterDate);
+                        }
+
+                        var dateObj = getField('lastPeriodDate.value').datepicker('getDate');
+                        var newDate = new Date(dateObj);
+                        // time difference
+                        var timeDiff = Math.abs(today.getTime() - newDate.getTime());
+                        // weeks difference = gestational age
+                        var diffWeeks = Math.ceil(timeDiff / (1000 * 3600 * 24 * 7));
+
+                        // Estimated Delivery Date = (LMP - 3 months) + 12 months + 7 days
+                        newDate.setMonth(newDate.getMonth() - 3);
+                        newDate.setFullYear(newDate.getFullYear() + 1);
+                        newDate.setDate(newDate.getDate() + 7);
+
+                        var widgetDate = getField('lastPeriodDate.value').datepicker('setDate', newDate).val();
+                        getField('lastPeriodDate.value').datepicker('setDate', dateObj);
+
+                        jq('#calculated-edd-and-gestational').show();
+                        jq('#calculated-edd').text(widgetDate);
+                        jq('#calculated-gestational-age-value').text(diffWeeks + " " + '<uimessage code="pihcore.weeks"/>');
+
+                    } else {
+                        jq('#calculated-edd-and-gestational').hide();
+                    }
+                };
+
+                jq('#calculated-edd-and-gestational').hide();
+
+                jq("#lastPeriodDate input[type='hidden']").change(function() {
+                    updateEdd();
+                });
+
+                updateEdd();
+            });
+        </script>
+    </ifMode>
+
     <ifMode mode="VIEW" include="false">
         <h3>
             <uimessage code="pihcore.hiv.state.title"/>
@@ -99,7 +151,7 @@
             <table>
                 <tr>
                     <th></th>
-                    <th>
+                    <th colspan="2">
                         <label>
                             <uimessage code="pihcore.result"/>
                         </label>
@@ -120,8 +172,10 @@
                                          style="checkbox"
                                          toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
                                 </td>
-                                <td id="{name}-lab-toggle">
-                                    <obs conceptId="{concept}" />
+                                <td id="{name}-lab-toggle" colspan="2">
+                                    <span class="small">
+                                        <obs conceptId="{concept}" showUnits="true" />
+                                    </span>
                                 </td>
                                 <td id="{name}-lab-toggle">
                                     <obs conceptId="PIH:3267" />
@@ -131,7 +185,59 @@
                     </template>
                     <render concept="CIEL:730" name="cd4Percent"/>
                     <render concept="CIEL:5497" name="cd4Count" />
+                </repeat>
+
+                <!-- Viral Load -->
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:1361">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:162087"
+                                         answerConceptId="{concept}"
+                                         answerCode="pihcore.lab.{name}"
+                                         style="checkbox"
+                                         toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
+                                </td>
+                                <td id="{name}-lab-toggle">
+                                    <span class="small">
+                                        <obs conceptId="{concept}" showUnits="true"/>
+                                    </span>
+                                </td>
+                                <td id="{name}-lab-toggle">
+                                    <obs conceptId="CIEL:1305" style="checkbox"
+                                         answerConceptId="CIEL:1306" answerCode="LDL" />
+                                </td>
+                                <td id="{name}-lab-toggle">
+                                    <obs conceptId="PIH:3267" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
                     <render concept="CIEL:856" name="viralLoad" />
+                </repeat>
+
+                <!-- TB resistance -->
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:1361">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:162087"
+                                         answerConceptId="{concept}"
+                                         answerCode="pihcore.lab.{name}"
+                                         style="checkbox"
+                                         toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
+                                </td>
+                                <td id="{name}-lab-toggle" colspan="2">
+                                    <obs conceptId="{concept}" />
+                                </td>
+                                <td id="{name}-lab-toggle">
+                                    <obs conceptId="PIH:3267" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
                     <render concept="CIEL:307" name="tbSmear" />
                 </repeat>
             </table>
@@ -341,6 +447,153 @@
         </div>
     </section>
 
+
+    <section id="sexual-activity" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="zl.consultNote.sexualActivities.label">
+        <div class="section-container">
+            <div class="two-columns">
+                <p class="radio">
+                    <label>
+                        <uimessage code="zl.sexuallyActive"/>?
+                    </label>
+                    <obs conceptId="CIEL:160109"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.familyPlanning.title"/>?
+                    </label>
+                    <obs conceptId="CIEL:1382"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                </p>
+            </div>
+
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.familyPlanning.method"/>
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.startDate"/>
+                        </label>
+                    </td>
+                </tr>
+
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:Family planning history construct">
+                            <tr>
+                                <td id="{comment}-fp">
+                                    <obs conceptId="CIEL:374"
+                                         answerConceptId="{fpMethod}"
+                                         style="checkbox"
+                                         toggle="{id: '{comment}-date', style: 'dim'}"
+                                    />
+                                </td>
+                                <td class="{comment}-date">
+                                    <obs conceptId="CIEL:163757"/>
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render fpMethod="CIEL:780" comment="Pill"/>
+                    <render fpMethod="CIEL:907" comment="Depo-provera"/>
+                    <render fpMethod="CIEL:190" comment="Condoms"/>
+                    <render fpMethod="CIEL:78796" comment="Norplant"/>
+                    <render fpMethod="CIEL:5275" comment="IUD"/>
+                    <render fpMethod="CIEL:1472" comment="TubalLigation"/>
+                    <render fpMethod="CIEL:1489" comment="Vasectomy"/>
+                </repeat>
+
+                <!-- Other family planning -->
+                <obsgroup groupingConceptId="PIH:Family planning history construct">
+                    <tr>
+                        <td>
+                            <obs conceptId="CIEL:374"
+                                 answerConceptId="CIEL:5622"
+                                 style="checkbox"
+                                 toggle="{id: 'other-fp', style: 'dim'}"
+                            />
+                        </td>
+                        <td class="other-fp">
+                            <obs conceptId="CIEL:163757"/>
+                        </td>
+                    </tr>
+                </obsgroup>
+                <tr>
+                    <td align="right" class="other-fp">
+                        <label>
+                            <uimessage code="zl.ifOtherSpecify"/>
+                        </label>
+                        <obs conceptId="PIH:2996" size="30"/>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <includeIf velocityTest="$patient.gender == 'F' ">
+                <br/>
+                <!-- Pregnant -->
+                <p>
+                    <obs conceptId="CIEL:5272" toggle="pregnant"
+                         answerConceptId="CIEL:1065"
+                         answerCode="pihcore.pregnant"
+                         style="checkbox"/>
+
+                    <div id="pregnant">
+                        <div class="two-columns">
+                            <!-- Last menstrual period (LMP or DDR) -->
+                            <p>
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                                </label>
+                                <span class="small">
+                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                                </span>
+                            </p>
+
+                            <!-- Due date (DPA) -->
+                            <p>
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.dueDate"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div id="calculated-edd-and-gestational" class="two-columns hidden">
+                            <p>
+                                <span id="calculated-gestational-age-wrapper">
+                                    <span id="calculated-gestational-age-label">
+                                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                                    </span>
+                                    <span id='calculated-gestational-age-value' class="value"></span>
+                                </span>
+                            </p>
+                            <p>
+                                <span id="calculated-edd-wrapper">
+                                    <span id="calculated-edd-label">
+                                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                                    </span>
+                                    <span id='calculated-edd' class="value"></span>
+                                </span>
+                            </p>
+
+                        </div>
+                    </div>
+                </p>
+            </includeIf>
+
+        </div>
+    </section>
+
+
     <section id="psych" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.psycState">
         <div class="section-container">
@@ -380,6 +633,32 @@
     <section id="hiv-adherence" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.arvAdherence">
         <div class="section-container">
+            <div class="two-columns">
+                <label>
+                    <uimessage code="pihcore.med.rxDosesMonth" />
+                </label>
+                <obs conceptId="PIH:13067" />
+                <br/>
+
+                <label>
+                    <uimessage code="pihcore.med.missedDosesMonth" />
+                </label>
+                <obs conceptId="CIEL:160110" />
+                <br/>
+
+                <label>
+                    <uimessage code="pihcore.dailyCHWvisit" />
+                </label>
+                <obs conceptId="CIEL:160111" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066" />
+                <br/>
+
+                <label>
+                    <uimessage code="pihcore.ifNotSpecifyReason" />
+                </label>
+                <obs conceptId="PIH:13065"  />
+                <br/><br/>
+            </div>
         </div>
     </section>
 
