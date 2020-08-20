@@ -485,7 +485,7 @@
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:Family planning history construct">
+                        <obsgroup groupingConceptId="PIH:Family planning construct">
                             <tr>
                                 <td id="{comment}-fp">
                                     <obs conceptId="CIEL:374"
@@ -510,7 +510,7 @@
                 </repeat>
 
                 <!-- Other family planning -->
-                <obsgroup groupingConceptId="PIH:Family planning history construct">
+                <obsgroup groupingConceptId="PIH:Family planning construct">
                     <tr>
                         <td>
                             <obs conceptId="CIEL:374"
@@ -665,19 +665,6 @@
     <section id="hiv-adverse-event" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.adverseEvent">
         <div class="section-container">
-            <p>
-                <label>
-                    <b>
-                        <uimessage code="pihcore.adverseEvent"/>
-                    </b>
-                </label>
-                <obsgroup groupingConceptId="PIH:1295">
-                    <obs conceptId="PIH:1297" style="checkbox"
-                         answerConceptId="CIEL:121764"
-                         answerCode="yes" toggle="ae" />
-                </obsgroup>
-            </p>
-
             <div id="ae">
                 <table>
                     <tr>
@@ -709,6 +696,7 @@
                                 </tr>
                             </obsgroup>
                         </template>
+                        <render concept="CIEL:1107"   name="None"/>
                         <render concept="CIEL:118983" name="Neuropathy"/>
                         <render concept="CIEL:136162" name="LacticAcidosis" />
                         <render concept="CIEL:133473" name="NauseaVomiting" />
@@ -741,18 +729,23 @@
         </div>
     </section>
 
-    <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="hiv-progress" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.progress">
         <div class="boxed">
             <p>
                 <label>
-                    <uimessage code="pihcore.healthCondition"/>
+                    <uimessage code="pihcore.hiv.clinicalState.short"/>
                 </label>
                 <obs conceptId="CIEL:160116"
                      answerConceptIds="PIH:GOOD,PIH:SATISFACTORY,CIEL:162679,PIH:DETERIORATION"
                      style="radio" />
             </p>
+        </div>
+    </section>
 
+    <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.hiv.clinicalStageCD4">
+        <div class="boxed">
             <p>
                 <label>
                     <uimessage code="pihcore.hiv.whoStages"/>
@@ -762,11 +755,11 @@
                      answerLabels="1,2,3,4" style="radio" />
             </p>
 
+            <!-- ToDo:  Duplicate of section A.  Valery says this is different and used to calculate stage.  -->
             <div class="two-columns">
-                <obsgroup groupingConceptId="CIEL:164853">
+                <obsgroup groupingConceptId="PIH:3434">
                     <obs conceptId="CIEL:5497" labelCode="CD4"/>
-                    <obs conceptId="CIEL:159951"
-                         labelCode="CD4 Date:" allowTime="false" />
+                    <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
                 </obsgroup>
             </div>
         </div>
