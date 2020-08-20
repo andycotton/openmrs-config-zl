@@ -71,10 +71,8 @@
              headerCode="pihcore.rad_order.title">
         <div class="section-container-color">
             <!-- Use PACS at HUM -->
-
-            <!-- ToDo:  Change pelvic U/S to use CIEL:161283 -->
             <repeat with="['Chest (X-ray)','CIEL:165152','chestXRay'],
-                          ['Pelvic (U/S)', 'PIH:7789', 'pelvicUS'],
+                          ['Pelvic (U/S)', 'CIEL:161283', 'pelvicUS'],
                           ['Abdominal (U/S)','CIEL:845','abUS']">
                 <p>
                     <obsgroup groupingConceptId="PIH:Radiology report construct">
@@ -91,41 +89,56 @@
                 </p>
             </repeat>
 
-            <p>
-                <label>
-                    <uimessage code="zl.ifOtherSpecify"/>
-                </label>
-                <obsgroup groupingConceptId="PIH:Radiology report construct">
-                    <obs conceptId="PIH:Radiology procedure performed"
-                         answerClasses="Radiology/Imaging Procedure"
-                         style="checkbox"/>
-                    <div class="two-columns">
-                        <obs conceptId="PIH:Radiology report comments"
-                             labelCode="pihcore.findings.label"/>
-                        <obs conceptId="PIH:12847" labelCode="Date" />
-                    </div>
-                </obsgroup>
-            </p>
+            <!-- this section is ONLY included for HIV intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                <p>
+                    <label>
+                        <uimessage code="zl.ifOtherSpecify"/>
+                    </label>
+                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                        <obs conceptId="PIH:Radiology procedure performed"
+                             answerClasses="Radiology/Imaging Procedure"
+                             style="checkbox"/>
+                        <div class="two-columns">
+                            <obs conceptId="PIH:Radiology report comments"
+                                 labelCode="pihcore.findings.label"/>
+                            <obs conceptId="PIH:12847" labelCode="Date" />
+                        </div>
+                    </obsgroup>
+                </p>
+            </includeIf>
         </div>
     </section>
+
 
     <!-- ToDo: This section is duplicated by the section-lab-order.xml and should be replace
          with including forms within htmlforms.  Formlets? -->
     <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.labs.title">
         <div class="section-container-color">
-            <div class="two-columns">
-                <obsgroup groupingConceptId="CIEL:164853">
-                    <obs conceptId="CIEL:5497" labelCode="CD4"/>
-                    <obs conceptId="CIEL:159951"
-                         labelCode="CD4 Date:" allowTime="false" />
-                </obsgroup>
-            </div>
+            <!-- this section is ONLY included for HIV intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                <div class="two-columns">
+                    <obsgroup groupingConceptId="CIEL:164853">
+                        <obs conceptId="CIEL:5497" labelCode="CD4"/>
+                        <obs conceptId="CIEL:159951"
+                             labelCode="CD4 Date:" allowTime="false" />
+                    </obsgroup>
+                </div>
+                <hr/>
+            </includeIf>
 
-            <hr/>
             <h4>
                 <uimessage code="pihcore.labExam"/>
             </h4>
+
+            <p>
+                <!-- ToDo:  Toggle lab section with 'none' checkbox -->
+                <obs conceptId="PIH:Lab test ordered coded"
+                     answerConceptId="CIEL:1107"
+                     style="checkbox" />
+            </p>
+
             <div class="three-columns">
                 <p>
                     <label>
@@ -365,6 +378,36 @@
                          showCommentField="true" commentFieldLabel=""/>
                 </p>
             </div>
+
+            <!-- this section is ONLY included for HIV followup encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                <h4>
+                    <uimessage code="pihcore.lab.lab_results.title" />
+                </h4>
+
+                <table>
+                    <repeat>
+                        <template>
+                            <tr>
+                                <td>
+                                    <obs conceptId="PIH:Lab test ordered coded"
+                                         answerConceptId="{labName}"
+                                         style="checkbox"/>
+                                </td>
+                                <td>
+                                    <obs conceptId="{labName}" />
+                                </td>
+                            </tr>
+                        </template>
+                        <render labName="CIEL:887"    comment="Glucose"/>
+                        <render labName="CIEL:307"    comment="Sputum"/>
+                        <render labName="CIEL:5475"   comment="TB skin"/>
+                        <render labName="CIEL:163613" comment="CrAg"/>
+                        <render labName="CIEL:1619"   comment="RPR/Bio?"/>
+                        <render labName="CIEL:161469" comment="ASO"/>
+                    </repeat>
+                </table>
+            </includeIf>
         </div>
     </section>
 
@@ -373,107 +416,109 @@
              headerCode="pihcore.treatment">
 
         <div class="section-container-color">
+            <!-- this section is ONLY included for HIV intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                <h4>
+                    <uimessage code="pihcore.prophylaxis"/>
+                </h4>
 
-            <h4>
-                <uimessage code="pihcore.prophylaxis"/>
-            </h4>
+                <p>
+                    <!-- Added yes NOT 'not indicated' to toggle this section -->
+                    <obs conceptId="PIH:2740"
+                         answerConceptId="CIEL:1065"
+                         toggle="prophylaxisIndicated" />
+                </p>
 
-            <p>
-                <!-- Added yes NOT 'not indicated' to toggle this section -->
-                <obs conceptId="PIH:2740"
-                     answerConceptId="CIEL:1065"
-                     toggle="prophylaxisIndicated" />
-            </p>
-
-            <table class="prophylaxisIndicated">
-                <tr>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.treatment" />
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.startDate" />
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.endDate" />
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.currentUse" />
-                        </label>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.stopReason" />
-                        </label>
-                    </td>
-                </tr>
-
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="PIH:10742">
-                            <tr>
-                                <td>
-                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptMap}"
-                                         answerLabel="{drugname}"
-                                         toggle="{id: '{drugname}-treat', style: 'dim'}"/>
-                                </td>
-                                <td class="{drugname}-treat">
-                                    <obs conceptId="CIEL:163526" />
-                                </td>
-                                <td class="{drugname}-treat">
-                                    <obs conceptId="CIEL:164384" allowFutureDates="true" />
-                                </td>
-                                <td class="{drugname}-treat">
-                                    <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
-                                         answerLabel=""/>
-                                </td>
-                                <td class="{drugname}-treat">
-                                    <small>
-                                        <obs conceptId="CIEL:6098"
-                                             answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
-                                    </small>
-                                </td>
-                            </tr>
-                        </obsgroup>
-                    </template>
-                    <render conceptMap="CIEL:105281" drugname="Cotrimoxazole" />
-                    <render conceptMap="CIEL:78280" drugname="Isoniazide" />
-                    <render conceptMap="CIEL:76488" drugname="Fluconazole" />
-                </repeat>
-
-                <obsgroup groupingConceptId="PIH:10742">
+                <table class="prophylaxisIndicated">
                     <tr>
                         <td>
-                            <obs conceptId="CIEL:1282"
-                                 answerConceptId="PIH:3120" answerCode="pihcore.other"
-                                 toggle="{id: '{other-pro-treat}', style: 'dim'}"
-                                 commentFieldLabel="specify:" />
+                            <label>
+                                <uimessage code="pihcore.treatment" />
+                            </label>
                         </td>
-                        <td class="other-pro-treat">
-                            <obs conceptId="CIEL:163526" />
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.startDate" />
+                            </label>
                         </td>
-                        <td class="other-pro-treat">
-                            <obs conceptId="CIEL:164384" allowFutureDates="true" />
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.endDate" />
+                            </label>
                         </td>
-                        <td class="other-pro-treat">
-                            <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
-                                 answerLabel=""/>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.currentUse" />
+                            </label>
                         </td>
-                        <td class="other-pro-treat">
-                            <small>
-                                <obs conceptId="CIEL:6098"
-                                     answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
-                            </small>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.stopReason" />
+                            </label>
                         </td>
                     </tr>
-                </obsgroup>
-            </table>
+
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:10742">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:1282" answerConceptId="{conceptMap}"
+                                             answerLabel="{drugname}"
+                                             toggle="{id: '{drugname}-treat', style: 'dim'}"/>
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:163526" />
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:164384" allowFutureDates="true" />
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
+                                             answerLabel=""/>
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <small>
+                                            <obs conceptId="CIEL:6098"
+                                                 answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
+                                        </small>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render conceptMap="CIEL:105281" drugname="Cotrimoxazole" />
+                        <render conceptMap="CIEL:78280" drugname="Isoniazide" />
+                        <render conceptMap="CIEL:76488" drugname="Fluconazole" />
+                    </repeat>
+
+                    <obsgroup groupingConceptId="PIH:10742">
+                        <tr>
+                            <td>
+                                <obs conceptId="CIEL:1282"
+                                     answerConceptId="PIH:3120" answerCode="pihcore.other"
+                                     toggle="{id: '{other-pro-treat}', style: 'dim'}"
+                                     commentFieldLabel="specify:" />
+                            </td>
+                            <td class="other-pro-treat">
+                                <obs conceptId="CIEL:163526" />
+                            </td>
+                            <td class="other-pro-treat">
+                                <obs conceptId="CIEL:164384" allowFutureDates="true" />
+                            </td>
+                            <td class="other-pro-treat">
+                                <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
+                                     answerLabel=""/>
+                            </td>
+                            <td class="other-pro-treat">
+                                <small>
+                                    <obs conceptId="CIEL:6098"
+                                         answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
+                                </small>
+                            </td>
+                        </tr>
+                    </obsgroup>
+                </table>
+            </includeIf>
 
             <!-- ARV Treatment -->
             <h4>
@@ -629,43 +674,46 @@
         </div>
     </section>
 
-    <section id="family-plan-section" sectionTag="fieldset"
-             headerTag="legend" headerStyle="title"
-             headerCode="pihcore.familyPlanning.title">
+    <!-- this section is ONLY included for HIV intake encounter -->
+    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+        <section id="family-plan-section" sectionTag="fieldset"
+                 headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.familyPlanning.title">
 
-        <div class="section-container-color">
-            <div class="two-columns">
-                <repeat>
-                    <template>
-                        <p>
-                            <obsgroup groupingConceptId="PIH:Family planning construct">
-                                <obs conceptId="CIEL:374"
-                                     answerConceptId="{fpMethod}"
-                                     style="checkbox" />
-                            </obsgroup>
-                        </p>
-                    </template>
-                    <render fpMethod="CIEL:190" comment="Condoms"/>
-                    <render fpMethod="CIEL:780" comment="Pill"/>
-                    <render fpMethod="CIEL:1472" comment="Tubal ligation"/>
-                    <render fpMethod="CIEL:1489" comment="Vasectomy"/>
-                    <render fpMethod="CIEL:5275" comment="IUD"/>
-                    <render fpMethod="CIEL:907" comment="Depo-provera"/>
-                    <render fpMethod="CIEL:78796" comment="Norplant"/>
-                    <render fpMethod="CIEL:159524" comment="Abstinence"/>
-                    <render fpMethod="CIEL:1107" comment="None"/>
-                    <render fpMethod="CIEL:5622" comment="Other"/>
-                </repeat>
+            <div class="section-container-color">
+                <div class="two-columns">
+                    <repeat>
+                        <template>
+                            <p>
+                                <obsgroup groupingConceptId="PIH:Family planning construct">
+                                    <obs conceptId="CIEL:374"
+                                         answerConceptId="{fpMethod}"
+                                         style="checkbox" />
+                                </obsgroup>
+                            </p>
+                        </template>
+                        <render fpMethod="CIEL:190" comment="Condoms"/>
+                        <render fpMethod="CIEL:780" comment="Pill"/>
+                        <render fpMethod="CIEL:1472" comment="Tubal ligation"/>
+                        <render fpMethod="CIEL:1489" comment="Vasectomy"/>
+                        <render fpMethod="CIEL:5275" comment="IUD"/>
+                        <render fpMethod="CIEL:907" comment="Depo-provera"/>
+                        <render fpMethod="CIEL:78796" comment="Norplant"/>
+                        <render fpMethod="CIEL:159524" comment="Abstinence"/>
+                        <render fpMethod="CIEL:1107" comment="None"/>
+                        <render fpMethod="CIEL:5622" comment="Other"/>
+                    </repeat>
+                </div>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.remarks"/>:
+                    </label>
+                    <obs conceptId="PIH:FAMILY PLANNING COMMENT" style="text"/>
+                </p>
             </div>
-
-            <p>
-                <label>
-                    <uimessage code="pihcore.remarks"/>:
-                </label>
-                <obs conceptId="PIH:FAMILY PLANNING COMMENT" style="text"/>
-            </p>
-        </div>
-    </section>
+        </section>
+    </includeIf>
 
     <section id="assistance" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="pihcore.socioEconAssist">
