@@ -552,8 +552,16 @@
 
                 <p class="radio">
                     <label>
-                        <uimessage code="pihcore.hiv.startRegimenName"/>:
+                        <!-- this label for HIV intake encounter -->
+                        <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                            <uimessage code="pihcore.hiv.startRegimenName"/>:
+                        </includeIf>
+                        <!-- this label for HIV followup -->
+                        <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                            <uimessage code="pihcore.specifyRegimen"/>:
+                        </includeIf>
                     </label>
+
                     <br/>
                     <!-- ARV medications -->
                     <obsgroup groupingConceptId="PIH:10742">
@@ -567,16 +575,52 @@
                 </p>
             </div>
 
+            <!-- HIV followup only -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                <label>
+                    <uimessage code="pihcore.ifChangeSpecifyReason" />
+                </label>
+                <div class="two-columns">
+                    <repeat>
+                        <template>
+                            <p>
+                                <obs conceptId="CIEL:1252" answerConceptId="{reason}" style="checkbox" />
+                            </p>
+                        </template>
+                        <render reason="CIEL:843"    name="Failure" />
+                        <render reason="CIEL:102"    name="Toxicity" />
+                        <render reason="CIEL:162853" name="interaction" />
+                        <render reason="CIEL:127750" name="refusal" />
+                        <render reason="CIEL:1754"   name="stockOut" />
+                        <render reason="CIEL:1434"   name="pregnant" />
+                    </repeat>
+                    <p>
+                        <!-- Other -->
+                        <obs conceptId="CIEL:1252" answerConceptId="CIEL:5622"
+                             style="checkbox" showCommentField="true" commentFieldLabel="" />
+                    </p>
+                </div>
+            </includeIf>
+
             <includeIf velocityTest="$patient.gender == 'F' ">
                 <br/>
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.hiv.startARVforPMTCT"/>
-                    </label>
-                    <br/>
-                    <obs conceptId="CIEL:5576" style="radio"
-                         answerConceptIds="CIEL:1066,CIEL:1065"/>
-                </p>
+                <div class="two-columns">
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.hiv.startARVforPMTCT"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:5576" style="radio"
+                             answerConceptIds="CIEL:1066,CIEL:1065"/>
+                        <br/>
+                        <br/>
+                        <label>
+                            <uimessage code="pihcore.ifyesTransferPMTCT" />?
+                        </label>
+                        <obs conceptId="PIH:8854" style="checkbox"
+                             answerConceptId="PIH:6260" answerCode="emr.yes"/>
+                    </p>
+                </div>
             </includeIf>
 
             <h4>
@@ -589,10 +633,21 @@
                     </label>
                     <br/>
 
-                    <obs conceptId="PIH:1559" style="radio"
-                         answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,PIH:1432"
-                         answerCodes="pihcore.ongoingExam,emr.no,emr.yes,pihcore.treatmentStarted"
-                         answerSeparator="&lt;br /&gt;" />
+                    <!-- for HIV intake -->
+                    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                        <obs conceptId="PIH:1559" style="radio"
+                             answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,PIH:1432"
+                             answerCodes="pihcore.ongoingExam,emr.no,emr.yes,pihcore.treatmentStarted"
+                             answerSeparator="&lt;br /&gt;" />
+                    </includeIf>
+
+                    <!-- for HIV followup -->
+                    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                        <obs conceptId="PIH:1559" style="radio"
+                             answerConceptIds="CIEL:1066,PIH:1432,CIEL:1267,CIEL:981,PIH:2224"
+                             answerCodes="emr.no,pihcore.treatmentStarted,stopped,changed,pihcore.ongoingExam"
+                             answerSeparator="&lt;br /&gt;" />
+                    </includeIf>
                 </p>
 
                 <label>
@@ -601,9 +656,14 @@
                 <obs conceptId="CIEL:1113" />
 
                 <p class="radio">
-                    <label>
+                    <!-- this label for HIV intake encounter -->
+                    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
                         <uimessage code="pihcore.tb.startTBTreatmentComment" />
-                    </label>
+                    </includeIf>
+                    <!-- this label for HIV followup -->
+                    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                        <uimessage code="pihcore.specifyRegimen"/>:
+                    </includeIf>
                     <br/>
                     <obs conceptId="PIH:6150" style="radio"
                          answerConceptIds="PIH:2125,PIH:13011,CIEL:159909"
@@ -611,6 +671,56 @@
                          answerSeparator="&lt;br /&gt;" />
                 </p>
             </div>
+
+            <!-- HIV followup only-->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                <label>
+                    <uimessage code="pihcore.ifStartChangeSpecifyReg" />
+                </label>
+                <div class="two-columns">
+                    <repeat>
+                        <template>
+                            <p>
+                                <obs conceptId="CIEL:1269" answerConceptId="{reason}" style="checkbox" />
+                            </p>
+                        </template>
+                        <render reason="CIEL:159794" name="Continue" />
+                        <render reason="CIEL:102"    name="Toxicity" />
+                        <render reason="CIEL:1267"   name="complete" />
+                        <render reason="CIEL:981"    name="changeDose" />
+                        <render reason="CIEL:843"    name="Failure" />
+                        <render reason="CIEL:1754"   name="stockOut" />
+                    </repeat>
+                </div>
+            </includeIf>
+
+            <!-- for HIV followup -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                <h4>
+                    <uimessage code="pihcore.stiScreeningOnly"/>
+                </h4>
+                <div class="two-columns">
+                    <repeat>
+                        <template>
+                            <p class="radio">
+                                <label>
+                                    <uimessage code="pihcore.{name}" />
+                                </label>
+                                <obs conceptId="{screen}" style="radio"
+                                     answerConceptIds="CIEL:1065,CIEL:1066" />
+                            </p>
+                        </template>
+                        <render screen="PIH:1816"    name="stiDischarge" />
+                        <render screen="CIEL:163606" name="burnUrine" />
+                        <render screen="CIEL:864"    name="genitalUlcer" />
+                    </repeat>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.other"/>
+                    </label>
+                    <obs conceptId="PIH:1374" />
+                </div>
+            </includeIf>
 
             <h4>
                 <uimessage code="pihcore.stiTreatment"/>
