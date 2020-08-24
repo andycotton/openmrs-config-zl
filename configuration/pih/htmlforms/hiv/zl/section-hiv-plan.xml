@@ -1,5 +1,5 @@
-<htmlform id="hiv-intake-plan"
-          formUuid="e86e3118-731c-11e7-8cf7-a6006ad3dba0" formName="HIV Intake Plan"
+<htmlform id="hiv-plan"
+          formUuid="e86e3118-731c-11e7-8cf7-a6006ad3dba0" formName="HIV Plan"
           formVersion="1.0">
 
     <style type="text/css">
@@ -392,18 +392,19 @@
                                 <td>
                                     <obs conceptId="PIH:Lab test ordered coded"
                                          answerConceptId="{labName}"
-                                         style="checkbox"/>
+                                         style="checkbox"
+                                         toggle="{id: '{comment}-test', style: 'dim'}"/>
                                 </td>
-                                <td>
+                                <td id="{comment}-test">
                                     <obs conceptId="{labName}" />
                                 </td>
                             </tr>
                         </template>
                         <render labName="CIEL:887"    comment="Glucose"/>
                         <render labName="CIEL:307"    comment="Sputum"/>
-                        <render labName="CIEL:5475"   comment="TB skin"/>
+                        <render labName="CIEL:5475"   comment="TBskin"/>
                         <render labName="CIEL:163613" comment="CrAg"/>
-                        <render labName="CIEL:1619"   comment="RPR/Bio?"/>
+                        <render labName="CIEL:1619"   comment="RPRbio"/>
                         <render labName="CIEL:161469" comment="ASO"/>
                     </repeat>
                 </table>
@@ -623,6 +624,8 @@
                 </div>
             </includeIf>
 
+            <!-- TB Treatment -->
+            <br/>
             <h4>
                 <uimessage code="pihcore.tbTreatment"/>
             </h4>
@@ -644,15 +647,22 @@
                     <!-- for HIV followup -->
                     <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
                         <obs conceptId="PIH:1559" style="radio"
-                             answerConceptIds="CIEL:1066,PIH:1432,CIEL:1267,CIEL:981,PIH:2224"
-                             answerCodes="emr.no,pihcore.treatmentStarted,stopped,changed,pihcore.ongoingExam"
+                             answerConceptIds="CIEL:1066,CIEL:160017,CIEL:1267,CIEL:981,PIH:2224"
+                             answerCodes="pihcore.tb.medsNotIndicated,pihcore.tb.medsStarted,pihcore.tb.medsStopped,pihcore.tb.medsChanged,pihcore.tb.ongoing"
                              answerSeparator="&lt;br /&gt;" />
+                        <br/><br/>
                     </includeIf>
                 </p>
 
-                <label>
-                    <uimessage code="pihcore.startDate" />
-                </label>
+                <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                    <label>
+                        <uimessage code="pihcore.startDate" />
+                    </label>
+                </includeIf>
+                <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                    <label>Date</label>
+                </includeIf>
+
                 <obs conceptId="CIEL:1113" />
 
                 <p class="radio">
@@ -675,9 +685,9 @@
             <!-- HIV followup only-->
             <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
                 <label>
-                    <uimessage code="pihcore.ifStartChangeSpecifyReg" />
+                    <uimessage code="pihcore.ifChangeSpecifyReason" />:
                 </label>
-                <div class="two-columns">
+                <div class="three-columns">
                     <repeat>
                         <template>
                             <p>
@@ -685,10 +695,10 @@
                             </p>
                         </template>
                         <render reason="CIEL:159794" name="Continue" />
-                        <render reason="CIEL:102"    name="Toxicity" />
-                        <render reason="CIEL:1267"   name="complete" />
                         <render reason="CIEL:981"    name="changeDose" />
+                        <render reason="CIEL:102"    name="Toxicity" />
                         <render reason="CIEL:843"    name="Failure" />
+                        <render reason="CIEL:1267"   name="complete" />
                         <render reason="CIEL:1754"   name="stockOut" />
                     </repeat>
                 </div>
@@ -696,6 +706,7 @@
 
             <!-- for HIV followup -->
             <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                <br/>
                 <h4>
                     <uimessage code="pihcore.stiScreeningOnly"/>
                 </h4>
@@ -762,7 +773,8 @@
                             <obsgroup groupingConceptId="PIH:13027">
                                 <tr>
                                     <td>
-                                        <obs conceptId="PIH:10637" style="text"/>
+                                        <!-- Toggle doesn't work with text -->
+                                        <obs conceptId="PIH:10637" style="text" />
                                     </td>
                                     <td>
                                         <obs conceptId="CIEL:1428" />
