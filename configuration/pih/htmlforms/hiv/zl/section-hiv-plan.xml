@@ -183,32 +183,11 @@
                     <render labName="CIEL:304" comment="Stool"/>
                 </repeat>
 
-                <!-- ANC -->
+                <br/><br/><br/><br/><br/>
                 <includeIf velocityTest="$patient.gender == 'F' ">
-                    <p>
-                        <label>
-                            ANC
-                        </label>
-                    </p>
-                    <repeat>
-                        <template>
-                            <p>
-                                <obs conceptId="PIH:Lab test ordered coded"
-                                     answerConceptId="{labName}"
-                                     answerCode="{codeLabel}"
-                                     style="checkbox"/>
-                            </p>
-                        </template>
-                        <render labName="PIH:B-HCG" codeLabel="pihcore.lab.pregnancy" comment="Pregnancy"/>
-                        <render labName="PIH:RPR" codeLabel="pihcore.lab.syphilis" comment="Syphilis (RPR)"/>
-                        <render labName="CIEL:165553" codeLabel="pihcore.lab.vaginal" comment="Vaginal discharge"/>
-                    </repeat>
+                    <br/><br/><br/>
                 </includeIf>
-
-                <includeIf velocityTest="$patient.gender == 'M' ">
-                    <br/>
-                    <br/>
-                    <br/>
+                <includeIf velocityTest="$patient.age &lt; 2">
                     <br/>
                 </includeIf>
 
@@ -250,6 +229,7 @@
 
                     <!-- Serology -->
                     <render labName="CIEL:163618" comment="Chlamydia"/>
+                    <render labName="CIEL:1619"   comment="Syphilis (RPR)"/>
                     <render labName="CIEL:161475" comment="Hep B"/>
                     <render labName="CIEL:161474" comment="Hep C"/>
                     <render labName="CIEL:159645" comment="Spinal fluid (CSF)"/>
@@ -271,12 +251,14 @@
                     <render labName="CIEL:161469" codeLabel="ASO" comment="ASO"/>
                 </repeat>
 
+
                 <includeIf velocityTest="$patient.gender == 'F' ">
+                    <br/><br/><br/>
+                </includeIf>
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
                     <br/>
                 </includeIf>
-                <includeIf velocityTest="$patient.age &lt; 2">
-                    <br/>
-                </includeIf>
+
 
                 <!-- TB -->
                 <p>
@@ -338,12 +320,33 @@
                     <render labName="PIH:CD4 COUNT" codeLabel="pihcore.lab.cd4" comment="CD4 count"/>
                 </repeat>
 
+                <!-- ANC -->
+                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 2) &amp;&amp; $patient.gender == 'F' ">
+                    <p>
+                        <label>
+                            ANC
+                        </label>
+                    </p>
+                    <repeat>
+                        <template>
+                            <p>
+                                <obs conceptId="PIH:Lab test ordered coded"
+                                     answerConceptId="{labName}"
+                                     answerCode="{codeLabel}"
+                                     style="checkbox"/>
+                            </p>
+                        </template>
+                        <render labName="PIH:B-HCG" codeLabel="pihcore.lab.pregnancy" comment="Pregnancy"/>
+                        <render labName="CIEL:165553" codeLabel="pihcore.lab.vaginal" comment="Vaginal discharge"/>
+                    </repeat>
+                </includeIf>
+
                 <!-- Other -->
                 <label>
                     <uimessage code="pihcore.other"/>
                 </label>
 
-                <includeIf velocityTest="$patient.gender == 'F' ">
+                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 2) &amp;&amp; $patient.gender == 'F' ">
                     <repeat>
                         <template>
                             <p>
@@ -377,6 +380,10 @@
                          style="checkbox"
                          showCommentField="true" commentFieldLabel=""/>
                 </p>
+
+                <includeIf velocityTest="$patient.gender == 'M' ">
+                    <br/><br/>
+                </includeIf>
             </div>
 
             <!-- this section is ONLY included for HIV followup encounter -->
