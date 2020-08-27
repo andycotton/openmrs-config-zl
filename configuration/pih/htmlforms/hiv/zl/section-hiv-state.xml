@@ -274,11 +274,11 @@
                     <br/>
                     <!-- ARV medications: 1st line -->
                     <obs conceptId="CIEL:1088" style="radio"
-                         answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:5424"
+                         answerConceptIds="CIEL:160124,CIEL:164505,CIEL:1652,CIEL:162565,PIH:13085"
                          answerSeparator="&lt;br /&gt;"/>
 
                     <!-- Other ARV -->
-                    <obs conceptId="CIEL:5424"/>
+                    <obs conceptId="PIH:13085"/>
                 </p>
 
                 <p class="radio">
@@ -303,7 +303,7 @@
                     <!-- ARV medications: 3rd line -->
                     <obs conceptId="CIEL:1088" style="checkbox"
                          answerConceptId="PIH:13063"
-                         answerCode="pihcore.other"/>
+                         answerCode=""/>
 
                     <!-- Other 3rd line ARV -->
                     <obs conceptId="PIH:13063"/>
