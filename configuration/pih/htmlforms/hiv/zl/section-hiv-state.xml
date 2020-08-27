@@ -464,12 +464,12 @@
                     <label>
                         <uimessage code="pihcore.familyPlanning.title"/>?
                     </label>
-                    <obs conceptId="CIEL:1382"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <obs conceptId="CIEL:1382" style="checkbox"
+                         answerConceptId="CIEL:1065" toggle="fp-table" />
                 </p>
             </div>
 
-            <table>
+            <table id="fp-table">
                 <tr>
                     <td>
                         <label>
@@ -525,7 +525,7 @@
                     </tr>
                 </obsgroup>
                 <tr>
-                    <td align="right" class="other-fp">
+                    <td align="left" class="other-fp">
                         <label>
                             <uimessage code="zl.ifOtherSpecify"/>
                         </label>
@@ -552,7 +552,7 @@
                                     <uimessage code="pihcore.pregnancy.lastPeriod"/>
                                 </label>
                                 <span class="small">
-                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" />
                                 </span>
                             </p>
 
@@ -756,12 +756,11 @@
             </p>
 
             <!-- ToDo:  Duplicate of section A.  Valery says this is different and used to calculate stage.  -->
-            <div class="two-columns">
-                <obsgroup groupingConceptId="PIH:3434">
-                    <obs conceptId="CIEL:5497" labelCode="CD4"/>
-                    <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
-                </obsgroup>
-            </div>
+            <obsgroup groupingConceptId="PIH:3434">
+                <obs conceptId="CIEL:5497" labelCode="pihcore.lab.cd4Count"/>
+                <br/>
+                <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
+            </obsgroup>
         </div>
     </section>
 
