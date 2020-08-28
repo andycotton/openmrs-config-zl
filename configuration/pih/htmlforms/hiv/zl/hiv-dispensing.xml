@@ -95,9 +95,9 @@
         }
 
         .two-columns {
-        column-count: 2;
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
+            column-count: 2;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
         }
 
     </style>
@@ -232,9 +232,84 @@
         </includeIf>
     </ifMode>
 
-    <section id="hiv-meds" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="sectionName">
+    <section id="hiv-dispense-meds" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="mirebalais.task.dispensing.label">
         <div class="section-container">
+            <div class="two-columns">
+                    <label>
+                        <uimessage code="pihcore.dispensedTo" />
+                    </label>
+                    <obs conceptId="PIH:12071" style="radio"
+                         answerConceptIds="CIEL:162571,CIEL:1555"
+                         answerCodes="ui.i18n.RelationshipType.bIsToA.8d919b58-c2cc-11de-8d13-0010c6dffd0f,pihcore.chw"/>
+
+                    <br/><br/>
+                    <label>
+                        <uimessage code="pihcore.nameCHW" />
+                    </label>
+                    <obs conceptId="CIEL:164141" />
+            </div>
+
+            <p>
+                <obs conceptId="PIH:3671" style="checkbox"
+                     answerConceptId="PIH:9361" answerCode="pihcore.communityDispensing"/>
+            </p>
+
+            <p class="radio">
+                <label>
+                    <uimessage code="pihcore.treatmentLine" />
+                </label>
+                <obs conceptId="CIEL:164432" style="radio"
+                     answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
+            </p>
+
+            <div class="two-columns">
+                <label>
+                    <uimessage code="pihcore.monthsDispensed" />
+                </label>
+                <obs conceptId="PIH:3102" />
+                <br/>
+
+                <label>
+                    <uimessage code="pihcore.nextDispenseDate"/>
+                </label>
+                <span class="small">
+                    <obs conceptId="CIEL:5096" allowFutureDates="true" />
+                </span>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <table>
+                <tr>
+                    <th>
+                        <uimessage code="pihcore.category" />
+                    </th>
+                    <th>
+                        <uimessage code="pihcore.ncd.meds" />
+                    </th>
+                    <th>
+                        <uimessage code="mirebalais.dispensing.medicationAmount" />
+                    </th>
+                </tr>
+                <repeat with="['1'],['2'],['3']">
+                    <obsgroup groupingConceptId="CIEL:1442" >
+                       <tr>
+                           <td>
+                                <obs conceptId="PIH:1535"
+                                     answerConceptIds="PIH:3013,PIH:2848,PIH:3120"/>
+                           </td>
+                           <td>
+                               <!-- ToDo: revise this list with all the meds including tb and prophylaxis -->
+                                <obs conceptId="CIEL:1282" answerConceptSetIds="CIEL:1085" />
+                           </td>
+                           <td>
+                               <obs conceptId="CIEL:1443" />
+                           </td>
+                       </tr>
+                    </obsgroup>
+                </repeat>
+            </table>
         </div>
     </section>
 
