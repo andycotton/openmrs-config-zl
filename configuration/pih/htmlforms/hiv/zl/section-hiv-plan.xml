@@ -978,24 +978,23 @@
     <section id="transfer-section" sectionTag="fieldset"
              headerTag="legend" headerStyle="title" headerCode="pihcore.transfer.title">
         <div class="section-container-color">
-            <div class="two-columns">
-                <p>
-                    <label>
-                        <uimessage code="pihcore.internalTransferLocation" />
-                    </label>
-                    <obs conceptId="PIH:8621" />
-                    <br/><br/>
-                </p>
+            <p>
+                <label>
+                    <uimessage code="pihcore.externalTransferQuestion" />
+                </label>
+                <br/>
+                <label>
+                    <uimessage code="pihcore.internalTransferLocation" />
+                </label>
+                <obs conceptId="PIH:8621" />
+            </p>
 
-                <p>
-                    <label>
-                        <uimessage code="pihcore.externalTransferQuestion" />
-                        <br/><br/>
-                        <uimessage code="pihcore.externalTransferLocation"/>
-                    </label>
-                    <obs conceptId="PIH:11483" />
-                </p>
-            </div>
+            <p>
+                <label>
+                    <uimessage code="pihcore.externalTransferLocation"/>
+                </label>
+                <obs conceptId="PIH:11483" />
+            </p>
         </div>
     </section>
 
