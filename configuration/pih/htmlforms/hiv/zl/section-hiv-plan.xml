@@ -978,23 +978,41 @@
     <section id="transfer-section" sectionTag="fieldset"
              headerTag="legend" headerStyle="title" headerCode="pihcore.transfer.title">
         <div class="section-container-color">
-            <p>
+            <p class="radio">
                 <label>
                     <uimessage code="pihcore.externalTransferQuestion" />
                 </label>
-                <br/>
-                <label>
-                    <uimessage code="pihcore.internalTransferLocation" />
-                </label>
-                <obs conceptId="PIH:8621" />
+                <obs conceptId="PIH:HUM Disposition categories"
+                     answerConceptId="CIEL:160036" answerCode="emr.yes"
+                     style="checkbox" toggle="transfer-details"/>
             </p>
 
-            <p>
-                <label>
-                    <uimessage code="pihcore.externalTransferLocation"/>
-                </label>
-                <obs conceptId="PIH:11483" />
-            </p>
+            <table id="transfer-details">
+                <tr>
+                    <td colspan="2">
+                        <p class="radio">
+                            <obs conceptId="PIH:Transfer out location" style="radio"
+                                 answerConceptIds="PIH:8855,PIH:8856"
+                                 answerCodes="pihcore.internal,pihcore.external" />
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.internalTransferLocation" />
+                        </label>
+                        <obs conceptId="PIH:8621" />
+                    </td>
+
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.externalTransferLocation"/>
+                        </label>
+                        <obs conceptId="PIH:11483" />
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
