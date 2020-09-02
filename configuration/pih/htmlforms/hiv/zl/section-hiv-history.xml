@@ -278,20 +278,36 @@
             <div class="section-container">
                 <div class="two-columns" >
                     <p>
-                        <!-- Term of birth:  premie, at term, post date -->
-                        <obsgroup groupingConceptId="CIEL:1633" >
-                            <obs conceptId="CIEL:1628"
-                                 answerConceptIds="CIEL:1860,CIEL:1395,CIEL:113600"
+                        <label>
+                            <uimessage code="pihcore.premature" />
+                        </label>
+                        <!-- ToDo:  Use Premature infant
+                            <obs conceptId="CIEL:x"
+                                 answerConceptIds="CIEL:x,CIEL:x,CIEL:x"
+                                 answerCodes=""
                                  style="radio" answerSeparator="" />
-                        </obsgroup>
+                                 -->
                     </p>
 
-                    <p>
+                    <!-- ToDo:  Add gestation weeks -->
+
+                    <!-- Delivery type -->
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.mch.deliveryType"/>
+                        </label>
+                        <obs conceptId="PIH:11663"
+                             answerConceptIds="CIEL:162595,CIEL:155884"
+                             answerCodes="pihcore.vaginal,pihcore.c-section"
+                             style="radio"  />
+                    </p>
+
+                    <p class="radio">
                         <label>
                             <uimessage code="pihcore.deliveryLocation" />
                         </label>
                         <obs conceptId="CIEL:163774" answerConceptIds="CIEL:1589,CIEL:1536,CIEL:5622"
-                             style="radio" answerSeparator="" />
+                             style="radio"  />
                     </p>
 
 
@@ -302,7 +318,7 @@
                         <span class="small">
                             <field>
                                 <!-- ToDo: Fix units to show on the right-side of the box - not the next line css -->
-                                <obs conceptId="CIEL:5916" showUnits="false" />
+                                <obs conceptId="CIEL:5916" showUnits="true" />
                             </field>
                         </span>
                     </p>
