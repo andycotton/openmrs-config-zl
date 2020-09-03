@@ -140,7 +140,7 @@
                     </label>
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                           tags="Consult Note Location"/>
+                                           tags="HIV Consult Location"/>
                     </span>
                 </p>
                 <p id="when">
@@ -177,7 +177,7 @@
                     </label>
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                           tags="Consult Note Location"/>
+                                           tags="HIV Consult Location"/>
                     </span>
                 </p>
                 <p id="when">
