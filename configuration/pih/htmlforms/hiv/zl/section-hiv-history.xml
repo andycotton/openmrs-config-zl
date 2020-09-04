@@ -277,12 +277,13 @@
                  headerCode="pihcore.birth-history" >
             <div class="section-container">
                 <div class="two-columns" >
-                    <p>
+                    <p class="radio">
                         <label>
                             <uimessage code="pihcore.premature" />
                         </label>
-                            <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                                 style="radio" answerSeparator="" />
+                        <br/>
+                        <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" />
                     </p>
 
                     <p>
@@ -292,7 +293,7 @@
 
                         <span class="small">
                             <field>
-                        <obs conceptId="CIEL:1409" showUnits="true" />
+                                <obs conceptId="CIEL:1409" showUnits="true"/>
                             </field>
                         </span>
                     </p>
@@ -328,14 +329,14 @@
                         </span>
                     </p>
 
-                    <p>
+                    <p class="radio">
                         <!-- Problem for new born -->
                         <label>
                             <uimessage code="pihcore.neonatalComplications" />
                         </label>
-
+                        <br/>
                         <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                             style="radio" answerSeparator="" />
+                             style="radio"  />
                     </p>
 
                     <p>
@@ -355,18 +356,17 @@
 
                         <!-- Other -->
                         <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
-                             style="checkbox" showCommentField="true" />
+                             style="checkbox" showCommentField="true" commentFieldCode="" />
                     </p>
 
-                    <p>
-                        <!-- Should these two concepts be wrapped together? -->
-                        <!-- Maternal complication present during pregnancy -->
+                    <p class="radio">
                         <label>
                             <uimessage code="pihcore.maternalcomplication" />
                         </label>
+                        <br/>
                         <obs conceptId="PIH:3334"  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                             style="radio" answerSeparator="" />
-
+                             style="radio" />
+                        <br/>
                         <!-- If yes, which ones -->
                         <label>
                             <uimessage code="pihcore.yesSpecify" />
