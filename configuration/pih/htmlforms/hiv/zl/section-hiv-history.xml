@@ -272,7 +272,7 @@
     </section>
 
     <!-- only show these sections if the patient is < 12 years old-->
-    <includeIf velocityTest="$patient.age &lt; 12 " >
+    <includeIf velocityTest="$patient.age &lt; 12">
         <section id="birth-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.birth-history" >
             <div class="section-container">
@@ -281,15 +281,21 @@
                         <label>
                             <uimessage code="pihcore.premature" />
                         </label>
-                        <!-- ToDo:  Use Premature infant
-                            <obs conceptId="CIEL:x"
-                                 answerConceptIds="CIEL:x,CIEL:x,CIEL:x"
-                                 answerCodes=""
+                            <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
                                  style="radio" answerSeparator="" />
-                                 -->
                     </p>
 
-                    <!-- ToDo:  Add gestation weeks -->
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.gestation"/>
+                        </label>
+
+                        <span class="small">
+                            <field>
+                        <obs conceptId="CIEL:1409" showUnits="true" />
+                            </field>
+                        </span>
+                    </p>
 
                     <!-- Delivery type -->
                     <p class="radio">
@@ -310,7 +316,6 @@
                              style="radio"  />
                     </p>
 
-
                     <p>
                         <label>
                             <uimessage code="pihcore.birthweight" />
@@ -324,14 +329,50 @@
                     </p>
 
                     <p>
-                        <!-- Mother's disease during pregnancy -->
-                        <pastMedicalHistoryCheckbox concept="CIEL:118203" label="pihcore.momDiseaseDuringPregnancy"
-                                                    specify="true" class="medicalHistoryText patientHistory"/>
-                        <!-- Neonatal disease -->
-                        <pastMedicalHistoryCheckbox concept="CIEL:115374"
-                                                    specify="true" class="medicalHistoryText patientHistory"/>
+                        <!-- Problem for new born -->
+                        <label>
+                            <uimessage code="pihcore.neonatalComplications" />
+                        </label>
+
+                        <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" answerSeparator="" />
                     </p>
 
+                    <p>
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:164122"
+                                     answerConceptId="{concept}" style="checkbox" />
+                            </template>
+                            <render concept="CIEL:112215" name="Obstetrical trauma" />
+                            <render concept="CIEL:115866" name="Meconial Fluid" />
+                            <render concept="CIEL:113027" name="Septicemia neonatal" />
+                            <render concept="CIEL:124954" name="Neonatal tetanus" />
+                            <render concept="CIEL:145548" name="Chorioamnionitis" />
+                            <render concept="CIEL:162131" name="Neonatal resuscitation" />
+                            <render concept="CIEL:121255" name="Bacterial meningitis" />
+                        </repeat>
+
+                        <!-- Other -->
+                        <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
+                             style="checkbox" showCommentField="true" />
+                    </p>
+
+                    <p>
+                        <!-- Should these two concepts be wrapped together? -->
+                        <!-- Maternal complication present during pregnancy -->
+                        <label>
+                            <uimessage code="pihcore.maternalcomplication" />
+                        </label>
+                        <obs conceptId="PIH:3334"  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" answerSeparator="" />
+
+                        <!-- If yes, which ones -->
+                        <label>
+                            <uimessage code="pihcore.yesSpecify" />
+                        </label>
+                        <obs conceptId="PIH:13094" style="textarea"/>
+                    </p>
                 </div>
             </div>
         </section>
