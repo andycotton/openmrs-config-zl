@@ -190,7 +190,7 @@
                 <!-- Viral Load -->
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="CIEL:1361">
+                        <obsgroup groupingConceptId="PIH:HIV viral load construct">
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:162087"
