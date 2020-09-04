@@ -287,7 +287,7 @@
 
                     <p>
                         <label>
-                            <uimessage code="pihcore.hiv.gestation"/>
+                            <uimessage code="pihcore.gestation"/>
                         </label>
 
                         <span class="small">
@@ -331,7 +331,7 @@
                     <p>
                         <!-- Problem for new born -->
                         <label>
-                            <uimessage code="pihcore.hiv.ProblemForNewBorn" />
+                            <uimessage code="pihcore.neonatalComplications" />
                         </label>
 
                         <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
@@ -376,14 +376,14 @@
                         <!-- Should these two concepts be wrapped together? -->
                         <!-- Maternal complication present during pregnancy -->
                         <label>
-                            <uimessage code="pihcore.hiv.maternalcomplication" />
+                            <uimessage code="pihcore.maternalcomplication" />
                         </label>
                         <obs conceptId="PIH:3334"  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
                              style="radio" answerSeparator="" />
 
                         <!-- If yes, which ones -->
                         <label>
-                            <uimessage code="pihcore.hiv.yesSpecify" />
+                            <uimessage code="pihcore.yesSpecify" />
                         </label>
                         <obs conceptId="PIH:13094" style="textarea"/>
                     </p>
