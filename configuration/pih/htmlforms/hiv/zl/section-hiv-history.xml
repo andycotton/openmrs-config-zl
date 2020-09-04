@@ -339,37 +339,23 @@
                     </p>
 
                     <p>
-                        <!-- Obstetrical trauma -->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:112215" style="checkbox"/>
-
-                        <!-- Meconial Fluid -->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:115866" style="checkbox"/>
-
-                        <!-- Septicemia neonatal -->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:113027" style="checkbox"/>
-
-                        <!-- Neonatal tetanus-->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:124954" style="checkbox"/>
-
-                        <!-- Chorioamnionitis -->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:145548" style="checkbox"/>
-
-                        <!-- Neonatal resuscitation -->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:162131" style="checkbox"/>
-
-                        <!-- Bacterial meningitis -->
-                        <obs conceptId="CIEL:164122"
-                             answerConceptId="CIEL:121255" style="checkbox"/>
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:164122"
+                                     answerConceptId="{concept}" style="checkbox" />
+                            </template>
+                            <render concept="CIEL:112215" name="Obstetrical trauma" />
+                            <render concept="CIEL:115866" name="Meconial Fluid" />
+                            <render concept="CIEL:113027" name="Septicemia neonatal" />
+                            <render concept="CIEL:124954" name="Neonatal tetanus" />
+                            <render concept="CIEL:145548" name="Chorioamnionitis" />
+                            <render concept="CIEL:162131" name="Neonatal resuscitation" />
+                            <render concept="CIEL:121255" name="Bacterial meningitis" />
+                        </repeat>
 
                         <!-- Other -->
                         <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
-                             showCommentField="true" commentFieldLabel="" style="checkbox"/>
+                             style="checkbox" showCommentField="true" />
                     </p>
 
                     <p>
