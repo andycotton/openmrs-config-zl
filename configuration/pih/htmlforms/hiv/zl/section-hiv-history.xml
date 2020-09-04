@@ -272,7 +272,7 @@
     </section>
 
     <!-- only show these sections if the patient is < 12 years old-->
-    <includeIf velocityTest="$patient.age &lt; 12 " >
+    <includeIf velocityTest="$patient.age &lt; 12">
         <section id="birth-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.birth-history" >
             <div class="section-container">
@@ -281,15 +281,21 @@
                         <label>
                             <uimessage code="pihcore.premature" />
                         </label>
-                        <!-- ToDo:  Use Premature infant
-                            <obs conceptId="CIEL:x"
-                                 answerConceptIds="CIEL:x,CIEL:x,CIEL:x"
-                                 answerCodes=""
+                            <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
                                  style="radio" answerSeparator="" />
-                                 -->
                     </p>
 
-                    <!-- ToDo:  Add gestation weeks -->
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.hiv.gestation"/>
+                        </label>
+
+                        <span class="small">
+                            <field>
+                        <obs conceptId="CIEL:1409" showUnits="true" />
+                            </field>
+                        </span>
+                    </p>
 
                     <!-- Delivery type -->
                     <p class="radio">
@@ -310,7 +316,6 @@
                              style="radio"  />
                     </p>
 
-
                     <p>
                         <label>
                             <uimessage code="pihcore.birthweight" />
@@ -324,14 +329,64 @@
                     </p>
 
                     <p>
-                        <!-- Mother's disease during pregnancy -->
-                        <pastMedicalHistoryCheckbox concept="CIEL:118203" label="pihcore.momDiseaseDuringPregnancy"
-                                                    specify="true" class="medicalHistoryText patientHistory"/>
-                        <!-- Neonatal disease -->
-                        <pastMedicalHistoryCheckbox concept="CIEL:115374"
-                                                    specify="true" class="medicalHistoryText patientHistory"/>
+                        <!-- Problem for new born -->
+                        <label>
+                            <uimessage code="pihcore.hiv.ProblemForNewBorn" />
+                        </label>
+
+                        <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" answerSeparator="" />
                     </p>
 
+                    <p>
+                        <!-- Obstetrical trauma -->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:112215" style="checkbox"/>
+
+                        <!-- Meconial Fluid -->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:115866" style="checkbox"/>
+
+                        <!-- Septicemia neonatal -->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:113027" style="checkbox"/>
+
+                        <!-- Neonatal tetanus-->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:124954" style="checkbox"/>
+
+                        <!-- Chorioamnionitis -->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:145548" style="checkbox"/>
+
+                        <!-- Neonatal resuscitation -->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:162131" style="checkbox"/>
+
+                        <!-- Bacterial meningitis -->
+                        <obs conceptId="CIEL:164122"
+                             answerConceptId="CIEL:121255" style="checkbox"/>
+
+                        <!-- Other -->
+                        <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
+                             showCommentField="true" commentFieldLabel="" style="checkbox"/>
+                    </p>
+
+                    <p>
+                        <!-- Should these two concepts be wrapped together? -->
+                        <!-- Maternal complication present during pregnancy -->
+                        <label>
+                            <uimessage code="pihcore.hiv.maternalcomplication" />
+                        </label>
+                        <obs conceptId="PIH:3334"  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" answerSeparator="" />
+
+                        <!-- If yes, which ones -->
+                        <label>
+                            <uimessage code="pihcore.hiv.yesSpecify" />
+                        </label>
+                        <obs conceptId="PIH:13094" style="textarea"/>
+                    </p>
                 </div>
             </div>
         </section>
