@@ -580,6 +580,13 @@
 
                     <!-- Other ARV -->
                     <obs conceptId="CIEL:5424"/>
+
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.treatmentLine" />
+                    </label>
+                    <obs conceptId="CIEL:164432" style="radio"
+                         answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
                 </p>
             </div>
 

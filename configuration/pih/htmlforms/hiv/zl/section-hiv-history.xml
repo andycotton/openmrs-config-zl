@@ -303,6 +303,7 @@
                         <label>
                             <uimessage code="pihcore.mch.deliveryType"/>
                         </label>
+                        <br/>
                         <obs conceptId="PIH:11663"
                              answerConceptIds="CIEL:162595,CIEL:155884"
                              answerCodes="pihcore.vaginal,pihcore.c-section"
@@ -313,6 +314,7 @@
                         <label>
                             <uimessage code="pihcore.deliveryLocation" />
                         </label>
+                        <br/>
                         <obs conceptId="CIEL:163774" answerConceptIds="CIEL:1589,CIEL:1536,CIEL:5622"
                              style="radio"  />
                     </p>
@@ -329,8 +331,10 @@
                         </span>
                     </p>
 
+                    <br/><br/>
+
                     <p class="radio">
-                        <!-- Problem for new born -->
+                        <!-- Problem for newborn -->
                         <label>
                             <uimessage code="pihcore.neonatalComplications" />
                         </label>
@@ -376,6 +380,68 @@
                 </div>
             </div>
         </section>
+
+        <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="zl.consultNote.feeding.label" >
+            <div class="section-container">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.specifyTypeFeeding"/>
+                    </label>
+                    <obs conceptId="CIEL: 1151"
+                         answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
+                         answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
+                         answerSeparator="" />
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.providedFormula"/>
+                    </label>
+                    <obs conceptId="PIH:3581" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.mch.counselling.breastfeeding"/>
+                    </label>
+                    <obs conceptId="CIEL:1910" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.foodBefore6months"/>
+                    </label>
+                    <obs conceptId="CIEL:5633" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.formulaPrepTraining"/>
+                    </label>
+                    <obs conceptId="CIEL:159880" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.vaccinated"/>
+                    </label>
+                    <obs conceptId="CIEL:164134" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.ifYesVaccinationCard"/>
+                    </label>
+                </p>
+
+
+            </div>
+        </section>
+
     </includeIf>
 
     <section id="transmission" sectionTag="fieldset" headerTag="legend" headerStyle="title"
