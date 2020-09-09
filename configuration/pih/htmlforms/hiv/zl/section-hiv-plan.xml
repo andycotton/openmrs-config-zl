@@ -187,7 +187,7 @@
                 <includeIf velocityTest="$patient.gender == 'F' ">
                     <br/><br/><br/>
                 </includeIf>
-                <includeIf velocityTest="$patient.age &lt; 2">
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
                     <br/>
                 </includeIf>
 
@@ -289,7 +289,7 @@
                 </label>
 
                 <!-- Only for infant (less than 2) -->
-                <includeIf velocityTest="$patient.age &lt; 2">
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
                     <repeat>
                         <template>
                             <p>
