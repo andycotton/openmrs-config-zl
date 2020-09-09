@@ -388,7 +388,7 @@
                     <label>
                         <uimessage code="pihcore.specifyTypeFeeding"/>
                     </label>
-                    <obs conceptId="CIEL: 1151"
+                    <obs conceptId="CIEL:1151"
                          answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
                          answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
                          answerSeparator="" />
@@ -680,6 +680,11 @@
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:SURGERY"
                                             specify="true" class="medicalHistoryText patientHistory"/>
+                <pastMedicalHistoryCheckbox concept="PIH:CHOLERA"
+                                            specify="true" class="medicalHistoryText patientHistory"/>
+                <!-- Chikungunya -->
+                <pastMedicalHistoryCheckbox concept="CIEl:120742"
+                                            specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:OTHER" code="pihcore.other"
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <br/><br/>
@@ -713,10 +718,18 @@
                     <span class="small">
                         <obs conceptId="PIH:11949" showUnits="false"/>
                     </span>
-                </p>
 
-                <!-- Removed Secondhand smoke exposure -->
+                </p>
             </div>
+
+            <!-- Secondary smoke -->
+            <p>
+                <label>
+                    <uimessage code="pihcore.habits.secondhandSmoke"/>:
+                </label>
+                <obs conceptId="CIEL:152721" answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerSeparator="" style="radio"/>
+            </p>
 
             <div class="two-columns">
                 <!-- Alcohol use -->
