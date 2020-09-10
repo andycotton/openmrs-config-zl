@@ -21,7 +21,7 @@
             #encounter-diagnoses-app {
                 margin-bottom: 20px;
             }
-            
+
             form fieldset {
                 min-width: 90%;
                 display: block;
@@ -314,7 +314,7 @@
                     <br/>
 
                     <!-- Adult 2 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15">
+                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
                         <repeat>
                             <template>
                                 <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
