@@ -739,7 +739,7 @@
                     </label>
                     <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
-                    <br/><br/><br/><br/>
+                    <br/>
                     <label>
                         <uimessage code="pihcore.habits.daysPerWeek"/>:
                     </label>
@@ -752,6 +752,14 @@
                     </label>
                     <span class="small">
                         <obs conceptId="PIH:2246" showUnits="pihcore.units.drinksPerDay" />
+                    </span>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.alcoholType"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="CIEL:159453" answerConceptId="CIEL:5622" answerCode="pihcore.other"
+                             showCommentField="true" commentFieldCode="" />
                     </span>
                 </p>
             </div>
