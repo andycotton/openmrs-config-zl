@@ -755,7 +755,7 @@
                     </span>
                     <br/>
                     <label>
-                        <uimessage code="pihcore.alcoholType"/>:
+                        <uimessage code="pihcore.habits.alcoholType"/>:
                     </label>
                     <span class="small">
                         <obs conceptId="CIEL:159453" answerConceptId="CIEL:5622" answerCode="pihcore.other"
