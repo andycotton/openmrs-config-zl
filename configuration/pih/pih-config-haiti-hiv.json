@@ -30,7 +30,8 @@
     "exportPatients",
     "importPatients",
     "vct",
-    "dispensing"
+    "dispensing",
+    "labResults"
   ],
 
   "globalProperties": {
