@@ -683,7 +683,7 @@
                 <pastMedicalHistoryCheckbox concept="PIH:CHOLERA"
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <!-- Chikungunya -->
-                <pastMedicalHistoryCheckbox concept="CIEl:120742"
+                <pastMedicalHistoryCheckbox concept="CIEL:120742"
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:OTHER" code="pihcore.other"
                                             specify="true" class="medicalHistoryText patientHistory"/>
