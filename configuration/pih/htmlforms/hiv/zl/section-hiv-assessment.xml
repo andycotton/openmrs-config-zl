@@ -360,37 +360,49 @@
                     </label>
                     <br/>
 
-                    <repeat>
-                        <template>
-                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
-                            <br/>
-                        </template>
-                        <!-- Adult 3 -->
-                        <render whoDef="CIEL:5339"   name="WeightLossMore10%" />
-                        <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
-                        <render whoDef="CIEL:5027"   name="FeverMore1Month" />
-                        <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
-                        <render whoDef="CIEL:5337"   name="LeukoplastOral" />
-                        <render whoDef="CIEL:42"     name="PulmonaryTB" />
-                        <render whoDef="CIEL:5030"   name="SevereBactInfection" />
-                        <render whoDef="CIEL:149629" name="AcuteUlcer" />
-                        <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
-                    </repeat>
-                </p>
+                    <!-- Adult 3 -->
+                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                     style="checkbox" answerSeparator=""/>
+                                <br/>
+                            </template>
+                                <render whoDef="CIEL:5339"   name="WeightLossMore10%" />
+                                <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
+                                <render whoDef="CIEL:5027"   name="FeverMore1Month" />
+                                <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
+                                <render whoDef="CIEL:5337"   name="LeukoplastOral" />
+                                <render whoDef="CIEL:42"     name="PulmonaryTB" />
+                                <render whoDef="CIEL:5030"   name="SevereBactInfection" />
+                                <render whoDef="CIEL:149629" name="AcuteUlcer" />
+                                <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
+                        </repeat>
+                    </includeIf>
 
-                    <!-- iSantePlus, but not ZL (next 5 diagnoses)
-                    Affections inflammatoires pelviennes
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:902" style="checkbox"/></p>
-                    Infections bactérienne, autre (septicémie incluse) (severe)
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5333" style="checkbox"/></p>
-                    Candidose, vulvo-vaginale chronique (&#62;1 mois)
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:298" style="checkbox"/></p>
-                    Méningites bactériennes
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:121255" style="checkbox"/></p>
-                    Tuberculose multirésistante
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:159355" style="checkbox"/></p>
-                    -->
+                    <!-- Peds 3 -->
+                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                     style="checkbox" answerSeparator=""/>
+                                <br/>
+                            </template>
+                            <render whoDef="CIEL:134722" name="ModMalnutrition" />
+                            <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
+                            <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
+                            <render whoDef="CIEL:5027"   name="FeverMore1Month" />
+                            <render whoDef="CIEL:5337"   name="LeukoplastOral" />
+                            <render whoDef="CIEL:111873" name="LymphTB" />
+                            <render whoDef="CIEL:149629" name="AcuteUlcer" />
+                            <render whoDef="CIEL:42"     name="PulmonaryTB" />
+                            <render whoDef="CIEL:5030"   name="SevereBactInfection" />
+                            <render whoDef="CIEL:135458" name="LIP" />
+                            <render whoDef="CIEL:155569" name="ChronLungDisease" />
+                            <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
+                        </repeat>
+                    </includeIf>
+                </p>
 
                 <p>
                     <label>
@@ -398,91 +410,66 @@
                     </label>
                     <br/>
 
-                    <repeat>
-                        <template>
-                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
-                            <br/>
-                        </template>
-                        <!-- Adult 4 -->
-                        <render whoDef="CIEL:823"    name="Wasting" />
-                        <render whoDef="CIEL:882"    name="PneumocystisPneumonia" />
-                        <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
-                        <render whoDef="CIEL:138706" name="HerpesSimplex" />
-                        <render whoDef="CIEL:5340"   name="Candidiosis" />
-                        <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
-                        <render whoDef="CIEL:507"    name="KaposiSarcoma" />
-                        <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
-                        <render whoDef="CIEL:990"    name="Toxoplasmosis" />
-                        <render whoDef="CIEL:160442" name="HIVencephalopathy" />
-                        <render whoDef="CIEL:5033"   name="Cryptococcocus" />
-                        <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
-                        <render whoDef="CIEL:5046"   name="LeukoEnceph" />
-                        <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
-                        <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
-                        <render whoDef="CIEL:5350"   name="Mycosis" />
-                        <render whoDef="PIH:11407"   name="RecurrentSepticemia" />
-                        <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
-                        <render whoDef="CIEL:116023" name="CervicalCancer" />
-                        <render whoDef="CIEL:159338" name="Leishmaniosis" />
-                        <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
-                    </repeat>
+                    <!-- Adult 4 -->
+                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                     style="checkbox" answerSeparator=""/>
+                                <br/>
+                            </template>
+                            <render whoDef="CIEL:823"    name="Wasting" />
+                            <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
+                            <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
+                            <render whoDef="CIEL:138706" name="HerpesSimplex" />
+                            <render whoDef="CIEL:5340"   name="Candidiosis" />
+                            <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
+                            <render whoDef="CIEL:507"    name="KaposiSarcoma" />
+                            <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
+                            <render whoDef="CIEL:990"    name="Toxoplasmosis" />
+                            <render whoDef="CIEL:160442" name="HIVencephalopathy" />
+                            <render whoDef="CIEL:5033"   name="Cryptococcocus" />
+                            <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
+                            <render whoDef="CIEL:5046"   name="LeukoEnceph" />
+                            <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
+                            <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
+                            <render whoDef="CIEL:5350"   name="Mycosis" />
+                            <render whoDef="PIH:11407"   name="RecurrentSepticemia" />
+                            <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
+                            <render whoDef="CIEL:116023" name="CervicalCancer" />
+                            <render whoDef="CIEL:159338" name="Leishmaniosis" />
+                            <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
+                        </repeat>
+                    </includeIf>
 
-                    <!-- iSantePlus but not ZL
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:1207" style="checkbox" /></p>
-                    perte de poids &#62;10% PLUS<br/>
-                    a) diarrhée &#62;1 mois sans cause identifiée OU<br/>
-                    b) fièvre &#62;1 mois sans cause identifiée
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5035" style="checkbox" /></p>
-                    Retinite à CMV
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:142963" style="checkbox" /></p>
-                    CMV viscéral <br/>(sauf rétine, ou foie, rate, ganglions lymphatiques)
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5033" style="checkbox" /></p>
-                    Méningites à Cryptococcose (extra pulmonaire)
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:1460" style="checkbox" /></p>
-                    Démence liée au VIH)
-
-                    <b>OMS Stade Clinique IV <br/>Diarrhée chronique >1 mois (dûe à): </b>
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:145443" style="checkbox" /></p>
-                    Cause inconnue
-
-                    Oesphagites avec ulcère (dûe à):
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:118510" style="checkbox" /></p>
-                    Cause inconnue
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:110516" style="checkbox" /></p>
-                    Oesophagites HSV
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:156804" style="checkbox" /></p>
-                    Oesophagites CMV
-
-                    Lésions cérébrales focales (dûe à):
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:135886" style="checkbox" /></p>
-                    Cause inconnue
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5040" style="checkbox" /></p>
-                    Lymphome primaire CNS
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5038" style="checkbox" /></p>
-                    Histoplasmoses (extra pulmonaires)
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:141488" style="checkbox" /></p>
-                    Ulcère chronique a HSV (>1 mois)
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5041" style="checkbox" /></p>
-                    Lymphomes, Hodgkins
-
-                    Pneumonie non bactérienne (dûe à):
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:114100" style="checkbox" /></p>
-                    Cause inconnue
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:5340" style="checkbox" /></p>
-                    Candidose
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:123098" style="checkbox" /></p>
-                    Infections virales (incl. HSV,CMV)
-
-                    <p><obs conceptId="CIEL:6042" answerConceptId="CIEL:882" style="checkbox" /></p>
-                    PCP
-                    -->
+                    <!-- Peds 4 -->
+                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                     style="checkbox" answerSeparator=""/>
+                                <br/>
+                            </template>
+                            <render whoDef="CIEL:164086" name="Stunting" />
+                            <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
+                            <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
+                            <render whoDef="CIEL:138706" name="HerpesSimplex" />
+                            <render whoDef="CIEL:5340"   name="Candidiosis" />
+                            <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
+                            <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
+                            <render whoDef="CIEL:507"    name="KaposiSarcoma" />
+                            <render whoDef="CIEL:990"    name="Toxoplasmosis" />
+                            <render whoDef="CIEL:5033"   name="Cryptococcocus" />
+                            <render whoDef="CIEL:5350"   name="Mycosis" />
+                            <render whoDef="CIEL:160442" name="HIVencephalopathy" />
+                            <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
+                            <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
+                            <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
+                            <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
+                            <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
+                            <render whoDef="CIEL:5046"   name="LeukoEnceph" />
+                        </repeat>
+                    </includeIf>
                 </p>
         </div>
     </section>
