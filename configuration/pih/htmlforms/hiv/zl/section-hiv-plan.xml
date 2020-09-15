@@ -116,8 +116,8 @@
     <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.labs.title">
         <div class="section-container-color">
-            <!-- this section is ONLY included for HIV intake encounter -->
-            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+            <!-- UHM-4784 Use Lab results or workflow to enter lab data.  Using includeif to comment out the section -->
+            <includeIf velocityTest="$patient.gender == 'NoLabEntryHere' ">
                 <div class="two-columns">
                     <obsgroup groupingConceptId="CIEL:164853">
                         <obs conceptId="CIEL:5497" labelCode="CD4"/>
@@ -386,8 +386,8 @@
                 </includeIf>
             </div>
 
-            <!-- this section is ONLY included for HIV followup encounter -->
-            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+            <!-- UHM-4784 Use Lab results or workflow to enter lab data.  Using includeif to comment out the section -->
+            <includeIf velocityTest="$patient.gender == 'NoLabEntryHere' ">
                 <h4>
                     <uimessage code="pihcore.lab.lab_results.title" />
                 </h4>

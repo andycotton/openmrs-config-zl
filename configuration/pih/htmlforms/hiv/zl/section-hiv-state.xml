@@ -144,105 +144,107 @@
         </script>
     </ifMode>
 
-    <section id="hiv-surveillance" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.labSurveillance">
-        <!-- ToDo:  UHM-4784 Needs analysis -->
-        <div class="section-container">
-            <table>
-                <tr>
-                    <th></th>
-                    <th colspan="2">
-                        <label>
-                            <uimessage code="pihcore.result"/>
-                        </label>
-                    </th>
-                    <th>
-                        Date
-                    </th>
-                </tr>
+    <!-- UHM-4784 Use Lab results or workflow to enter lab data.  Using includeif to comment out the section -->
+    <includeIf velocityTest="$patient.gender == 'NoLabEntryHere' ">
+        <section id="hiv-surveillance" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.labSurveillance">
+            <div class="section-container">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th colspan="2">
+                            <label>
+                                <uimessage code="pihcore.result"/>
+                            </label>
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                    </tr>
 
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="CIEL:1361">
-                            <tr>
-                                <td>
-                                    <obs conceptId="CIEL:162087"
-                                         answerConceptId="{concept}"
-                                         answerCode="pihcore.lab.{name}"
-                                         style="checkbox"
-                                         toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
-                                </td>
-                                <td id="{name}-lab-toggle" colspan="2">
-                                    <span class="small">
-                                        <obs conceptId="{concept}" showUnits="true" />
-                                    </span>
-                                </td>
-                                <td id="{name}-lab-toggle">
-                                    <obs conceptId="PIH:3267" />
-                                </td>
-                            </tr>
-                        </obsgroup>
-                    </template>
-                    <render concept="CIEL:730" name="cd4Percent"/>
-                    <render concept="CIEL:5497" name="cd4Count" />
-                </repeat>
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="CIEL:1361">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:162087"
+                                             answerConceptId="{concept}"
+                                             answerCode="pihcore.lab.{name}"
+                                             style="checkbox"
+                                             toggle="{id: '{name}-lab-toggle', style: 'dim'}"/>
+                                    </td>
+                                    <td id="{name}-lab-toggle" colspan="2">
+                                        <span class="small">
+                                            <obs conceptId="{concept}" showUnits="true"/>
+                                        </span>
+                                    </td>
+                                    <td id="{name}-lab-toggle">
+                                        <obs conceptId="PIH:3267"/>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render concept="CIEL:730" name="cd4Percent"/>
+                        <render concept="CIEL:5497" name="cd4Count"/>
+                    </repeat>
 
-                <!-- Viral Load -->
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="PIH:HIV viral load construct">
-                            <tr>
-                                <td>
-                                    <obs conceptId="CIEL:162087"
-                                         answerConceptId="{concept}"
-                                         answerCode="pihcore.lab.{name}"
-                                         style="checkbox"
-                                         toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
-                                </td>
-                                <td id="{name}-lab-toggle">
-                                    <span class="small">
-                                        <obs conceptId="{concept}" showUnits="true"/>
-                                    </span>
-                                </td>
-                                <td id="{name}-lab-toggle">
-                                    <obs conceptId="CIEL:1305" style="checkbox"
-                                         answerConceptId="CIEL:1306" answerCode="LDL" />
-                                </td>
-                                <td id="{name}-lab-toggle">
-                                    <obs conceptId="PIH:3267" />
-                                </td>
-                            </tr>
-                        </obsgroup>
-                    </template>
-                    <render concept="CIEL:856" name="viralLoad" />
-                </repeat>
+                    <!-- Viral Load -->
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:HIV viral load construct">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:162087"
+                                             answerConceptId="{concept}"
+                                             answerCode="pihcore.lab.{name}"
+                                             style="checkbox"
+                                             toggle="{id: '{name}-lab-toggle', style: 'dim'}"/>
+                                    </td>
+                                    <td id="{name}-lab-toggle">
+                                        <span class="small">
+                                            <obs conceptId="{concept}" showUnits="true"/>
+                                        </span>
+                                    </td>
+                                    <td id="{name}-lab-toggle">
+                                        <obs conceptId="CIEL:1305" style="checkbox"
+                                             answerConceptId="CIEL:1306" answerCode="LDL"/>
+                                    </td>
+                                    <td id="{name}-lab-toggle">
+                                        <obs conceptId="PIH:3267"/>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render concept="CIEL:856" name="viralLoad"/>
+                    </repeat>
 
-                <!-- TB resistance -->
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="CIEL:1361">
-                            <tr>
-                                <td>
-                                    <obs conceptId="CIEL:162087"
-                                         answerConceptId="{concept}"
-                                         answerCode="pihcore.lab.{name}"
-                                         style="checkbox"
-                                         toggle="{id: '{name}-lab-toggle', style: 'dim'}" />
-                                </td>
-                                <td id="{name}-lab-toggle" colspan="2">
-                                    <obs conceptId="{concept}" />
-                                </td>
-                                <td id="{name}-lab-toggle">
-                                    <obs conceptId="PIH:3267" />
-                                </td>
-                            </tr>
-                        </obsgroup>
-                    </template>
-                    <render concept="CIEL:307" name="tbSmear" />
-                </repeat>
-            </table>
-        </div>
-    </section>
+                    <!-- TB resistance -->
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="CIEL:1361">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:162087"
+                                             answerConceptId="{concept}"
+                                             answerCode="pihcore.lab.{name}"
+                                             style="checkbox"
+                                             toggle="{id: '{name}-lab-toggle', style: 'dim'}"/>
+                                    </td>
+                                    <td id="{name}-lab-toggle" colspan="2">
+                                        <obs conceptId="{concept}"/>
+                                    </td>
+                                    <td id="{name}-lab-toggle">
+                                        <obs conceptId="PIH:3267"/>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render concept="CIEL:307" name="tbSmear"/>
+                    </repeat>
+                </table>
+            </div>
+        </section>
+    </includeIf>
 
     <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.currentTreatment">
@@ -744,7 +746,7 @@
     </section>
 
     <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.hiv.clinicalStageCD4">
+             headerCode="pihcore.hiv.clinicalStage">
         <div class="boxed">
             <p>
                 <label>
@@ -755,12 +757,15 @@
                      answerLabels="1,2,3,4" style="radio" />
             </p>
 
-            <!-- ToDo:  Duplicate of section A.  Valery says this is different and used to calculate stage.  -->
-            <obsgroup groupingConceptId="PIH:3434">
-                <obs conceptId="CIEL:5497" labelCode="pihcore.lab.cd4Count"/>
-                <br/>
-                <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
-            </obsgroup>
+            <!-- UHM-4784 Use Lab results or workflow to enter lab data.  Using includeif to comment out the section -->
+            <includeIf velocityTest="$patient.gender == 'NoLabEntryHere' ">
+                <!-- ToDo:  Duplicate of section A.  Valery says this is different and used to calculate stage.  -->
+                <obsgroup groupingConceptId="PIH:3434">
+                    <obs conceptId="CIEL:5497" labelCode="pihcore.lab.cd4Count"/>
+                    <br/>
+                    <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
+                </obsgroup>
+            </includeIf>
         </div>
     </section>
 
