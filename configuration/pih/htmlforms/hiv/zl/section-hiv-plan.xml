@@ -313,11 +313,11 @@
                         </p>
                     </template>
 
-                    <render labName="CIEL:163722" codeLabel="pihcore.lab.hivRapid" comment="AFB / Smear"/>
-                    <render labName="PIH:1041" codeLabel="pihcore.lab.elisaQuant" comment="HIV ELISA (quant)"/>
-                    <!-- ToDo: ELISA EID -->
-                    <render labName="PIH:HIV VIRAL LOAD" codeLabel="pihcore.lab.viralLoad" comment="HIV viral load"/>
-                    <render labName="PIH:CD4 COUNT" codeLabel="pihcore.lab.cd4" comment="CD4 count"/>
+                    <render labName="CIEL:163722" codeLabel="pihcore.lab.hivRapid" comment="HIV RT"/>
+                    <!-- Removed: HIV ELISA Quant (CIEL:1041) pihcore.lab.elisaQuant -->
+                    <render labName="CIEL:856"  codeLabel="pihcore.lab.viralLoad" comment="HIV viral load"/>
+                    <render labName="CIEL:5497" codeLabel="pihcore.lab.cd4" comment="CD4 count"/>
+                    <render labName="CIEL:730"  codeLabel="pihcore.lab.cd4Percent" comment="CD4 %"/>
                 </repeat>
 
                 <!-- ANC -->
