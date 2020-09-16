@@ -263,22 +263,16 @@
                      answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
             </p>
 
-            <div class="two-columns">
+            <p class="radio">
                 <label>
                     <uimessage code="pihcore.monthsDispensed" />
                 </label>
-                <obs conceptId="PIH:3102" />
-                <br/>
-
-                <label>
-                    <uimessage code="pihcore.nextDispenseDate"/>
-                </label>
                 <span class="small">
-                    <obs conceptId="CIEL:5096" allowFutureDates="true" />
+                    <obs conceptId="PIH:3102" />
                 </span>
-            </div>
+            </p>
         </div>
-
+        
         <div class="section-container">
             <table>
                 <tr>
@@ -311,6 +305,17 @@
                 </repeat>
             </table>
         </div>
+
+        <br/>
+        <p>
+            <label>
+                <uimessage code="pihcore.nextDispenseDate"/>
+            </label>
+            <span class="small">
+                <obs conceptId="CIEL:5096" allowFutureDates="true" />
+            </span>
+        </p>
+
     </section>
 
     <ifMode mode="VIEW" include="false">
