@@ -382,7 +382,7 @@
         </section>
 
         <section id="ARV within 72 hours of life" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-                 headerCode="pihcore.C1ARV" >
+                 headerCode="pihcore.arvForNewBorn" >
             <div class="section-container">
                 <table>
                 <tr>
