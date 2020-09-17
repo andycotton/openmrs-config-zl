@@ -400,75 +400,37 @@
                         </label>
                     </th>
                 </tr>
-                    <tr>
+                    <repeat>
+                    <template>
                         <obsgroup groupingConceptId="PIH:PROPHYLAXIS FOR INFANT CONSTRUCT">
+                            <tr>
                             <td>
                                    <p class="radio">
-                                        <!-- AZT after birth-->
                                         <label>
-                                            <uimessage code="pihcore.aztAfterBirth" />
+                                            <uimessage code="pihcore.{toggle}" />
                                         </label>
                                        <br/>
-                                        <obs conceptId="PIH:ZIDOVUDINE AFTER BIRTH" answerConceptIds="CIEL:1065, CIEL:1066"
-                                     style="radio" />
+                                        <obs conceptId="{cId}" answerConceptIds="CIEL:1065, CIEL:1066" style="radio" />
                                     </p>
                             </td>
-                            <td>
+                            <td id="{toggle}-start-date">
                                         <!-- start date -->
                                         <obs conceptId="CIEL:163526" allowTime="false" />
                             </td>
-                            <td>
+                            <td id="{toggle}-end-date">
                                         <!-- end date -->
                                         <obs conceptId="CIEL:164384" allowTime="false" />
                             </td>
+                            </tr>
                         </obsgroup>
-                </tr>
-                <tr>
-                <obsgroup groupingConceptId="PIH:PROPHYLAXIS FOR INFANT CONSTRUCT">
-                    <td>
-                                    <p class="radio">
-                                        <!-- NVP after birth-->
-                                        <label>
-                                            <uimessage code="pihcore.nvpAfterBirth" />
-                                        </label>
-                                        <br/>
-                                        <obs conceptId="PIH:HISTORY OF NEVIRAPINE TO INFANT	" answerConceptIds="CIEL:1065, CIEL:1066"
-                                             style="radio" />
-                                    </p>
-                    </td>
-                    <td>
-                                    <!-- start date -->
-                                    <obs conceptId="CIEL:163526" allowTime="false" />
-                    </td>
-                    <td>
-                                    <!-- end date -->
-                                    <obs conceptId="CIEL:164384" allowTime="false" />
-                    </td>
-                        </obsgroup>
-                </tr>
-                <tr>
-                        <obsgroup groupingConceptId="PIH:PROPHYLAXIS FOR INFANT CONSTRUCT">
-                            <td>
-                            <p class="radio">
-                                <!-- ARV triple therapy after birth (coded)-->
-                                <label>
-                                    <uimessage code="pihcore.arvTripleTherapyAfterBirth" />
-                                </label>
-                                <br/>
-                                <obs conceptId="PIH:2212" answerConceptIds="CIEL:1065, CIEL:1066"
-                                     style="radio" />
-                            </p>
-                            </td>
-                            <td>
-                                <!-- start date -->
-                                <obs conceptId="CIEL:163526" allowTime="false" />
-                            </td>
-                            <td>
-                                <!-- end date -->
-                                <obs conceptId="CIEL:164384" allowTime="false" />
-                            </td>
-                        </obsgroup>
-                </tr>
+                    </template>
+                        <!-- AZT after birth-->
+                        <render cId="PIH:ZIDOVUDINE AFTER BIRTH" toggle="aztAfterBirth"/>
+                        <!-- NVP after birth-->
+                        <render cId="PIH:HISTORY OF NEVIRAPINE TO INFANT" toggle="nvpAfterBirth"/>
+                        <!-- ARV triple therapy after birth (coded)-->
+                        <render cId="PIH:2212" toggle="arvTripleTherapyAfterBirth"/>
+                    </repeat>
                 </table>
 
                 <p>
