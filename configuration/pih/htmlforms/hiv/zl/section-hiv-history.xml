@@ -381,6 +381,76 @@
             </div>
         </section>
 
+        <section id="ARV within 72 hours of life" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.arvForNewBorn" >
+            <div class="section-container">
+                <table>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.startDate" />
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.endDate" />
+                        </label>
+                    </th>
+                </tr>
+                    <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:PROPHYLAXIS FOR INFANT CONSTRUCT">
+                            <tr>
+                            <td>
+                                   <p class="radio">
+                                        <label>
+                                            <uimessage code="pihcore.{toggle}" />
+                                        </label>
+                                       <br/>
+                                        <obs conceptId="{cId}" answerConceptIds="CIEL:1065, CIEL:1066" style="radio" />
+                                    </p>
+                            </td>
+                            <td id="{toggle}-start-date">
+                                        <!-- start date -->
+                                        <obs conceptId="CIEL:163526" allowTime="false" />
+                            </td>
+                            <td id="{toggle}-end-date">
+                                        <!-- end date -->
+                                        <obs conceptId="CIEL:164384" allowTime="false" />
+                            </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                        <!-- AZT after birth-->
+                        <render cId="PIH:ZIDOVUDINE AFTER BIRTH" toggle="aztAfterBirth"/>
+                        <!-- NVP after birth-->
+                        <render cId="PIH:HISTORY OF NEVIRAPINE TO INFANT" toggle="nvpAfterBirth"/>
+                        <!-- ARV triple therapy after birth (coded)-->
+                        <render cId="PIH:2212" toggle="arvTripleTherapyAfterBirth"/>
+                    </repeat>
+                </table>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.prophylaxisForInfant" />
+                    </label>
+                    <obs conceptId="PIH:6656" style="textarea"/>
+                </p>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.ReasonForNoARVs" />
+                    </label>
+
+                    <obs conceptId="PIH:1709" style="textarea"/>
+                </p>
+
+            </div>
+        </section>
+
         <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="zl.consultNote.feeding.label" >
             <div class="section-container">
