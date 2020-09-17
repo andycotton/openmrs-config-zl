@@ -274,6 +274,38 @@
         </div>
 
         <div class="section-container">
+            WORK IN PROGRESS
+            <table>
+                <tr>
+                    <td>
+                        <label><uimessage code="pihcore.previousRegimen" /></label>
+                    </td>
+                    <td>
+                        <lookup expression="fn.latestObs('CIEL:1282').valueCoded.name"/>
+                        <br/>
+                        <label><uimessage code="zl.date" />:</label>
+                        <lookup expression="fn.latestObs('CIEL:1282').obsDatetime"/>
+                        <br/>
+                        <label>
+                            (<uimessage code="pihcore.ifOther"/>
+                        </label>
+                        <lookup expression="fn.latestObs('CIEL:5424').valueText"/>)
+                        <br/>
+                        <label><uimessage code="pihcore.treatmentLine" />:</label>
+                        <lookup expression="fn.latestObs('CIEL:164432').valueCoded.name"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <obs conceptId="PIH:3277" style="checkbox"
+                             answerConceptId="CIEL:1065" answerCode="pihcore.equivalentART" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div class="section-container">
             <table>
                 <tr>
                     <th>
