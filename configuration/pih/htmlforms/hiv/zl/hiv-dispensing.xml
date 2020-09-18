@@ -102,6 +102,32 @@
 
     </style>
 
+<script type="text/javascript">
+    jq(function() {
+
+      jq("#monthsDispensed input").change(function() {
+        var monthsDispensed= htmlForm.getValueIfLegal('monthsDispensed.value');
+        console.log("months dispensed: " + monthsDispensed);
+          if (typeof monthsDispensed !== "undefined" &amp;&amp; monthsDispensed !== null &amp;&amp; (monthsDispensed.length > 0)) {
+
+              var today = new Date();
+              var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+              if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
+                console.log("currentEncounterDate= " + currentEncounterDate);
+                today = new Date(+currentEncounterDate);
+                console.log("today= " + today);
+              }
+
+              var currentDate = htmlForm.getValueIfLegal('nextDispenseDate.value');
+              console.log("currentDate: " + currentDate);
+              today.setDate(today.getDate() + 28 * monthsDispensed);
+
+              console.log("today: " + today.toISOString().slice(0,10));
+              setValue('nextDispenseDate.value', today.toISOString().slice(0,10));
+          }
+      });
+    });
+</script>
 
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="pihcore.form.created_on"/>:
@@ -263,14 +289,7 @@
                      answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
             </p>
 
-            <p class="radio">
-                <label>
-                    <uimessage code="pihcore.monthsDispensed" />
-                </label>
-                <span class="small">
-                    <obs conceptId="PIH:3102" />
-                </span>
-            </p>
+
         </div>
 
         <div class="section-container">
@@ -339,15 +358,18 @@
         </div>
 
         <br/>
-        <p>
+        <div class="two-columns">
+
+            <label>
+                <uimessage code="pihcore.monthsDispensed" />
+            </label>
+            <obs id="monthsDispensed" conceptId="PIH:3102" />
+
             <label>
                 <uimessage code="pihcore.nextDispenseDate"/>
             </label>
-            <span class="small">
-                <obs conceptId="CIEL:5096" allowFutureDates="true" />
-            </span>
-        </p>
-
+            <obs id="nextDispenseDate" conceptId="CIEL:5096" allowFutureDates="true" />
+        </div>
     </section>
 
     <ifMode mode="VIEW" include="false">
