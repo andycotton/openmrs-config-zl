@@ -572,21 +572,22 @@
 
                     <br/>
                     <!-- ARV medications -->
-                    <obsgroup groupingConceptId="PIH:10742">
+                    <obsgroup groupingConceptId="PIH:6116">
                         <obs conceptId="CIEL:1282" style="radio"
                              answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:164512,CIEL:162201,CIEL:5424"
                              answerSeparator="&lt;br /&gt;"/>
+
+
+                        <!-- Other ARV -->
+                        <obs conceptId="CIEL:5424"/>
+
+                        <br/>
+                        <label>
+                            <uimessage code="pihcore.treatmentLine" />
+                        </label>
+                        <obs conceptId="PIH:13115" style="radio"
+                             answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
                     </obsgroup>
-
-                    <!-- Other ARV -->
-                    <obs conceptId="CIEL:5424"/>
-
-                    <br/>
-                    <label>
-                        <uimessage code="pihcore.treatmentLine" />
-                    </label>
-                    <obs conceptId="CIEL:164432" style="radio"
-                         answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
                 </p>
             </div>
 
