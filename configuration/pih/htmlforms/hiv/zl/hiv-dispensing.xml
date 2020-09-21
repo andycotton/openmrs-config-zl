@@ -107,22 +107,17 @@
 
       jq("#monthsDispensed input").change(function() {
         var monthsDispensed= htmlForm.getValueIfLegal('monthsDispensed.value');
-        console.log("months dispensed: " + monthsDispensed);
           if (typeof monthsDispensed !== "undefined" &amp;&amp; monthsDispensed !== null &amp;&amp; (monthsDispensed.length > 0)) {
 
               var today = new Date();
               var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
               if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
-                console.log("currentEncounterDate= " + currentEncounterDate);
                 today = new Date(+currentEncounterDate);
-                console.log("today= " + today);
               }
 
               var currentDate = htmlForm.getValueIfLegal('nextDispenseDate.value');
-              console.log("currentDate: " + currentDate);
               today.setDate(today.getDate() + 28 * monthsDispensed);
 
-              console.log("today: " + today.toISOString().slice(0,10));
               setValue('nextDispenseDate.value', today.toISOString().slice(0,10));
           }
       });
@@ -285,7 +280,7 @@
                 <label>
                     <uimessage code="pihcore.treatmentLine" />
                 </label>
-                <obs conceptId="CIEL:164432" style="radio"
+                <obs conceptId="PIH:13115" style="radio"
                      answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
             </p>
 
@@ -311,7 +306,7 @@
                         <lookup expression="fn.latestObs('CIEL:5424').valueText"/>)
                         <br/>
                         <label><uimessage code="pihcore.treatmentLine" />:</label>
-                        <lookup expression="fn.latestObs('CIEL:164432').valueCoded.name"/>
+                        <lookup expression="fn.latestObs('PIH:13115').valueCoded.name"/>
                     </td>
                 </tr>
                 <tr>
@@ -342,6 +337,9 @@
                 <tr>
                    <td>
                        <uimessage code="ARV #1" />:
+                       <span class="small hidden">
+                           <obs conceptId="PIH:1535" answerConceptId="PIH:3013" defaultValue="PIH:3013"></obs>
+                       </span>
                    </td>
                    <td>
                         <obs conceptId="CIEL:1282"
@@ -376,8 +374,8 @@
                                 TDF/3TC/EFV 300/300/600 mg,
                                 3TC 10 mg sp,
                                 ABC/3TC 60/30 mg,
-                                RAL/DAR/r 400/600/100mg,
-                                DAR/ETV 300/100 mg,
+                                RAL/DRV/r 400/600/100mg,
+                                DRV/ETV 300/100 mg,
                                 ABC/3TC 120/60 mg" />
                    </td>
                    <td>
@@ -386,46 +384,106 @@
                 </tr>
                 </obsgroup>
                 <obsgroup groupingConceptId="CIEL:1442" >
-                    <tr>
-                        <td>
-                            <uimessage code="TMS / Dapsone" />:
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:1282"
-                                 answerDrugIds="
-                                    85153088-b868-4723-aacd-27f25f121685,
-                                    54972d88-156e-465e-8483-9a9e97d5898f,
-                                    160d7a20-f710-48b3-9c9b-0a1b98ab5871,
-                                    b3910fb7-2b17-44e6-8a52-8543af46c935"
-                                 answerLabels="
-                                    TMS 960 mg,
-                                    TMS 480 mg,
-                                    TMS 120 mg,
-                                    TMS 240 mg sp" />
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:1443" />
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <uimessage code="ARV #2" />:
+                        <span class="small hidden">
+                            <obs conceptId="PIH:1535" answerConceptId="PIH:2848" defaultValue="PIH:2848"></obs>
+                        </span>
+                    </td>
+                    <td>
+                        <obs conceptId="CIEL:1282"
+                             answerDrugIds="
+                                78fab02a-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f96210-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78faa576-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f9780e-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f981d2-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78faaaf8-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                35c6041e-0af3-4bab-887d-9db682a02248,
+                                78f976c4-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78faa710-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f98308-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f95e78-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f95d38-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f96526-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                c893970e-22b5-4cb9-8be2-1a9bff480235,
+                                78f97b9c-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                29c9dd27-25f2-45c6-9708-93fe142a46ba,
+                                0fc3d5c1-fd39-4899-b5c0-b094e28ff359
+                                "
+                             answerLabels="
+                                DTG 50 mg,
+                                EFV 600 mg,
+                                TDF 300 mg,
+                                NVP 200 mg,
+                                ABC 300 mg,
+                                LPV/r 40/10 mg,
+                                ABC 60 mg,
+                                LPV/r 100/25 mg,
+                                LPV/r 80/20 mg,
+                                ABC 20 mg,
+                                LPV/r 200/50 mg,
+                                ATV/r 300/100 mg,
+                                NVP 50 mg,
+                                RAL/ETV 400/100 mg,
+                                EFV 200 mg,
+                                ETV 100mg,
+                                DAR/ETV 300/100 mg
+                                " />
+                    </td>
+                    <td>
+                        <obs conceptId="CIEL:1443" />
+                    </td>
+                </tr>
                 </obsgroup>
                 <obsgroup groupingConceptId="CIEL:1442" >
-                    <tr>
-                        <td>
-                            <uimessage code="INH" />:
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:1282"
-                                 answerDrugIds="
-                                    e47fa273-0c52-4f0f-b57b-34001a3e9677,
-                                    849218ee-901c-46b3-80f9-7c808132893b"
-                                 answerLabels="
-                                    INH 100 mg,
-                                    INH 300 mg" />
-                        </td>
-                        <td>
-                            <obs conceptId="CIEL:1443" />
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <uimessage code="TMS / Dapsone" />:
+                        <span class="small hidden">
+                            <obs conceptId="PIH:1535" answerConceptId="PIH:3120" defaultValue="PIH:3120"></obs>
+                        </span>
+                    </td>
+                    <td>
+                        <obs conceptId="CIEL:1282"
+                             answerDrugIds="
+                                85153088-b868-4723-aacd-27f25f121685,
+                                54972d88-156e-465e-8483-9a9e97d5898f,
+                                160d7a20-f710-48b3-9c9b-0a1b98ab5871,
+                                b3910fb7-2b17-44e6-8a52-8543af46c935"
+                             answerLabels="
+                                TMS 960 mg,
+                                TMS 480 mg,
+                                TMS 120 mg,
+                                TMS 240 mg sp" />
+                    </td>
+                    <td>
+                        <obs conceptId="CIEL:1443" />
+                    </td>
+                </tr>
+                </obsgroup>
+                <obsgroup groupingConceptId="CIEL:1442" >
+                <tr>
+                    <td>
+                        <uimessage code="INH" />:
+                        <span class="small hidden">
+                            <obs conceptId="PIH:1535" answerConceptId="CIEL:1679" defaultValue="CIEL:1679"></obs>
+                        </span>
+                    </td>
+                    <td>
+                        <obs conceptId="CIEL:1282"
+                             answerDrugIds="
+                                e47fa273-0c52-4f0f-b57b-34001a3e9677,
+                                849218ee-901c-46b3-80f9-7c808132893b"
+                             answerLabels="
+                                INH 100 mg,
+                                INH 300 mg" />
+                    </td>
+                    <td>
+                        <obs conceptId="CIEL:1443" />
+                    </td>
+                </tr>
                 </obsgroup>
 
             </table>
