@@ -105,22 +105,145 @@
 <script type="text/javascript">
     jq(function() {
 
-      jq("#monthsDispensed input").change(function() {
-        var monthsDispensed= htmlForm.getValueIfLegal('monthsDispensed.value');
-          if (typeof monthsDispensed !== "undefined" &amp;&amp; monthsDispensed !== null &amp;&amp; (monthsDispensed.length > 0)) {
+        var dispensedToChwConceptId = <lookup expression="fn.getConcept('CIEL:1555').id"/>;
+        var dispensedToPatientConceptId = <lookup expression="fn.getConcept('CIEL:162571').id"/>;
 
-              var today = new Date();
-              var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
-              if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
-                today = new Date(+currentEncounterDate);
+
+        var dispensedToValue= getValue('dispensedTo.value');
+        if (dispensedToValue == dispensedToPatientConceptId) {
+            getField('chwName.value').fadeTo(250,0.33);
+            getField('chwName.value').prop( 'disabled', true );
+        } else if (dispensedToValue == dispensedToChwConceptId) {
+            getField('dispensedInCommunity.value').prop( 'disabled', true );
+        }
+
+        var validateNextDispensingDate = function() {
+            var currentEncounterDate = new Date();
+            var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+            if (typeof encounterDate !== "undefined" &amp;&amp; encounterDate !== null &amp;&amp; (encounterDate.length > 0)) {
+                currentEncounterDate = new Date(+encounterDate);
+            }
+
+            var dateObj = getField('nextDispenseDate.value').datepicker('getDate');
+            var newDate = new Date(dateObj);
+
+            var timeDiff = newDate.getTime() - currentEncounterDate.getTime();
+            // difference in days
+            var daysDifference = Math.ceil(timeDiff / (1000 * 3600 * 24 ));
+            if ( (daysDifference &lt; 1) ||  (daysDifference &gt; 364)) {
+                getField('nextDispenseDate.error').text("<uimessage code='Next dispensing date has to be within a year of the encounter date'/>").show();
+                return false;
+            } else {
+              getField('nextDispenseDate.error').text("").hide();
+              return true;
+            }
+        };
+
+    jq("#medsTable select").on('change', function() {
+        if( this.value.length > 0 ) {
+            // a med has been selected
+            jq("#missingMedsError").text("").hide();
+        }
+    });
+
+    jq("#dispensedTo").click(function () {
+
+    dispensedToValue= getValue('dispensedTo.value');
+    if (dispensedToValue == dispensedToPatientConceptId) {
+    // medication dispensed to patient
+    //do not allow entering the name of CHW and disable "Dispensed in Community" checkbox
+    setValue('chwName.value','');
+    getField('chwName.value').fadeTo(250,0.33);
+    getField('chwName.value').prop( 'disabled', true );
+    getField('dispensedInCommunity.value').prop( 'disabled', false );
+    } else if (dispensedToValue == dispensedToChwConceptId) {
+    // medication dispensed to CHW
+    // enable CHW name input and disable and uncheck "Dispensed in Community" checkbox
+    getField('chwName.value').prop('disabled', false );
+    getField('chwName.value').fadeTo(250,1);
+    getField('dispensedInCommunity.value').prop( 'disabled', true );
+    getField('dispensedInCommunity.value').prop( 'checked', false );
+    } else if (dispensedToValue == false) {
+    // all radio buttons are un-selected
+    getField('dispensedInCommunity.value').prop( 'disabled', false );
+    }
+
+    });
+
+
+    jq("#chwName input").change(function() {
+    var chwName= getValue('chwName.value');
+    if (chwName.length > 0) {
+    getField('chwName.error').text("").hide();
+    }
+
+    });
+
+    jq("#nextDispenseDate input[type='hidden']").change(function() {
+    var nextDispensingDate = getValue('nextDispenseDate.value');
+    if (nextDispensingDate.length > 0 ) {
+    validateNextDispensingDate();
+    }
+    });
+
+
+    jq("#monthsDispensed input").change(function() {
+    var monthsDispensed= getValue('monthsDispensed.value');
+    if (typeof monthsDispensed !== "undefined" &amp;&amp; monthsDispensed !== null &amp;&amp; (monthsDispensed.length >
+    0)) {
+    var currentEncounterDate = new Date();
+    var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+              if (typeof encounterDate !== "undefined" &amp;&amp; encounterDate !== null &amp;&amp; (encounterDate.length > 0)) {
+                  currentEncounterDate = new Date(+encounterDate);
               }
-
-              var currentDate = htmlForm.getValueIfLegal('nextDispenseDate.value');
-              today.setDate(today.getDate() + 28 * monthsDispensed);
-
-              setValue('nextDispenseDate.value', today.toISOString().slice(0,10));
+              currentEncounterDate.setDate(currentEncounterDate.getDate() + 28 * monthsDispensed);
+              setValue('nextDispenseDate.value', currentEncounterDate.toISOString().slice(0,10));
+              validateNextDispensingDate();
           }
-      });
+        });
+
+        // At least one drug should be selected
+        beforeValidation.push(function() {
+            var arv1Drug = getValue('arv1Drug.value');
+            var arv2Drug = getValue('arv2Drug.value');
+            var tmsDrug = getValue('tmsDrug.value');
+            var inhDrug =  getValue('inhDrug.value');
+
+            if ( arv1Drug == false &amp;&amp;  arv2Drug == false &amp;&amp;  tmsDrug == false &amp;&amp;  inhDrug == false ) {
+                jq("#missingMedsError").text("<uimessage code='Please select a drug!'/>").show();
+                return false;
+            } else {
+                jq("missingMedsError").hide();
+            }
+
+            return true;
+
+        });
+
+        // The CHW name is required when dispensed to CHW radio button is checked
+        beforeValidation.push(function() {
+          var dispensedToChw= getValue('dispensedTo.value');
+          if (dispensedToChw == dispensedToChwConceptId ) {
+            var chwName = getValue('chwName.value');
+            if (chwName == false) {
+              // the CHW name was not entered
+              getField('chwName.error').text("<uimessage code='required'/>").show();
+              return false;
+            }
+          }
+          return true;
+        });
+
+        // (Encounter Date) less than (Next Dispensing Date) less than (Encounter Date + 365 days)
+        beforeValidation.push(function() {
+            var nextDispensingDate = getValue('nextDispenseDate.value');
+            if (nextDispensingDate == false) {
+              getField('nextDispenseDate.error').text("<uimessage code='Please select date'/>").show();
+              return false;
+            }
+
+            return validateNextDispensingDate();
+        });
     });
 </script>
 
@@ -256,35 +379,44 @@
     <section id="hiv-dispense-meds" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="mirebalais.task.dispensing.label">
         <div class="section-container">
-            <div class="two-columns">
-                    <label>
-                        <uimessage code="pihcore.dispensedTo" />
-                    </label>
-                    <obs conceptId="PIH:12071" style="radio"
-                         answerConceptIds="CIEL:162571,CIEL:1555"
-                         answerCodes="ui.i18n.RelationshipType.bIsToA.8d919b58-c2cc-11de-8d13-0010c6dffd0f,pihcore.chw"/>
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.dispensedTo" />
+                        </label>
+                        <obs id="dispensedTo" conceptId="PIH:12071" style="radio"
+                             answerConceptIds="CIEL:162571,CIEL:1555"
+                             answerCodes="ui.i18n.RelationshipType.bIsToA.8d919b58-c2cc-11de-8d13-0010c6dffd0f,pihcore.chw">
+                        </obs>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.nameCHW" />
+                        </label>
+                        <obs id="chwName" conceptId="CIEL:164141" />
+                    </td>
 
-                    <br/><br/>
-                    <label>
-                        <uimessage code="pihcore.nameCHW" />
-                    </label>
-                    <obs conceptId="CIEL:164141" />
-            </div>
-
-            <p>
-                <obs conceptId="PIH:3671" style="checkbox"
-                     answerConceptId="PIH:9361" answerCode="pihcore.communityDispensing"/>
-            </p>
-
-            <p class="radio">
-                <label>
-                    <uimessage code="pihcore.treatmentLine" />
-                </label>
-                <obs conceptId="PIH:13115" style="radio"
-                     answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
-            </p>
-
-
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>
+                            <obs id="dispensedInCommunity" conceptId="PIH:3671" style="checkbox"
+                                 answerConceptId="PIH:9361" answerCode="pihcore.communityDispensing"/>
+                        </p>
+                            </td>
+                            </tr>
+                            <tr><td colspan="2">
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.treatmentLine" />
+                            </label>
+                            <obs conceptId="PIH:13115" style="radio"
+                                 answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
+                        </p>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="section-container">
@@ -320,7 +452,7 @@
 
 
         <div class="section-container">
-            <table>
+            <table id="medsTable">
                 <tr>
                     <th>
                         <uimessage code="pihcore.category" />
@@ -342,7 +474,7 @@
                        </span>
                    </td>
                    <td>
-                        <obs conceptId="CIEL:1282"
+                        <obs id="arv1Drug" conceptId="CIEL:1282"
                              answerDrugIds="
                                 78faac2e-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f968e6-dfbe-11e9-8a34-2a2ae2dbcce4,
@@ -392,7 +524,7 @@
                         </span>
                     </td>
                     <td>
-                        <obs conceptId="CIEL:1282"
+                        <obs id="arv2Drug" conceptId="CIEL:1282"
                              answerDrugIds="
                                 78fab02a-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f96210-dfbe-11e9-8a34-2a2ae2dbcce4,
@@ -446,7 +578,7 @@
                         </span>
                     </td>
                     <td>
-                        <obs conceptId="CIEL:1282"
+                        <obs id="tmsDrug" conceptId="CIEL:1282"
                              answerDrugIds="
                                 85153088-b868-4723-aacd-27f25f121685,
                                 54972d88-156e-465e-8483-9a9e97d5898f,
@@ -472,7 +604,7 @@
                         </span>
                     </td>
                     <td>
-                        <obs conceptId="CIEL:1282"
+                        <obs id="inhDrug" conceptId="CIEL:1282"
                              answerDrugIds="
                                 e47fa273-0c52-4f0f-b57b-34001a3e9677,
                                 849218ee-901c-46b3-80f9-7c808132893b"
@@ -485,28 +617,39 @@
                     </td>
                 </tr>
                 </obsgroup>
-
+                <tr>
+                    <td colspan="3">
+                        <span id="missingMedsError" class="error field-error" style="display: none"></span>
+                    </td>
+                </tr>
             </table>
         </div>
 
         <br/>
-        <div class="two-columns">
 
-            <label>
-                <uimessage code="pihcore.monthsDispensed" />
-            </label>
-            <obs id="monthsDispensed" conceptId="PIH:3102" />
-
-            <label>
-                <uimessage code="pihcore.nextDispenseDate"/>
-            </label>
-            <obs id="nextDispenseDate" conceptId="CIEL:5096" allowFutureDates="true" />
+        <div class="section-container">
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.monthsDispensed" />
+                        </label>
+                        <obs id="monthsDispensed" conceptId="PIH:3102" />
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.nextDispenseDate"/>
+                        </label>
+                        <obs id="nextDispenseDate" conceptId="CIEL:5096" allowFutureDates="true" />
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
-            <submit submitClass="confirm right" submitCode="mirebalais.save"/>
+            <submit id="submitBtn" submitClass="confirm right" submitCode="mirebalais.save"/>
             <button type="button" class="cancel">
                 <uimessage code="emr.cancel"/>
             </button>
