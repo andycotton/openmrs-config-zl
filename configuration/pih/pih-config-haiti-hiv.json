@@ -31,7 +31,8 @@
     "importPatients",
     "vct",
     "dispensing",
-    "labResults"
+    "labResults",
+    "markPatientDead"
   ],
 
   "globalProperties": {
