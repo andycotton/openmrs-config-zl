@@ -103,10 +103,82 @@
     </style>
 
 <script type="text/javascript">
+
     jq(function() {
+
+        var artTreatmentConstructUuid = '0b1ca3d0-9f70-4366-a58c-c0f7491c47da';
+        var medicationOrdersUuid = '3cd9491e-26fe-102b-80cb-0017a47871b2';
+        var artTreatmentLineUuid='0c709500-0cf8-4959-b244-3e9d24dcacc0';
+
+        var patientUuid = '<lookup expression="patient.uuid"/>';
+
+        var contextPath = window.location.href.split('/')[3];
+        var apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
 
         var dispensedToChwConceptId = <lookup expression="fn.getConcept('CIEL:1555').id"/>;
         var dispensedToPatientConceptId = <lookup expression="fn.getConcept('CIEL:162571').id"/>;
+
+        var currentEncounterDate = new Date();
+        var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+        if (typeof encounterDate !== "undefined" &amp;&amp; encounterDate !== null &amp;&amp; (encounterDate.length > 0)) {
+          currentEncounterDate = new Date(+encounterDate);
+        }
+
+        var lastPrescribedRegimen = {
+            prescribedDate: null,
+            regimen: "",
+            treatmentLine: ""
+        };
+
+        jq.getJSON(apiBaseUrl + "/obs", {
+            concept: artTreatmentConstructUuid,
+            patient: patientUuid,
+            v: 'custom:(uuid,display,obsDatetime,value,concept:(uuid,name:(display),datatype:(uuid,display)),groupMembers:(id,uuid,display,concept:(id,uuid,name:(display)),value))'
+          },
+          function( data ){
+              for (var index = 0; index &lt; data.results.length; ++index) {
+                var construct = data.results[index];
+                var constructDate = new Date(construct.obsDatetime);
+
+                if( currentEncounterDate.getTime() &gt;=  constructDate.getTime() ) {
+                    if (construct.groupMembers &amp;&amp; construct.groupMembers.length > 0) {
+                      var tmpRegimen = {
+                        prescribedDate: null,
+                        regimen: "",
+                        treatmentLine: ""
+                      };
+                      for (var j = 0; j &lt; construct.groupMembers.length; ++j) {
+                          var member = construct.groupMembers[j];
+                          if (member &amp;&amp; member.concept.uuid == medicationOrdersUuid) {
+                              // the regimen obs
+                              if ( member.value &amp;&amp; member.value.display) {
+                                  tmpRegimen.prescribedDate = constructDate;
+                                  tmpRegimen.regimen = member.value.display
+                              }
+                          } else if (member &amp;&amp; member.concept.uuid == artTreatmentLineUuid) {
+                                // the treatment line obs
+                                tmpRegimen.treatmentLine = member.value.display
+                          }
+                      }
+                      if (tmpRegimen.regimen != null &amp;&amp; tmpRegimen.regimen.length > 0
+                          &amp;&amp; tmpRegimen.prescribedDate != null) {
+                        if (tmpRegimen.prescribedDate != null &amp;&amp;
+                            ((lastPrescribedRegimen.prescribedDate == null) ||
+                            (lastPrescribedRegimen.prescribedDate.getTime() &lt; tmpRegimen.prescribedDate.getTime()))){
+
+                            lastPrescribedRegimen.prescribedDate = tmpRegimen.prescribedDate;
+                            lastPrescribedRegimen.regimen = tmpRegimen.regimen;
+                            lastPrescribedRegimen.treatmentLine = tmpRegimen.treatmentLine;
+                        }
+                      }
+                    }
+                }
+              }
+
+              jq("#lastPrescribedRegimenDate").text(lastPrescribedRegimen.prescribedDate.toDateString());
+              jq("#lastPrescribedRegimen").text(lastPrescribedRegimen.regimen);
+              jq("#lastPrescribedTreatmentLine").text(lastPrescribedRegimen.treatmentLine);
+        });
 
 
         var dispensedToValue= getValue('dispensedTo.value');
@@ -420,29 +492,32 @@
         </div>
 
         <div class="section-container">
-            WORK IN PROGRESS
             <table>
                 <tr>
-                    <td>
+                    <th>
                         <label><uimessage code="pihcore.previousRegimen" /></label>
-                    </td>
+                    </th>
+                </tr>
+                <tr>
                     <td>
-                        <lookup expression="fn.latestObs('CIEL:1282').valueCoded.name"/>
-                        <br/>
                         <label><uimessage code="zl.date" />:</label>
-                        <lookup expression="fn.latestObs('CIEL:1282').obsDatetime"/>
-                        <br/>
-                        <label>
-                            (<uimessage code="pihcore.ifOther"/>
-                        </label>
-                        <lookup expression="fn.latestObs('CIEL:5424').valueText"/>)
-                        <br/>
-                        <label><uimessage code="pihcore.treatmentLine" />:</label>
-                        <lookup expression="fn.latestObs('PIH:13115').valueCoded.name"/>
+                        <span id="lastPrescribedRegimenDate" class="value"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
+                        <label><uimessage code="Regimen" />:</label>
+                        <span id="lastPrescribedRegimen" class="value"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><uimessage code="pihcore.treatmentLine" />:</label>
+                        <span id="lastPrescribedTreatmentLine" class="value"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <obs conceptId="PIH:3277" style="checkbox"
                              answerConceptId="CIEL:1065" answerCode="pihcore.equivalentART" />
                     </td>
