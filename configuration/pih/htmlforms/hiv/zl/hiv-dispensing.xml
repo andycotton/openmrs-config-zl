@@ -136,58 +136,53 @@
             v: 'custom:(uuid,display,obsDatetime,value,concept:(uuid,name:(display),datatype:(uuid,display)),groupMembers:(id,uuid,display,concept:(id,uuid,name:(display)),value))'
           },
           function( data ){
-              for (var index = 0; index &lt; data.results.length; ++index) {
-                var construct = data.results[index];
-                var constructDate = new Date(construct.obsDatetime);
+              if (data.results.length &gt; 0) {
+                  for (var index = 0; index &lt; data.results.length; ++index) {
+                    var construct = data.results[index];
+                    var constructDate = new Date(construct.obsDatetime);
 
-                if( currentEncounterDate.getTime() &gt;=  constructDate.getTime() ) {
-                    if (construct.groupMembers &amp;&amp; construct.groupMembers.length > 0) {
-                      var tmpRegimen = {
-                        prescribedDate: null,
-                        regimen: "",
-                        treatmentLine: ""
-                      };
-                      for (var j = 0; j &lt; construct.groupMembers.length; ++j) {
-                          var member = construct.groupMembers[j];
-                          if (member &amp;&amp; member.concept.uuid == medicationOrdersUuid) {
-                              // the regimen obs
-                              if ( member.value &amp;&amp; member.value.display) {
-                                  tmpRegimen.prescribedDate = constructDate;
-                                  tmpRegimen.regimen = member.value.display
+                    if( currentEncounterDate.getTime() &gt;=  constructDate.getTime() ) {
+                        if (construct.groupMembers &amp;&amp; construct.groupMembers.length > 0) {
+                          var tmpRegimen = {
+                            prescribedDate: null,
+                            regimen: "",
+                            treatmentLine: ""
+                          };
+                          for (var j = 0; j &lt; construct.groupMembers.length; ++j) {
+                              var member = construct.groupMembers[j];
+                              if (member &amp;&amp; member.concept.uuid == medicationOrdersUuid) {
+                                  // the regimen obs
+                                  if ( member.value &amp;&amp; member.value.display) {
+                                      tmpRegimen.prescribedDate = constructDate;
+                                      tmpRegimen.regimen = member.value.display
+                                  }
+                              } else if (member &amp;&amp; member.concept.uuid == artTreatmentLineUuid) {
+                                    // the treatment line obs
+                                    tmpRegimen.treatmentLine = member.value.display
                               }
-                          } else if (member &amp;&amp; member.concept.uuid == artTreatmentLineUuid) {
-                                // the treatment line obs
-                                tmpRegimen.treatmentLine = member.value.display
                           }
-                      }
-                      if (tmpRegimen.regimen != null &amp;&amp; tmpRegimen.regimen.length > 0
-                          &amp;&amp; tmpRegimen.prescribedDate != null) {
-                        if (tmpRegimen.prescribedDate != null &amp;&amp;
-                            ((lastPrescribedRegimen.prescribedDate == null) ||
-                            (lastPrescribedRegimen.prescribedDate.getTime() &lt; tmpRegimen.prescribedDate.getTime()))){
+                          if (tmpRegimen.regimen != null &amp;&amp; tmpRegimen.regimen.length > 0
+                              &amp;&amp; tmpRegimen.prescribedDate != null) {
+                            if (tmpRegimen.prescribedDate != null &amp;&amp;
+                                ((lastPrescribedRegimen.prescribedDate == null) ||
+                                (lastPrescribedRegimen.prescribedDate.getTime() &lt; tmpRegimen.prescribedDate.getTime()))){
 
-                            lastPrescribedRegimen.prescribedDate = tmpRegimen.prescribedDate;
-                            lastPrescribedRegimen.regimen = tmpRegimen.regimen;
-                            lastPrescribedRegimen.treatmentLine = tmpRegimen.treatmentLine;
+                                lastPrescribedRegimen.prescribedDate = tmpRegimen.prescribedDate;
+                                lastPrescribedRegimen.regimen = tmpRegimen.regimen;
+                                lastPrescribedRegimen.treatmentLine = tmpRegimen.treatmentLine;
+                            }
+                          }
                         }
-                      }
                     }
-                }
+                  }
+                  if (lastPrescribedRegimen.prescribedDate != null) {
+                      jq("#lastPrescribedRegimenDate").text(lastPrescribedRegimen.prescribedDate.toDateString());
+                      jq("#lastPrescribedRegimen").text(lastPrescribedRegimen.regimen);
+                      jq("#lastPrescribedTreatmentLine").text(lastPrescribedRegimen.treatmentLine);
+                  }
               }
-
-              jq("#lastPrescribedRegimenDate").text(lastPrescribedRegimen.prescribedDate.toDateString());
-              jq("#lastPrescribedRegimen").text(lastPrescribedRegimen.regimen);
-              jq("#lastPrescribedTreatmentLine").text(lastPrescribedRegimen.treatmentLine);
         });
 
-
-        var dispensedToValue= getValue('dispensedTo.value');
-        if (dispensedToValue == dispensedToPatientConceptId) {
-            getField('chwName.value').fadeTo(250,0.33);
-            getField('chwName.value').prop( 'disabled', true );
-        } else if (dispensedToValue == dispensedToChwConceptId) {
-            getField('dispensedInCommunity.value').prop( 'disabled', true );
-        }
 
         var validateNextDispensingDate = function() {
             var currentEncounterDate = new Date();
@@ -274,6 +269,16 @@
           }
         });
 
+    var dispensedToValue= null;
+    if (typeof htmlForm !== "undefined" &amp;&amp; htmlForm !== null) {
+        dispensedToValue = htmlForm.getValueIfLegal('dispensedTo.value');
+        if (dispensedToValue == dispensedToPatientConceptId) {
+            getField('chwName.value').fadeTo(250,0.33);
+            getField('chwName.value').prop( 'disabled', true );
+        } else if (dispensedToValue == dispensedToChwConceptId) {
+            getField('dispensedInCommunity.value').prop( 'disabled', true );
+        }
+
         // At least one drug should be selected
         beforeValidation.push(function() {
             var arv1Drug = getValue('arv1Drug.value');
@@ -316,7 +321,8 @@
 
             return validateNextDispensingDate();
         });
-    });
+    }
+});
 </script>
 
     <div class="print-form-datestamps" style="display:none">
