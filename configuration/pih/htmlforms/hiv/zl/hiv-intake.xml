@@ -162,6 +162,7 @@
                 </div>
             </includeIf>
         </ifMode>
+        
 
         <ifMode mode="VIEW" include="false">
             <div id="buttons">
