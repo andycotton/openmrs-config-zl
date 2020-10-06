@@ -381,6 +381,65 @@
             </div>
         </section>
 
+        <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="zl.consultNote.feeding.label" >
+            <div class="section-container">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.specifyTypeFeeding"/>
+                    </label>
+                    <obs conceptId="CIEL:1151"
+                         answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
+                         answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
+                         answerSeparator="" />
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.providedFormula"/>
+                    </label>
+                    <obs conceptId="PIH:3581" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.mch.counselling.breastfeeding"/>
+                    </label>
+                    <obs conceptId="CIEL:1910" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.foodBefore6months"/>
+                    </label>
+                    <obs conceptId="CIEL:5633" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.formulaPrepTraining"/>
+                    </label>
+                    <obs conceptId="CIEL:159880" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.vaccinated"/>
+                    </label>
+                    <obs conceptId="CIEL:164134" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.ifYesVaccinationCard"/>
+                    </label>
+                </p>
+            </div>
+        </section>
+
         <section id="ARV within 72 hours of life" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.arvForNewBorn" >
             <div class="section-container">
@@ -451,67 +510,149 @@
             </div>
         </section>
 
-        <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-                 headerCode="zl.consultNote.feeding.label" >
+        <section id="mother-info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.infoMother">
             <div class="section-container">
-                <p>
-                    <label>
-                        <uimessage code="pihcore.specifyTypeFeeding"/>
-                    </label>
-                    <obs conceptId="CIEL:1151"
-                         answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
-                         answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
-                         answerSeparator="" />
-                </p>
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.providedFormula"/>
-                    </label>
-                    <obs conceptId="PIH:3581" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066"/>
-                </p>
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.mch.counselling.breastfeeding"/>
-                    </label>
-                    <obs conceptId="CIEL:1910" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066"/>
-                </p>
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.foodBefore6months"/>
-                    </label>
-                    <obs conceptId="CIEL:5633" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066"/>
-                </p>
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.formulaPrepTraining"/>
-                    </label>
-                    <obs conceptId="CIEL:159880" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066"/>
-                </p>
-
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.vaccinated"/>
-                    </label>
-                    <obs conceptId="CIEL:164134" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                <div class="two-columns">
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.hiv.motherSerology" />
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:1396" style="radio"
+                             answerConceptIds="CIEL:703,CIEL:664,CIEL:1067" />
+                    </p>
                     <br/>
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.screeningDate" />
+                        </label>
+                        <obs conceptId="PIH:3595" />
+                    </p>
+                </div>
+
+                <!-- Mother's ARV information -->
+
                     <label>
-                        <uimessage code="pihcore.ifYesVaccinationCard"/>
+                        <uimessage code="pihcore.hiv.motherRecvARV" />
                     </label>
-                </p>
+                    <p class="small">
+                        <obs id="mom-rcvd-arv" conceptId="CIEL:163783" style="radio" answerSeparator=""
+                             answerConceptIds="CIEL:1065,CIEL:1066" >
+                             <controls>
+                                 <when value="CIEL:1065" thenDisplay="#mom-arv-section"/>
+                             </controls>
+                        </obs>
 
 
+                    <div id="mom-arv-section">
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.ifYes"/>
+                            </label>
+                            <obs conceptId="CIEL:166085" style="radio" answerSeparator=""
+                                 answerConceptIds="CIEL:1178,CIEL:1179"
+                                 answerCodes="pihcore.beforeChildBirth,pihcore.duringChildBirth"/>
+                        </p>
+
+                        <strong>
+                            <uimessage code="pihcore.hiv.mothersARV" />
+                        </strong>
+
+                        <label>
+                            <uimessage code="pihcore.hiv.startDateARV" />
+                        </label>
+                        <obs conceptId="CIEL:163784" />
+
+                        <label>
+                            <uimessage code="pih.app.3cd9491e-26fe-102b-80cb-0017a47871b2.dispensing.summary" />
+                        </label>
+                        <obs conceptId="CIEL:166086" style="text" />
+                        <br/>
+
+
+                        <label>
+                            <uimessage code="pihcore.motherSideEffects" />
+                        </label>
+                        <obs conceptId="PIH:13144" style="checkbox"
+                             answerConceptId="CIEL:1065"
+                             showCommentField="true" commentFieldCode="pihcore.ifYesWhichOnes" />
+                        <br/>
+
+                        <label>
+                            <uimessage code="pihcore.hiv.changeARVsDuringPregnancy" />?
+                        </label>
+                        <p class="radio">
+                        <obs conceptId="CIEL:166084" style="radio" answerSeparator=""
+                             answerConceptIds="CIEL:1065,CIEL:1066" />
+                        <br/>
+                        <label>
+                            <uimessage code="pihcore.yesSpecify" />
+                        </label>
+                        <obs conceptId="PIH:13145" style="text" />
+                        </p>
+                    </div>
+                    </p>
+
+                <hr/>
+
+                <!-- Mother's TB information -->
+                <obsgroup groupingConceptId="PIH:13142" >
+                    <label>
+                        <uimessage code="pihcore.motherTBtreatment" />
+                    </label>
+                    <p class="small">
+
+                        <obs id="mom-tb" conceptId="CIEL:159398"
+                             style="radio" answerSeparator=""
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#mom-tb-section"/>
+                            </controls>
+                        </obs>
+
+                        <div id="mom-tb-section">
+                            <div class="two-columns">
+                                <label>
+                                    anti-TB <uimessage code="pihcore.startDate" />
+                                </label>
+                                <obs conceptId="CIEL:1113" />
+
+                                <label>
+                                    anti-TB <uimessage code="pihcore.stopDate" />
+                                </label>
+                                <!-- Date when TB treatment stopped -->
+                                <obs conceptId="CIEL:164384" />
+                            </div>
+
+                            <div class="radio">
+                                <label>
+                                    <uimessage code="pihcore.treatmentEndDate" />
+                                </label>
+                                <!-- End date for TB treatment -->
+                                <obs conceptId="CIEL:159431" />
+                            </div>
+
+                            <p class="radio">
+                                <label>
+                                    <uimessage code="pihcore.motherDischarge" />
+                                </label>
+                                <br/>
+                                <obs conceptId="PIH:1568" style="radio"
+                                     answerConceptIds="PIH:PATIENT CURED,CIEL:160035,CIEL:843,CIEL:160034,CIEL:5622"
+                                     answerCodes="pihcore.cured,pihcore.treatCompleted,pihcore.failure,pihcore.died,pihcore.other"/>
+                                <br/>
+                                <label>
+                                    <uimessage code="zl.ifOtherSpecify" />
+                                </label>
+                                <obs conceptId="CIEL:161011" />
+                            </p>
+                        </div>
+                    </p>
+
+                </obsgroup>
             </div>
         </section>
-
     </includeIf>
 
     <section id="transmission" sectionTag="fieldset" headerTag="legend" headerStyle="title"
@@ -572,7 +713,7 @@
     </section>
 
     <section id="risk" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.otherRiskFactors">
+             headerCode="pihcore.otherFactors">
         <div class="section-container">
             <table>
                 <tr>
@@ -615,7 +756,6 @@
                     <render mode="no condom" cId="CIEL:159218" toggle="withoutCondom"/>
                     <render mode="anal" cId="CIEL:163278" toggle="analSex"/>
                     <render mode="withprosex" cId="CIEL:160580" toggle="withSexWorker" />
-                    <render mode="pro" cId="CIEL:160579" toggle="sexWorker" />
                 </repeat>
 
                 <obsgroup groupingConceptId="CIEL:163288">
@@ -639,7 +779,25 @@
                 </label>
                 <obs conceptId="PIH:12999" rows="2" />
             </div>
+        </div>
 
+        <div class="section-container">
+            <h3><uimessage code="pihcore.keyPopulation"/></h3>
+            <repeat>
+                <template>
+
+                    <obs conceptId="PIH:11560"
+                         answerConceptId="{cId}"
+                         answerCode="pihcore.{mode}"
+                         style="checkbox"/>
+
+                </template>
+                <render mode="menSexWithMen" cId="CIEL:160578"/>
+                <render mode="sexWorker" cId="CIEL:160579"/>
+                <render mode="prisoner" cId="CIEL:156761"/>
+                <render mode="transgender" cId="PIH:11561"/>
+                <render mode="ivDrugUser" cId="CIEL:105"/>
+            </repeat>
         </div>
     </section>
 
