@@ -690,8 +690,8 @@
                         <uimessage code="pihcore.specifyRegimen"/>:
                     </includeIf>
                     <br/>
-                    <obs conceptId="PIH:6150" style="radio"
-                         answerConceptIds="PIH:2125,PIH:13011,CIEL:159909"
+                    <obs conceptId="CIEL:159792" style="radio"
+                         answerConceptIds="CIEL:159795,CIEL:159793,CIEL:159909"
                          answerCodes="pihcore.tb.initialTreatment,pihcore.tb.retreatment,pihcore.tb.mdrtbTreatment"
                          answerSeparator="&lt;br /&gt;" />
                 </p>
