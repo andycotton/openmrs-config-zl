@@ -1,0 +1,52 @@
+{
+  "welcomeMessage": "Bienvenue dans l'EMR de BOUCAN CARRE",
+  "site": "BOUCAN CARRE",
+  "dossierIdentifierPrefix": "BC",
+
+  "components": [
+    "clinicianDashboard",
+    "visitNote",
+    "allergies",
+    "patientRegistration",
+    "visitManagement",
+    "checkIn",
+    "checkInHomepageApp",
+    "systemAdministration",
+    "myAccount",
+    "waitingForConsult",
+    "primaryCare",
+    "overviewReports",
+    "dataExports",
+    "monitoringReports",
+    "todaysVisits",
+    "relationships",
+    "programs",
+    "exportPatients",
+    "importPatients",
+    "biometricsFingerPrints",
+    "vitals",
+    "mentalHealth",
+    "ncd",
+    "socioEconomics",
+    "growthChart"
+  ],
+
+  "globalProperties": {
+    "coreapps.defaultPatientIdentifierLocation": "9bc65df6-99a2-4d43-b56b-f42bde3f5d6d"
+  },
+
+  "locationTags": {
+    "Login Location": ["Centre de Santé de Boucan Carré"],
+    "Medical Record Location": ["Centre de Santé de Boucan Carré"],
+    "Visit Location": ["Centre de Santé de Boucan Carré"]
+  },
+
+  "biometricsConfig": {
+    "biometricEngine": "restBiometricEngine",
+    "templateFormat": "PROPRIETARY",
+    "subjectUrl": "http://192.168.1.111:9000/subject",
+    "matchUrl": "http://192.168.1.111:9000/match",
+    "scanUrl": "https://localhost:9443/fingerprint/scan",
+    "devicesUrl": "https://localhost:9443/fingerprint/devices"
+  }
+}
