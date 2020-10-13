@@ -36,16 +36,16 @@
   },
 
   "locationTags": {
-    "Login Location": ["Centre de Santé de Boucan Carré"],
-    "Medical Record Location": ["Centre de Santé de Boucan Carré"],
-    "Visit Location": ["Centre de Santé de Boucan Carré"]
+    "Login Location": ["Centre de Santé Saint-Michel de Boucan-Carré"],
+    "Medical Record Location": ["Centre de Santé Saint-Michel de Boucan-Carré"],
+    "Visit Location": ["Centre de Santé Saint-Michel de Boucan-Carré"]
   },
 
   "biometricsConfig": {
     "biometricEngine": "restBiometricEngine",
     "templateFormat": "PROPRIETARY",
-    "subjectUrl": "http://192.168.1.111:9000/subject",
-    "matchUrl": "http://192.168.1.111:9000/match",
+    "subjectUrl": "http://localhost:9000/subject",
+    "matchUrl": "http://localhost:9000/match",
     "scanUrl": "https://localhost:9443/fingerprint/scan",
     "devicesUrl": "https://localhost:9443/fingerprint/devices"
   }
