@@ -3,22 +3,50 @@
   "site": "BELLADERE",
   "dossierIdentifierPrefix": "HNB",
 
+  "components": [
+    "clinicianDashboard",
+    "visitNote",
+    "allergies",
+    "patientRegistration",
+    "visitManagement",
+    "checkIn",
+    "checkInHomepageApp",
+    "systemAdministration",
+    "myAccount",
+    "waitingForConsult",
+    "primaryCare",
+    "overviewReports",
+    "dataExports",
+    "monitoringReports",
+    "todaysVisits",
+    "relationships",
+    "programs",
+    "exportPatients",
+    "importPatients",
+    "biometricsFingerPrints",
+    "vitals",
+    "mentalHealth",
+    "ncd",
+    "socioEconomics",
+    "growthChart"
+  ],
+
   "globalProperties": {
     "coreapps.defaultPatientIdentifierLocation": "d6dafa1a-9a2f-4f61-a33e-410acb64b0e9"
-  },
-
-  "biometricsConfig": {
-    "biometricEngine": "restBiometricEngine",
-    "templateFormat": "PROPRIETARY",
-    "subjectUrl": "http://localhost:9000/subject",
-    "matchUrl": "http://localhost:9000/match",
-    "scanUrl": "https://localhost:9443/fingerprint/scan",
-    "devicesUrl": "https://localhost:9443/fingerprint/devices"
   },
 
   "locationTags": {
     "Login Location": ["Hôpital Notre-Dame de la Nativité de Belladère"],
     "Medical Record Location": ["Hôpital Notre-Dame de la Nativité de Belladère"],
     "Visit Location": ["Hôpital Notre-Dame de la Nativité de Belladère"]
+  },
+
+  "biometricsConfig": {
+    "biometricEngine": "restBiometricEngine",
+    "templateFormat": "PROPRIETARY",
+    "subjectUrl": "http://192.168.1.111:9000/subject",
+    "matchUrl": "http://192.168.1.111:9000/match",
+    "scanUrl": "https://localhost:9443/fingerprint/scan",
+    "devicesUrl": "https://localhost:9443/fingerprint/devices"
   }
 }
