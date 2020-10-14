@@ -246,6 +246,102 @@
         </section>
     </includeIf>
 
+    <!-- only show these sections if the patient is < 12 years old-->
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 12">
+        <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.hiv.clinicalStage">
+            <div class="boxed">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.hiv.whoStages"/>
+                    </label>
+                    <obs conceptId="PIH:CURRENT WHO HIV STAGE"
+                         answerConceptIds="CIEL:1204,CIEL:1205,CIEL:1206,CIEL:1207"
+                         answerLabels="1,2,3,4" style="radio"/>
+                </p>
+            </div>
+        </section>
+
+        <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.feedingAndVaccination" >
+            <div class="section-container">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.specifyTypeFeeding"/>
+                    </label>
+                    <br/>
+                    <obs conceptId="CIEL:1151"
+                         answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
+                         answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
+                         answerSeparator="" />
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.providedFormula"/>
+                    </label>
+                    <obs conceptId="PIH:3581" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.mch.counselling.breastfeeding"/>
+                    </label>
+                    <obs conceptId="CIEL:1910" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.foodBefore6months"/>
+                    </label>
+                    <obs conceptId="CIEL:5633" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.formulaPrepTraining"/>
+                    </label>
+                    <obs conceptId="CIEL:159880" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.vaccinated"/>
+                    </label>
+                    <obs id="vaccinate" conceptId="CIEL:164134" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                         answerSeparator="" >
+                        <!-- ToDo: Fix this
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#vaccinationCard" />
+                        </controls>
+                        -->
+                    </obs>
+                    <div id="vaccinationCard">
+                        <p>
+                            <strong>
+                                <uimessage code="pihcore.ifYesVaccinationCard"/>
+                            </strong>
+                        </p>
+                    </div>
+                </p>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.childWeaned" />
+                    </label>
+                    <obs conceptId="CIEL:1152" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+            </div>
+        </section>
+
+    </includeIf>
+
     <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.currentTreatment">
         <div class="section-container">
@@ -745,29 +841,31 @@
         </div>
     </section>
 
-    <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.hiv.clinicalStage">
-        <div class="boxed">
-            <p>
-                <label>
-                    <uimessage code="pihcore.hiv.whoStages"/>
-                </label>
-                <obs conceptId="PIH:CURRENT WHO HIV STAGE"
-                     answerConceptIds="CIEL:1204,CIEL:1205,CIEL:1206,CIEL:1207"
-                     answerLabels="1,2,3,4" style="radio" />
-            </p>
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12">
+        <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.hiv.clinicalStage">
+            <div class="boxed">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.hiv.whoStages"/>
+                    </label>
+                    <obs conceptId="PIH:CURRENT WHO HIV STAGE"
+                         answerConceptIds="CIEL:1204,CIEL:1205,CIEL:1206,CIEL:1207"
+                         answerLabels="1,2,3,4" style="radio" />
+                </p>
 
-            <!-- UHM-4784 Use Lab results or workflow to enter lab data.  Using includeif to comment out the section -->
-            <includeIf velocityTest="$patient.gender == 'NoLabEntryHere' ">
-                <!-- ToDo:  Duplicate of section A.  Valery says this is different and used to calculate stage.  -->
-                <obsgroup groupingConceptId="PIH:3434">
-                    <obs conceptId="CIEL:5497" labelCode="pihcore.lab.cd4Count"/>
-                    <br/>
-                    <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
-                </obsgroup>
-            </includeIf>
-        </div>
-    </section>
+                <!-- UHM-4784 Use Lab results or workflow to enter lab data.  Using includeif to comment out the section -->
+                <includeIf velocityTest="$patient.gender == 'NoLabEntryHere' ">
+                    <!-- ToDo:  Duplicate of section A.  Valery says this is different and used to calculate stage.  -->
+                    <obsgroup groupingConceptId="PIH:3434">
+                        <obs conceptId="CIEL:5497" labelCode="pihcore.lab.cd4Count"/>
+                        <br/>
+                        <obs conceptId="PIH:10783" labelCode="CD4 Date:" />
+                    </obsgroup>
+                </includeIf>
+            </div>
+        </section>
+    </includeIf>
 
     <section id="hiv-oi" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.oi.title">

@@ -382,7 +382,7 @@
         </section>
 
         <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-                 headerCode="zl.consultNote.feeding.label" >
+                 headerCode="pihcore.feedingAndVaccination" >
             <div class="section-container">
                 <p>
                     <label>
@@ -543,7 +543,6 @@
                                  <when value="CIEL:1065" thenDisplay="#mom-arv-section"/>
                              </controls>
                         </obs>
-
 
                     <div id="mom-arv-section">
                         <p class="radio">
