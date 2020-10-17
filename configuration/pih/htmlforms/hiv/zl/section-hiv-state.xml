@@ -371,12 +371,20 @@
                     </label>
                     <br/>
                     <!-- ARV medications: 1st line -->
-                    <obs conceptId="CIEL:1088" style="radio"
-                         answerConceptIds="CIEL:160124,CIEL:164505,CIEL:1652,CIEL:162565,PIH:13085"
-                         answerSeparator="&lt;br /&gt;"/>
+                    <obs id="firstLine" conceptId="CIEL:1088" style="radio"
+                         answerConceptIds="CIEL:160124,CIEL:164505,CIEL:1652,CIEL:162565,CIEL:165086,CIEL:165606,PIH:13085"
+                         answerSeparator="&lt;br /&gt;">
+                        <!-- ToDo: Fix this
+                        <controls>
+                            <when value="PIH:13085" thenDisplay="#otherFirstLine" />
+                        </controls>
+                        -->
+                    </obs>
 
                     <!-- Other ARV -->
-                    <obs conceptId="PIH:13085"/>
+                    <div id="otherFirstLine">
+                        <obs conceptId="PIH:13085"/>
+                    </div>
                 </p>
 
                 <p class="radio">
