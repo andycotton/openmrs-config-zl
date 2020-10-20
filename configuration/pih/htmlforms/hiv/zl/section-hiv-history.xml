@@ -1111,8 +1111,8 @@
                                 </tr>
                             </obsgroup>
                         </template>
-                        <render concept="CIEL:159795" regimen="initialTreatment" />
-                        <render concept="CIEL:159793" regimen="retreatment" />
+                        <render concept="PIH:2406" regimen="initialTreatment" />
+                        <render concept="PIH:2408" regimen="retreatment" />
                     </repeat>
                 </table>
 

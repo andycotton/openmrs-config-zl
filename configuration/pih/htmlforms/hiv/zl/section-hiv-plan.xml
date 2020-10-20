@@ -691,7 +691,7 @@
                     </includeIf>
                     <br/>
                     <obs conceptId="CIEL:159792" style="radio"
-                         answerConceptIds="CIEL:159795,CIEL:159793,CIEL:159909"
+                         answerConceptIds="PIH:2406,PIH:2408,CIEL:159909"
                          answerCodes="pihcore.tb.initialTreatment,pihcore.tb.retreatment,pihcore.tb.mdrtbTreatment"
                          answerSeparator="&lt;br /&gt;" />
                 </p>
