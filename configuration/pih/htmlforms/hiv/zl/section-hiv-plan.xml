@@ -711,10 +711,13 @@
                         </template>
                         <render reason="CIEL:159794" name="Continue" />
                         <render reason="CIEL:981"    name="changeDose" />
+                        <render reason="CIEL:160041" name="extended" />
                         <render reason="CIEL:102"    name="Toxicity" />
                         <render reason="CIEL:843"    name="Failure" />
+                        <render reason="CIEL:159791" name="cured" />
                         <render reason="CIEL:1267"   name="complete" />
                         <render reason="CIEL:1754"   name="stockOut" />
+                        <render reason="CIEL:5622"   name="other" />
                     </repeat>
                 </div>
             </includeIf>
