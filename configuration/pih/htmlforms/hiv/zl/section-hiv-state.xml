@@ -748,7 +748,7 @@
     <section id="psych" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.psycState">
         <div class="section-container">
-            <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12">
+            <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12 || $patient.getAge($encounter.getEncounterDatetime()) == 12 || (! $patient.age)">
                 <p>
                     <label>
                         <uimessage code="pihcore.patientReceivedAdvice" />
@@ -896,7 +896,7 @@
         </div>
     </section>
 
-    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12">
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12 || $patient.getAge($encounter.getEncounterDatetime()) == 12 || (! $patient.age)">
         <section id="hiv-state-stage" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.hiv.clinicalStage">
             <div class="boxed">

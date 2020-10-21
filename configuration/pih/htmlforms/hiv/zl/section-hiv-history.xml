@@ -272,7 +272,7 @@
     </section>
 
     <!-- only show these sections if the patient is < 12 years old-->
-    <includeIf velocityTest="$patient.age &lt; 12">
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 12">
         <section id="birth-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.birth-history" >
             <div class="section-container">
@@ -440,7 +440,7 @@
             </div>
         </section>
 
-        <section id="ARV within 72 hours of life" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+        <section id="ARVwithin72hoursOfBirth" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.arvForNewBorn" >
             <div class="section-container">
                 <table>

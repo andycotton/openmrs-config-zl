@@ -831,9 +831,9 @@
                             <uimessage code="pihcore.syph.needTreatment" />
                         </label>
                         <br/>
-                        <!-- ToDo:  Change PIH:1432 to CIEL:160037 -->
+
                         <obs conceptId="CIEL:165331" style="radio"
-                             answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,PIH:1432"
+                             answerConceptIds="PIH:2224,CIEL:1066,CIEL:1065,CIEL:160037"
                              answerCodes="pihcore.ongoingExam,emr.no,emr.yes,pihcore.treatmentStarted"
                              answerSeparator="&lt;br /&gt;" />
                     </p>
