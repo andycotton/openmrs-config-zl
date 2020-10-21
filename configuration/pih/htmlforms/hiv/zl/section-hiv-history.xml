@@ -1164,8 +1164,9 @@
                         </obsgroup>
                     </template>
                     <render conceptH="CIEL:105281" drugname="Cotrimoxazole"/>
-                    <render conceptH="CIEL:78280" drugname="Isoniazide"/>
-                    <render conceptH="CIEL:76488" drugname="Fluconazole"/>
+                    <render conceptH="CIEL:78280"  drugname="Isoniazide"/>
+                    <render conceptH="CIEL:76488"  drugname="Fluconazole"/>
+                    <render conceptH="CIEL:74250"  drugname="Dapsone" />
                 </repeat>
             </table>
 

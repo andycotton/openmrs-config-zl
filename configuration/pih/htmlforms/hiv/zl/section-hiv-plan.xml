@@ -495,8 +495,9 @@
                             </obsgroup>
                         </template>
                         <render conceptMap="CIEL:105281" drugname="Cotrimoxazole" />
-                        <render conceptMap="CIEL:78280" drugname="Isoniazide" />
-                        <render conceptMap="CIEL:76488" drugname="Fluconazole" />
+                        <render conceptMap="CIEL:78280"  drugname="Isoniazide" />
+                        <render conceptMap="CIEL:76488"  drugname="Fluconazole" />
+                        <render conceptMap="CIEL:74250"  drugname="Dapsone" />
                     </repeat>
 
                     <obsgroup groupingConceptId="PIH:10742">
