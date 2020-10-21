@@ -495,7 +495,72 @@
                             </obsgroup>
                         </template>
                         <render conceptMap="CIEL:105281" drugname="Cotrimoxazole" />
+                    </repeat>
+
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:10742">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:1282" answerConceptId="{conceptMap}"
+                                             answerLabel="{drugname}"
+                                             toggle="{id: '{drugname}-treat', style: 'dim'}"/>
+                                        <p class="radio {drugname}-treat">
+                                            <obs conceptId="PIH:13154" style="radio"
+                                                 answerConceptIds="CIEL:159943, CIEL:159944"
+                                                 answerSeparator="&lt;br /&gt;"/>
+                                        </p>
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:163526" />
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:164384" allowFutureDates="true" />
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
+                                             answerLabel=""/>
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <small>
+                                            <obs conceptId="CIEL:6098"
+                                                 answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
+                                        </small>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
                         <render conceptMap="CIEL:78280"  drugname="Isoniazide" />
+                    </repeat>
+
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:10742">
+                                <tr>
+                                    <td>
+                                        <obs conceptId="CIEL:1282" answerConceptId="{conceptMap}"
+                                             answerLabel="{drugname}"
+                                             toggle="{id: '{drugname}-treat', style: 'dim'}"/>
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:163526" />
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:164384" allowFutureDates="true" />
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <obs conceptId="CIEL:159367" answerConceptId="CIEL:1065"
+                                             answerLabel=""/>
+                                    </td>
+                                    <td class="{drugname}-treat">
+                                        <small>
+                                            <obs conceptId="CIEL:6098"
+                                                 answerConceptIds="CIEL:843,CIEL:1754,CIEL:102,CIEL:987,CIEL:1434,CIEL:5622" />
+                                        </small>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
                         <render conceptMap="CIEL:76488"  drugname="Fluconazole" />
                         <render conceptMap="CIEL:74250"  drugname="Dapsone" />
                     </repeat>
@@ -542,7 +607,7 @@
                     <br/>
                     <!-- ToDo:  Change 1432 to CIEL:160037 -->
                     <obs conceptId="CIEL:162703" style="radio"
-                         answerConceptIds="CIEL:1066,CIEL:127750,PIH:2222,PIH:1619,PIH:1432,PIH:7262"
+                         answerConceptIds="CIEL:1066,CIEL:127750,PIH:2222,PIH:1619,CIEL:160037,PIH:7262"
                          answerCodes="pihcore.noNotIndicated,pihcore.yesButRefused,pihcore.yesAfterCHW,pihcore.yesStartNow,pihcore.yesTreatmentStarted,pihcore.yesDelayed"
                          answerSeparator="&lt;br /&gt;" />
                     <!-- Reason about delay -->
