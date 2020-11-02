@@ -1,5 +1,5 @@
 <htmlform formUuid="3959f956-b83a-11e7-abc4-cec278b6b50a"
-          formName="HIV State" formVersion="1.0">
+          formName="HIV Clinical State" formVersion="1.0">
 
     <style type="text/css">
         <ifMode mode="VIEW" include="false">
@@ -15,7 +15,6 @@
                 -webkit-column-count: 2;
                 -moz-column-count: 2;
             }
-
 
             p.radio > * {
                 display: inline;
@@ -120,7 +119,7 @@
 
     <ifMode mode="VIEW" include="false">
         <h3>
-            <uimessage code="pihcore.hiv.state.title"/>
+            <uimessage code="pihcore.hiv.clinicalState.short"/>
         </h3>
 
         <script type="text/javascript">
