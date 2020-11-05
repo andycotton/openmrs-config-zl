@@ -8,11 +8,8 @@
             display: block;
         }
 
-        #test-orders, #id-treatment {
-        }
-
-
-        #test-orders input[type=checkbox], #id-treatment, #family-plan-section {
+        #test-orders input[type=checkbox],
+        #id-treatment, #family-plan-section {
             float: none;
             vertical-align: middle;
         }
@@ -24,6 +21,13 @@
         #test-orders span, #test-orders label {
             display: inline !important;
             vertical-align: middle;
+        }
+
+        #external-transfer-out input[type=checkbox],
+        #external-transfer-in input[type=checkbox],
+        .cb-align input[type=checkbox] {
+            margin: 0px 5px;
+            top:0px;
         }
 
         .two-columns {
@@ -44,6 +48,12 @@
             min-width: initial;
         }
 
+
+        .section-container label,
+        .section-container-color label {
+            margin: 0px;
+        }
+
         .section-container-color {
             background: #F2F2F2;
             box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
@@ -59,6 +69,9 @@
             padding: 0px 3px 0px 0px
         }
 
+        .narrow {
+            width: 200px;
+        }
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -1133,46 +1146,50 @@
         </div>
     </section>
 
-    <section id="transfer-section" sectionTag="fieldset"
+    <section id="transfer-out-section" sectionTag="fieldset"
              headerTag="legend" headerStyle="title" headerCode="pihcore.transfer.title">
         <div class="section-container-color">
-            <label>
-                <uimessage code="pihcore.externalTransferQuestion" />
-            </label>
-            <p class="radio">
-                <obs conceptId="PIH:HUM Disposition categories"
-                     answerConceptId="CIEL:160036" answerCode="emr.yes"
-                     style="checkbox" toggle="transfer-details"/>
-            </p>
-
-            <div id="transfer-details">
-                <p class="small">
-                    <obs id="transfer-out-spots"
-                         conceptId="PIH:Transfer out location" style="radio"
-                         answerConceptIds="PIH:8855,PIH:8856"
-                         answerCodes="pihcore.internal,pihcore.external"
-                         answerSeparator="">
-                        <controls>
-                            <when value="PIH:8855" thenDisplay="#internal-transfer"/>
-                            <when value="PIH:8856" thenDisplay="#external-transfer"/>
-                        </controls>
-                    </obs>
+            <obsgroup groupingConceptId="PIH:13170">
+                <label>
+                    <uimessage code="pihcore.externalTransferQuestion" />
+                </label>
+                <p class="radio cb-align">
+                    <obs conceptId="PIH:HUM Disposition categories"
+                         answerConceptId="CIEL:160036" answerCode="emr.yes"
+                         style="checkbox" toggle="transfer-out-details"/>
                 </p>
 
-                <div id="internal-transfer">
-                    <label>
-                        <uimessage code="pihcore.internalTransferLocation" />
-                    </label>
-                    <obs conceptId="PIH:8621" />
-                </div>
+                <div id="transfer-out-details">
+                    <p class="small">
+                        <obs id="transfer-out-spots"
+                             conceptId="PIH:Transfer out location" style="radio"
+                             answerConceptIds="PIH:8855,PIH:8856"
+                             answerCodes="pihcore.internal,pihcore.external"
+                             answerSeparator="">
+                            <controls>
+                                <when value="PIH:8855" thenDisplay="#internal-transfer-out"/>
+                                <when value="PIH:8856" thenDisplay="#external-transfer-out"/>
+                            </controls>
+                        </obs>
+                    </p>
 
-                <div id="external-transfer">
-                    <label>
-                        <uimessage code="pihcore.externalTransferLocation"/>
-                    </label>
-                    <obs conceptId="PIH:11483" />
+                    <p id="internal-transfer-out">
+                        <label>
+                            <uimessage code="pihcore.internalTransferLocation" />
+                        </label>
+                        <obs conceptId="PIH:8621" style="location" answerLocationTags="Program Location" />
+                    </p>
+
+                    <p id="external-transfer-out">
+                            <label>
+                                <uimessage code="pihcore.externalTransferLocation"/>
+                            </label>
+                            <obs conceptId="PIH:11483" />
+                            <obs conceptId="PIH:PEPFAR partner site"
+                                 answerConceptId="CIEL:1065" answerCode="pihcore.pepfarSite" />
+                    </p>
                 </div>
-            </div>
+            </obsgroup>
         </div>
     </section>
 
