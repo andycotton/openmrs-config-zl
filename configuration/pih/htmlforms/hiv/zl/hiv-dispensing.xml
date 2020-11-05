@@ -108,6 +108,7 @@
 
         var artTreatmentConstructUuid = '0b1ca3d0-9f70-4366-a58c-c0f7491c47da';
         var medicationOrdersUuid = '3cd9491e-26fe-102b-80cb-0017a47871b2';
+        var medicationARV_2_Uuid = 'f2d0375a-374c-4962-ab89-27c6919e85ac';
         var artTreatmentLineUuid='0c709500-0cf8-4959-b244-3e9d24dcacc0';
 
         var patientUuid = '<lookup expression="patient.uuid"/>';
@@ -138,6 +139,7 @@
         var lastPrescribedRegimen = {
             prescribedDate: null,
             regimen: "",
+            regimen_second: "",
             treatmentLine: ""
         };
 
@@ -155,8 +157,9 @@
                     if( currentEncounterDate.getTime() &gt;=  constructDate.getTime() ) {
                         if (construct.groupMembers &amp;&amp; construct.groupMembers.length > 0) {
                           var tmpRegimen = {
-                            prescribedDate: null,
+                            prescribedDate: constructDate,
                             regimen: "",
+                            regime_second: "",
                             treatmentLine: ""
                           };
                           for (var j = 0; j &lt; construct.groupMembers.length; ++j) {
@@ -164,15 +167,20 @@
                               if (member &amp;&amp; member.concept.uuid == medicationOrdersUuid) {
                                   // the regimen obs
                                   if ( member.value &amp;&amp; member.value.display) {
-                                      tmpRegimen.prescribedDate = constructDate;
                                       tmpRegimen.regimen = member.value.display
                                   }
+                              } else if (member &amp;&amp; member.concept.uuid == medicationARV_2_Uuid) {
+                                    // the regimen obs
+                                    if ( member.value &amp;&amp; member.value.display) {
+                                        tmpRegimen.regimen_second = member.value.display
+                                    }
                               } else if (member &amp;&amp; member.concept.uuid == artTreatmentLineUuid) {
                                     // the treatment line obs
                                     tmpRegimen.treatmentLine = member.value.display
                               }
                           }
-                          if (tmpRegimen.regimen != null &amp;&amp; tmpRegimen.regimen.length > 0
+                          if ( ((tmpRegimen.regimen != null &amp;&amp; tmpRegimen.regimen.length > 0)
+                                || (tmpRegimen.regimen_second != null &amp;&amp; tmpRegimen.regimen_second.length > 0) )
                               &amp;&amp; tmpRegimen.prescribedDate != null) {
                             if (tmpRegimen.prescribedDate != null &amp;&amp;
                                 ((lastPrescribedRegimen.prescribedDate == null) ||
@@ -180,6 +188,7 @@
 
                                 lastPrescribedRegimen.prescribedDate = tmpRegimen.prescribedDate;
                                 lastPrescribedRegimen.regimen = tmpRegimen.regimen;
+                                lastPrescribedRegimen.regimen_second = tmpRegimen.regimen_second;
                                 lastPrescribedRegimen.treatmentLine = tmpRegimen.treatmentLine;
                             }
                           }
@@ -188,7 +197,8 @@
                   }
                   if (lastPrescribedRegimen.prescribedDate != null) {
                       jq("#lastPrescribedRegimenDate").text(lastPrescribedRegimen.prescribedDate.toDateString());
-                      jq("#lastPrescribedRegimen").text(lastPrescribedRegimen.regimen);
+                      jq("#lastPrescribedRegimenARV1").text(lastPrescribedRegimen.regimen);
+                      jq("#lastPrescribedRegimenARV2").text(lastPrescribedRegimen.regimen_second);
                       jq("#lastPrescribedTreatmentLine").text(lastPrescribedRegimen.treatmentLine);
                   }
               }
@@ -516,8 +526,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <label><uimessage code="Regimen" />:</label>
-                        <span id="lastPrescribedRegimen" class="value"></span>
+                        <label><uimessage code="ARV #1" />:</label>
+                        <span id="lastPrescribedRegimenARV1" class="value"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><uimessage code="ARV #2" />:</label>
+                        <span id="lastPrescribedRegimenARV2" class="value"></span>
                     </td>
                 </tr>
                 <tr>
