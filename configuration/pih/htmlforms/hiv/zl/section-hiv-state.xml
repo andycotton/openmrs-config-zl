@@ -383,9 +383,11 @@
                                 78f96a76-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 f2a2c2d9-16a6-4138-9074-6fdf3307e107,
                                 78f97cfa-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                c893970e-22b5-4cb9-8be2-1a9bff480235,
                                 78fab02a-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f95bc6-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f967ba-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f96526-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f960da-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f96684-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78faa9b8-dfbe-11e9-8a34-2a2ae2dbcce4,
@@ -400,15 +402,17 @@
                                 TDF/3TC 300/300 mg,
                                 ABC/3TC 300/300 mg,
                                 AZT/3TC/NVP 60/30/50 mg,
+                                RAL/ETV 400/100 mg,
                                 DTG 50 mg,
                                 AZT 10 mg sp,
                                 NVP 10 mg sp,
+                                NVP 50 mg,
                                 TDF/3TC/EFV 300/300/600 mg,
                                 3TC 10 mg sp,
                                 ABC/3TC 60/30 mg,
                                 RAL/DRV/r 400/600/100mg,
                                 DRV/ETV 300/100 mg,
-                                ABC/3TC 120/60 mg"/>
+                                ABC/3TC 120/60 mg" />
 
                             <label>ARV #2</label>
                             <obs id="curremtARV2" conceptId="PIH:13162"
@@ -417,6 +421,7 @@
                                 78f96210-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78faa576-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f9780e-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                78f96526-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f981d2-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78faaaf8-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 35c6041e-0af3-4bab-887d-9db682a02248,
@@ -425,8 +430,6 @@
                                 78f98308-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f95e78-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f95d38-dfbe-11e9-8a34-2a2ae2dbcce4,
-                                78f96526-dfbe-11e9-8a34-2a2ae2dbcce4,
-                                c893970e-22b5-4cb9-8be2-1a9bff480235,
                                 78f97b9c-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 29c9dd27-25f2-45c6-9708-93fe142a46ba,
                                 0fc3d5c1-fd39-4899-b5c0-b094e28ff359"
@@ -435,6 +438,7 @@
                                 EFV 600 mg,
                                 TDF 300 mg,
                                 NVP 200 mg,
+                                NVP 50 mg,
                                 ABC 300 mg,
                                 LPV/r 40/10 mg,
                                 ABC 60 mg,
@@ -443,11 +447,9 @@
                                 ABC 20 mg,
                                 LPV/r 200/50 mg,
                                 ATV/r 300/100 mg,
-                                NVP 50 mg,
-                                RAL/ETV 400/100 mg,
                                 EFV 200 mg,
                                 ETV 100mg,
-                                DRV/ETV 300/100 mg"/>
+                                DRV/ETV 300/100 mg" />
 
                             <!-- Other ARV -->
                             <label>
