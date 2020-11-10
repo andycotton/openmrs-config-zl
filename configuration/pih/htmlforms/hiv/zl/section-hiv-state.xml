@@ -623,31 +623,16 @@
     <section id="tb-screen" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.tbscreen.title">
         <div class="section-container">
-            <table>
+            <div class="two-columns">
                 <repeat with="['feverSweats','11565'],['wtLoss3kg','11566'],['cough','11567'],['tbContact','11568'],['painfulNodes','11569'],['bloodyCough','970'],['dyspnea','5960'],['chestPain','136']">
-                    <tr>
-                        <td>
-                            <!-- TB symptom -->
-                            <obs conceptId="PIH:11563"
-                                 answerConceptId="PIH:{1}"
-                                 answerCode="coreapps.yes"
-                                 style="checkbox" />
-                        </td>
-                        <td>
-                            <!-- No TB symptom -->
-                            <obs conceptId="PIH:11564"
-                                 answerConceptId="PIH:{1}"
-                                 answerCode="coreapps.no"
-                                 style="checkbox" />
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.tbscreen.{0}"/>
-                            </label>
-                        </td>
-                    </tr>
+                    <!-- ToDo: Add radio styling, answerCode (pihcore.tbscreen.{0}), conceptCodes (coreapps.yes/no) -->
+                    <obs conceptIds="PIH:11563,PIH:11564"
+                         answerConceptId="PIH:{1}"
+                         answerLabel="pihcore.tbscreen.{0}"
+                         conceptLabels="oui,non" />
                 </repeat>
-            </table>
+            </div>
+
             <br/>
             <p>
                 <label>

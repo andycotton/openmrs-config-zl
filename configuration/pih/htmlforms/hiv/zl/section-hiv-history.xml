@@ -232,9 +232,9 @@
                     <render point="PIH:2717" message="pihcore.testLocation.pedWard" comment="inpatient peds"/>
                  </repeat>
 
-                    <obs conceptId="CIEL:159936"
-                         answerConceptId="CIEL:5622" answerCode="pihcore.other"
-                         commentFieldCode="zl.ifOtherSpecify" />
+                <obs conceptId="CIEL:159936"
+                     answerConceptId="CIEL:5622" answerCode="pihcore.other"
+                     commentFieldCode="zl.ifOtherSpecify" />
 
                 <p>
                     <label>
@@ -786,8 +786,7 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <!-- ToDo: style the radio buttons; toggle/radio doesn't work for date css -->
-                                    <p class="small">
+                                    <p class="radio">
                                         <obs conceptId="{cId}"
                                              answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
                                              answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
@@ -1437,31 +1436,16 @@
     <section id="tb-screen" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.tbscreen.title">
         <div class="section-container">
-            <table>
+            <div class="two-columns">
                 <repeat with="['feverSweats','11565'],['wtLoss3kg','11566'],['cough','11567'],['tbContact','11568'],['painfulNodes','11569'],['bloodyCough','970'],['dyspnea','5960'],['chestPain','136']">
-                    <tr>
-                        <td>
-                            <!-- TB symptom -->
-                            <obs conceptId="PIH:11563"
-                                 answerConceptId="PIH:{1}"
-                                 answerCode="coreapps.yes"
-                                 style="checkbox" />
-                        </td>
-                        <td>
-                            <!-- No TB symptom -->
-                            <obs conceptId="PIH:11564"
-                                 answerConceptId="PIH:{1}"
-                                 answerCode="coreapps.no"
-                                 style="checkbox" />
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.tbscreen.{0}"/>
-                            </label>
-                        </td>
-                    </tr>
+                    <!-- ToDo: Add radio styling, answerCode (pihcore.tbscreen.{0}), conceptCodes (coreapps.yes/no) -->
+                    <obs conceptIds="PIH:11563,PIH:11564"
+                         answerConceptId="PIH:{1}"
+                         answerLabel="pihcore.tbscreen.{0}"
+                         conceptLabels="oui,non" />
                 </repeat>
-            </table>
+            </div>
+            
             <br/>
             <p>
                 <label>
