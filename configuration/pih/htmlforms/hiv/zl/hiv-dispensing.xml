@@ -154,7 +154,9 @@
                     var construct = data.results[index];
                     var constructDate = new Date(construct.obsDatetime);
 
-                    if( currentEncounterDate.getTime() &gt;=  constructDate.getTime() ) {
+                    if( (currentEncounterDate.getTime() &gt;=  constructDate.getTime()) ||
+                        (currentEncounterDate.toDateString() === constructDate.toDateString())) {
+                          // if both dates are today
                         if (construct.groupMembers &amp;&amp; construct.groupMembers.length > 0) {
                           var tmpRegimen = {
                             prescribedDate: constructDate,
