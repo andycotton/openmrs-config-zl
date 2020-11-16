@@ -301,8 +301,8 @@
                     <uimessage code="pihcore.lab.hiv.title"/>
                 </label>
 
-                <!-- Only for infant (less than 2) -->
-                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
+                <!-- Only for infant (less than 1) -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 1">
                     <repeat>
                         <template>
                             <p>
@@ -334,7 +334,7 @@
                 </repeat>
 
                 <!-- ANC -->
-                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 2) &amp;&amp; $patient.gender == 'F' ">
+                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 13) &amp;&amp; $patient.gender == 'F' ">
                     <p>
                         <label>
                             ANC
@@ -359,7 +359,7 @@
                     <uimessage code="pihcore.other"/>
                 </label>
 
-                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 2) &amp;&amp; $patient.gender == 'F' ">
+                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 25) &amp;&amp; $patient.gender == 'F' ">
                     <repeat>
                         <template>
                             <p>
@@ -1061,7 +1061,7 @@
     </section>
 
     <!-- this section is ONLY included for HIV intake encounter -->
-    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+    <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33' &amp;&amp; ($patient.getAge($encounter.getEncounterDatetime()) &gt; 13)">
         <section id="family-plan-section" sectionTag="fieldset"
                  headerTag="legend" headerStyle="title"
                  headerCode="pihcore.familyPlanning.title">
