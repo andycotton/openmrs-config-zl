@@ -334,7 +334,7 @@
                 </repeat>
 
                 <!-- ANC -->
-                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 13) &amp;&amp; $patient.gender == 'F' ">
+                <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 8) &amp;&amp; $patient.gender == 'F' ">
                     <p>
                         <label>
                             ANC
