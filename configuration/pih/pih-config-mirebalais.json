@@ -190,7 +190,7 @@
     ],
     "ED Note Location": ["Ijans"],
     "ED Triage Location": ["Ijans"],
-    "HIV Consult Location": ["Klinik Ekstèn", "Sante Fanm"],
+    "HIV Consult Location": ["Klinik Ekstèn"],
     "Identifier Assignment Location": [
       "Hôpital Universitaire de Mirebalais - Prensipal",
       "CDI Klinik Ekstèn Jeneral"
@@ -309,8 +309,8 @@
       "CDI Klinik Ekstèn Jeneral",
       "Hôpital Universitaire de Mirebalais - Prensipal"
     ],
-    "Mental Health Location": ["Klinik Ekstèn", "Sante Fanm"],
-    "NCD Consult Location": ["Klinik Ekstèn", "Sante Fanm", "Klinik MNT"],
+    "Mental Health Location": ["Klinik Ekstèn"],
+    "NCD Consult Location": ["Klinik Ekstèn", "Klinik MNT"],
     "Oncology Consult Location": ["Klinik Ekstèn"],
     "Order Pathology Location": [
       "CDI Klinik Ekstèn Jeneral Achiv Santral",
@@ -394,8 +394,7 @@
       "CDI Klinik Ekstèn Jeneral Sal Pwosedi",
       "CDI Klinik Ekstèn Jeneral",
       "Klinik MNT",
-      "Sal Timoun",
-      "Sante Fanm"
+      "Sal Timoun"
     ],
     "Program Location": ["Hôpital Universitaire de Mirebalais"],
     "Provider Management Location": [
