@@ -46,7 +46,7 @@
         <globalProperty>
             <!-- Override the one defined in config-pihemr to include ZL HIV encounter types -->
             <property>labworkflowowa.labResultsEncounterTypes</property>
-            <value>${encounterType.labSpecimenCollection.uuid},${encounterType.laboratoryResults.uuid},${encounterType.zlHivIntake.uuid},${encounterType.zlHivFollowup.uuid}</value>
+            <value>${encounterType.labSpecimenCollection.uuid},${encounterType.laboratoryResults.uuid},${encounterType.covidIntake.uuid},${encounterType.covidFollowup.uuid},${encounterType.zlHivIntake.uuid},${encounterType.zlHivFollowup.uuid}</value>
         </globalProperty>
     </globalProperties>
 </config>
