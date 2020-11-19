@@ -259,7 +259,7 @@
                 </p>
             </div>
 
-            <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 13) &amp;&amp; $patient.gender == 'F' ">
+            <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 8) &amp;&amp; $patient.gender == 'F' ">
                 <br/>
                 <!-- Pregnant -->
                 <p>
@@ -1344,7 +1344,7 @@
 
             </table>
 
-            <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 13">
+            <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 8">
                 <h3>
                     <uimessage code="pihcore.familyPlanningHistory.title"/>
                 </h3>
