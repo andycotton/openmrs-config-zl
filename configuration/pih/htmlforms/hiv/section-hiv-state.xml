@@ -792,6 +792,14 @@
              headerCode="pihcore.psycState">
         <div class="section-container">
             <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12 || $patient.getAge($encounter.getEncounterDatetime()) == 12 || (! $patient.age)">
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.receivedPostTestCounsel" />
+                    </label>
+                    <obs conceptId="CIEL:159382" answerConceptIds="CIEL:1066,CIEL:1065"
+                         style="radio" />
+                </p>
+                
                 <p>
                     <label>
                         <uimessage code="pihcore.patientReceivedAdvice" />
