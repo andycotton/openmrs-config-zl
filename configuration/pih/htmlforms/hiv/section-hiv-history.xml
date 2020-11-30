@@ -946,10 +946,12 @@
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:HERPES ZOSTER"
                                             specify="true" class="medicalHistoryText patientHistory"/>
+                <!-- Thrush -->
                 <pastMedicalHistoryCheckbox concept="CIEL:5334"
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:DERMATITIS"
                                             specify="true" class="medicalHistoryText patientHistory"/>
+                <!-- Enteropathy -->
                 <pastMedicalHistoryCheckbox concept="CIEL:119175"
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:DIARRHEA"
@@ -958,6 +960,7 @@
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:SEXUALLY TRANSMITTED INFECTION" label="pihcore.medicalhistory.sti"
                                             specify="true" class="medicalHistoryText patientHistory"/>
+                <!-- Peripheral neuropathy -->
                 <pastMedicalHistoryCheckbox concept="CIEL:118983"
                                             specify="true" class="medicalHistoryText patientHistory"/>
                 <pastMedicalHistoryCheckbox concept="PIH:SEIZURE"
