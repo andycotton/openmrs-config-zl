@@ -252,29 +252,6 @@
         </div>
     </section>
 
-    <section id="hiv-oi" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.oi.title">
-        <div class="section-container">
-                <label>
-                    <uimessage code="pihcore.hiv.enterOI"/>
-                </label>
-            <br/>
-
-            <div class="two-columns">
-                <repeat with="['One'],
-                              ['Two'],
-                              ['Three'],
-                              ['Four']">
-                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                        <obs conceptId="PIH:DIAGNOSIS"
-                             answerConceptSetIds="PIH:HUM opportunistic infection"
-                             style="autocomplete"/>
-                    </obsgroup>
-                </repeat>
-            </div>
-        </div>
-    </section>
-
     <section id="hiv-who-stages" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.hiv.whoStages">
         <div class="section-container">
@@ -475,16 +452,23 @@
     </section>
 
     <section id="hiv-dx" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="zl.exam.clinicalImpression.title">
-        <div id="data-collection">
-            <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+             headerCode="pihcore.diagnosesAndOI.title">
+        <div class="section-container">
             <p>
-                <label><uimessage code="emr.consult.freeTextComments"/></label>
-                <obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS" style="textarea" rows="5"/>
+                <obs conceptId="PIH:1401" style="checkbox"
+                     answerConceptId="CIEL:1107" answerCode="pihcore.noOI"  />
             </p>
-        </div>
 
-        <div id="encounter-diagnoses-target">
+            <div id="data-collection" >
+                <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+                <p>
+                    <label><uimessage code="emr.consult.freeTextComments"/></label>
+                    <obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS" style="textarea" rows="5"/>
+                </p>
+            </div>
+
+            <div id="encounter-diagnoses-target">
+            </div>
         </div>
     </section>
 
