@@ -248,6 +248,15 @@
                     <render symptom="CIEL:140238" comment="Fever"/>
                     <render symptom="CIEL:143264" comment="Cough"/>
                 </repeat>
+
+                <obsgroup groupingConceptId="CIEL:1727">
+                    <tr>
+                        <td colspan="4">
+                            <obs conceptId="CIEL:1728" answerConceptId="CIEL:5622"
+                                 showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+                        </td>
+                    </tr>
+                </obsgroup>
             </table>
         </div>
     </section>
