@@ -941,53 +941,69 @@
     <section id="patient-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="zl.consultNote.patientHistory.title">
         <div class="section-container">
-            <div class="two-columns">
-                <pastMedicalHistoryCheckbox concept="PIH:PNEUMONIA"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:HERPES ZOSTER"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <!-- Thrush -->
-                <pastMedicalHistoryCheckbox concept="CIEL:5334"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:DERMATITIS"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <!-- Enteropathy -->
-                <pastMedicalHistoryCheckbox concept="CIEL:119175"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:DIARRHEA"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:ANEMIA"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:SEXUALLY TRANSMITTED INFECTION" label="pihcore.medicalhistory.sti"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <!-- Peripheral neuropathy -->
-                <pastMedicalHistoryCheckbox concept="CIEL:118983"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:SEIZURE"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <!-- Autres symptoms neurologiques -->
-                <pastMedicalHistoryCheckbox concept="PIH:995"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:HYPERTENSION" label="pihcore.medicalhistory.hypertension"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <!-- Autres problemes cardio-vasculaires -->
-                <pastMedicalHistoryCheckbox concept="CIEL:119270"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:HEPATITIS"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:DIABETES"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:SURGERY"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:CHOLERA"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <!-- Chikungunya -->
-                <pastMedicalHistoryCheckbox concept="CIEL:120742"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <pastMedicalHistoryCheckbox concept="PIH:OTHER" code="pihcore.other"
-                                            specify="true" class="medicalHistoryText patientHistory"/>
-                <br/><br/>
-            </div>
+            <table>
+                <tr>
+                    <th colspan="2">
+                        <uimessage code="pihcore.pathology" />
+                    </th>
+                    <th>
+                        <uimessage code="zl.date" />
+                    </th>
+                    <th>
+                        <uimessage code="pihcore.remarks" />
+                    </th>
+                </tr>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:1633">
+                            <tr>
+                                <td id="{name}-mhf">
+                                    <!-- Past medical history finding -->
+                                    <obs conceptId="CIEL:1628" answerConceptId="{concept}" style="checkbox"
+                                         toggle="{id: '{name}-mhf-data', style: 'dim'}"/>
+                                </td>
+                                <td class="{name}-mhf-data">
+                                    <p class="radio">
+                                        <obs conceptId="CIEL:1729" style="radio"
+                                             answerConceptIds="CIEL:1066,CIEL:1065"
+                                             answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar" />
+                                    </p>
+                                </td>
+                                <td class="{name}-mhf-data">
+                                    <!-- Date -->
+                                    <obs conceptId="CIEL:159948" />
+                                </td>
+                                <td class="{name}-mhf-data">
+                                    <!-- Remarks -->
+                                    <obs conceptId="CIEL:160221" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    
+                    <render concept="PIH:PNEUMONIA" name="pneumonia"/>
+                    <render concept="PIH:HERPES ZOSTER" name="herpes"/>
+                    <render concept="CIEL:5334" name="thrush" />
+                    <render concept="PIH:DERMATITIS" name="dermatitis"/>
+                    <render concept="CIEL:119175" name="enteropathy"/>
+                    <render concept="PIH:DIARRHEA" name="diarrhea" />
+                    <render concept="PIH:ANEMIA" name="anemia"/>
+                    <render concept="PIH:SEXUALLY TRANSMITTED INFECTION" name="sti"
+                            label="pihcore.medicalhistory.sti" />
+                    <render concept="CIEL:118983" name="PeripheralNeuropathy"/>
+                    <render concept="PIH:SEIZURE" name="seizure"/>
+                    <render concept="PIH:995" name="OtherNeuroSympt" />
+                    <render concept="PIH:HYPERTENSION" name="htn"
+                            label="pihcore.medicalhistory.hypertension"/>
+                    <render concept="CIEL:119270" name="otherCardio"/>
+                    <render concept="PIH:HEPATITIS" name="hepatitis" />
+                    <render concept="PIH:DIABETES" name="diabetes" />
+                    <render concept="PIH:SURGERY" name="surgery" />
+                    <render concept="PIH:CHOLERA" name="cholera" />
+                    <render concept="CIEL:120742" name="chikungunya"/>
+                    <render concept="PIH:OTHER" name="other" />
+                </repeat>
+            </table>
         </div>
     </section>
 
