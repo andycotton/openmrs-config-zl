@@ -33,6 +33,12 @@
                 -moz-column-count: 2;
             }
 
+            .four-columns {
+                column-count: 4;
+                -webkit-column-count: 4;
+                -moz-column-count: 4;
+            }
+
             form label, .form label {
                 display: inline-block;
             }
@@ -466,6 +472,58 @@
             <p>
                 <obs conceptId="PIH:1401" style="checkbox"
                      answerConceptId="CIEL:1107" answerCode="pihcore.noOI"  />
+            </p>
+
+            <p class="small">
+                <label>
+                    <uimessage code="pihcore.listOI" />
+                </label>
+                <div class="four-columns small">
+                    Tuberculose <br/>
+                    Tuberculose pulmonaire <br/>
+                    Tuberculose extra-pulmonaire <br/>
+                    Pneumonie bactérienne <br/>
+                    Pneumocystose <br/>
+                    Entérite <br/>
+                    Fièvre Typhoïde <br/>
+                    Dysenterie bacillaire <br/>
+                    Candidose <br/>
+                    Candidose buccale <br/>
+                    Candidiasis de l'œsophage <br/>
+                    Candidose vaginale <br/>
+                    Diarrhée <br/>
+                    Diarrhée parasitaire <br/>
+                    Diarrhée bactérienne <br/>
+                    Méningite bactérienne <br/>
+                    Méningite à cryptocoques <br/>
+                    Méningite tuberculeuse <br/>
+                    Eruption cutanées <br/>
+                    Prurigo nodulaire <br/>
+                    Zona <br/>
+                    Sarcome de Kaposi <br/>
+                    Toxoplasmose <br/>
+                    Lymphome du cerveau <br/>
+                    Malaria célébrale <br/>
+                    Encéphalopathie <br/>
+                    Encéphalite présumée due au VIH <br/>
+                    Encéphalopathie à VIH <br/>
+                    Neurosyphilis <br/>
+                    Leishmaniose <br/>
+                    Isosporose <br/>
+                    Infection à Mycobacterium Avium<br/>
+                    Pénicilliose <br/>
+                    Trouble génito-urinaire<br/>
+                    Maladie inflammatoire pelvienne <br/>
+                    Herpès simplex <br/>
+                    LGV<br/>
+                    Condylomes<br/>
+                    Ecoulement urétral <br/>
+                    Trichomonase <br/>
+                    Gonorrhée <br/>
+                    Perte de poids <br/>
+                    Carcinome cellulaire squameux<br/>
+                    Infection au cytomegalovirus
+                </div>
             </p>
 
             <div id="data-collection" >
