@@ -1,6 +1,6 @@
 <htmlform formUuid="3959f67c-b83a-11e7-abc4-cec278b6b50a"
           formEncounterType="c31d3312-40c4-11e7-a919-92ebcb67fe33"
-          formName="HIV Followup" formVersion="1.0">
+          formName="HIV Followup" formVersion="3.0">
 
     <style type="text/css">
         #who-when-where {

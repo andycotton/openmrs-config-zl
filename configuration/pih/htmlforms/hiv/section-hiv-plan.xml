@@ -281,14 +281,13 @@
                     <render labName="CIEL:161469" codeLabel="ASO" comment="ASO"/>
                 </repeat>
 
-
                 <includeIf velocityTest="$patient.gender == 'F' ">
                     <br/><br/>
                 </includeIf>
                 <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
                     <br/>
                 </includeIf>
-                
+
                 <!-- TB -->
                 <p>
                     <label>
