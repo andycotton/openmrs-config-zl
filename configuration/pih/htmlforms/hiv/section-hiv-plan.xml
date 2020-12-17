@@ -168,13 +168,17 @@
                     </template>
 
                     <!-- Hematology -->
+                    <render labName="CIEL:678" comment="WBC" />
                     <render labName="PIH:HEMOGLOBIN" comment="Hemoglobin"/>
                     <render labName="PIH:HEMATOCRIT" comment="Hematocrit"/>
-                    <render labName="CIEL:1019" comment="Hemogram"/>
-                    <render labName="CIEL:160225" comment="Sickling"/>
+                    <render labName="CIEL:1019" comment="Hematogram"/>
+                    <render labName="CIEL:729" comment="Platelets" />
+                    <render labName="PIH:1477" comment="ESR" />
                     <render labName="CIEL:161152" comment="Coagulation"/>
                     <render labName="PIH:BLOOD TYPING" comment="Blood group"/>
                     <render labName="CIEL:161233" comment="Crossmatching"/>
+                    <render labName="CIEL:159644" comment="HbA1c"/>
+                    <render labName="CIEL:160225" comment="Sickling"/>
                     <render labName="CIEL:165544" comment="Hemoglobin electrophoresis"/>
                 </repeat>
 
@@ -196,7 +200,7 @@
                     <render labName="CIEL:304" comment="Stool"/>
                 </repeat>
 
-                <br/><br/><br/><br/><br/>
+                <br/><br/>
                 <includeIf velocityTest="$patient.gender == 'F' ">
                     <br/><br/><br/>
                 </includeIf>
@@ -204,10 +208,10 @@
                     <br/>
                 </includeIf>
 
-                <!-- Chemistry -->
+                <!-- Biochemistry -->
                 <p>
                     <label>
-                        <uimessage code="pihcore.lab.chemistry.title"/>
+                        <uimessage code="pihcore.lab.biochemistry.title"/>
                     </label>
                 </p>
                 <repeat>
@@ -218,12 +222,25 @@
                                  style="checkbox"/>
                         </p>
                     </template>
-                    <render labName="CIEL:887" comment="Glucose"/>
-                    <render labName="CIEL:159644" comment="HbA1c"/>
-                    <render labName="CIEL:953" comment="Liver (LFT)"/>
+                    <render labName="CIEL:953"  comment="Liver (LFT)"/>
                     <render labName="CIEL:161488" comment="Renal (RFT)"/>
                     <render labName="CIEL:1010" comment="Lipid panel"/>
                     <render labName="CIEL:5473" comment="Electrolytes"/>
+                    <render labName="CIEL:887"  comment="Glucose"/>
+                    <render labName="PIH:12655" comment="BUN" />
+                </repeat>
+
+                <repeat>
+                    <template>
+                        <p>
+                            <obs conceptId="PIH:Lab test ordered coded"
+                                 answerConceptId="{labName}"
+                                 answerCode="{comment}"
+                                 style="checkbox"/>
+                        </p>
+                    </template>
+                    <render labName="CIEL:653"  comment="AST / SGOT" />
+                    <render labName="CIEL:654"  comment="ALT / SGPT" />
                 </repeat>
 
                 <p>
@@ -266,13 +283,12 @@
 
 
                 <includeIf velocityTest="$patient.gender == 'F' ">
-                    <br/><br/><br/>
+                    <br/><br/>
                 </includeIf>
                 <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
                     <br/>
                 </includeIf>
-
-
+                
                 <!-- TB -->
                 <p>
                     <label>
@@ -327,10 +343,11 @@
                     </template>
 
                     <render labName="CIEL:163722" codeLabel="pihcore.lab.hivRapid" comment="HIV RT"/>
-                    <!-- Removed: HIV ELISA Quant (CIEL:1041) pihcore.lab.elisaQuant -->
+                    <render labName="CIEL:1041" codeLabel="pihcore.lab.elisaQuant" comment="HIV ELISA Quant" />
                     <render labName="CIEL:856"  codeLabel="pihcore.lab.viralLoad" comment="HIV viral load"/>
                     <render labName="CIEL:5497" codeLabel="pihcore.lab.cd4" comment="CD4 count"/>
                     <render labName="CIEL:730"  codeLabel="pihcore.lab.cd4Percent" comment="CD4 %"/>
+                    <render labName="CIEL:1047" codeLabel="Western blot" comment="Western blot (qual)" />
                 </repeat>
 
                 <!-- ANC -->
