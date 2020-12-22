@@ -200,7 +200,7 @@
                     <render labName="CIEL:304" comment="Stool"/>
                 </repeat>
 
-                <br/><br/>
+                <br/><br/><br/>
                 <includeIf velocityTest="$patient.gender == 'F' ">
                     <br/><br/><br/>
                 </includeIf>
@@ -239,6 +239,7 @@
                                  style="checkbox"/>
                         </p>
                     </template>
+                    <render labName="CIEL:164364" comment="Creatinine" />
                     <render labName="CIEL:653"  comment="AST / SGOT" />
                     <render labName="CIEL:654"  comment="ALT / SGPT" />
                 </repeat>
@@ -308,6 +309,7 @@
                             comment="AFB / Smear"/>
                     <render labName="PIH:TUBERCULOSIS CULTURE RESULT" codeLabel="pihcore.lab.tbCulture"
                             comment="TB culture"/>
+                    <render labName="CIEL:5475"   codeLabel="pihcore.lab.tbSkin" comment="PPD (skin test)"/>
                     <render labName="CIEL:164945" codeLabel="pihcore.lab.tbRIF" comment="GenXpert"/>
                 </repeat>
 
