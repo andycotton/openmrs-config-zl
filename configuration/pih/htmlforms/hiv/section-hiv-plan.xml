@@ -1,6 +1,6 @@
 <htmlform id="hiv-plan"
           formUuid="e86e3118-731c-11e7-8cf7-a6006ad3dba0" formName="HIV Plan"
-          formVersion="1.0">
+          formVersion="2.0">
 
     <style type="text/css">
 
@@ -283,7 +283,7 @@
                 </repeat>
 
                 <includeIf velocityTest="$patient.gender == 'F' ">
-                    <br/><br/>
+                    <br/><br/><br/>
                 </includeIf>
                 <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
                     <br/>
@@ -636,7 +636,7 @@
                         <uimessage code="pihcore.hiv.needsART" />
                     </label>
                     <br/>
-                    <!-- ToDo:  Change 1432 to CIEL:160037 -->
+
                     <obs conceptId="CIEL:162703" style="radio"
                          answerConceptIds="CIEL:1066,CIEL:127750,PIH:2222,PIH:1619,CIEL:160037,PIH:7262"
                          answerCodes="pihcore.noNotIndicated,pihcore.yesButRefused,pihcore.yesAfterCHW,pihcore.yesStartNow,pihcore.yesTreatmentStarted,pihcore.yesDelayed"
@@ -648,6 +648,7 @@
                     <obs conceptId="PIH:13021" style="text"/>
                 </p>
 
+                <!-- Version Pre-DrugOrder
                 <p>
                     <label>
                         <uimessage code="pihcore.hiv.startDateARV"/>
@@ -655,27 +656,24 @@
                     <obs conceptId="CIEL:159599"/>
                 </p>
                 <br/><br/>
+                -->
 
                 <p class="radio">
+                    <!-- Version Pre-DrugOrder
                     <label>
-                        <!-- this label for HIV intake encounter -->
+                        <!- this label for HIV intake encounter ->
                         <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
                             <uimessage code="pihcore.hiv.startRegimenName"/>:
                         </includeIf>
-                        <!-- this label for HIV followup -->
+                        <!- this label for HIV followup ->
                         <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
                             <uimessage code="pihcore.specifyRegimen"/>:
                         </includeIf>
                     </label>
 
                     <br/>
-                    <!-- ARV medications -->
+                    <!- ARV medications ->
                     <obsgroup groupingConceptId="PIH:6116">
-                        <!-- Previous radio buttons
-                        <obs conceptId="CIEL:1282" style="radio"
-                             answerConceptIds="CIEL:1652,CIEL:162565,CIEL:164505,CIEL:160124,CIEL:164512,CIEL:162201,CIEL:5424"
-                             answerSeparator="&lt;br /&gt;"/>
-                        -->
                         <label>ARV #1</label>
                         <obs id="arv1Drug" conceptId="CIEL:1282"
                              answerDrugIds="
@@ -754,24 +752,29 @@
                                 ETV 100mg,
                                 DRV/ETV 300/100 mg" />
 
-                        <!-- Other ARV -->
+                        <!- Other ARV ->
                         <label>
                             <uimessage code="pihcore.other" /> ARV:
                         </label>
                         <obs conceptId="CIEL:5424"/>
 
                         <br/>
+                        -->
                         <label>
                             <uimessage code="pihcore.treatmentLine" />
                         </label>
                         <obs conceptId="PIH:13115" style="radio"
                              answerConceptIds="PIH:7428,PIH:7429,PIH:7430" />
-                    </obsgroup>
-                <br/><br/>
+                    <!-- Version Pre-DrugOrder </obsgroup> -->
+                <br/><br/><br/><br/>
                 </p>
             </div>
 
-            <h4>ART Drug Orders</h4>
+            <label>
+                <b>
+                    <uimessage code="pihcore.artDrugOrders" />
+                </b>
+            </label>
 
             <style type="text/css">
                 .drugorders-drug-section {
@@ -904,34 +907,40 @@
                 </orderTemplate>
             </drugOrder>
 
+            <!-- Release Pre-drugOrder
             <br/><br/>
-
-            <!-- HIV followup only -->
             <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
                 <label>
                     <uimessage code="pihcore.ifChangeSpecifyReason" />
                 </label>
-                <div class="two-columns">
-                    <repeat>
+                -->
+
+            <!-- Release Pre-drugOrder:  delete these lines too, but they don't like to be commented out
+                <div class="two-columns"> -->
+            <repeat>
                         <template>
-                            <p>
-                                <obs conceptId="CIEL:1252" answerConceptId="{reason}" style="checkbox" />
-                            </p>
-                        </template>
-                        <render reason="CIEL:843"    name="Failure" />
-                        <render reason="CIEL:102"    name="Toxicity" />
-                        <render reason="CIEL:162853" name="interaction" />
-                        <render reason="CIEL:127750" name="refusal" />
-                        <render reason="CIEL:1754"   name="stockOut" />
-                        <render reason="CIEL:1434"   name="pregnant" />
-                    </repeat>
-                    <p>
-                        <!-- Other -->
-                        <obs conceptId="CIEL:1252" answerConceptId="CIEL:5622"
-                             style="checkbox" showCommentField="true" commentFieldLabel="" />
-                    </p>
-                </div>
-            </includeIf>
+                        <!-- Release Pre-drugOrder: Other ->
+                        <p>
+                            <obs conceptId="CIEL:1252" answerConceptId="{reason}" style="checkbox" />
+                        </p> -->
+                    </template>
+                <!-- Release Pre-drugOrder ->
+                <render reason="CIEL:843"    name="Failure" />
+                <render reason="CIEL:102"    name="Toxicity" />
+                <render reason="CIEL:162853" name="interaction" />
+                <render reason="CIEL:127750" name="refusal" />
+                <render reason="CIEL:1754"   name="stockOut" />
+                <render reason="CIEL:1434"   name="pregnant" /> -->
+                </repeat>
+
+                <!-- Release Pre-drugOrder: Other ->
+                <p>
+                    <obs conceptId="CIEL:1252" answerConceptId="CIEL:5622"
+                         style="checkbox" showCommentField="true" commentFieldLabel="" />
+                </p>
+                </div> -->
+
+            <!-- Release Pre-drugOrder </includeIf> -->
 
             <includeIf velocityTest="$patient.gender == 'F' ">
                 <br/>
