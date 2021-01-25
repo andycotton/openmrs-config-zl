@@ -737,7 +737,7 @@
 
     <section id="contacts" sectionTag="fieldset" headerTag="legend" headerStyle="title"
             headerCode="pihcore.contacts">
-        <repeat with="['1'],['2'],['3'],['4'],['5']">
+        <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10']">
             <div class="section-container mb-4 flex-questions">
                 <obsgroup groupingConceptId="PIH:Contact construct">
                     <div>
