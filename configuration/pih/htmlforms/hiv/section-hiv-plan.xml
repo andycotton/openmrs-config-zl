@@ -813,7 +813,7 @@
                 }
             </style>
 
-            <drugOrder format="select" selectLabel="Add another drug...">
+            <drugOrder format="select" selectLabel="pihcore.drugOrder.addAnotherDrug">
                 <orderTemplate>
                     <orderProperty name="drug">
                         <option value="78faac2e-dfbe-11e9-8a34-2a2ae2dbcce4" label="DTG/3TC/TDF 50/300/300 mg"/>
@@ -849,41 +849,43 @@
                         <option value="29c9dd27-25f2-45c6-9708-93fe142a46ba" label="ETV 100mg"/>
                         <option value="0fc3d5c1-fd39-4899-b5c0-b094e28ff359" label="DRV/ETV 300/100 mg"/>
                     </orderProperty>
-                    <orderProperty name="action" label="Action">
-                        <option value="NEW" label="New Order"/>
-                        <option value="REVISE" label="Revise Order"/>
-                        <option value="RENEW" label="Renew Order"/>
-                        <option value="DISCONTINUE" label="Discontinue Order"/>
+                    <orderProperty name="action" label="pihcore.action">
+                        <option value="NEW" label="pihcore.newOrder"/>
+                        <option value="REVISE" label="pihcore.reviseOrder"/>
+                        <option value="RENEW" label="pihcore.renewOrder"/>
+                        <option value="DISCONTINUE" label="pihcore.discontinueOrder"/>
                     </orderProperty>
                     <div style="padding:0px;">
-                        <orderProperty name="dose" label="Dosing"/>
+                        <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
                         <orderProperty name="doseUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" ">
-                            <option value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="tablet(s)"/>
+                            <option value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> <!-- tablet -->
                             <option value="161553AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="mg"/>
                         </orderProperty>
+                        <!-- ToDo:  Fix uuids -->
                         <orderProperty name="frequency" label=" ">
-                            <option value="fb8068a0-7647-4aec-93d0-14658533dfdf" label="1/day"/>
-                            <option value="e08de81e-3bed-4471-a26f-180417d543d9" label="2/day"/>
+                            <option value="fb8068a0-7647-4aec-93d0-14658533dfdf" label="OD"/>
+                            <option value="e08de81e-3bed-4471-a26f-180417d543d9" label="BID"/>
                         </orderProperty>
                         <orderProperty name="route" value="CIEL:160240" label=" ">
-                            <option value="CIEL:160240" label="Oral"/>
+                            <option value="CIEL:160240" /> <!-- Oral -->
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="dateActivated" label="Starting"/>
-                        <orderProperty name="duration" label="for"/>
+                        <orderProperty name="dateActivated" label="pihcore.starting"/>
+                        <orderProperty name="duration" label="pihcore.visitNote.for"/>
+                        <!-- Note:  Changed mapping from SNOMED CT to CIEL -->
                         <orderProperty name="durationUnits" label=" ">
-                            <option value="SNOMED CT:258703001" label="days"/>
-                            <option value="SNOMED CT:258706009" label="months"/>
+                            <option value="CIEL:1072" /> <!-- Days -->
+                            <option value="CIEL:1074" /> <!-- Months -->
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="quantity" label="Quantity"/>
+                        <orderProperty name="quantity" label="pihcore.quantity"/>
                         <orderProperty name="quantityUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" ">
-                            <option value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="tablet(s)"/>
+                            <option value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> <!-- tablet -->
                             <option value="161553AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="mg"/>
                         </orderProperty>
-                        <orderProperty name="numRefills" value="0" label="Refills"/>
+                        <orderProperty name="numRefills" value="0" label="pihcore.refills"/>
                     </div>
                     <div style="display:none;">
                         <orderProperty name="urgency" value="ROUTINE"/>
