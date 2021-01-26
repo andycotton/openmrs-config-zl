@@ -1290,11 +1290,13 @@
                                 </label>
                             </td>
                             <td>
-                                <obs conceptId="PIH:2156" answerConceptId="{aid}"
+                                <obs conceptId="PIH:SOCIO-ECONOMIC ASSISTANCE ALREADY RECEIVED"
+                                     answerConceptId="{aid}"
                                      answerLabel="" style="checkbox"/>
                             </td>
                             <td>
-                                <obs conceptId="PIH:2157" answerConceptId="{aid}"
+                                <obs conceptId="PIH:SOCIO-ECONOMIC ASSISTANCE RECOMMENDED"
+                                     answerConceptId="{aid}"
                                      answerLabel="" style="checkbox"/>
                             </td>
                         </tr>
@@ -1309,11 +1311,13 @@
                              labelCode="zl.ifOtherSpecify"/>
                     </td>
                     <td>
-                        <obs conceptId="PIH:2156" answerConceptId="CIEL:5622"
+                        <obs conceptId="PIH:SOCIO-ECONOMIC ASSISTANCE ALREADY RECEIVED"
+                             answerConceptId="CIEL:5622"
                              answerLabel="" style="checkbox"/>
                     </td>
                     <td>
-                        <obs conceptId="PIH:2157" answerConceptId="CIEL:5622"
+                        <obs conceptId="PIH:SOCIO-ECONOMIC ASSISTANCE RECOMMENDED"
+                             answerConceptId="CIEL:5622"
                              answerLabel="" style="checkbox"/>
                     </td>
                 </tr>
