@@ -894,7 +894,7 @@
                         <orderProperty name="careSetting" value="OUTPATIENT"/>
                     </div>
                     <orderProperty name="voided"/>
-                    <orderProperty name="discontinueReason">
+                    <orderProperty name="discontinueReason" label="pihcore.discontinueReason">
                         <option value="CIEL:843"/>
                         <option value="CIEL:102"/>
                         <option value="CIEL:127750"/>
