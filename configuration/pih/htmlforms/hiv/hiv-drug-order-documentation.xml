@@ -5,84 +5,84 @@
     <style type="text/css">
 
         form fieldset {
-            display: block;
+        display: block;
         }
 
         .two-columns {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
         }
 
         .three-columns {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
+        column-count: 3;
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
         }
 
         p.radio > * {
-            display: inline;
-            float: none !important;
-            min-width: initial;
+        display: inline;
+        float: none !important;
+        min-width: initial;
         }
 
         .section-container label,
-            .section-container-color label {
-            margin: 0px;
+        .section-container-color label {
+        margin: 0px;
         }
 
         .section-container-color {
-            background: #F2F2F2;
-            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-            padding: 10px 5px 10px 15px;
-            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        background: #F2F2F2;
+        box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+        padding: 10px 5px 10px 15px;
+        line-height: 1.5em; /*add this for vertical spacing between elements*/
         }
 
         - .section {
-            width: 100%;
+        width: 100%;
         }
 
         label {
-            padding: 0px 3px 0px 0px
+        padding: 0px 3px 0px 0px
         }
 
         .narrow {
-            width: 200px;
+        width: 200px;
         }
 
         .drugorders-drug-section {
-            padding: 10px;
-            border: 1px dotted black;
+        padding: 10px;
+        border: 1px dotted black;
         }
         .drugorders-drug-details {
-            font-weight:bold;
-            padding-top: 5px; padding-bottom: 5px;
+        font-weight:bold;
+        padding-top: 5px; padding-bottom: 5px;
         }
         .order-field {
-            display: inline-block;
-            padding: 0px;
+        display: inline-block;
+        padding: 0px;
         }
         .order-field.action {
-            display: block;
+        display: block;
         }
         .order-field.dateActivated {
-            padding-right: 20px;
+        padding-right: 20px;
         }
         .order-field-label {
-            display: inline-block;
-            padding-right: 5px;
-            vertical-align: middle;
+        display: inline-block;
+        padding-right: 5px;
+        vertical-align: middle;
         }
         .order-field-label:after {
-            content: "";
-            white-space: pre;
+        content: "";
+        white-space: pre;
         }
         .order-field-widget {
-            display: inline-block;
+        display: inline-block;
         }
         .order-view-section {
-            display: block;
-            padding-left: 0px;
+        display: block;
+        padding-left: 0px;
         }
     </style>
 
@@ -94,36 +94,44 @@
 
             <drugOrder format="select" selectLabel="Add another drug...">
                 <orderTemplate>
-                    <orderProperty name="drug"/>
-                    <orderProperty name="action" label="Action">
-                        <option value="NEW" label="New Order"/>
-                        <option value="REVISE" label="Revise Order"/>
-                        <option value="RENEW" label="Renew Order"/>
-                        <option value="DISCONTINUE" label="Discontinue Order"/>
-                    </orderProperty>
+                    <orderProperty name="action"/>
+                    <div style="padding:0px;">
+                        <orderProperty name="concept" label="Drug"/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="drug" label="Formulation"/>
+                        <orderProperty name="drugNonCoded" label=",  "/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="orderReason" label="Order Reason">
+                            <option value="138405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="ART"/>
+                            <option value="160538AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="PTME"/>
+                            <option value="1691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Prophylaxis"/>
+                        </orderProperty>
+                    </div>
                     <div style="padding:0px;">
                         <orderProperty name="dose" label="Dosing"/>
                         <orderProperty name="doseUnits"/>
                         <orderProperty name="frequency"/>
                         <orderProperty name="route"/>
+                        <orderProperty name="dosingInstructions"/>
+                        <orderProperty name="dosingType"/>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="dateActivated" label="Starting"/>
                         <orderProperty name="duration" label="for"/>
-                        <orderProperty name="durationUnits"/>
+                        <orderProperty name="durationUnits" label=" "/>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="quantity" label="Quantity"/>
-                        <orderProperty name="quantityUnits"/>
+                        <orderProperty name="quantityUnits" label=" "/>
                         <orderProperty name="numRefills" value="0" label="Refills"/>
                     </div>
                     <div style="display:none;">
                         <orderProperty name="urgency" value="ROUTINE"/>
-                        <orderProperty name="dosingType" value="org.openmrs.SimpleDosingInstructions"/>
                         <orderProperty name="previousOrder"/>
                         <orderProperty name="careSetting" value="OUTPATIENT"/>
                     </div>
-                    <orderProperty name="voided"/>
                     <orderProperty name="discontinueReason">
                         <option value="CIEL:843"/>
                         <option value="CIEL:102"/>
