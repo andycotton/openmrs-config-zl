@@ -85,8 +85,14 @@
         padding-left: 0px;
         }
     </style>
-
-    <!-- Stolen from the dispensing module, but using prescription construct instead of dispensing -->
+    <br/>
+    <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="htmlformentry.drugOrder.dateActivated">
+        <div class="section-container-color">
+            <encounterDate id="encounterDate" showTime="false" default="now"/>
+        </div>
+    </section>
+    <br/>
     <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.visitNote.orders.medications">
 
@@ -125,7 +131,7 @@
                     <div style="padding:0px;">
                         <orderProperty name="quantity" label="Quantity"/>
                         <orderProperty name="quantityUnits" label=" "/>
-                        <orderProperty name="numRefills" value="0" label="Refills"/>
+                        <orderProperty name="numRefills" label="Refills"/>
                     </div>
                     <div style="display:none;">
                         <orderProperty name="urgency" value="ROUTINE"/>
@@ -153,14 +159,19 @@
         </div>
 
     </section>
+    <br/>
+
 
     <ifMode mode="VIEW" include="false">
-        <div id="buttons">
-            <submit submitClass="confirm right" submitCode="emr.save"/>
-            <button type="button" class="cancel">
-                <uimessage code="emr.cancel"/>
-            </button>
-        </div>
+        <section>
+            <div id="buttons" class="section-container-color">
+                <submit submitClass="confirm right" submitCode="emr.save"/>
+                <button type="button" class="cancel" onclick="javascript:window.history.back();">
+                    <uimessage code="emr.cancel"/>
+                </button>
+            </div>
+        </section>
     </ifMode>
+
 
 </htmlform>
