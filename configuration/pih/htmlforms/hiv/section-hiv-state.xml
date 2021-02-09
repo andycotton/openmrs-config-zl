@@ -738,6 +738,15 @@
                     </tr>
                 </obsgroup>
             </table>
+
+            <h4>
+                <uimessage code="pihcore.otherMeds"/>
+            </h4>
+
+            <p>
+                <obs conceptId="PIH:13318" style="text"/>
+            </p>
+
         </div>
     </section>
 
