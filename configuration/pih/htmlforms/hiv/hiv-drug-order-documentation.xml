@@ -89,7 +89,7 @@
         }
     </style>
     <br/>
-    <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="id-encounter-details" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="htmlformentry.drugOrder.dateActivated">
         <div class="section-container-color">
             <encounterDate id="encounterDate" showTime="false" default="now"/>
