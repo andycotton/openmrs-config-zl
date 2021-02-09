@@ -84,6 +84,9 @@
         display: block;
         padding-left: 0px;
         }
+        .hidden-field {
+            display:none;
+        }
     </style>
     <br/>
     <section id="id-treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
@@ -102,11 +105,22 @@
                 <orderTemplate>
                     <orderProperty name="action"/>
                     <div style="padding:0px;">
-                        <orderProperty name="concept" label="Drug"/>
+                        <orderProperty name="concept" label="Drug">
+                            <optionGroup
+                                    concept="3cd72184-26fe-102b-80cb-0017a47871b2"
+                                    groupLabel="ARVs"
+                                    sortAlphabetically="true" />
+                            <optionGroup
+                                    groupClass="hidden-field"
+                                    groupLabel="Other Medications"
+                                    sortAlphabetically="true" />
+                        </orderProperty>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="drug" label="Formulation"/>
-                        <orderProperty name="drugNonCoded" label=",  "/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="drugNonCoded" label="Non-coded Formulation"/>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="orderReason" label="Order Reason">
