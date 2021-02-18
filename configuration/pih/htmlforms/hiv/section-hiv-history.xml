@@ -1256,6 +1256,7 @@
                         </template>
                         <render concept="PIH:2406" regimen="initialTreatment" />
                         <render concept="PIH:2408" regimen="retreatment" />
+                        <render concept="CIEL:159909" regimen="mdrtbTreatment" />
                     </repeat>
                 </table>
 
