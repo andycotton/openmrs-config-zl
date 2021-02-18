@@ -62,33 +62,33 @@
   "dispositionConfig": "file:configuration/pih/pih-dispositions-haiti.json",
 
   "locationTags": {
-    "Check-In Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
+    "Check-In Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "POZ"],
 
-    "Consult Note Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "Unknown Location"],
+    "Consult Note Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "Unknown Location", "POZ"],
 
-    "COVID-19 Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
+    "COVID-19 Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "POZ"],
 
-    "HIV Consult Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "Unknown Location"],
+    "HIV Consult Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "Unknown Location", "POZ"],
 
-    "Lab Results Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais", "Unknown Location"],
+    "Lab Results Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais", "Unknown Location", "POZ"],
 
     "Login Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
 
-    "Medical Record Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
+    "Medical Record Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "POZ"],
 
-    "Mental Health Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
+    "Mental Health Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "POZ"],
 
-    "Primary Care Consult Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais"],
+    "Primary Care Consult Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais", "POZ"],
 
-    "Program Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais"],
+    "Program Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais", "POZ"],
 
-    "Provider Management Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
+    "Provider Management Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "POZ"],
 
-    "Registration Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais"],
+    "Registration Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "POZ"],
 
-    "Vitals Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "Unknown Location"],
+    "Vitals Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes", "Mirebalais", "Unknown Location", "POZ"],
 
-    "Visit Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais", "Unknown Location"]
+    "Visit Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes","Mirebalais", "Unknown Location", "POZ"]
   },
 
   "registrationConfig": {
