@@ -101,7 +101,7 @@
 
         <div class="section-container-color">
 
-            <drugOrder format="select" selectLabel="Add another drug...">
+            <drugOrder format="select">
                 <orderTemplate>
                     <orderProperty name="action"/>
                     <div style="padding:0px;">
@@ -130,7 +130,7 @@
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="dose" label="Dosing"/>
+                        <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
                         <orderProperty name="doseUnits"/>
                         <orderProperty name="frequency"/>
                         <orderProperty name="route"/>
@@ -138,14 +138,14 @@
                         <orderProperty name="dosingType"/>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="dateActivated" label="Starting"/>
-                        <orderProperty name="duration" label="for"/>
+                        <orderProperty name="dateActivated" label="pihcore.starting"/>
+                        <orderProperty name="duration" label="pihcore.visitNote.for"/>
                         <orderProperty name="durationUnits" label=" "/>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="quantity" label="Quantity"/>
+                        <orderProperty name="quantity" label="pihcore.quantity"/>
                         <orderProperty name="quantityUnits" label=" "/>
-                        <orderProperty name="numRefills" label="Refills"/>
+                        <orderProperty name="numRefills" label="pihcore.refills"/>
                     </div>
                     <div style="display:none;">
                         <orderProperty name="urgency" value="ROUTINE"/>
