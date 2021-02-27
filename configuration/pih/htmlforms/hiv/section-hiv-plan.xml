@@ -820,7 +820,7 @@
                 <orderTemplate>
                     <orderProperty name="action"/>
                     <div style="padding:0px;">
-                        <orderProperty name="concept" label="Drug"/>
+                        <orderProperty name="concept" label="Drug" style="autocomplete"/>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="drug" label="Formulation">
