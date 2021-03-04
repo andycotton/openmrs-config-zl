@@ -648,29 +648,27 @@
                     <obs conceptId="PIH:13021" style="text"/>
                 </p>
 
-                <p>
+                <p class="radio">
                     <label>
                         <uimessage code="pihcore.hiv.startDateARV"/>
                     </label>
-                    <obs conceptId="CIEL:159599"/>
-                </p>
-                <br/><br/>
-
-                <p class="radio">
-                    <label>
-                        <!-- this label for HIV intake encounter -->
-                        <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
-                            <uimessage code="pihcore.hiv.startRegimenName"/>:
-                        </includeIf>
-                        <!-- this label for HIV followup -->
-                        <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
-                            <uimessage code="pihcore.specifyRegimen"/>:
-                        </includeIf>
-                    </label>
-
-                    <br/>
-                    <!-- ARV medications -->
                     <obsgroup groupingConceptId="PIH:6116">
+                        <obs conceptId="CIEL:159599"/>
+                        <br/><br/>
+
+                        <label>
+                            <!-- this label for HIV intake encounter -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d306a-40c4-11e7-a919-92ebcb67fe33'">
+                                <uimessage code="pihcore.hiv.startRegimenName"/>:
+                            </includeIf>
+                            <!-- this label for HIV followup -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
+                                <uimessage code="pihcore.specifyRegimen"/>:
+                            </includeIf>
+                        </label>
+
+                        <br/>
+                        <!-- ARV medications -->
                         <label>ARV</label>
                         <obs id="arv1Drug" conceptId="CIEL:1282"
                              answerConceptIds="CIEL:792,CIEL:164511,CIEL:160124,CIEL:1652,CIEL:164512,
