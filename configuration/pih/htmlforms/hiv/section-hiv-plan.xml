@@ -123,6 +123,36 @@
         </div>
     </section>
 
+    <style>
+        #test-orders-new .orderwidget-orderable-section div {
+            display:inline-block;
+        }
+        #test-orders-new .orderwidget-order-history-item div {
+            display:none;
+        }
+    </style>
+
+    <section id="test-orders-new" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Lab Ordering Test Example">
+        <order orderType="52a447d3-a64a-11e3-9aeb-50e549534c5e">
+            <orderTemplate>
+                <orderProperty name="action">
+                    <option value="NEW" label=" "/>
+                    <option value="DISCONTINUE"/>
+                </orderProperty>
+                <orderProperty name="concept" label=" ">
+                    <optionGroup concept="PIH:11683" groupLabel="pihcore.lab.hematology.title"/>
+                    <optionGroup concept="PIH:12260" groupLabel="pihcore.lab.parasitology.title"/>
+                    <optionGroup concept="PIH:3642" groupLabel="pihcore.lab.biochemistry.title"/>
+                    <optionGroup concept="PIH:12324" groupLabel="pihcore.lab.serology.title"/>
+                    <optionGroup concept="PIH:10582" groupLabel="pihcore.lab.tb.title"/>
+                    <optionGroup concept="PIH:10561" groupLabel="pihcore.lab.hiv.title"/>
+                </orderProperty>
+                <div style="display:none;">
+                    <orderProperty name="careSetting" value="OUTPATIENT"/>
+                </div>
+            </orderTemplate>
+        </order>
+    </section>
 
     <!-- ToDo: This section is duplicated by the section-lab-order.xml and should be replace
          with including forms within htmlforms.  Formlets? -->
@@ -665,14 +695,6 @@
             </label>
 
             <style type="text/css">
-                .drugorders-drug-section {
-                    padding: 10px;
-                    border: 1px dotted black;
-                }
-                .drugorders-drug-details {
-                    font-weight:bold;
-                    padding-top: 5px; padding-bottom: 5px;
-                }
                 .order-field {
                     display: inline-block;
                     padding: 0px;
@@ -756,13 +778,15 @@
                             <option value="1691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Prophylaxis"/>
                         </orderProperty>
                     </div>
+                    <div style="padding:0x;">
+                        <orderProperty name="dosingType"/>
+                    </div>
                     <div style="padding:0px;">
                         <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
-                        <orderProperty name="doseUnits"/>
-                        <orderProperty name="frequency"/>
-                        <orderProperty name="route"/>
-                        <orderProperty name="dosingInstructions"/>
-                        <orderProperty name="dosingType"/>
+                        <orderProperty name="doseUnits" label=" "/>
+                        <orderProperty name="frequency" label=" x "/>
+                        <orderProperty name="route" label=" "/>
+                        <orderProperty name="dosingInstructions" textArea="true" textAreaRows="3" textAreaColumns="50" label=" "/>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="dateActivated" label="pihcore.starting"/>
