@@ -48,6 +48,9 @@
             min-width: initial;
         }
 
+        script {
+            display: none !important;
+        }
 
         .section-container label,
         .section-container-color label {
@@ -649,10 +652,10 @@
                 </p>
 
                 <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.hiv.startDateARV"/>
-                    </label>
                     <obsgroup groupingConceptId="PIH:6116">
+                        <label>
+                            <uimessage code="pihcore.hiv.startDateARV"/>
+                        </label>
                         <obs conceptId="CIEL:159599"/>
                         <br/><br/>
 
