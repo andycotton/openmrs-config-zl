@@ -5,8 +5,8 @@
     <artifactId>openmrs-config-zl</artifactId>
     <name>ZL OpenMRS Configuration</name>
     <description>Top-Level configuration for Zanmi Lasante OpenMRS distro</description>
-    <url>https://github.com/PIH/openmrs-config-pihsl</url>
-    <version>1.17.0-SNAPSHOT</version>
+    <url>https://github.com/PIH/openmrs-config-zl</url>
+    <version>1.18.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <organization>
