@@ -124,11 +124,16 @@
     </section>
 
     <style>
-        #test-orders-new .orderwidget-orderable-section div {
+        #test-orders-new .orderwidget-history-section {
             display:inline-block;
         }
-        #test-orders-new .orderwidget-order-history-item div {
-            display:none;
+        #test-orders-new .order-action-section {
+            display:inline-block;
+        }
+        #test-orders-new .order-cancel-action-section {
+            display: inline-block;
+            padding-left: 10px;
+            vertical-align: middle;
         }
     </style>
 
