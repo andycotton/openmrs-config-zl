@@ -50,39 +50,31 @@
         width: 200px;
         }
 
-        .drugorders-drug-section {
-        padding: 10px;
-        border: 1px dotted black;
-        }
-        .drugorders-drug-details {
-        font-weight:bold;
-        padding-top: 5px; padding-bottom: 5px;
-        }
         .order-field {
-        display: inline-block;
-        padding: 0px;
+            display: inline-block;
+            padding: 0px;
         }
         .order-field.action {
-        display: block;
+            display: block;
         }
         .order-field.dateActivated {
-        padding-right: 20px;
+            padding-right: 20px;
         }
         .order-field-label {
-        display: inline-block;
-        padding-right: 5px;
-        vertical-align: middle;
+            display: inline-block;
+            padding-right: 5px;
+            vertical-align: middle;
         }
         .order-field-label:after {
-        content: "";
-        white-space: pre;
+            content: "";
+            white-space: pre;
         }
         .order-field-widget {
-        display: inline-block;
+            display: inline-block;
         }
         .order-view-section {
-        display: block;
-        padding-left: 0px;
+            display: block;
+            padding-left: 0px;
         }
         .hidden-field {
             display:none;
@@ -90,7 +82,7 @@
     </style>
     <br/>
     <section id="id-encounter-details" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="htmlformentry.drugOrder.dateActivated">
+             headerCode="htmlformentry.orders.dateActivated">
         <div class="section-container-color">
             <encounterDate id="encounterDate" showTime="false" default="now"/>
         </div>
