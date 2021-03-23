@@ -16,6 +16,16 @@
                 -moz-column-count: 2;
             }
 
+            .five-columns, .four-columns, .three-columns, .two-column {
+                display: table;
+                height: 100%;
+                width: 100%;
+            }
+
+            .two-column > div {
+                display: table-cell;
+                width: 50%;
+            }
 
             p.radio > * {
                 display: inline;
@@ -293,45 +303,45 @@
                          style="checkbox"/>
 
                     <div id="pregnant">
-                        <div class="two-columns">
+                        <div class="two-column">
                             <!-- Last menstrual period (LMP or DDR) -->
-                            <p>
+                            <div>
                                 <label>
                                     <uimessage code="pihcore.pregnancy.lastPeriod"/>
                                 </label>
                                 <span class="small">
                                     <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
                                 </span>
-                            </p>
+                            </div>
 
                             <!-- Due date (DPA) -->
-                            <p>
+                            <div>
                                 <label>
                                     <uimessage code="pihcore.pregnancy.dueDate"/>
                                 </label>
                                 <span class="small">
                                     <obs conceptId="CIEL:5596" allowFutureDates="true"/>
                                 </span>
-                            </p>
+                            </div>
                         </div>
 
-                        <div id="calculated-edd-and-gestational" class="two-columns hidden">
-                            <p>
+                        <div id="calculated-edd-and-gestational" class="two-column hidden">
+                            <div>
                                 <span id="calculated-gestational-age-wrapper">
                                     <span id="calculated-gestational-age-label">
                                         <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
                                     </span>
                                     <span id='calculated-gestational-age-value' class="value"></span>
                                 </span>
-                            </p>
-                            <p>
+                            </div>
+                            <div>
                                 <span id="calculated-edd-wrapper">
                                     <span id="calculated-edd-label">
                                         <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
                                     </span>
                                     <span id='calculated-edd' class="value"></span>
                                 </span>
-                            </p>
+                            </div>
 
                         </div>
 
@@ -594,22 +604,23 @@
         <section id="mother-info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.infoMother">
             <div class="section-container">
-                <div class="two-columns">
-                    <p class="radio">
-                        <label>
-                            <uimessage code="pihcore.hiv.motherSerology" />
-                        </label>
-                        <br/>
-                        <obs conceptId="CIEL:1396" style="radio"
-                             answerConceptIds="CIEL:703,CIEL:664,CIEL:1067" />
-                    </p>
-                    <br/>
-                    <p>
+                <div class="two-column">
+                    <div>
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.hiv.motherSerology" />
+                            </label>
+                            <br/>
+                            <obs conceptId="CIEL:1396" style="radio"
+                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1067" />
+                        </p>
+                    </div>
+                    <div>
                         <label>
                             <uimessage code="pihcore.screeningDate" />
                         </label>
                         <obs conceptId="PIH:3595" />
-                    </p>
+                    </div>
                 </div>
 
                 <!-- Mother's ARV information -->
@@ -692,17 +703,22 @@
                         </obs>
 
                         <div id="mom-tb-section">
-                            <div class="two-columns">
-                                <label>
-                                    anti-TB <uimessage code="pihcore.startDate" />
-                                </label>
-                                <obs conceptId="CIEL:1113" />
-
-                                <label>
-                                    anti-TB <uimessage code="pihcore.stopDate" />
-                                </label>
-                                <!-- Date when TB treatment stopped -->
-                                <obs conceptId="CIEL:164384" />
+                            <div class="two-column">
+                                <div>
+                                    <label>
+                                        anti-TB
+                                        <uimessage code="pihcore.startDate"/>
+                                    </label>
+                                    <obs conceptId="CIEL:1113"/>
+                                </div>
+                                <div>
+                                    <label>
+                                        anti-TB
+                                        <uimessage code="pihcore.stopDate"/>
+                                    </label>
+                                    <!-- Date when TB treatment stopped -->
+                                    <obs conceptId="CIEL:164384"/>
+                                </div>
                             </div>
 
                             <div class="radio">
@@ -739,7 +755,7 @@
             headerCode="pihcore.contacts">
         <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10']">
             <div class="section-container mb-4 flex-questions">
-                <obsgroup groupingConceptId="PIH:Contact construct">
+                <obsgroup groupingConceptId="PIH:Contact construct" showIfEmpty="false">
                     <div>
                         <!-- Relationship to patient -->
                         <obs conceptId="CIEL:164352"
@@ -1078,16 +1094,16 @@
     <section id="habits" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.habits">
         <div class="section-container">
-            <div class="two-columns">
+            <div class="two-column">
                 <!-- Tobacco use -->
-                <p>
+                <div>
                     <label>
                         <uimessage code="pihcore.habits.smoking"/>:
                     </label>
                     <obs conceptId="CIEL:163731" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
-
-                    <br/><br/><br/>
+                </div>
+                <div>
                     <label>
                         <uimessage code="pihcore.habits.ifYesDuration"/>
                     </label>
@@ -1102,7 +1118,7 @@
                         <obs conceptId="PIH:11949" showUnits="false"/>
                     </span>
 
-                </p>
+                </div>
             </div>
 
             <!-- Secondary smoke -->
@@ -1114,22 +1130,23 @@
                      answerSeparator="" style="radio"/>
             </p>
 
-            <div class="two-columns">
+            <div class="two-column">
                 <!-- Alcohol use -->
-                <p>
+                <div>
                     <label>
                         <uimessage code="pihcore.habits.alcohol"/>:
                     </label>
                     <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
-                    <br/>
+                </div>
+                <div>
                     <label>
                         <uimessage code="pihcore.habits.daysPerWeek"/>:
                     </label>
                     <span class="small">
                         <obs conceptId="PIH:2243" showUnits="pihcore.units.daysPerWeek" />
                     </span>
-                    <br/>
+
                     <label>
                         <uimessage code="pihcore.habits.drinksPerDay"/>:
                     </label>
@@ -1144,18 +1161,20 @@
                         <obs conceptId="CIEL:159453" answerConceptId="CIEL:5622" answerCode="pihcore.other"
                              showCommentField="true" commentFieldCode="" />
                     </span>
-                </p>
+                </div>
             </div>
+            <br/>
 
-            <div class="two-columns">
+            <div class="two-column">
                 <!-- Drug use -->
-                <p>
+                <div>
                     <label><uimessage code="pihcore.habits.drugs"/>:
                     </label>
                     <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
                          answerSeparator="" style="radio"/>
 
-                    <br/><br/><br/>
+                </div>
+                <div>
                     <label>
                         <uimessage code="pihcore.habits.ifYesDuration"/>
                     </label>
@@ -1169,7 +1188,7 @@
                     <span class="small">
                         <obs conceptId="PIH:6489"/>
                     </span>
-                </p>
+                </div>
             </div>
         </div>
     </section>
@@ -1194,6 +1213,27 @@
                     </label>
                     <obs conceptId="PIH:11526" />
                 </p>
+
+                <!-- Based on HIV EMR form and questions -->
+                <div class="two-column">
+                    <div>
+                        <!-- Location of TB:  Pulmonary or EP -->
+                        <obs conceptId="CIEL:160040" style="checkbox"
+                             answerConceptId="CIEL:42" />
+                        <obs conceptId="CIEL:160040" style="checkbox"
+                             answerConceptId="CIEL:5042" />
+                    </div>
+
+                    <div>
+                        <!-- DST -->
+                        <obs conceptId="PIH:3039" style="checkbox"
+                             answerConceptId="CIEL:1065" answerCode="pihcore.dstComplete" />
+                        <label>
+                            <uimessage code="pihcore.result" />:
+                        </label>
+                        <obs conceptId="CIEL:159391"  />
+                    </div>
+                </div>
 
                 <p>
                     <label>
