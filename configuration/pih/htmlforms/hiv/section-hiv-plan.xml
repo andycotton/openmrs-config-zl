@@ -506,7 +506,9 @@
                             <orderProperty name="urgency" value="ROUTINE"/>
                             <orderProperty name="previousOrder"/>
                             <orderProperty name="careSetting" value="OUTPATIENT"/>
-                            <orderProperty name="orderReason" value="1691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                            <orderProperty name="orderReason" value="1691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
+                                <option value="1691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+                            </orderProperty>
                         </div>
                         <div style="display:none;" class="order-discontinueReason">
                             <orderProperty name="discontinueReason">
