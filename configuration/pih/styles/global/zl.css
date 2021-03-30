@@ -1,0 +1,85 @@
+header {
+	background: #FF9800;
+}
+
+h1 {
+	color: #0f5149;
+}
+
+h2,h3,h4,h5 {
+	color: #3E3E3E;
+}
+
+.dashboard .info-header {
+	border-bottom: 6px solid #3E3E3E;
+}
+
+.dashboard .info-header i {
+	color: #3E3E3E;
+}
+
+.tag {
+	background: #0f5149;
+}
+
+.dashboard .action-section ul {
+	background: #0f5149;
+}
+
+.button.task, button.task, a.button.task {
+	background: #323372;
+	border: #323372 1px solid;
+}
+
+a {
+	color: #323372;
+}
+
+/* Locations on login page */
+ul.select li.selected {
+	background-color: #F6BE00;
+	color: #3E3E3F;
+	font-weight: bolder;
+	border-color: transparent;
+}
+
+ul.select li:hover {
+	background-color: #F6BE00;
+	color: #3E3E3E;
+	cursor: pointer;
+}
+
+ul.select li {
+	color: #0f5149;
+}
+
+.new-patient-header .identifiers span.add-id a,
+.patient-header .identifiers span.add-id a:link,
+.patient-header .identifiers span.add-id a:visited {
+	color: #3AB4B1;
+}
+
+.button.confirm,
+button.confirm,
+input[type="submit"].confirm,
+input[type="button"].confirm,
+a.button.confirm {
+	background: #0F5149;
+	border-color: #0f5149;
+}
+
+.button, button, input[type="submit"], input[type="button"], a.button {
+	color: #3E3E3E;
+}
+
+header a, header a:visited, header a:hover, header a:link {
+	background: #FF9800;
+}
+
+header .user-options li.change-location {
+	border: 1px solid #FF9800;
+}
+
+header .user-options li.change-location:hover, header .user-options li.change-location .focus {
+	background: #FF9800;
+}
