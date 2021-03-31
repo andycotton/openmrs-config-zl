@@ -26,17 +26,13 @@ h2,h3,h4,h5 {
 	background: #0f5149;
 }
 
-.button.task, button.task, a.button.task {
-	background: #323372;
-	border: #323372 1px solid;
-}
-
 a {
 	color: #323372;
 }
 
+/* PIH Purple 80% Tint */
 a:hover {
-	color: #3AB4B1
+	color: #5B5C8E;
 }
 
 /* Locations on login page */
@@ -63,6 +59,19 @@ ul.select li {
 	color: #3AB4B1;
 }
 
+/* Action buttons:  PIH Purple */
+.button.task, button.task, a.button.task {
+	background: #323372;
+	border: #323372 1px solid;
+}
+
+/* Action buttons:  50% tint of PIH Purple */
+.button.task:hover, button.task:hover, a.button.task:hover {
+	background-color: #9999B9;
+	border: #9999B9 1px solid;
+}
+
+/* Login, submit buttons */
 .button.confirm,
 button.confirm,
 input[type="submit"].confirm,
@@ -72,12 +81,31 @@ a.button.confirm {
 	border-color: #0f5149;
 }
 
-.button, button, input[type="submit"], input[type="button"], a.button {
+/* Login, submit buttons (hover with 50% tint */
+.button.confirm:hover,
+button.confirm:hover,
+input[type="submit"].confirm:hover,
+input[type="button"].confirm:hover,
+a.button.confirm:hover {
+	background: #3F746D;
+	border-color: #3F746D;
+}
+
+.button, button,
+input[type="submit"], input[type="button"],
+a.button {
 	color: #3E3E3E;
 }
 
-header a, header a:visited, header a:hover, header a:link {
+header a,
+header a:visited,
+header a:hover,
+header a:link {
 	background: #FF9800;
+}
+
+.dashboard:hover .visit-link:hover {
+	color: #3F746D;
 }
 
 header .user-options li.change-location {
@@ -87,3 +115,59 @@ header .user-options li.change-location {
 header .user-options li.change-location:hover, header .user-options li.change-location .focus {
 	background: #FF9800;
 }
+
+form input:focus, form select:focus,
+form textarea:focus, form ul.select:focus,
+.form input:focus, .form select:focus,
+.form textarea:focus, .form ul.select:focus {
+	outline: 2px solid #0f5149;
+	background: #0f5149;
+}
+
+/* Header on popups */
+.dialog .dialog-header,
+.dialog-diagnoses .dialog-header,
+.ngdialog.ngdialog-theme-default .ngdialog-content .dialog-header {
+	background: #FF9800;
+	color: white;
+	padding: 0 20px;
+	padding-top: 5px;
+	border-bottom: #FF9800 1px solid;
+}
+
+/* Vitals and left tabs for simple form */
+ul#formBreadcrumb li.doing {
+	border-left: 5px solid #0f5149;
+}
+
+#save-form {
+	color: #0f5149;
+}
+
+.simple-form-ui section fieldset select:focus,
+.simple-form-ui section fieldset input:focus,
+.simple-form-ui form section fieldset select:focus {
+	outline: 2px solid #0f5149;
+}
+
+form select:focus,
+form input:focus {
+	background: #CFDCDB;
+}
+
+/* Vitals replace blue highlight */
+ul#formBreadcrumb li.doing ul li.focused {
+	color: #FFF;
+	background-color: #0f5149;
+}
+
+/* Not working */
+/* Login and patient search text boxes 20% PIH Green tint
+username input[type="text"],
+.username input[type="text"] {
+	background-color: #CFDCDB;
+
+}
+*/
+
+
