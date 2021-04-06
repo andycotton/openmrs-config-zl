@@ -30,6 +30,15 @@ a {
 	color: #323372;
 }
 
+/* Border/shadow on search box */
+.form-control:focus {
+	color: #495057;
+	background-color: #fff;
+	border-color: #0f5149;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgb(15 81 73 / 25%);
+}
+
 /* PIH Purple 80% Tint */
 a:hover {
 	color: #5B5C8E;
@@ -112,16 +121,34 @@ header .user-options li.change-location {
 	border: 1px solid #FF9800;
 }
 
-header .user-options li.change-location:hover, header .user-options li.change-location .focus {
+header .user-options li.change-location:hover,
+header .user-options li.change-location .focus {
 	background: #FF9800;
 }
 
 form input:focus, form select:focus,
 form textarea:focus, form ul.select:focus,
 .form input:focus, .form select:focus,
-.form textarea:focus, .form ul.select:focus {
+.form textarea:focus, .form ul.select:focus,
+dialog input:focus, dialog select:focus,
+dialog textarea:focus, dialog ul.select:focus,
+.dialog input:focus, .dialog select:focus,
+.dialog textarea:focus, .dialog ul.select:focus,
+.ui-autocomplete-input form input:focus
+{
 	outline: 2px solid #0f5149;
 	background: #0f5149;
+}
+
+form textarea:focus {
+	outline: 2px solid #0f5149;
+	background: #CFDCDB;
+}
+
+.simple-form-ui section fieldset input:focus,
+simple-form-ui section fieldset input:focus {
+	outline: 2px solid #0f5149;
+	background: #CFDCDB;
 }
 
 /* Header on popups */
@@ -133,6 +160,11 @@ form textarea:focus, form ul.select:focus,
 	padding: 0 20px;
 	padding-top: 5px;
 	border-bottom: #FF9800 1px solid;
+}
+
+.diagnosis.primary,
+#display-encounter-diagnoses-container li .diagnosis.primary {
+	border-left:	8px #3AB4B1 solid;
 }
 
 /* Vitals and left tabs for simple form */
