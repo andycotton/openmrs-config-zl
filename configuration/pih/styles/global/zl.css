@@ -117,6 +117,10 @@ header a:link {
 	color: #3F746D;
 }
 
+.navigation {
+	color: #EEEEEE;
+}
+
 header .user-options li.change-location {
 	border: 1px solid #FF9800;
 }
@@ -137,10 +141,15 @@ dialog textarea:focus, dialog ul.select:focus,
 .ui-autocomplete-input form input:focus
 {
 	outline: 2px solid #0f5149;
-	background: #0f5149;
+	background: #CFDCDB;
 }
 
 form textarea:focus {
+	outline: 2px solid #0f5149;
+	background: #CFDCDB;
+}
+
+.dialog input:focus {
 	outline: 2px solid #0f5149;
 	background: #CFDCDB;
 }
