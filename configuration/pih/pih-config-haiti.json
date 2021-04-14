@@ -61,8 +61,8 @@
     "dispositionConfig": "file:configuration/pih/pih-dispositions-haiti.json",
 
     "locationTags": {
-      "Check-In Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
-      "Consult Note Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
+      "Check-In Location": ["Belladère", "Boucan-Carré", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
+      "Consult Note Location": ["Belladère", "Boucan-Carré", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
       "COVID-19 Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
       "ED Triage Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
       "HIV Consult Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
