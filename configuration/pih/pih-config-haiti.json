@@ -71,7 +71,7 @@
       "Primary Care Consult Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
       "Program Location": ["Belladère", "Boucan-Carré", "Cange", "Cerca la Source", "Hinche", "Saint-Marc (HSN)", "La Colline", "Petite Riviere", "Saint-Marc (SSPE)", "Thomonde", "Verrettes"],
       "Provider Management Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
-      "Registration Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
+      "Registration Location": ["Belladère", "Boucan-Carré", "Cerca la Source", "Hinche", "La Colline", "Thomonde"],
       "Vitals Location": ["Belladère", "Cerca la Source", "Hinche", "La Colline", "Thomonde"]
     },
 
