@@ -495,7 +495,11 @@
                         <div style="padding:0px;">
                             <orderProperty name="dateActivated" label="pihcore.starting"/>
                             <orderProperty name="duration" label="pihcore.visitNote.for"/>
-                            <orderProperty name="durationUnits" label=" "/>
+                            <orderProperty name="durationUnits" label=" ">
+                                <option value="CIEL:1072"/>  <!-- days -->
+                                <option value="CIEL:1073"/>  <!-- weeks -->
+                                <option value="CIEL:1074"/>  <!-- months -->
+                            </orderProperty>
                         </div>
                         <div style="padding:0px;">
                             <orderProperty name="quantity" label="pihcore.quantity"/>
@@ -627,7 +631,11 @@
                     <div style="padding:0px;">
                         <orderProperty name="dateActivated" label="pihcore.starting"/>
                         <orderProperty name="duration" label="pihcore.visitNote.for"/>
-                        <orderProperty name="durationUnits" label=" "/>
+                        <orderProperty name="durationUnits" label=" ">
+                            <option value="CIEL:1072"/>  <!-- days -->
+                            <option value="CIEL:1073"/>  <!-- weeks -->
+                            <option value="CIEL:1074"/>  <!-- months -->
+                        </orderProperty>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="quantity" label="pihcore.quantity"/>
@@ -737,31 +745,88 @@
                 </p>
             </div>
 
-            <!-- HIV followup only-->
-            <includeIf velocityTest="$encounter.encounterType.uuid == 'c31d3312-40c4-11e7-a919-92ebcb67fe33'">
-                <label>
-                    <uimessage code="pihcore.ifChangeSpecifyReason" />:
-                </label>
-                <div class="three-columns">
-                    <repeat>
-                        <template>
-                            <p>
-                                <obs conceptId="CIEL:1269" answerConceptId="{reason}" style="checkbox" />
-                            </p>
-                        </template>
-                        <render reason="CIEL:159794" name="Continue" />
-                        <render reason="CIEL:981"    name="changeDose" />
-                        <render reason="CIEL:160041" name="extended" />
-                        <render reason="CIEL:102"    name="Toxicity" />
-                        <render reason="CIEL:843"    name="Failure" />
-                        <render reason="CIEL:159791" name="cured" />
-                        <render reason="CIEL:1267"   name="complete" />
-                        <render reason="CIEL:1754"   name="stockOut" />
-                        <render reason="CIEL:5622"   name="other" />
-                    </repeat>
-                </div>
-            </includeIf>
-
+            <!-- TB Drug order -->
+            <drugOrder>
+                <orderTemplate>
+                    <orderProperty name="action"/>
+                    <div style="padding:0px;">
+                        <orderProperty name="concept" label="pihcore.drugOrders.concept">
+                            <optionGroup concept="PIH:TUBERCULOSIS DRUGS"/>
+                        </orderProperty>
+                    </div>
+                    <div style="padding:0x;">
+                        <orderProperty name="drug" label="pihcore.drugOrders.drug"/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="drugNonCoded" label="Non-coded Formulation"/>
+                    </div>
+                    <div style="padding:0x;">
+                        <orderProperty name="dosingType"/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
+                        <orderProperty name="doseUnits" label=" ">
+                            <option value="CIEL:1513"/>    <!-- Tablet -->
+                            <option value="CIEL:1608"/>    <!-- Capsule -->
+                            <option value="CIEL:161553"/>  <!-- mg -->
+                            <option value="CIEL:162264" label="IU"/>  <!-- IU -->
+                        </orderProperty>
+                        <orderProperty name="frequency" label=" x "/>
+                        <orderProperty name="route" label=" ">
+                            <option value="CIEL:160240"/> <!-- Oral -->
+                            <option value="CIEL:160243"/> <!-- Intramuscular -->
+                            <option value="CIEL:160242" label="IV"/> <!-- IV -->
+                        </orderProperty>
+                        <orderProperty name="dosingInstructions" textArea="true" textAreaRows="3" textAreaColumns="50"
+                                       label=" "/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="dateActivated" label="pihcore.starting"/>
+                        <orderProperty name="duration" label="pihcore.visitNote.for"/>
+                        <orderProperty name="durationUnits" label=" ">
+                            <option value="CIEL:1072"/>  <!-- days -->
+                            <option value="CIEL:1073"/>  <!-- weeks -->
+                            <option value="CIEL:1074"/>  <!-- months -->
+                        </orderProperty>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="quantity" label="pihcore.quantity"/>
+                        <orderProperty name="quantityUnits" label=" ">
+                            <option value="CIEL:1513"/>    <!-- Tablet -->
+                            <option value="CIEL:1608"/>    <!-- Capsule -->
+                            <option value="CIEL:161553"/>  <!-- mg -->
+                            <option value="CIEL:162264" label="IU"/>  <!-- IU -->
+                        </orderProperty>
+                        <orderProperty name="numRefills" label="pihcore.refills"/>
+                    </div>
+                    <div style="display:none;">
+                        <orderProperty name="urgency" value="ROUTINE"/>
+                        <orderProperty name="previousOrder"/>
+                        <orderProperty name="careSetting" value="OUTPATIENT"/>
+                        <orderProperty name="orderReason" >
+                            <option value="3ccca7cc-26fe-102b-80cb-0017a47871b2" /> <!-- TB -->
+                        </orderProperty>
+                    </div>
+                    <div style="display:none;" class="order-discontinueReason">
+                        <orderProperty name="discontinueReason">
+                            <option value="CIEL:159794"/> <!-- continuation phase -->
+                            <option value="CIEL:981"/>    <!-- changeDose -->
+                            <option value="CIEL:159791"/> <!-- cured -->
+                            <option value="CIEL:1267"/>   <!-- completed -->
+                            <option value="CIEL:843"/>    <!-- regimen failure -->
+                            <option value="CIEL:102"/>    <!-- toxicity -->
+                            <option value="CIEL:127750"/> <!-- patient refused -->
+                            <option value="CIEL:1754"/>   <!-- out of stock -->
+                            <option value="CIEL:162853"/> <!-- interaction -->
+                            <option value="CIEL:1434"/>   <!-- pregnant -->
+                            <option value="CIEL:987"/>    <!-- intolerance -->
+                            <option value="CIEL:1067"/>   <!-- unknown -->
+                            <option value="CIEL:5622"/>   <!-- other -->
+                        </orderProperty>
+                        <orderProperty name="discontinueReasonNonCoded"/>
+                    </div>
+                </orderTemplate>
+            </drugOrder>
         </div>
 
     </section>
@@ -947,7 +1012,11 @@
                     <div style="padding:0px;">
                         <orderProperty name="dateActivated" label="pihcore.starting"/>
                         <orderProperty name="duration" label="pihcore.visitNote.for"/>
-                        <orderProperty name="durationUnits" label=" "/>
+                        <orderProperty name="durationUnits" label=" ">
+                            <option value="CIEL:1072"/>  <!-- days -->
+                            <option value="CIEL:1073"/>  <!-- weeks -->
+                            <option value="CIEL:1074"/>  <!-- months -->
+                        </orderProperty>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="quantity" label="pihcore.quantity"/>
