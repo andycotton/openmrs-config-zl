@@ -602,6 +602,7 @@
                         <obs id="arv2Drug" conceptId="CIEL:1282"
                              answerDrugIds="
                                 78fab02a-dfbe-11e9-8a34-2a2ae2dbcce4,
+                                6058eb5c-c7bb-445b-9a9a-14e73e8ab5a9,
                                 78f96210-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78faa576-dfbe-11e9-8a34-2a2ae2dbcce4,
                                 78f9780e-dfbe-11e9-8a34-2a2ae2dbcce4,
@@ -619,6 +620,7 @@
                                 0fc3d5c1-fd39-4899-b5c0-b094e28ff359"
                              answerLabels="
                                 DTG 50 mg,
+                                DTG 5 mg,
                                 EFV 600 mg,
                                 TDF 300 mg,
                                 NVP 200 mg,
