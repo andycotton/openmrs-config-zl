@@ -88,6 +88,7 @@ input[type="button"].confirm,
 a.button.confirm {
 	background: #0F5149;
 	border-color: #0f5149;
+	color: white;
 }
 
 /* Login, submit buttons (hover with 50% tint */
