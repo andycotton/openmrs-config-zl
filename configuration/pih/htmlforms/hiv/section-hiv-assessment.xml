@@ -287,187 +287,187 @@
                      answerSeparator="&amp;nbsp;" style="radio" />
             </p>
 
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.whoStage1"/>
-                    </label>
-                    <br/>
+            <p>
+                <label>
+                    <uimessage code="pihcore.hiv.whoStage1"/>
+                </label>
+                <br/>
 
+                <repeat>
+                    <template>
+                        <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                             style="checkbox" answerSeparator=""/>
+                        <br/>
+                    </template>
+                    <render whoDef="CIEL:5327" name="Asymptomatic" />
+                    <render whoDef="CIEL:5328" name="PersistGenLymph" />
+                </repeat>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="pihcore.hiv.whoStage2"/>
+                </label>
+                <br/>
+
+                <!-- Adult 2 -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
                                  style="checkbox" answerSeparator=""/>
                             <br/>
                         </template>
-                        <render whoDef="CIEL:5327" name="Asymptomatic" />
-                        <render whoDef="CIEL:5328" name="PersistGenLymph" />
-                    </repeat>
-                </p>
-
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.whoStage2"/>
-                    </label>
-                    <br/>
-
-                    <!-- Adult 2 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                     style="checkbox" answerSeparator=""/>
-                                <br/>
-                            </template>
-                                <render whoDef="CIEL:5332"   name="WeightLossLess10%" />
-                                <render whoDef="CIEL:127784" name="RecurrantURI" />
-                                <render whoDef="CIEL:117543" name="Zona" />
-                                <render whoDef="CIEL:148762" name="Perleche" />
-                                <render whoDef="CIEL:159912" name="OralUlcers" />
-                                <render whoDef="CIEL:1249"   name="PapularPruriticEruption" />
-                                <render whoDef="CIEL:113116" name="seborrDermatitis" />
-                                <render whoDef="CIEL:132387" name="FungalNailInfection" />
-                        </repeat>
-                    </includeIf>
-
-                    <!-- Peds 2 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                     style="checkbox" answerSeparator=""/>
-                                <br/>
-                            </template>
-                            <render whoDef="CIEL:160436" name="PersistentHepatosplenomegaly" />
-                            <render whoDef="CIEL:128321" name="Prurigo nodularis" />
-                            <render whoDef="CIEL:1211"   name="VerrucaPlanus" />
-                            <render whoDef="CIEL:132387" name="FungalNailInfection" />
-                            <render whoDef="CIEL:1212"   name="MolluscumContagiosum" />
-                            <render whoDef="CIEL:127841" name="RecurrentAphthousUlcer" />
-                            <render whoDef="CIEL:166061" name="PersistentParotidSwelling" />
-                            <render whoDef="CIEL:159344" name="LinearGingivalErythema" />
+                            <render whoDef="CIEL:5332"   name="WeightLossLess10%" />
+                            <render whoDef="CIEL:127784" name="RecurrantURI" />
                             <render whoDef="CIEL:117543" name="Zona" />
-                            <render whoDef="PIH:106"     name="URI" />
-                        </repeat>
-                    </includeIf>
-                </p>
+                            <render whoDef="CIEL:148762" name="Perleche" />
+                            <render whoDef="CIEL:159912" name="OralUlcers" />
+                            <render whoDef="CIEL:1249"   name="PapularPruriticEruption" />
+                            <render whoDef="CIEL:113116" name="seborrDermatitis" />
+                            <render whoDef="CIEL:132387" name="FungalNailInfection" />
+                    </repeat>
+                </includeIf>
 
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.whoStage3"/>
-                    </label>
-                    <br/>
+                <!-- Peds 2 -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                 style="checkbox" answerSeparator=""/>
+                            <br/>
+                        </template>
+                        <render whoDef="CIEL:160436" name="PersistentHepatosplenomegaly" />
+                        <render whoDef="CIEL:128321" name="Prurigo nodularis" />
+                        <render whoDef="CIEL:1211"   name="VerrucaPlanus" />
+                        <render whoDef="CIEL:132387" name="FungalNailInfection" />
+                        <render whoDef="CIEL:1212"   name="MolluscumContagiosum" />
+                        <render whoDef="CIEL:127841" name="RecurrentAphthousUlcer" />
+                        <render whoDef="CIEL:166061" name="PersistentParotidSwelling" />
+                        <render whoDef="CIEL:159344" name="LinearGingivalErythema" />
+                        <render whoDef="CIEL:117543" name="Zona" />
+                        <render whoDef="PIH:106"     name="URI" />
+                    </repeat>
+                </includeIf>
+            </p>
 
-                    <!-- Adult 3 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                     style="checkbox" answerSeparator=""/>
-                                <br/>
-                            </template>
-                                <render whoDef="CIEL:5339"   name="WeightLossMore10%" />
-                                <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
-                                <render whoDef="CIEL:5027"   name="FeverMore1Month" />
-                                <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
-                                <render whoDef="CIEL:5337"   name="LeukoplastOral" />
-                                <render whoDef="CIEL:42"     name="PulmonaryTB" />
-                                <render whoDef="CIEL:5030"   name="SevereBactInfection" />
-                                <render whoDef="CIEL:149629" name="AcuteUlcer" />
-                                <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
-                        </repeat>
-                    </includeIf>
+            <p>
+                <label>
+                    <uimessage code="pihcore.hiv.whoStage3"/>
+                </label>
+                <br/>
 
-                    <!-- Peds 3 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                     style="checkbox" answerSeparator=""/>
-                                <br/>
-                            </template>
-                            <render whoDef="CIEL:134722" name="ModMalnutrition" />
+                <!-- Adult 3 -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                 style="checkbox" answerSeparator=""/>
+                            <br/>
+                        </template>
+                            <render whoDef="CIEL:5339"   name="WeightLossMore10%" />
                             <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
-                            <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
                             <render whoDef="CIEL:5027"   name="FeverMore1Month" />
+                            <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
                             <render whoDef="CIEL:5337"   name="LeukoplastOral" />
-                            <render whoDef="CIEL:111873" name="LymphTB" />
-                            <render whoDef="CIEL:149629" name="AcuteUlcer" />
                             <render whoDef="CIEL:42"     name="PulmonaryTB" />
                             <render whoDef="CIEL:5030"   name="SevereBactInfection" />
-                            <render whoDef="CIEL:135458" name="LIP" />
-                            <render whoDef="CIEL:155569" name="ChronLungDisease" />
+                            <render whoDef="CIEL:149629" name="AcuteUlcer" />
                             <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
-                        </repeat>
-                    </includeIf>
-                </p>
+                    </repeat>
+                </includeIf>
 
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.whoStage4"/>
-                    </label>
-                    <br/>
+                <!-- Peds 3 -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                 style="checkbox" answerSeparator=""/>
+                            <br/>
+                        </template>
+                        <render whoDef="CIEL:134722" name="ModMalnutrition" />
+                        <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
+                        <render whoDef="PIH:2580"    name="PersistentOralCandidiasis" />
+                        <render whoDef="CIEL:5027"   name="FeverMore1Month" />
+                        <render whoDef="CIEL:5337"   name="LeukoplastOral" />
+                        <render whoDef="CIEL:111873" name="LymphTB" />
+                        <render whoDef="CIEL:149629" name="AcuteUlcer" />
+                        <render whoDef="CIEL:42"     name="PulmonaryTB" />
+                        <render whoDef="CIEL:5030"   name="SevereBactInfection" />
+                        <render whoDef="CIEL:135458" name="LIP" />
+                        <render whoDef="CIEL:155569" name="ChronLungDisease" />
+                        <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
+                    </repeat>
+                </includeIf>
+            </p>
 
-                    <!-- Adult 4 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                     style="checkbox" answerSeparator=""/>
-                                <br/>
-                            </template>
-                            <render whoDef="CIEL:823"    name="Wasting" />
-                            <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
-                            <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
-                            <render whoDef="CIEL:138706" name="HerpesSimplex" />
-                            <render whoDef="CIEL:5340"   name="Candidiosis" />
-                            <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
-                            <render whoDef="CIEL:507"    name="KaposiSarcoma" />
-                            <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
-                            <render whoDef="CIEL:990"    name="Toxoplasmosis" />
-                            <render whoDef="CIEL:160442" name="HIVencephalopathy" />
-                            <render whoDef="CIEL:5033"   name="Cryptococcocus" />
-                            <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
-                            <render whoDef="CIEL:5046"   name="LeukoEnceph" />
-                            <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
-                            <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
-                            <render whoDef="CIEL:5350"   name="Mycosis" />
-                            <render whoDef="PIH:11407"   name="RecurrentSepticemia" />
-                            <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
-                            <render whoDef="CIEL:116023" name="CervicalCancer" />
-                            <render whoDef="CIEL:159338" name="Leishmaniosis" />
-                            <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
-                        </repeat>
-                    </includeIf>
+            <p>
+                <label>
+                    <uimessage code="pihcore.hiv.whoStage4"/>
+                </label>
+                <br/>
 
-                    <!-- Peds 4 -->
-                    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                     style="checkbox" answerSeparator=""/>
-                                <br/>
-                            </template>
-                            <render whoDef="CIEL:164086" name="Stunting" />
-                            <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
-                            <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
-                            <render whoDef="CIEL:138706" name="HerpesSimplex" />
-                            <render whoDef="CIEL:5340"   name="Candidiosis" />
-                            <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
-                            <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
-                            <render whoDef="CIEL:507"    name="KaposiSarcoma" />
-                            <render whoDef="CIEL:990"    name="Toxoplasmosis" />
-                            <render whoDef="CIEL:5033"   name="Cryptococcocus" />
-                            <render whoDef="CIEL:5350"   name="Mycosis" />
-                            <render whoDef="CIEL:160442" name="HIVencephalopathy" />
-                            <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
-                            <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
-                            <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
-                            <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
-                            <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
-                            <render whoDef="CIEL:5046"   name="LeukoEnceph" />
-                        </repeat>
-                    </includeIf>
-                </p>
+                <!-- Adult 4 -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 15 || $patient.getAge($encounter.getEncounterDatetime()) == 15 || (! $patient.age)">
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                 style="checkbox" answerSeparator=""/>
+                            <br/>
+                        </template>
+                        <render whoDef="CIEL:823"    name="Wasting" />
+                        <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
+                        <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
+                        <render whoDef="CIEL:138706" name="HerpesSimplex" />
+                        <render whoDef="CIEL:5340"   name="Candidiosis" />
+                        <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
+                        <render whoDef="CIEL:507"    name="KaposiSarcoma" />
+                        <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
+                        <render whoDef="CIEL:990"    name="Toxoplasmosis" />
+                        <render whoDef="CIEL:160442" name="HIVencephalopathy" />
+                        <render whoDef="CIEL:5033"   name="Cryptococcocus" />
+                        <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
+                        <render whoDef="CIEL:5046"   name="LeukoEnceph" />
+                        <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
+                        <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
+                        <render whoDef="CIEL:5350"   name="Mycosis" />
+                        <render whoDef="PIH:11407"   name="RecurrentSepticemia" />
+                        <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
+                        <render whoDef="CIEL:116023" name="CervicalCancer" />
+                        <render whoDef="CIEL:159338" name="Leishmaniosis" />
+                        <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
+                    </repeat>
+                </includeIf>
+
+                <!-- Peds 4 -->
+                <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 15">
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
+                                 style="checkbox" answerSeparator=""/>
+                            <br/>
+                        </template>
+                        <render whoDef="CIEL:164086" name="Stunting" />
+                        <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
+                        <render whoDef="CIEL:1215"   name="RecurrentBactPneumonia" />
+                        <render whoDef="CIEL:138706" name="HerpesSimplex" />
+                        <render whoDef="CIEL:5340"   name="Candidiosis" />
+                        <render whoDef="CIEL:5042"   name="ExtraPulmonaryTB" />
+                        <render whoDef="CIEL:5035"   name="CytomegalovirusDisease" />
+                        <render whoDef="CIEL:507"    name="KaposiSarcoma" />
+                        <render whoDef="CIEL:990"    name="Toxoplasmosis" />
+                        <render whoDef="CIEL:5033"   name="Cryptococcocus" />
+                        <render whoDef="CIEL:5350"   name="Mycosis" />
+                        <render whoDef="CIEL:160442" name="HIVencephalopathy" />
+                        <render whoDef="CIEL:5043"   name="Mycobacteriosis" />
+                        <render whoDef="CIEL:5034"   name="Cryptosporidiosis" />
+                        <render whoDef="PIH:2721"    name="NephropathyCardiomyopathySymptoms" />
+                        <render whoDef="CIEL:160520" name="ChronicIsosporidios" />
+                        <render whoDef="CIEL:115195" name="NonHodgkinsLymph" />
+                        <render whoDef="CIEL:5046"   name="LeukoEnceph" />
+                    </repeat>
+                </includeIf>
+            </p>
         </div>
     </section>
 
