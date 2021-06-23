@@ -36,6 +36,7 @@
   },
 
   "locationTags": {
+    "Lab Results Location": ["Boucan-Carré"],
     "Login Location": ["Boucan-Carré"],
     "Medical Record Location": ["Boucan-Carré"]
   },

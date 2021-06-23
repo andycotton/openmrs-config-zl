@@ -33,6 +33,17 @@
   "idCardLocale": "ht",
 
   "locationTags": {
+    "Lab Results Location": [
+      "Bank Pou San",
+      "COVID-19 | Izolman",
+      "COVID-19 | UMI",
+      "Klinik Ekstèn",
+      "Sal Avan Operasyon | PACU",
+      "Sal Timoun",
+      "Sal Timoun A",
+      "Sal Timoun B",
+      "Sante Fanm"
+    ],
     "Login Location": [
       "Achiv Santral",
       "Bank Pou San",

@@ -17,6 +17,7 @@
   },
 
   "locationTags": {
+    "Lab Results Location": ["Hinche"],
     "Login Location": ["Hinche"],
     "Medical Record Location": ["Hinche"]
   }
