@@ -1,0 +1,1732 @@
+<htmlform formUuid="db041f90-938b-44b2-ae70-2ef0da6c693e"
+          formName="PMTCT History" formVersion="1.0">
+
+    <style type="text/css">
+        <ifMode mode="VIEW" include="false">
+
+            #data-collection {
+                display: inline-block;
+                width: 58%;
+                vertical-align: top;
+            }
+
+            .two-columns {
+                column-count: 2;
+                -webkit-column-count: 2;
+                -moz-column-count: 2;
+            }
+
+            .five-columns, .four-columns, .three-columns, .two-column {
+                display: table;
+                height: 100%;
+                width: 100%;
+            }
+
+            .two-column > div {
+                display: table-cell;
+                width: 50%;
+            }
+
+            p.radio > * {
+                display: inline;
+                float: none !important;
+                min-width: initial;
+            }
+
+            .flex-questions {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .flex-questions > div {
+                margin-right: 16px;
+                margin-bottom: 8px;
+            }
+
+            form fieldset {
+                min-width: 90%;
+                display: block;
+            }
+
+            .section-container {
+                background: #F2F2F2;
+                box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+                padding: 10px 5px 10px 15px;
+                line-height: 1.5em; /*add this for vertical spacing between elements*/
+            }
+
+            .section-container-color {
+                background: #F2F2F2;
+                box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+                padding: 10px 5px 10px 15px;
+                line-height: 1.5em; /*add this for vertical spacing between elements*/
+            }
+
+            .section-container input[type="checkbox"] {
+                margin: 0px 5px; /*changed values to vertical, horizontal*/
+                top:5px; /*added to offset the checkbox position to line up*/
+            }
+
+            .cb-align input[type=checkbox] {
+                margin: 0px 5px;
+                top:0px;
+            }
+
+            .section-container label,
+            .section-container-color label {
+                margin: 0px;
+            }
+
+            .section {
+                width: 95%;
+            }
+
+        </ifMode>
+    </style>
+
+<script type="text/javascript">
+
+    jq(document).ready(function() {
+
+        // UHM-5259, do not display TB treatment rows 2RHZ/4RH and 2RHEZS/1RHEZ/5RHE if they dont already have a value
+        var twoSRHEZ = jq('#2s_rhez_1rhez_5rhe span.value').text();
+        if (!twoSRHEZ || twoSRHEZ.length &lt; 1) {
+            jq('#2s_rhez_1rhez_5rhe').closest('tr').hide();
+        }
+
+        var twoRhz_FourRH = jq('#2rhz_4rh span.value').text();
+        if (!twoRhz_FourRH || twoRhz_FourRH.length &lt; 1) {
+            jq('#2rhz_4rh').closest('tr').hide();
+        }
+
+    });
+
+</script>
+
+    <ifMode mode="VIEW" include="false" >
+        <script type="text/javascript">
+
+            jq(function() {
+
+                var updateEdd = function() {
+
+                var lastPeriodDate = htmlForm.getValueIfLegal('lastPeriodDate.value');
+                if (typeof lastPeriodDate !== "undefined" &amp;&amp; lastPeriodDate !== null &amp;&amp; (lastPeriodDate.length > 0)) {
+
+                var today = new Date();
+                var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
+                    // calculate the gestational age at the time of the encounter
+                    today = new Date(+currentEncounterDate);
+                    }
+
+                    var dateObj = getField('lastPeriodDate.value').datepicker('getDate');
+                    var newDate = new Date(dateObj);
+                    // time difference
+                    var timeDiff = Math.abs(today.getTime() - newDate.getTime());
+                    // weeks difference = gestational age
+                    var diffWeeks = Math.ceil(timeDiff / (1000 * 3600 * 24 * 7));
+
+                    // Estimated Delivery Date = (LMP - 3 months) + 12 months + 7 days
+                    newDate.setMonth(newDate.getMonth() - 3);
+                    newDate.setFullYear(newDate.getFullYear() + 1);
+                    newDate.setDate(newDate.getDate() + 7);
+
+                    var widgetDate = getField('lastPeriodDate.value').datepicker('setDate', newDate).val();
+                    getField('lastPeriodDate.value').datepicker('setDate', dateObj);
+
+                    jq('#calculated-edd-and-gestational').show();
+                    jq('#calculated-edd').text(widgetDate);
+                    jq('#calculated-gestational-age-value').text(diffWeeks + " " + '<uimessage code="pihcore.weeks"/>');
+
+                } else {
+                    jq('#calculated-edd-and-gestational').hide();
+                }
+            };
+
+            jq('#calculated-edd-and-gestational').hide();
+
+            jq("#lastPeriodDate input[type='hidden']").change(function() {
+                updateEdd();
+            });
+
+            updateEdd();
+            });
+        </script>
+    </ifMode>
+
+    <ifMode mode="VIEW" include="false">
+        <h3>
+            <uimessage code="pihcore.history.label"/>
+        </h3>
+
+        <script type="text/javascript">
+            jq(document).ready(function() {
+
+                // handle our custom functionality for triggering going to the next section when the "Next" button is clicked
+                jq('#next').click(function() {
+                    window.htmlForm.getBeforeSubmit().push(function () {
+                    window.htmlForm.setReturnUrl(window.htmlForm.getReturnUrl() + "&amp;goToNextSection=hiv-history");
+                    return true;
+                });
+
+                window.htmlForm.submitHtmlForm();
+                })
+
+                jq('#submit').click(function() {
+                    window.htmlForm.submitHtmlForm();
+                })
+
+            });
+        </script>
+    </ifMode>
+
+    <!-- Program enrollment (if the patient hasn't already been enrolled); use first ancestor location tagged as Program Location-->
+    <enrollInProgram programId="HIV" locationTag="Program Location"/>
+
+    <!-- ToDo:  Add when enrollment date is fixed
+    <section id="hiv-program" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.hiv.programEnroll.title">
+        <div class="section-container">
+            <div class="two-columns">
+                <label>
+                    <uimessage code="pihcore.progEnrollDate"/>
+                </label>
+                <enrollInProgram programId="HIV" showDate="true"/>
+                <br/><br/><br/>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <section id="chwName-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.chw">
+        <div class="section-container-color">
+            <div id="chw-name-details">
+                <p id="chw-name">
+                    <label>
+                        <uimessage code="pihcore.nameCHW"/>:
+                    </label>
+                    <obs id="chwName" conceptId="CIEL:164141"/>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="referralIn" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.transferReferralIn">
+        <div class="section-container-color">
+            <obsgroup groupingConceptId="PIH:13169">
+                <label>
+                    <uimessage code="pihcore.externalReferInQuestion"/>
+                </label>
+                <p class="radio cb-align">
+                    <obs conceptId="CIEL:160563"
+                         answerConceptId="CIEL:160036" answerCode="emr.yes"
+                         style="checkbox" toggle="transfer-out-details"/>
+                </p>
+
+                <div id="transfer-out-details">
+                    <p class="small">
+                        <obs id="transfer-out-spots"
+                             conceptId="PIH:REFERRED FROM ANOTHER SITE" style="radio"
+                             answerConceptIds="PIH:8855,PIH:8856"
+                             answerCodes="pihcore.internal,pihcore.external"
+                             answerSeparator="">
+                            <controls>
+                                <when value="PIH:8855" thenDisplay="#internal-transfer-out"/>
+                                <when value="PIH:8856" thenDisplay="#external-transfer-out"/>
+                            </controls>
+                        </obs>
+                    </p>
+
+                    <p id="internal-transfer-out">
+                        <label>
+                            <uimessage code="pihcore.internalTransferLocation"/>
+                        </label>
+                        <obs conceptId="PIH:8621" style="location" answerLocationTags="Program Location"/>
+                    </p>
+
+                    <p id="external-transfer-out">
+                        <label>
+                            <uimessage code="pihcore.externalTransferLocation"/>
+                        </label>
+                        <obs conceptId="PIH:11483"/>
+                        <obs conceptId="PIH:PEPFAR partner site"
+                             answerConceptId="CIEL:1065" answerCode="pihcore.pepfarSite"/>
+                    </p>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
+
+    <section id="hiv-serology" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.hiv.serology.title">
+        <div class="section-container">
+            <div class="two-columns">
+                <label>
+                    <uimessage code="pihcore.testOrderedBy"/>
+                </label>
+
+                <repeat>
+                    <template>
+                        <obs conceptId="CIEL:159936"
+                             answerConceptId="{point}" answerCode="{message}"/>
+                    </template>
+
+                    <render point="CIEL:159940" message="pihcore.testLocation.vct" comment="vct"/>
+                    <render point="CIEL:159937" message="pihcore.testLocation.mch" comment="MCH"/>
+                    <render point="CIEL:160542" message="pihcore.testLocation.primary" comment="Outpatient"/>
+                    <render point="CIEL:159939" message="pihcore.testLocation.mobile" comment="Mobile"/>
+                    <render point="PIH:2714" message="pihcore.testLocation.familyPlan" comment="Family planning clinic"/>
+                    <render point="PIH:2235" message="pihcore.testLocation.maternity" comment="inpatient maternity"/>
+                    <render point="PIH:6298" message="pihcore.testLocation.surgery" comment="surgery"/>
+                    <render point="PIH:7891" message="pihcore.testLocation.intMed" comment="inpatient internal med"/>
+                    <render point="PIH:2717" message="pihcore.testLocation.pedWard" comment="inpatient peds"/>
+                 </repeat>
+
+                <obs conceptId="CIEL:159936"
+                     answerConceptId="CIEL:5622" answerCode="pihcore.other"
+                     commentFieldCode="zl.ifOtherSpecify" />
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.hiv.testDate"/>
+                    </label>
+                    <obs conceptId="CIEL:164400"/>
+                </p>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                <!-- Partner -->
+                <p>
+                    <label>
+                        <uimessage code="pihcore.hiv.partnerTesting"/>
+                    </label>
+
+                    <obs conceptId="CIEL:159381"
+                        answerConceptIds="CIEL:1066,CIEL:1065,PIH:NO PARTNER"
+                        style="radio" answerSeparator="" />
+                </p>
+            </div>
+
+            <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 8) &amp;&amp; $patient.gender == 'F' ">
+                <br/>
+                <!-- Pregnant -->
+                <p>
+                    <obs conceptId="CIEL:5272" toggle="pregnant"
+                         answerConceptId="CIEL:1065"
+                         answerCode="pihcore.pregnancy.status"
+                         style="checkbox"/>
+
+                    <div id="pregnant">
+                        <div class="two-column">
+                            <!-- Last menstrual period (LMP or DDR) -->
+                            <div>
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                                </label>
+                                <span class="small">
+                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                                </span>
+                            </div>
+
+                            <!-- Due date (DPA) -->
+                            <div>
+                                <label>
+                                    <uimessage code="pihcore.pregnancy.dueDate"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="calculated-edd-and-gestational" class="two-column hidden">
+                            <div>
+                                <span id="calculated-gestational-age-wrapper">
+                                    <span id="calculated-gestational-age-label">
+                                        <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                                    </span>
+                                    <span id='calculated-gestational-age-value' class="value"></span>
+                                </span>
+                            </div>
+                            <div>
+                                <span id="calculated-edd-wrapper">
+                                    <span id="calculated-edd-label">
+                                        <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                                    </span>
+                                    <span id='calculated-edd' class="value"></span>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <!-- ToDo: Add PMTCT program enrollment but lookup/show -->
+                        <!-- ToDo: Is PMTCT also for infants? -->
+                        <p>
+                            <label>
+                                <i>NOTE: Add <uimessage code="pihcore.pmtct.enrollmentStatus"/></i>
+                            </label>
+                        </p>
+                    </div>
+                </p>
+            </includeIf>
+        </div>
+    </section>
+
+    <!-- only show these sections if the patient is < 2 years old-->
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
+        <section id="birth-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.birth-history" >
+            <div class="section-container">
+                <div class="two-columns" >
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.premature" />
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" />
+                    </p>
+
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.gestation"/>
+                        </label>
+
+                        <span class="small">
+                            <field>
+                                <obs conceptId="CIEL:1409" showUnits="true"/>
+                            </field>
+                        </span>
+                    </p>
+
+                    <!-- Delivery type -->
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.mch.deliveryType"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:11663"
+                             answerConceptIds="CIEL:162595,CIEL:155884"
+                             answerCodes="pihcore.vaginal,pihcore.c-section"
+                             style="radio"  />
+                    </p>
+
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.deliveryLocation" />
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:163774" answerConceptIds="CIEL:1589,CIEL:1536,CIEL:5622"
+                             style="radio"  />
+                    </p>
+
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.birthweight" />
+                        </label>
+                        <span class="small">
+                            <field>
+                                <!-- ToDo: Fix units to show on the right-side of the box - not the next line css -->
+                                <obs conceptId="CIEL:5916" showUnits="true" />
+                            </field>
+                        </span>
+                    </p>
+
+                    <br/><br/>
+
+                    <p class="radio">
+                        <!-- Problem for newborn -->
+                        <label>
+                            <uimessage code="pihcore.neonatalComplications" />
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio"  />
+                    </p>
+
+                    <p>
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:164122"
+                                     answerConceptId="{concept}" style="checkbox" />
+                            </template>
+                            <render concept="CIEL:112215" name="Obstetrical trauma" />
+                            <render concept="CIEL:115866" name="Meconial Fluid" />
+                            <render concept="CIEL:113027" name="Septicemia neonatal" />
+                            <render concept="CIEL:124954" name="Neonatal tetanus" />
+                            <render concept="CIEL:145548" name="Chorioamnionitis" />
+                            <render concept="CIEL:162131" name="Neonatal resuscitation" />
+                            <render concept="CIEL:121255" name="Bacterial meningitis" />
+                        </repeat>
+
+                        <!-- Other -->
+                        <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
+                             style="checkbox" showCommentField="true" commentFieldCode="" />
+                    </p>
+
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.maternalcomplication" />
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:3334"  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             style="radio" />
+                        <br/>
+                        <!-- If yes, which ones -->
+                        <label>
+                            <uimessage code="pihcore.yesSpecify" />
+                        </label>
+                        <obs conceptId="PIH:13094" style="textarea"/>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </includeIf>
+
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 1">
+        <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.feedingAndVaccination" >
+            <div class="section-container">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.specifyTypeFeeding"/>
+                    </label>
+                    <obs conceptId="CIEL:1151"
+                         answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
+                         answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
+                         answerSeparator="" />
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.providedFormula"/>
+                    </label>
+                    <obs conceptId="PIH:3581" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.mch.counselling.breastfeeding"/>
+                    </label>
+                    <obs conceptId="CIEL:1910" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.foodBefore6months"/>
+                    </label>
+                    <obs conceptId="CIEL:5633" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.formulaPrepTraining"/>
+                    </label>
+                    <obs conceptId="CIEL:159880" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.vaccinated"/>
+                    </label>
+                    <obs conceptId="CIEL:164134" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.ifYesVaccinationCard"/>
+                    </label>
+                </p>
+            </div>
+        </section>
+    </includeIf>
+
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
+        <section id="ARVwithin72hoursOfBirth" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.arvForNewBorn" >
+            <div class="section-container">
+                <table>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.startDate" />
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.endDate" />
+                        </label>
+                    </th>
+                </tr>
+                    <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:PROPHYLAXIS FOR INFANT CONSTRUCT">
+                            <tr>
+                            <td>
+                                   <p class="radio">
+                                        <label>
+                                            <uimessage code="pihcore.{toggle}" />
+                                        </label>
+                                       <br/>
+                                        <obs conceptId="{cId}" answerConceptIds="CIEL:1065, CIEL:1066" style="radio" />
+                                    </p>
+                            </td>
+                            <td id="{toggle}-start-date">
+                                        <!-- start date -->
+                                        <obs conceptId="CIEL:163526" allowTime="false" />
+                            </td>
+                            <td id="{toggle}-end-date">
+                                        <!-- end date -->
+                                        <obs conceptId="CIEL:164384" allowTime="false" />
+                            </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                        <!-- AZT after birth-->
+                        <render cId="PIH:ZIDOVUDINE AFTER BIRTH" toggle="aztAfterBirth"/>
+                        <!-- NVP after birth-->
+                        <render cId="PIH:HISTORY OF NEVIRAPINE TO INFANT" toggle="nvpAfterBirth"/>
+                        <!-- ARV triple therapy after birth (coded)-->
+                        <render cId="PIH:2212" toggle="arvTripleTherapyAfterBirth"/>
+                    </repeat>
+                </table>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.prophylaxisForInfant" />
+                    </label>
+                    <obs conceptId="PIH:6656" style="textarea"/>
+                </p>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.ReasonForNoARVs" />
+                    </label>
+
+                    <obs conceptId="PIH:1709" style="textarea"/>
+                </p>
+
+            </div>
+        </section>
+
+        <section id="mother-info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.infoMother">
+            <div class="section-container">
+                <div class="two-column">
+                    <div>
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.hiv.motherSerology" />
+                            </label>
+                            <br/>
+                            <obs conceptId="CIEL:1396" style="radio"
+                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1067" />
+                        </p>
+                    </div>
+                    <div>
+                        <label>
+                            <uimessage code="pihcore.screeningDate" />
+                        </label>
+                        <obs conceptId="PIH:3595" />
+                    </div>
+                </div>
+
+                <!-- Mother's ARV information -->
+
+                    <label>
+                        <uimessage code="pihcore.hiv.motherRecvARV" />
+                    </label>
+                    <p class="small">
+                        <obs id="mom-rcvd-arv" conceptId="CIEL:163783" style="radio" answerSeparator=""
+                             answerConceptIds="CIEL:1065,CIEL:1066" >
+                             <controls>
+                                 <when value="CIEL:1065" thenDisplay="#mom-arv-section"/>
+                             </controls>
+                        </obs>
+
+                    <div id="mom-arv-section">
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.ifYes"/>
+                            </label>
+                            <obs conceptId="CIEL:166085" style="radio" answerSeparator=""
+                                 answerConceptIds="CIEL:1178,CIEL:1179"
+                                 answerCodes="pihcore.beforeChildBirth,pihcore.duringChildBirth"/>
+                        </p>
+
+                        <strong>
+                            <uimessage code="pihcore.hiv.mothersARV" />
+                        </strong>
+
+                        <label>
+                            <uimessage code="pihcore.hiv.startDateARV" />
+                        </label>
+                        <obs conceptId="CIEL:163784" />
+
+                        <label>
+                            <uimessage code="pih.app.3cd9491e-26fe-102b-80cb-0017a47871b2.dispensing.summary" />
+                        </label>
+                        <obs conceptId="CIEL:166086" style="text" />
+                        <br/>
+
+
+                        <label>
+                            <uimessage code="pihcore.motherSideEffects" />
+                        </label>
+                        <obs conceptId="PIH:13144" style="checkbox"
+                             answerConceptId="CIEL:1065"
+                             showCommentField="true" commentFieldCode="pihcore.ifYesWhichOnes" />
+                        <br/>
+
+                        <label>
+                            <uimessage code="pihcore.hiv.changeARVsDuringPregnancy" />?
+                        </label>
+                        <p class="radio">
+                        <obs conceptId="CIEL:166084" style="radio" answerSeparator=""
+                             answerConceptIds="CIEL:1065,CIEL:1066" />
+                        <br/>
+                        <label>
+                            <uimessage code="pihcore.yesSpecify" />
+                        </label>
+                        <obs conceptId="PIH:13145" style="text" />
+                        </p>
+                    </div>
+                    </p>
+
+                <hr/>
+
+                <!-- Mother's TB information -->
+                <obsgroup groupingConceptId="PIH:13142" >
+                    <label>
+                        <uimessage code="pihcore.motherTBtreatment" />
+                    </label>
+                    <p class="small">
+
+                        <obs id="mom-tb" conceptId="CIEL:159398"
+                             style="radio" answerSeparator=""
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#mom-tb-section"/>
+                            </controls>
+                        </obs>
+
+                        <div id="mom-tb-section">
+                            <div class="two-column">
+                                <div>
+                                    <label>
+                                        anti-TB
+                                        <uimessage code="pihcore.startDate"/>
+                                    </label>
+                                    <obs conceptId="CIEL:1113"/>
+                                </div>
+                                <div>
+                                    <label>
+                                        anti-TB
+                                        <uimessage code="pihcore.stopDate"/>
+                                    </label>
+                                    <!-- Date when TB treatment stopped -->
+                                    <obs conceptId="CIEL:164384"/>
+                                </div>
+                            </div>
+
+                            <div class="radio">
+                                <label>
+                                    <uimessage code="pihcore.treatmentEndDate" />
+                                </label>
+                                <!-- End date for TB treatment -->
+                                <obs conceptId="CIEL:159431" />
+                            </div>
+
+                            <p class="radio">
+                                <label>
+                                    <uimessage code="pihcore.motherDischarge" />
+                                </label>
+                                <br/>
+                                <obs conceptId="PIH:1568" style="radio"
+                                     answerConceptIds="PIH:PATIENT CURED,CIEL:160035,CIEL:843,CIEL:160034,CIEL:5622"
+                                     answerCodes="pihcore.cured,pihcore.treatCompleted,pihcore.failure,pihcore.died,pihcore.other"/>
+                                <br/>
+                                <label>
+                                    <uimessage code="zl.ifOtherSpecify" />
+                                </label>
+                                <obs conceptId="CIEL:161011" />
+                            </p>
+                        </div>
+                    </p>
+
+                </obsgroup>
+            </div>
+        </section>
+    </includeIf>
+
+    <section id="contacts" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+            headerCode="pihcore.contacts">
+        <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10']">
+            <div class="section-container mb-4 flex-questions">
+                <obsgroup groupingConceptId="PIH:Contact construct" showIfEmpty="false">
+                    <div>
+                        <!-- Relationship to patient -->
+                        <obs conceptId="CIEL:164352"
+                         labelCode="pihcore.contactRelationship"
+                         answerConceptIds="CIEL:1527,PIH:GUARDIAN,PIH:PARTNER OR SPOUSE,CIEL:1528,PIH:SIBLING,PIH:OTHER RELATIVE"/>
+                         <!-- CIEL codes: 1527=Parent, 1528=Child -->
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:FIRST NAME" labelCode="pihcore.firstName"/>
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:LAST NAME" labelCode="pihcore.lastName"/>
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:AGE" labelCode="pihcore.age"/>
+                    </div>
+                    <div style="margin-right: 64px;">
+                        <label><uimessage code="pihcore.dead"/></label>
+                        <p class="radio">
+                            <!-- Health status of contact -->
+                            <obs conceptId="CIEL:163533"
+                                answerConceptIds="PIH:ALIVE,PIH:DEATH,PIH:UNKNOWN"
+                                answerCodes="general.no,general.yes,pihcore.unknown"
+                                style="radio"/>
+                        </p>
+                    </div>
+                    <div>
+                        <label><uimessage code="pihcore.hiv.serologicalStatus"/></label>
+                        <p class="radio">
+                            <obs conceptId="PIH:RESULT OF HIV TEST"
+                                answerConceptIds="PIH:UNKNOWN,PIH:POSITIVE,PIH:NEGATIVE"
+                                style="radio"/>
+                        </p>
+                    </div>
+                </obsgroup>
+            </div>
+        </repeat>
+    </section>
+
+    <section id="transmission" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.modeOfTransmission">
+    <div class="section-container">
+        <table>
+            <tr>
+                <th>
+                    Mode
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+            <repeat>
+                <template>
+                    <obsgroup groupingConceptId="CIEL:163288">
+                    <tr>
+                        <td>
+                            <obs conceptId="CIEL:160581"
+                                 answerConceptId="{cId}"
+                                 style="checkbox"
+                                 toggle="{id: '{toggle}-trans-date', style: 'dim'}"/>
+                        </td>
+                        <td id="{toggle}-trans-date">
+                            <obs conceptId="CIEL:162601" allowTime="false" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                </template>
+                <render mode="Rapports sexuels avec un homme" cId="CIEL:163290" toggle="men" />
+                <render mode="Rapports sexuels avec une femme" cId="CIEL:163291" toggle="women" />
+                <render mode="Injection de drogues" cId="CIEL:105" toggle="drugs"/>
+                <render mode="Bénéficier de sang/dérivé sanguin" cId="CIEL:1063" toggle="blood" />
+                <render mode="Transmission mère a enfant" cId="CIEL:163273" toggle="pmtct "/>
+                <render mode="Accident d'exposition au sang" cId="CIEL:163274" toggle="accident-blood"/>
+                <render mode="Rapports hétérosexuelles avec personne SIDA/VIH+" cId="CIEL:163289" toggle="hiv-person" />
+                <render mode="Rapports hétérosexuelles avec personne qui s'injecte de la drogue" cId="PIH:11534" toggle="with-drug-person" />
+                <render mode="Rapports hétérosexuelles avec personne homme bisexuel" cId="CIEL:165433" toggle="with-bisexual" />
+                <render mode="Rapports hétérosexuelles avec personne bénéficier de sang/dérivé sanguin" cId="CIEL:165434" toggle="with-blood-person" />
+            </repeat>
+
+            <obsgroup groupingConceptId="CIEL:163288">
+                <tr>
+                    <td>
+                        <obs conceptId="CIEL:160581"
+                             answerConceptId="CIEL:5622"
+                             style="checkbox" commentFieldCode=""
+                             toggle="{id: 'other-trans-date', style: 'dim'}"/>
+                    </td>
+                    <td id="other-trans-date">
+                        <obs conceptId="CIEL:162601" allowTime="false" />
+                    </td>
+                </tr>
+            </obsgroup>
+        </table>
+    </div>
+    </section>
+
+    <section id="risk" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.otherFactors">
+        <div class="section-container">
+            <table>
+                <tr>
+                    <th colspan="2">
+                        <uimessage code="pihcore.otherRiskFactors"/>
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:163292">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <uimessage code="pihcore.{toggle}" />
+                                    </label>
+                                </td>
+                                <td>
+                                    <p class="radio">
+                                        <obs conceptId="{cId}"
+                                             answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
+                                             answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
+                                             style="radio" answerSeparator=""
+                                             toggle="{id: '{toggle}-risk-date', style: 'dim'}"/>
+                                    </p>
+                                </td>
+                                <td id="{toggle}-risk-date">
+                                    <obs conceptId="CIEL:162601" allowTime="false" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render mode="syph" cId="CIEL:163276" toggle="hxSyphilis" />
+                    <render mode="IST" cId="CIEL:156660" toggle="hxOtherSTI" />
+                    <render mode="violence" cId="CIEL:123160" toggle="victimGBV"/>
+                    <render mode="multi" cId="CIEL:5567" toggle="multipleSexPartners" />
+                    <render mode="no condom" cId="CIEL:159218" toggle="withoutCondom"/>
+                    <render mode="anal" cId="CIEL:163278" toggle="analSex"/>
+                    <render mode="withprosex" cId="CIEL:160580" toggle="withSexWorker" />
+                </repeat>
+
+                <obsgroup groupingConceptId="CIEL:163288">
+                    <tr>
+                        <td colspan="2">
+                            <obs conceptId="CIEL:160581"
+                                 answerConceptId="PIH:11406"
+                                 style="checkbox" commentFieldCode=""
+                                 toggle="{id: 'other-risk--date', style: 'dim'}"/>
+                        </td>
+                        <td id="other-risk-date">
+                            <obs conceptId="CIEL:162601" allowTime="false" />
+                        </td>
+                    </tr>
+                </obsgroup>
+            </table>
+
+            <div>
+                <label>
+                    <uimessage code="pihcore.comment"/>
+                </label>
+                <obs conceptId="PIH:12999" rows="2" />
+            </div>
+        </div>
+
+        <div class="section-container">
+            <h3>
+                <uimessage code="pihcore.keyPopulation"/>
+            </h3>
+            <table>
+                <repeat>
+                    <template>
+                        <tr>
+                            <td>
+                                <label>
+                                    <uimessage code="pihcore.{name}"/>
+                                </label>
+                            </td>
+                            <td>
+                                <p class="radio">
+                                    <obs conceptId="{cId}"
+                                         answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1067"
+                                         answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar,pihcore.unknown.oneChar"
+                                         style="radio" answerSeparator=""/>
+                                </p>
+                            </td>
+                        </tr>
+                </template>
+                <render cId="CIEL:160578" name="menSexWithMen"/>
+                <render cId="CIEL:160579" name="sexWorker"/>
+                <render cId="CIEL:156761" name="prisoner"/>
+                <render cId="PIH:11561" name="transgender"/>
+                <render cId="CIEL:105" name="ivDrugUser"/>
+            </repeat>
+        </table>
+        </div>
+    </section>
+
+    <section id="hiv-adverse-event" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.adverseEvent">
+        <div class="section-container">
+            <p>
+                <label>
+                    <b>
+                        <uimessage code="pihcore.adverseEvent"/>?
+                    </b>
+                </label>
+                <obsgroup groupingConceptId="PIH:1295">
+                    <obs conceptId="PIH:1297" style="checkbox"
+                         answerConceptId="CIEL:121764"
+                         answerCode="emr.yes" toggle="ae" />
+                </obsgroup>
+            </p>
+
+            <div id="ae">
+                <table>
+                    <tr>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.ncd.meds"/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.adverseEvent"/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                Date
+                            </label>
+                        </th>
+                    </tr>
+
+                    <repeat with="[1],[2],[3]">
+                        <obsgroup groupingConceptId="PIH:1295">
+                            <tr>
+                                <td id="ae-med-{0}">
+                                    <obs conceptId="CIEL:160632" />
+                                </td>
+                                <td id="ae-{0}">
+                                    <repeat>
+                                        <template>
+                                            <obs conceptId="PIH:1297"
+                                                 answerConceptId="{concept}"
+                                                 style="checkbox" />
+                                        </template>
+                                        <render concept="CIEL:512"    name="Rash" />
+                                        <render concept="CIEL:148888" name="Anaphylaxis"/>
+                                        <render concept="CIEL:148787" name="Angioedema"/>
+                                        <render concept="CIEL:118983" name="Neuropathy"/>
+                                        <render concept="CIEL:116986" name="Hepatitis" />
+                                    </repeat>
+                                    <obs conceptId="PIH:1297" answerConceptId="CIEL:5622"
+                                         commentFieldCode="zl.ifOtherSpecify" style="checkbox" />
+                                </td>
+                                <td id="ae-date-{0}">
+                                    <obs conceptId="PIH:1300" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </repeat>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="patient-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="zl.consultNote.patientHistory.title">
+        <div class="section-container">
+            <table>
+                <tr>
+                    <th colspan="2">
+                        <uimessage code="pihcore.pathology" />
+                    </th>
+                    <th>
+                        <uimessage code="zl.date" />
+                    </th>
+                    <th>
+                        <uimessage code="pihcore.remarks" />
+                    </th>
+                </tr>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:1633">
+                            <tr>
+                                <td id="{name}-mhf">
+                                    <!-- Past medical history finding -->
+                                    <obs conceptId="CIEL:1628" answerConceptId="{concept}" style="checkbox"
+                                         toggle="{id: '{name}-mhf-data', style: 'dim'}"/>
+                                </td>
+                                <td class="{name}-mhf-data">
+                                    <p class="radio">
+                                        <obs conceptId="CIEL:1729" style="radio"
+                                             answerConceptIds="CIEL:1066,CIEL:1065"
+                                             answerCodes="pihcore.no.oneChar,pihcore.yes.oneChar" />
+                                    </p>
+                                </td>
+                                <td class="{name}-mhf-data">
+                                    <!-- Date -->
+                                    <obs conceptId="CIEL:159948" />
+                                </td>
+                                <td class="{name}-mhf-data">
+                                    <!-- Remarks -->
+                                    <obs conceptId="CIEL:160221" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+
+                    <render concept="PIH:PNEUMONIA" name="pneumonia"/>
+                    <render concept="PIH:HERPES ZOSTER" name="herpes"/>
+                    <render concept="CIEL:5334" name="thrush" />
+                    <render concept="PIH:DERMATITIS" name="dermatitis"/>
+                    <render concept="CIEL:119175" name="enteropathy"/>
+                    <render concept="PIH:DIARRHEA" name="diarrhea" />
+                    <render concept="PIH:ANEMIA" name="anemia"/>
+                    <render concept="PIH:SEXUALLY TRANSMITTED INFECTION" name="sti"
+                            label="pihcore.medicalhistory.sti" />
+                    <render concept="CIEL:118983" name="PeripheralNeuropathy"/>
+                    <render concept="PIH:SEIZURE" name="seizure"/>
+                    <render concept="PIH:995" name="OtherNeuroSympt" />
+                    <render concept="PIH:HYPERTENSION" name="htn"
+                            label="pihcore.medicalhistory.hypertension"/>
+                    <render concept="CIEL:119270" name="otherCardio"/>
+                    <render concept="PIH:HEPATITIS" name="hepatitis" />
+                    <render concept="PIH:DIABETES" name="diabetes" />
+                    <render concept="PIH:SURGERY" name="surgery" />
+                    <render concept="PIH:CHOLERA" name="cholera" />
+                    <render concept="CIEL:120742" name="chikungunya"/>
+                    <render concept="PIH:OTHER" name="other" />
+                </repeat>
+            </table>
+        </div>
+    </section>
+
+    <section id="habits" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.habits">
+        <div class="section-container">
+            <div class="two-column">
+                <!-- Tobacco use -->
+                <div>
+                    <label>
+                        <uimessage code="pihcore.habits.smoking"/>:
+                    </label>
+                    <obs conceptId="CIEL:163731" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
+                         answerSeparator="" style="radio"/>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="pihcore.habits.ifYesDuration"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="CIEL:159931" showUnits="pihcore.units.years" />
+                    </span>
+
+                    <label>
+                        <uimessage code="pihcore.habits.packsPerYear"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:11949" showUnits="false"/>
+                    </span>
+
+                </div>
+            </div>
+
+            <!-- Secondary smoke -->
+            <p>
+                <label>
+                    <uimessage code="pihcore.habits.secondhandSmoke"/>:
+                </label>
+                <obs conceptId="CIEL:152721" answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerSeparator="" style="radio"/>
+            </p>
+
+            <div class="two-column">
+                <!-- Alcohol use -->
+                <div>
+                    <label>
+                        <uimessage code="pihcore.habits.alcohol"/>:
+                    </label>
+                    <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
+                         answerSeparator="" style="radio"/>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="pihcore.habits.daysPerWeek"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:2243" showUnits="pihcore.units.daysPerWeek" />
+                    </span>
+
+                    <label>
+                        <uimessage code="pihcore.habits.drinksPerDay"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:2246" showUnits="pihcore.units.drinksPerDay" />
+                    </span>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.habits.alcoholType"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="CIEL:159453" answerConceptId="CIEL:5622" answerCode="pihcore.other"
+                             showCommentField="true" commentFieldCode="" />
+                    </span>
+                </div>
+            </div>
+            <br/>
+
+            <div class="two-column">
+                <!-- Drug use -->
+                <div>
+                    <label><uimessage code="pihcore.habits.drugs"/>:
+                    </label>
+                    <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:1090,CIEL:159452"
+                         answerSeparator="" style="radio"/>
+
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="pihcore.habits.ifYesDuration"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
+                    </span>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.habits.drugName"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:6489"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tb-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.tb.historyTB">
+        <div class="section-container">
+            <p>
+                <label>
+                    <uimessage code="pihcore.tb.patientActiveTB" />
+                </label>
+                <obs conceptId="CIEL:1389" style="checkbox"
+                     answerConceptId="CIEL:1065"
+                     answerCode="emr.yes"
+                     toggle="activeTB" />
+            </p>
+
+            <div id="activeTB">
+                <p>
+                    <label>
+                        <uimessage code="pihcore.ifYesTestDate" />
+                    </label>
+                    <obs conceptId="PIH:11526" />
+                </p>
+
+                <!-- Based on HIV EMR form and questions -->
+                <div class="two-column">
+                    <div>
+                        <!-- Location of TB:  Pulmonary or EP -->
+                        <obs conceptId="CIEL:160040" style="checkbox"
+                             answerConceptId="CIEL:42" />
+                        <obs conceptId="CIEL:160040" style="checkbox"
+                             answerConceptId="CIEL:5042" />
+                    </div>
+
+                    <div>
+                        <!-- DST -->
+                        <obs conceptId="PIH:3039" style="checkbox"
+                             answerConceptId="CIEL:1065" answerCode="pihcore.dstComplete" />
+                        <label>
+                            <uimessage code="pihcore.result" />:
+                        </label>
+                        <obs conceptId="CIEL:159391"  />
+                    </div>
+                </div>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.longActiveTBTreatmentComment" />
+                    </label>
+                </p>
+
+                <h3>
+                    <uimessage code="pihcore.tbTreatmentHistory"/>
+                </h3>
+                <table>
+                    <tr>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.treatment"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.startDate"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.endDate"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.treatmentResult"/>
+                            </label>
+                        </td>
+                    </tr>
+
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:1589">
+                                <tr>
+                                    <td>
+                                        <obs id="{obs_id}" conceptId="CIEL:1282" answerConceptId="{concept}"
+                                             answerCode="pihcore.tb.{regimen}.{obs_id}"
+                                             toggle="{id: '{regimen}', style: 'dim'}" />
+                                    </td>
+                                    <td class="{regimen}">
+                                        <obs conceptId="CIEL:1190"/>
+                                    </td>
+                                    <td class="{regimen}">
+                                        <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                                    </td>
+                                    <td id="{regimen}">
+                                        <p class="radio">
+                                            <obs conceptId="CIEL:6098" style="radio"
+                                                 answerConceptIds="CIEL:159791,CIEL:843,CIEL:160031"
+                                                 answerCodes="pihcore.cured,pihcore.failure,pihcore.defaulted"
+                                                 answerSeparator=""/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render concept="PIH:2406" regimen="initialTreatment" obs_id="2_RHZE_4_RH"/>
+                        <render concept="PIH:2RHZ - 4RH" regimen="initialTreatment" obs_id="2rhz_4rh"/>  <!-- legacy treatment, only shown if existing data (see JS above) -->
+                        <render concept="PIH:2408" regimen="retreatment" obs_id="2hrze_4hr"/>
+                        <render concept="PIH:2126" regimen="retreatment" obs_id="2s_rhez_1rhez_5rhe"/>  <!-- legacy treatment, only shown if existing data (see JS above) -->
+                        <render concept="CIEL:159909" regimen="mdrtbTreatment" obs_id="ciel_159909"/>
+                    </repeat>
+                </table>
+
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .tb-screening-question * {
+        display: inline;
+        float: none !important;
+        min-width: initial;
+        vertical-align: middle;
+        }
+        .tb-screening-question-label {
+        display:block;
+        }
+        .tb-screening-question {
+        margin-bottom: 10px;
+        }
+    </style>
+
+
+    <section id="tb-screen" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.tbscreen.title">
+        <div class="section-container">
+            <div class="two-columns">
+                <repeat with="['feverSweats','11565'],['wtLoss3kg','11566'],['cough','11567'],['tbContact','11568'],['painfulNodes','11569'],['bloodyCough','970'],['dyspnea','5960'],['chestPain','136']">
+                    <div class="radio tb-screening-question">
+                        <obs conceptIds="PIH:11563,PIH:11564"
+                             answerConceptId="PIH:{1}"
+                             labelCode="pihcore.tbscreen.{0}"
+                             labelCssClass="tb-screening-question-label"
+                             conceptLabels="coreapps.yes,coreapps.no"
+                             style="radio" />
+                    </div>
+                </repeat>
+            </div>
+
+            <br/>
+            <p>
+                <label>
+                    <uimessage code="pihcore.tbSuspectedMessage" />
+                </label>
+            </p>
+        </div>
+    </section>
+
+    <section id="previous-meds" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.therapyHistory">
+        <div class="section-container">
+            <h3>
+                <uimessage code="pihcore.prophylaxis"/>
+            </h3>
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.treatment"/>
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.startDate"/>
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.endDate"/>
+                        </label>
+                    </td>
+                </tr>
+
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:1501">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
+                                         answerLabel="{drugname}"
+                                         toggle="{id: '{drugname}-hx', style: 'dim'}" />
+                                </td>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1190"/>
+                                </td>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1191" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render conceptH="CIEL:105281" drugname="Cotrimoxazole"/>
+                </repeat>
+
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:1501">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
+                                         answerLabel="{drugname}"
+                                         toggle="{id: '{drugname}-hx', style: 'dim'}" />
+                                    <p class="radio {drugname}-hx">
+                                        <obs conceptId="PIH:13154" style="radio"
+                                             answerConceptIds="CIEL:159943, CIEL:159944" />
+                                    </p>
+                                </td>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1190"/>
+                                </td>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1191" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render conceptH="CIEL:78280"  drugname="Isoniazide"/>
+                </repeat>
+
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:1501">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
+                                         answerLabel="{drugname}"
+                                         toggle="{id: '{drugname}-hx', style: 'dim'}" />
+                                </td>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1190"/>
+                                </td>
+                                <td class="{drugname}-hx">
+                                    <obs conceptId="CIEL:1191" />
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render conceptH="CIEL:76488"  drugname="Fluconazole"/>
+                    <render conceptH="CIEL:74250"  drugname="Dapsone" />
+                </repeat>
+            </table>
+
+            <h3>
+                <uimessage code="pihcore.lab.hiv.title"/>
+            </h3>
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.treatment"/>
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.startDate"/>
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.endDate"/>
+                        </label>
+                    </td>
+                </tr>
+
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:1590">
+                            <tr>
+                                <td>
+                                    <obs conceptId="CIEL:1282" answerConceptId="{concept}"
+                                         toggle="{id: '{hivMedHx}', style: 'dim'}" />
+                                </td>
+                                <td class="{hivMedHx}">
+                                    <obs conceptId="CIEL:1190"/>
+                                </td>
+                                <td class="{hivMedHx}">
+                                    <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+                    <render concept="PIH:13013"   hivMedHx="tdf3tcEfvNvp" />
+                    <render concept="PIH:13014"   hivMedHx="azt3tcEfvNvp"/>
+                    <render concept="PIH:13012"   hivMedHx="regD4T"/>
+                    <render concept="CIEL:162201" hivMedHx="tdf3tcLpvR"/>
+                </repeat>
+
+                <!-- Other HIV regimen -->
+                <obsgroup groupingConceptId="PIH:1590">
+                    <tr>
+                        <td>
+                            <obs conceptId="CIEL:1282" answerConceptId="CIEL:5622"
+                                 toggle="{id: 'otherHivMedHx', style: 'dim'}" />
+                        </td>
+                        <td class="otherHivMedHx">
+                            <obs conceptId="CIEL:1190"/>
+                        </td>
+                        <td class="otherHivMedHx">
+                            <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                        </td>
+                    </tr>
+                </obsgroup>
+
+                <tr>
+                    <td align="right" class="otherHivMedHx">
+                        <label>
+                            <uimessage code="zl.ifOtherSpecify"/>
+                        </label>
+                        <obs conceptId="PIH:1527" size="30"/>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+            <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 8">
+                <h3>
+                    <uimessage code="pihcore.familyPlanningHistory.title"/>
+                </h3>
+                <table>
+                    <tr>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.familyPlanning.method"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.startDate"/>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="pihcore.endDate"/>
+                            </label>
+                        </td>
+                    </tr>
+
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:Family planning history construct">
+                                <tr>
+                                    <td id="{comment}-fp">
+                                        <obs conceptId="CIEL:374"
+                                             answerConceptId="{fpMethod}"
+                                             style="checkbox"
+                                             toggle="{id: '{comment}-date', style: 'dim'}"
+                                        />
+                                    </td>
+                                    <td class="{comment}-date">
+                                        <obs conceptId="CIEL:163757"/>
+                                    </td>
+                                    <td class="{comment}-date">
+                                        <obs conceptId="CIEL:163758" allowFutureDates="true"/>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+                        <render fpMethod="CIEL:780" comment="Pill"/>
+                        <render fpMethod="CIEL:907" comment="Depo-provera"/>
+                        <render fpMethod="CIEL:190" comment="Condoms"/>
+                        <render fpMethod="CIEL:78796" comment="Norplant"/>
+                        <render fpMethod="CIEL:5275" comment="IUD"/>
+                        <render fpMethod="CIEL:1472" comment="TubalLigation"/>
+                        <render fpMethod="CIEL:1489" comment="Vasectomy"/>
+                    </repeat>
+
+                    <!-- Other family planning -->
+                    <obsgroup groupingConceptId="PIH:Family planning history construct">
+                        <tr>
+                            <td>
+                                <obs conceptId="CIEL:374"
+                                     answerConceptId="CIEL:5622"
+                                     style="checkbox"
+                                     toggle="{id: 'other-fp', style: 'dim'}"
+                                />
+                            </td>
+                            <td class="other-fp">
+                                <obs conceptId="CIEL:163757"/>
+                            </td>
+                            <td class="other-fp">
+                                <obs conceptId="CIEL:163758" allowFutureDates="true"/>
+                            </td>
+                        </tr>
+                    </obsgroup>
+                    <tr>
+                        <td align="right" class="other-fp">
+                            <label>
+                                <uimessage code="zl.ifOtherSpecify"/>
+                            </label>
+                            <obs conceptId="PIH:2996" size="30"/>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </includeIf>
+        </div>
+    </section>
+
+    <section id="presenting-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.history.presentingHistory.title">
+        <div class="section-container">
+            <p>
+                <obs conceptId="PIH:PRESENTING HISTORY" style="textarea" id="presenting-history"/>
+            </p>
+        </div>
+    </section>
+
+    <section id="radiology-findings" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.rad_findings.title">
+        <div class="section-container-color">
+            <!-- Use PACS at HUM -->
+            <repeat with="['Chest (X-ray)','CIEL:165152','chestXRay'],
+                          ['Pelvic (U/S)', 'CIEL:161283', 'pelvicUS'],
+                          ['Abdominal (U/S)','CIEL:845','abUS']">
+                <p>
+                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                        <obs conceptId="PIH:Radiology procedure performed"
+                             answerConceptId="{1}" toggle="{2}"
+                             answerCode="pihcore.rad.{2}"
+                             style="checkbox"/>
+                        <div id="{2}" class="two-columns">
+                            <obs conceptId="PIH:Radiology report comments"
+                                 labelCode="pihcore.findings.label" />
+                            <obs conceptId="PIH:12847" labelCode="Date" />
+                        </div>
+                    </obsgroup>
+                </p>
+            </repeat>
+
+            <p>
+                <label>
+                    <uimessage code="zl.ifOtherSpecify"/>
+                </label>
+                <obsgroup groupingConceptId="PIH:Radiology report construct">
+                    <obs conceptId="PIH:Radiology procedure performed"
+                         answerClasses="Radiology/Imaging Procedure"
+                         style="checkbox"/>
+                    <div class="two-columns">
+                        <obs conceptId="PIH:Radiology report comments"
+                             labelCode="pihcore.findings.label"/>
+                        <obs conceptId="PIH:12847" labelCode="Date" />
+                    </div>
+                </obsgroup>
+            </p>
+        </div>
+    </section>
+
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 12 || $patient.getAge($encounter.getEncounterDatetime()) == 12 || (! $patient.age)">
+        <section id="psych" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                  headerCode="pihcore.psycState">
+             <div class="section-container">
+                 <p class="radio">
+                     <label>
+                        <uimessage code="pihcore.receivedPostTestCounsel" />
+                     </label>
+                     <obs conceptId="CIEL:159382" answerConceptIds="CIEL:1066,CIEL:1065"
+                          style="radio" />
+                 </p>
+
+                 <p>
+                     <label>
+                         <uimessage code="pihcore.patientReceivedAdvice" />
+                     </label>
+
+                     <repeat>
+                         <template>
+                             <obs conceptId="CIEL:163560"
+                                  answerConceptId="{response}"
+                                  answerCode="{text}"
+                                  style="checkbox" />
+                         </template>
+                         <render response="CIEL:151185" text="pihcore.cervicalCancerScreeningTreatment"/>
+                         <render response="CIEL:165489" text="pihcore.lowRiskBehavior" />
+                         <render response="CIEL:1382"   text="pihcore.fpCounseling" />
+                         <render response="CIEL:163559" text="pihcore.stiScreening" />
+                         <render response="CIEL:159381" text="pihcore.partnerScreening" />
+                     </repeat>
+                 </p>
+
+                 <p class="radio">
+                     <label>
+                         <uimessage code="pihcore.referredMH" />
+                     </label>
+                     <obs conceptId="PIH:13002" answerConceptIds="CIEL:1066,CIEL:1065"
+                          answerSeparator="" style="radio" />
+                 </p>
+             </div>
+         </section>
+    </includeIf>
+
+    <br/>
+
+    <ifMode mode="VIEW" include="false">
+        <div id="buttons">
+            <button id="next" type="button" class="submitButton confirm right">
+                <uimessage code="emr.next"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="submit" class="submitButton confirm right">
+                <uimessage code="mirebalais.save"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="cancel" type="button" class="cancel">
+                <uimessage code="emr.cancel"/>
+            </button>
+        </div>
+    </ifMode>
+
+</htmlform>
