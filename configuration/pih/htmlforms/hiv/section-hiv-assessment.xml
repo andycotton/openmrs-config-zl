@@ -219,7 +219,7 @@
                 </tr>
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="CIEL:1727">
+                        <obsgroup groupingConceptId="CIEL:1727" showIfEmpty="false">
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:1728" answerConceptId="{symptom}"
@@ -296,7 +296,7 @@
                 <repeat>
                     <template>
                         <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                             style="checkbox" answerSeparator=""/>
+                             style="checkbox" answerSeparator="" />
                         <br/>
                     </template>
                     <render whoDef="CIEL:5327" name="Asymptomatic" />
