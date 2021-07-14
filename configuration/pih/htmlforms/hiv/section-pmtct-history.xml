@@ -382,25 +382,30 @@
                     <div>
                         <obs id="contact-age-{0}" conceptId="PIH:AGE" labelCode="pihcore.age"/>
                     </div>
-                    <div style="margin-right: 64px;">
-                        <label><uimessage code="pihcore.dead"/></label>
-                        <p class="radio">
-                            <!-- Health status of contact -->
-                            <obs id="contact-life-{0}" conceptId="CIEL:163533"
-                                 answerConceptIds="PIH:ALIVE,PIH:DEATH,PIH:UNKNOWN"
-                                 answerCodes="general.no,general.yes,pihcore.unknown"
-                                 style="radio"/>
-                        </p>
-                    </div>
-                    <div>
-                        <label>
-                            <uimessage code="pihcore.hiv.serologicalStatus"/>
-                        </label>
-                        <p class="radio">
-                            <obs id="contact-hiv-status-{0}" conceptId="PIH:RESULT OF HIV TEST"
-                                 answerConceptIds="PIH:UNKNOWN,PIH:POSITIVE,PIH:NEGATIVE"
-                                 style="radio"/>
-                        </p>
+                    <br/>
+                    <div class="two-columns">
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.dead"/>
+                            </label>
+                            <p class="radio">
+                                <!-- Health status of contact -->
+                                <obs id="contact-life-{0}" conceptId="CIEL:163533"
+                                     answerConceptIds="PIH:ALIVE,PIH:DEATH,PIH:UNKNOWN"
+                                     answerCodes="general.no,general.yes,pihcore.unknown"
+                                     style="radio" answerSeparator=""/>
+                            </p>
+                        </div>
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.hiv.serologicalStatus"/>
+                            </label>
+                            <p class="radio">
+                                <obs id="contact-hiv-status-{0}" conceptId="PIH:RESULT OF HIV TEST"
+                                     answerConceptIds="PIH:UNKNOWN,PIH:POSITIVE,PIH:NEGATIVE"
+                                     style="radio" answerSeparator=""/>
+                            </p>
+                        </div>
                     </div>
                 </obsgroup>
             </span>
@@ -633,13 +638,15 @@
             </div>
 
             <div class="two-columns">
-                <div class="side-by-side">
+                <div>
+                    <p class="radio">
                         <label>
                             <b><uimessage code="Menstruation" /></b>
                         </label>
                         <obs conceptId="CIEL:160600" style="radio"
                              answerConceptIds="CIEL:1065,CIEL:1066"
                              answerCodes="pihcore.regular,pihcore.irregular" />
+                    </p>
                 </div>
                 <div>
                     <!-- Dysmenorrhea -->
