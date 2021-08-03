@@ -47,6 +47,8 @@
     "surgery",
     "systemAdministration",
     "uhmVitals",
+    "vaccination",
+    "vct",
     "visitManagement",
     "visitNote",
     "wristbands",
