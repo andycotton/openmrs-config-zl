@@ -119,125 +119,16 @@
     </style>
 
     <ifMode mode="VIEW" include="false" >
-        <script type="text/javascript">
-
-            jq(function() {
-
-                var updateEdd = function() {
-
-                var lastPeriodDate = htmlForm.getValueIfLegal('lastPeriodDate.value');
-                if (typeof lastPeriodDate !== "undefined" &amp;&amp; lastPeriodDate !== null &amp;&amp; (lastPeriodDate.length > 0)) {
-
-                var today = new Date();
-                var currentEncounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
-                if (typeof currentEncounterDate !== "undefined" &amp;&amp; currentEncounterDate !== null &amp;&amp; (currentEncounterDate.length > 0)) {
-                    // calculate the gestational age at the time of the encounter
-                    today = new Date(+currentEncounterDate);
-                    }
-
-                    var dateObj = getField('lastPeriodDate.value').datepicker('getDate');
-                    var newDate = new Date(dateObj);
-                    // time difference
-                    var timeDiff = Math.abs(today.getTime() - newDate.getTime());
-                    // weeks difference = gestational age
-                    var diffWeeks = Math.ceil(timeDiff / (1000 * 3600 * 24 * 7));
-
-                    // Estimated Delivery Date = (LMP - 3 months) + 12 months + 7 days
-                    newDate.setMonth(newDate.getMonth() - 3);
-                    newDate.setFullYear(newDate.getFullYear() + 1);
-                    newDate.setDate(newDate.getDate() + 7);
-
-                    var widgetDate = getField('lastPeriodDate.value').datepicker('setDate', newDate).val();
-                    getField('lastPeriodDate.value').datepicker('setDate', dateObj);
-
-                    jq('#calculated-edd-and-gestational').show();
-                    jq('#calculated-edd').text(widgetDate);
-                    jq('#calculated-gestational-age-value').text(diffWeeks + " " + '<uimessage code="pihcore.weeks"/>');
-
-                } else {
-                    jq('#calculated-edd-and-gestational').hide();
-                }
-            };
-
-            jq('#calculated-edd-and-gestational').hide();
-
-            jq("#lastPeriodDate input[type='hidden']").change(function() {
-                updateEdd();
-            });
-
-            updateEdd();
-            });
-        </script>
-    </ifMode>
-
-    <ifMode mode="VIEW" include="false">
         <h3>
             <uimessage code="pihcore.history.label"/>
         </h3>
 
         <script type="text/javascript">
-            jq(document).ready(function() {
-
-                // handle our custom functionality for triggering going to the next section when the "Next" button is clicked
-                jq('#next').click(function() {
-                    window.htmlForm.getBeforeSubmit().push(function () {
-                    window.htmlForm.setReturnUrl(window.htmlForm.getReturnUrl() + "&amp;goToNextSection=pmtct-history");
-                    return true;
-                });
-
-                window.htmlForm.submitHtmlForm();
-                })
-
-                jq('#submit').click(function() {
-                    window.htmlForm.submitHtmlForm();
-                })
-
-            });
-        </script>
-    </ifMode>
-
-    <ifMode mode="VIEW" include="false">
-        <script type="text/javascript">
-
-            var $j = jQuery;
-
             jq(function() {
-
-                var hasValue = function(element) {
-                    return jq(element).find('.contact-name input').val();
-                };
-
-                var hideOtherContacts = function() {
-                    jq('#contact-2').hide();
-                    jq('#contact-3').hide();
-                    jq('#contact-4').hide();
-                    jq('#contact-5').hide();
-                    jq('#contact-6').hide();
-                    jq('#contact-7').hide();
-                    jq('#contact-8').hide();
-                    jq('#contact-9').hide();
-                    jq('#contact-10').hide();
-                };
-
-                if (!hasValue('#contact-2') &amp;&amp; !hasValue('#contact-3') &amp;&amp; !hasValue('#contact-4') &amp;&amp; !hasValue('#contact-5') &amp;&amp; !hasValue('#contact-6') &amp;&amp; !hasValue('#contact-7') &amp;&amp; !hasValue('#contact-8') &amp;&amp; !hasValue('#contact-9') &amp;&amp; !hasValue('#contact-10')) {
-                    hideOtherContacts();
-                    jq('#show-more-contacts-button').show();
-                }
-
-                jq('#show-more-contacts-button').click(function() {
-                    jq('.contact').show();
-                    jq('#show-more-contacts-button').hide();
-                    jq('#show-less-contacts-button').show();
-                });
-
-                jq('#show-less-contacts-button').click(function() {
-                    hideOtherContacts();
-                    jq('#show-less-contacts-button').hide();
-                    jq('#show-more-contacts-button').show();
-                });
-
-            })
-
+                setUpEdd('<lookup expression="encounter.getEncounterDatetime().getTime()"/>', '<uimessage code="pihcore.weeks"/>');
+                setUpNextButtonForSections();
+                setUpExpandableContacts('<uimessage code="pihcore.invalid.phoneNumber"/>');
+            });
         </script>
     </ifMode>
 
@@ -364,7 +255,7 @@
             headerCode="pihcore.contacts">
 
         <repeat with="['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10']">
-            <span id="contact-{0}" class="mb-4 flex-questions section-container" >
+            <span id="contact-{0}" class="mb-4 flex-questions section-container contacts">
                 <obsgroup groupingConceptId="PIH:Contact construct" showIfEmpty="false">
                     <div>
                         <!-- Relationship to patient -->
@@ -407,13 +298,19 @@
                             </p>
                         </div>
                     </div>
+                    <div>
+                        <obs id="contact-hiv-phone-{0}" conceptId="PIH:TELEPHONE NUMBER OF CONTACT"
+                             labelCode="pihcore.telephone"/>
+                        <span id="contact-phone-error-message-{0}" class="text-danger"></span>
+                    </div>
+
                 </obsgroup>
             </span>
         </repeat>
-            <button id="show-more-contacts-button" type="button" style="display:none">
+            <button id="show-more-contacts-button" type="button">
                 <uimessage code="pihcore.showMore"/>
             </button>
-            <button id="show-less-contacts-button" type="button" style="display:none">
+            <button id="show-less-contacts-button" type="button">
                 <uimessage code="pihcore.showLess"/>
             </button>
     </section>
