@@ -299,14 +299,6 @@
                             </div>
 
                         </div>
-
-                        <!-- ToDo: Add PMTCT program enrollment but lookup/show -->
-                        <!-- ToDo: Is PMTCT also for infants? -->
-                        <p>
-                            <label>
-                                <i>NOTE: Add <uimessage code="pihcore.pmtct.enrollmentStatus"/></i>
-                            </label>
-                        </p>
                     </div>
                 </p>
             </includeIf>
