@@ -117,8 +117,28 @@
         </script>
     </ifMode>
 
-    <!-- Program enrollment (if the patient hasn't already been enrolled); use first ancestor location tagged as Program Location-->
-    <enrollInProgram programId="HIV" locationTag="Program Location"/>
+    <!-- Program enrollment (if the patient hasn't already been enrolled); use first ancestor location tagged as Program Location -->
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &gt; 1">
+        <enrollInProgram programId="HIV" locationTag="Program Location"/>
+    </includeIf>
+
+    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) &lt; 2">
+        <section id="hiv-program" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.programEnroll">
+            <div class="section-container">
+                <label>
+                    <uimessage code="zl.choose1"/>:
+                </label>
+                <enrollInProgram programId="EID" locationTag="Program Location" showCheckbox="true" />
+                <uimessage code="ui.i18n.Program.name.7e06bf82-9f1a-4218-b68f-823082ef519b"/>
+                <br/>
+
+                <enrollInProgram programId="HIV" locationTag="Program Location" showCheckbox="true" />
+                <uimessage code="pihcore.lab.hiv.title"/>
+                <br/>
+            </div>
+        </section>
+    </includeIf>
 
     <!-- ToDo:  Add when enrollment date is fixed
     <section id="hiv-program" sectionTag="fieldset" headerTag="legend" headerStyle="title"
