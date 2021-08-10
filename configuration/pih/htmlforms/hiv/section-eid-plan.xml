@@ -129,20 +129,6 @@
     <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.labs.title">
         <div class="section-container-color">
-
-            <div class="two-columns">
-                <div>
-                    <!-- PCR? -->
-                    <obsgroup groupingConceptId="CIEL:164853">
-                        <obs conceptId="CIEL:5497" labelCode="CD4"/>
-                        <obs conceptId="CIEL:159951"
-                             labelCode="CD4 Date:" allowTime="false" />
-                    </obsgroup>
-                </div>
-                <div></div>
-            </div>
-            <hr/>
-
             <h4>
                 <uimessage code="pihcore.labExam"/>
             </h4>
@@ -246,6 +232,36 @@
                              style="checkbox"
                              showCommentField="true" commentFieldLabel=""/>
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pcr-results" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.result">
+        <div class="section-container-color">
+            <div class="two-columns">
+                <div>
+                    <obsgroup id="hiv-pcr1" groupingConceptId="PIH:11522">
+                        <p class="radio">
+                            <obs conceptId="CIEL:1030" labelCode="PCR1" style="radio"
+                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1138"/>
+                        </p>
+                        <p class="narrow">
+                            <obs conceptId="CIEL:164400" labelCode="Date:"/>
+                        </p>
+                    </obsgroup>
+                </div>
+                <div>
+                    <obsgroup id="hiv-pcr2" groupingConceptId="PIH:11522">
+                        <p class="radio">
+                            <obs conceptId="CIEL:1030" labelCode="PCR2" style="radio"
+                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1138"/>
+                        </p>
+                        <p class="narrow">
+                            <obs conceptId="CIEL:164400" labelCode="Date:"/>
+                        </p>
+                    </obsgroup>
                 </div>
             </div>
         </div>
@@ -398,10 +414,10 @@
              headerTag="legend" headerStyle="title"
              headerCode="pihcore.consult.returnVisitDate">
         <div class="section-container-color">
+            <label>
+                <uimessage code="pihcore.consult.returnVisitDate" />
+            </label>
             <p class="narrow">
-                <label>
-                    <uimessage code="pihcore.consult.returnVisitDate" />
-                </label>
                 <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" id="apptDate"/>
             </p>
         </div>

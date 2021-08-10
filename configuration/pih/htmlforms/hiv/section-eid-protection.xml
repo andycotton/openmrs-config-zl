@@ -11,6 +11,17 @@
             margin-top: 1.5em;
         }
 
+        .five-columns, .four-columns, .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
         p.radio > * {
             display: inline;
             float: none !important;
@@ -170,175 +181,103 @@
         </div>
     </section>
 
-    <ifMode mode="VIEW" include="false">
-        <h2><uimessage code="pihcore.supplements.history.title"/></h2>
-    </ifMode>
-
-    <section id="supplements" sectionTag="fieldset" headerTag="legend">
+    <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.feedingAndVaccination">
         <div class="section-container">
-            <table >
-                <thead>
-                    <tr>
-                        <th><uimessage code="pihcore.supplements.history.title"/></th>
-                        <th><uimessage code="coreapps.age"/></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
-                        <tr>
-                            <td>
-                                <span>
-                                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="PIH:VITAMIN A" style="checkbox" id="vitamin-a" class="supplement"/>
-                                </span>
-                            </td>
+            <div class="two-columns">
+                <div>
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.specifyTypeFeeding"/>
+                        </label>
+                        <obs conceptId="CIEL:1151"
+                             answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
+                             answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
+                             answerSeparator=""/>
+                    </p>
 
-                            <td>
-                                <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
-                        <tr>
-                            <td>
-                                <span>
-                                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="PIH:FERROUS SULFATE" style="checkbox" class="supplement"/>
-                                </span>
-                            </td>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.mch.counselling.breastfeeding"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:1910" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
 
-                            <td>
-                                <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" class="ageReceived" placeholder="Specify" />
-                            </td>
-                        </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
-                        <tr>
-                            <td>
-                                <span>
-                                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="PIH:IODINE" style="checkbox" class="supplement" />
-                                </span>
-                            </td>
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.durationBreast" />
+                        </label>
+                        <obs conceptId="CIEL:160603" />
+                    </p>
 
-                            <td>
-                                <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
-                        <tr>
-                            <td>
-                                <span>
-                                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="PIH:DEWORMING" style="checkbox" class="supplement" />
-                                </span>
-                            </td>
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.dateWeaned" />
+                        </label>
+                        <obs conceptId="PIH:6889" />
+                    </p>
 
-                            <td>
-                                <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
-                        <tr>
-                            <td>
-                                <span>
-                                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="PIH:ZINC" style="checkbox" class="supplement" />
-                                </span>
-                            </td>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.typeWeaned" />
+                        </label>
+                        <obs conceptId="PIH:13646" style="radio"
+                             answerConceptIds="CIEL:1839,CIEL:1841"
+                             answerCodes="pihcore.sudden,pihcore.gradual"/>
+                    </p>
 
-                            <td>
-                                <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
-                </tbody>
-            </table>
-        </div>
-    </section>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.foodBefore6months"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:5633" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
+
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.formulaPrepTraining"/>
+                        </label>
+                        <obs conceptId="CIEL:159880" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
 
 
-    <ifMode mode="VIEW" include="false">
-        <h2><uimessage code="pihcore.feeding.history.title"/></h2>
-    </ifMode>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.providedFormula"/>
+                        </label>
+                        <obs conceptId="PIH:3581" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
 
-   <section id="feeding" sectionTag="fieldset" headerTag="legend">
-        <div class="section-container">
-            <table >
-                <thead>
-                    <tr>
-                        <th><uimessage code="pihcore.feeding.history.title"/></th>
-                        <th><uimessage code="emr.yes"/></th>
-                        <th><uimessage code="emr.no"/></th>
-                        <th><uimessage code="coreapps.age"/></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <obsgroup groupingConceptId="PIH:PEDIATRIC FEEDING HISTORY CONSTRUCT">
-                    <tr>
-                        <td><uimessage code="zl.breastfeedExclusively"/></td>
-                        <td>
-                            <obs conceptId="PIH:FEEDING METHOD PRESENT" answerConceptId="PIH:BREASTFED EXCLUSIVELY" style="checkbox" answerCode="" id="breastfeeding-yes" class="yes-feeding"/>  <!-- id used for smoke tests -->
-                        </td>
-                        <td>
-                            <obs conceptId="PIH:FEEDING METHOD ABSENT" answerConceptId="PIH:BREASTFED EXCLUSIVELY" style="checkbox" class="no-feeding" answerCode=""/>
-                        </td>
-                        <td>
-                            <obs id="breastfeedAge" conceptId="PIH:FEEDING METHOD AGE" placeholder="Specify" class="ageReceived"/>
-                        </td>
-                    </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:PEDIATRIC FEEDING HISTORY CONSTRUCT">
-                        <tr>
-                            <td><uimessage code="zl.infantFormula"/></td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD PRESENT" answerConceptId="PIH:INFANT FORMULA" style="checkbox" class="yes-feeding" answerCode=""/>
-                            </td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD ABSENT" answerConceptId="PIH:INFANT FORMULA" style="checkbox" answerCode="" class="no-feeding"/>
-                            </td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD AGE" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:PEDIATRIC FEEDING HISTORY CONSTRUCT">
-                        <tr>
-                            <td><uimessage code="zl.mixedFeeding"/></td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD PRESENT" answerConceptId="PIH:MIXED FEEDING" style="checkbox" class="yes-feeding" answerCode=""/>
-                            </td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD ABSENT" answerConceptId="PIH:MIXED FEEDING" style="checkbox" answerCode="" class="no-feeding"/>
-                            </td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD AGE" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="PIH:PEDIATRIC FEEDING HISTORY CONSTRUCT">
-                        <tr>
-                            <td><uimessage code="zl.breastfeedStopped"/></td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD PRESENT" answerConceptId="PIH:WEANED" style="checkbox" class="yes-feeding" answerCode=""/>
-                            </td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD ABSENT" answerConceptId="PIH:WEANED" style="checkbox" answerCode="" class="no-feeding"/>
-                            </td>
-                            <td>
-                                <obs conceptId="PIH:FEEDING METHOD AGE" placeholder="Specify" class="ageReceived"/>
-                            </td>
-                        </tr>
-                    </obsgroup>
+                </div>
+                <div>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.vaccinationsOnSchedule"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:5585" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                    </p>
 
-                    <tr>
-                        <td colspan="4">
-                            <label>
-                                <uimessage code="pihcore.exam.comment" />
-                            </label>
-                            <obs conceptId="PIH:6906" style="textarea" rows="2" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.vaccinated"/>
+                        </label>
+                        <obs conceptId="CIEL:164134" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                        <br/>
+                        <label>
+                            <uimessage code="pihcore.ifYesVaccinationCard"/>
+                        </label>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -370,17 +309,18 @@
         }
     </style>
 
-    <section id="id-treatment-prophylaxis" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.prophylaxis">
+    <section id="id-treatment-prophylaxis" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="pihcore.prophylaxis">
         <div class="section-container-color">
             <drugOrder>
                 <orderTemplate>
                     <orderProperty name="action"/>
                     <div style="padding:0px;">
                         <orderProperty name="concept" label="Drug">
+                            <option value="CIEL:86663"  label="AZT" />
+                            <option value="CIEL:80586"  label="NVP" />
                             <option value="CIEL:105281" label="Cotrimoxazole" />
                             <option value="CIEL:78280"  label="Isoniazide" />
-                            <option value="CIEL:76488"  label="Fluconazole" />
-                            <option value="CIEL:74250"  label="Dapsone" />
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
@@ -441,6 +381,46 @@
         </div>
     </section>
 
+    <section id="supplements" sectionTag="fieldset" headerTag="legend"
+             headerCode="pihcore.supplements.history.title" headerStyle="title">
+
+        <div class="section-container">
+            <table >
+                <thead>
+                    <tr>
+                        <th><uimessage code="pihcore.supplements.history.title"/></th>
+                        <th><uimessage code="coreapps.age"/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
+                                <tr>
+                                    <td>
+                                        <span>
+                                            <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="{answer}"
+                                                 style="checkbox" id="{identity}" class="supplement"/>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" placeholder="Specify" class="ageReceived"/>
+                                    </td>
+                                </tr>
+                            </obsgroup>
+                        </template>
+
+                        <render answer="PIH:VITAMIN A" identity="vitamin-a"/>
+                        <render answer="PIH:FERROUS SULFATE" identity="iron-sulf"/>
+                        <render answer="PIH:IODINE"    identity="iodine"/>
+                        <render answer="PIH:DEWORMING" identity="deworm"/>
+                        <render answer="PIH:ZINC"      identity="zinc"/>
+                    </repeat>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
