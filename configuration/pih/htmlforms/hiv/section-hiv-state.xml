@@ -166,6 +166,10 @@
         </script>
     </ifMode>
 
+    <!-- Program enrollment (if the patient hasn't already been enrolled);
+         use first ancestor location tagged as Program Location -->
+    <enrollInProgram programId="HIV" locationTag="Program Location"/>
+
     <section id="chwName-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.chw">
         <div class="section-container-color">
