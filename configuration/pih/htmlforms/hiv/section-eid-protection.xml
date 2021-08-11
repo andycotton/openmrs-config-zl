@@ -197,8 +197,9 @@
                     </p>
 
                     <p class="radio">
+                        <!-- Todo: Confirm this section which is not on paper -->
                         <label>
-                            <uimessage code="pihcore.mch.counselling.breastfeeding"/>
+                            <i><uimessage code="pihcore.mch.counselling.breastfeeding"/></i>
                         </label>
                         <br/>
                         <obs conceptId="CIEL:1910" style="radio"
@@ -265,15 +266,9 @@
                              answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
                     </p>
 
-                    <p class="radio">
+                    <p>
                         <label>
-                            <uimessage code="pihcore.vaccinated"/>
-                        </label>
-                        <obs conceptId="CIEL:164134" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
-                        <br/>
-                        <label>
-                            <uimessage code="pihcore.ifYesVaccinationCard"/>
+                            <uimessage code="pihcore.completeVaxCard"/>
                         </label>
                     </p>
                 </div>
@@ -381,44 +376,12 @@
         </div>
     </section>
 
-    <section id="supplements" sectionTag="fieldset" headerTag="legend"
-             headerCode="pihcore.supplements.history.title" headerStyle="title">
-
+    <section id="chief-complaint" sectionTag="fieldset" headerStyle="title"
+             headerTag="legend" headerCode="pihcore.chiefComplaint.title">
         <div class="section-container">
-            <table >
-                <thead>
-                    <tr>
-                        <th><uimessage code="pihcore.supplements.history.title"/></th>
-                        <th><uimessage code="coreapps.age"/></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <repeat>
-                        <template>
-                            <obsgroup groupingConceptId="PIH:SUPPLEMENT HISTORY CONSTRUCT">
-                                <tr>
-                                    <td>
-                                        <span>
-                                            <obs conceptId="PIH:SUPPLEMENT RECEIVED" answerConceptId="{answer}"
-                                                 style="checkbox" id="{identity}" class="supplement"/>
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <obs conceptId="PIH:AGE SUPPLEMENT RECEIVED" placeholder="Specify" class="ageReceived"/>
-                                    </td>
-                                </tr>
-                            </obsgroup>
-                        </template>
-
-                        <render answer="PIH:VITAMIN A" identity="vitamin-a"/>
-                        <render answer="PIH:FERROUS SULFATE" identity="iron-sulf"/>
-                        <render answer="PIH:IODINE"    identity="iodine"/>
-                        <render answer="PIH:DEWORMING" identity="deworm"/>
-                        <render answer="PIH:ZINC"      identity="zinc"/>
-                    </repeat>
-                </tbody>
-            </table>
+            <p>
+                <obs conceptId="PIH:PRESENTING HISTORY" style="textarea" id="presenting-history"/>
+            </p>
         </div>
     </section>
 
