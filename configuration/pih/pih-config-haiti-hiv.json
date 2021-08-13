@@ -16,6 +16,7 @@
     "dataExports",
     "dispensing",
     "exportPatients",
+    "exposedInfant",
     "hiv",
     "importPatients",
     "labResults",
