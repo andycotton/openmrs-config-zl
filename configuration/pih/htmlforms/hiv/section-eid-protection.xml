@@ -196,16 +196,6 @@
                              answerSeparator=""/>
                     </p>
 
-                    <p class="radio">
-                        <!-- Todo: Confirm this section which is not on paper -->
-                        <label>
-                            <i><uimessage code="pihcore.mch.counselling.breastfeeding"/></i>
-                        </label>
-                        <br/>
-                        <obs conceptId="CIEL:1910" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"/>
-                    </p>
-
                     <p>
                         <label>
                             <uimessage code="pihcore.durationBreast" />
@@ -217,14 +207,14 @@
                         <label>
                             <uimessage code="pihcore.dateWeaned" />
                         </label>
-                        <obs conceptId="PIH:6889" />
+                        <obs conceptId="CIEL:166566" />
                     </p>
 
                     <p class="radio">
                         <label>
                             <uimessage code="pihcore.typeWeaned" />
                         </label>
-                        <obs conceptId="PIH:13646" style="radio"
+                        <obs conceptId="CIEL:166565" style="radio"
                              answerConceptIds="CIEL:1839,CIEL:1841"
                              answerCodes="pihcore.sudden,pihcore.gradual"/>
                     </p>
