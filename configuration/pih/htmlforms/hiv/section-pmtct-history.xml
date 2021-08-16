@@ -312,12 +312,14 @@
                 </obsgroup>
             </span>
         </repeat>
+        <ifMode mode="VIEW" include="false">
             <button id="show-more-contacts-button" type="button">
                 <uimessage code="pihcore.showMore"/>
             </button>
             <button id="show-less-contacts-button" type="button">
                 <uimessage code="pihcore.showLess"/>
             </button>
+        </ifMode>
     </section>
 
     <section id="transmission" sectionTag="fieldset" headerTag="legend" headerStyle="title"
