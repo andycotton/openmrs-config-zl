@@ -30,6 +30,17 @@
             top:0px;
         }
 
+        .five-column, .four-column, .three-column, .two-column {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-column > div {
+            display: table-cell;
+            width: 50%;
+        }
+
         .two-columns {
             column-count: 2;
             -webkit-column-count: 2;
@@ -83,6 +94,74 @@
             <uimessage code="pihcore.visitNote.plan"/>
         </h1>
     </ifMode>
+
+    <!-- this section for PMTCT followup -->
+    <includeIf velocityTest="$encounter.encounterType.uuid == '95e03e7d-9aeb-4a99-bd7a-94e8591ec2c5'">
+        <section id="counsel-support" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="pihcore.counselSupport">
+            <div class="section-container-color">
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.registerMomClub" />
+                    </label>
+                    <obs conceptId="PIH:13261" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <div class="two-column">
+                    <div>
+                        <b>
+                            <uimessage code="pihcore.receivedCounsel" />
+                        </b>
+                    </div>
+
+                    <div>
+                        <p class="radio">
+                            <label>
+                                <uimessage code="Taking ARVs" />
+                            </label>
+                            <obs conceptId="CIEL:5586" style="radio"
+                                 answerConceptIds="CIEL:1066,CIEL:1065"/>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <repeat>
+                        <template>
+                            <p>
+                                <obs conceptId="CIEL:165309" style="checkbox"
+                                     answerConceptId="{answer}"
+                                     answerCode="pihcore.{name}"/>
+                            </p>
+                        </template>
+                        <render answer="CIEL:116023" name="cervicalCancer" />
+                        <render answer="CIEL:1382"   name="familyPlanning.title" />
+                        <render answer="CIEL:164882" name="medicalhistory.sti" />
+                        <render answer="CIEL:159381" name="partnerScreening" />
+                        <render answer="CIEL:161069" name="deliveryPrep" />
+                    </repeat>
+                </div>
+
+                <!-- Not used
+                        <render answer="CIEL:164480" name="mch.dangerSigns" />
+                        <render answer="CIEL:161651" name="mch.breastfeeding" />
+                        <render answer="CIEL:1380"   name="nutrition" />
+                        <render answer="CIEL:1906"   name="hygiene" />
+                -->
+
+                <p>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.referredTo" />
+                    </label>
+                    <obs conceptId="PIH:Type of referring service" style="checkbox"
+                         answerConceptId="CIEL:163558"  />
+                </p>
+            </div>
+        </section>
+    </includeIf>
 
     <section id="radiology-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.rad_order.title">
