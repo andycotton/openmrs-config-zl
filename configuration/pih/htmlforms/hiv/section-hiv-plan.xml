@@ -103,23 +103,39 @@
 
                 <p class="radio">
                     <label>
+                        <uimessage code="pihcore.dispenseIronFolate" />
+                    </label>
+                    <obs conceptId="CIEL:104677" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
                         <uimessage code="pihcore.registerMomClub" />
                     </label>
                     <obs conceptId="PIH:13261" style="radio"
                          answerConceptIds="CIEL:1065,CIEL:1066"/>
                 </p>
 
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.deliveryPlan" />
+                    </label>
+                    <obs conceptId="CIEL:159758" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
                 <div class="two-column">
                     <div>
                         <b>
-                            <uimessage code="pihcore.receivedCounsel" />
+                            <uimessage code="pihcore.patientReceivedAdvice" />
                         </b>
                     </div>
 
                     <div>
                         <p class="radio">
                             <label>
-                                <uimessage code="Taking ARVs" />
+                                <uimessage code="pihcore.takingArvs" />
                             </label>
                             <obs conceptId="CIEL:5586" style="radio"
                                  answerConceptIds="CIEL:1066,CIEL:1065"/>
@@ -127,37 +143,28 @@
                     </div>
                 </div>
 
-                <div class="two-columns">
+                <p>
                     <repeat>
                         <template>
-                            <p>
-                                <obs conceptId="CIEL:165309" style="checkbox"
-                                     answerConceptId="{answer}"
-                                     answerCode="pihcore.{name}"/>
-                            </p>
+                            <obs conceptId="CIEL:163560"
+                                 answerConceptId="{response}"
+                                 answerCode="{text}"
+                                 style="checkbox" />
                         </template>
-                        <render answer="CIEL:116023" name="cervicalCancer" />
-                        <render answer="CIEL:1382"   name="familyPlanning.title" />
-                        <render answer="CIEL:164882" name="medicalhistory.sti" />
-                        <render answer="CIEL:159381" name="partnerScreening" />
-                        <render answer="CIEL:161069" name="deliveryPrep" />
+                        <render response="CIEL:151185" text="pihcore.cervicalCancerScreeningTreatment"/>
+                        <render response="CIEL:165489" text="pihcore.lowRiskBehavior" />
+                        <render response="CIEL:1382"   text="pihcore.fpCounseling" />
+                        <render response="CIEL:163559" text="pihcore.stiScreening" />
+                        <render response="CIEL:159381" text="pihcore.partnerScreening" />
                     </repeat>
-                </div>
+                </p>
 
-                <!-- Not used
-                        <render answer="CIEL:164480" name="mch.dangerSigns" />
-                        <render answer="CIEL:161651" name="mch.breastfeeding" />
-                        <render answer="CIEL:1380"   name="nutrition" />
-                        <render answer="CIEL:1906"   name="hygiene" />
-                -->
-
-                <p>
-                    <br/>
+                <p class="radio">
                     <label>
-                        <uimessage code="pihcore.referredTo" />
+                        <uimessage code="pihcore.referredMH" />
                     </label>
-                    <obs conceptId="PIH:Type of referring service" style="checkbox"
-                         answerConceptId="CIEL:163558"  />
+                    <obs conceptId="PIH:13002" answerConceptIds="CIEL:1066,CIEL:1065"
+                         answerSeparator="" style="radio" />
                 </p>
             </div>
         </section>
