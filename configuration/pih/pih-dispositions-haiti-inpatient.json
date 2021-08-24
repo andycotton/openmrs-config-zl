@@ -39,7 +39,8 @@
       "ca65f5d3-6312-4143-ae4e-0237427f339e"
     ],
     "actions": [
-      "admitToSpecificLocationDispositionAction"
+      "admitToSpecificLocationDispositionAction",
+      "reopenVisitDispositionAction"
     ],
     "additionalObs": [
       {
