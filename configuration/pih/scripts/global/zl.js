@@ -45,8 +45,23 @@ function setUpExpandableContacts(badPhoneNumberMsg) {
     }
   });
 
-  // Phone Number Regex functionality
   for (let i = 0; maxContacts > i; i++) {
+    //showing contact if exist data
+    let contactHasValues = false;
+    jq(`#contact-${i} input:checked, #contact-${i} input[type=text]`).each(
+      function (j, domEl) {
+        const element = jq(domEl);
+        if (element.val()) {
+          contactHasValues = true;
+        }
+      }
+    )
+    if (contactHasValues) {
+      jq(`#contact-${i}`).show();
+      contactsToShow++;
+    }
+
+    // Phone Number Regex validation
     jq("#contact-hiv-phone-" + i)
       .children(":input")
       .change(function (e) {
