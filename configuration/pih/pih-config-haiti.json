@@ -12,6 +12,7 @@
         "checkInHomepageApp",
         "clinicianDashboard",
         "dataExports",
+        "echocardiogram",
         "edTriage",
         "edTriageQueue",
         "exportPatients",
