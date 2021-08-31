@@ -95,6 +95,38 @@
         </h1>
     </ifMode>
 
+    <!-- this section for PMTCT intake -->
+    <includeIf velocityTest="$encounter.encounterType.uuid == '584124b9-1f10-4757-ba09-91fc9075af92'">
+        <section id="pmtct-support-q" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="Support">
+            <div class="section-container-color">
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.dispenseIronFolate" />
+                    </label>
+                    <obs conceptId="CIEL:104677" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.registerMomClub" />
+                    </label>
+                    <obs conceptId="PIH:13261" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+
+                <p class="radio">
+                    <label>
+                        <uimessage code="pihcore.deliveryPlan" />
+                    </label>
+                    <obs conceptId="CIEL:159758" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"/>
+                </p>
+            </div>
+        </section>
+    </includeIf>
+
     <!-- this section for PMTCT followup -->
     <includeIf velocityTest="$encounter.encounterType.uuid == '95e03e7d-9aeb-4a99-bd7a-94e8591ec2c5'">
         <section id="counsel-support" sectionTag="fieldset" headerTag="legend" headerStyle="title"
