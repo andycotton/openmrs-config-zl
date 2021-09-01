@@ -168,7 +168,7 @@
                 </p>
 
                 <div id="transfer-out-details">
-                    <p class="small">
+                    <p class="side-by-side">
                         <obs id="transfer-out-spots"
                              conceptId="PIH:REFERRED FROM ANOTHER SITE" style="radio"
                              answerConceptIds="PIH:8855,PIH:8856"
@@ -242,11 +242,11 @@
                     </p>
 
                     <!-- Partner -->
-                    <p>
+                    <p class="side-by-side">
                         <label>
                             <uimessage code="pihcore.hiv.partnerTesting"/>
                         </label>
-
+                        <br/>
                         <obs conceptId="CIEL:159381"
                             answerConceptIds="CIEL:1066,CIEL:1065,PIH:NO PARTNER"
                             style="radio" answerSeparator="" />
@@ -284,7 +284,7 @@
                             <label>
                                 <uimessage code="pihcore.dead"/>
                             </label>
-                            <p class="radio">
+                            <p class="side-by-side">
                                 <!-- Health status of contact -->
                                 <obs id="contact-life-{0}" conceptId="CIEL:163533"
                                      answerConceptIds="PIH:ALIVE,PIH:DEATH,PIH:UNKNOWN"
@@ -296,7 +296,7 @@
                             <label>
                                 <uimessage code="pihcore.hiv.serologicalStatus"/>
                             </label>
-                            <p class="radio">
+                            <p class="side-by-side">
                                 <obs id="contact-hiv-status-{0}" conceptId="PIH:RESULT OF HIV TEST"
                                      answerConceptIds="PIH:UNKNOWN,PIH:POSITIVE,PIH:NEGATIVE"
                                      style="radio" answerSeparator=""/>
