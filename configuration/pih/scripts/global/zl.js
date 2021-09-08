@@ -71,7 +71,7 @@ function setUpExpandableContacts(badPhoneNumberMsg) {
   }
 
   function phoneNumber(inputted, index) {
-  
+
     var pattern1 = /^\d{8}$/;
     var pattern2 = /^\d{4}(?:\)|[-|\s])?\s*?\d{4}$/;
 
@@ -87,3 +87,4 @@ function setUpExpandableContacts(badPhoneNumberMsg) {
   }
 
 }
+
