@@ -207,6 +207,10 @@
                             <uimessage code="pihcore.internalTransferLocation"/>
                         </label>
                         <obs conceptId="PIH:8621" style="location" answerLocationTags="Program Location"/>
+                        <includeIf velocityTest="$patient.gender == 'F' ">
+                            <obs conceptId="PIH:13679" style="checkbox"
+                                 answerCode="pihcore.refer.referByMCH" answerConceptId="CIEL:1065" />
+                        </includeIf>
                     </p>
 
                     <p id="external-transfer-out">
