@@ -5,16 +5,12 @@
 
   "components": [
     "allergies",
-    "biometricsFingerPrints",
     "checkIn",
     "checkInHomepageApp",
     "clinicianDashboard",
     "dataExports",
     "echocardiogram",
-    "edTriage",
-    "edTriageQueue",
     "exportPatients",
-    "growthChart",
     "importPatients",
     "markPatientDead",
     "mch",
@@ -24,31 +20,20 @@
     "ncd",
     "overviewReports",
     "patientRegistration",
-    "primaryCare",
     "programs",
     "relationships",
     "socioEconomics",
     "systemAdministration",
     "todaysVisits",
-    "vct",
     "visitManagement",
     "visitNote",
-    "vitals",
-    "waitingForConsult"
+    "uhmVitals"
   ],
 
   "globalProperties": {
     "coreapps.defaultPatientIdentifierLocation": "328f6a60-0370-102d-b0e3-001ec94a0cc1"
   },
 
-  "biometricsConfig": {
-    "biometricEngine": "restBiometricEngine",
-    "templateFormat": "PROPRIETARY",
-    "subjectUrl": "http://localhost:9000/subject",
-    "matchUrl": "http://localhost:9000/match",
-    "scanUrl": "https://localhost:9443/fingerprint/scan",
-    "devicesUrl": "https://localhost:9443/fingerprint/devices"
-  },
 
   "locationTags": {
     "Login Location": ["Klinik MNT | Hinche", "Sante Fanm | Hinche", "Sante Mantal | Hinche"],
