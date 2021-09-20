@@ -31,11 +31,10 @@
     "socioEconomics",
     "systemAdministration",
     "todaysVisits",
+    "uhmVitals",
     "vct",
     "visitManagement",
-    "visitNote",
-    "vitals",
-    "waitingForConsult"
+    "visitNote"
   ],
 
   "globalProperties": {
