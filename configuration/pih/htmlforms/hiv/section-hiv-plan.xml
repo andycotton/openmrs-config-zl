@@ -999,7 +999,11 @@
                     <div style="padding:0px;">
                         <orderProperty name="dateActivated" label="pihcore.starting"/>
                         <orderProperty name="duration" label="pihcore.visitNote.for"/>
-                        <orderProperty name="durationUnits" label=" "/>
+                        <orderProperty name="durationUnits" label=" ">
+                            <option value="CIEL:1072"/>  <!-- days -->
+                            <option value="CIEL:1073"/>  <!-- weeks -->
+                            <option value="CIEL:1074"/>  <!-- months -->
+                        </orderProperty>
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="quantity" label="pihcore.quantity"/>
