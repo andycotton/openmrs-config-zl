@@ -7,6 +7,13 @@
         form fieldset {
             display: block;
         }
+        .side-by-side label {
+        display: inline-block;
+        }
+        form input[type="radio"], .form input[type="radio"] {
+        float: none;
+        display: inline-block;
+        }
 
         #test-orders input[type=checkbox],
         #id-treatment, #family-plan-section {
@@ -1178,7 +1185,7 @@
                 </p>
 
                 <div id="transfer-out-details">
-                    <p class="small">
+                    <p class="small side-by-side">
                         <obs id="transfer-out-spots"
                              conceptId="PIH:Transfer out location" style="radio"
                              answerConceptIds="PIH:8855,PIH:8856"
@@ -1199,12 +1206,12 @@
                     </p>
 
                     <p id="external-transfer-out">
-                            <label>
-                                <uimessage code="pihcore.externalTransferLocation"/>
-                            </label>
-                            <obs conceptId="PIH:11483" />
-                            <obs conceptId="PIH:PEPFAR partner site"
-                                 answerConceptId="CIEL:1065" answerCode="pihcore.pepfarSite" />
+                        <label>
+                            <uimessage code="pihcore.externalTransferLocation"/>
+                        </label>
+                        <obs conceptId="PIH:11483" />
+                        <obs conceptId="PIH:PEPFAR partner site"
+                             answerConceptId="CIEL:1065" answerCode="pihcore.pepfarSite" />
                     </p>
                 </div>
             </obsgroup>
