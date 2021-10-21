@@ -1115,6 +1115,7 @@
                     <render concept="PIH:SURGERY" name="surgery" />
                     <render concept="PIH:CHOLERA" name="cholera" />
                     <render concept="CIEL:120742" name="chikungunya"/>
+                    <render concept="CIEL:165623" name="covid-19"/>
                     <render concept="PIH:OTHER" name="other" />
                 </repeat>
             </table>
