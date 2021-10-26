@@ -51,6 +51,11 @@
         </repository>
     </repositories>
 
+    <properties>
+        <dataExportSqlDir>${build.directory}/openmrs-packager-config/configuration/reports/reportdescriptors/dataexports/sql/</dataExportSqlDir>
+        <petlOpenmrsExtractionsSqlDir>${build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/openmrs/extractions/</petlOpenmrsExtractionsSqlDir>
+    </properties>
+
     <build>
         <filters>
             <filter>${project.build.directory}/openmrs-packager-config/configuration/constants.properties</filter>
@@ -92,6 +97,44 @@
                         <goals>
                             <goal>package-configurations</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-report-sql-to-petl</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <sourceFile>${dataExportSqlDir}/echocardiogram.sql</sourceFile>
+                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/echocardiogram.sql</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${dataExportSqlDir}/delivery.sql</sourceFile>
+                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/mch_delivery.sql</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${dataExportSqlDir}/diagnoses.sql</sourceFile>
+                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/diagnoses.sql</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${dataExportSqlDir}/labOrdersReport.sql</sourceFile>
+                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/all_lab_orders.sql</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${dataExportSqlDir}/labResultsExport.sql</sourceFile>
+                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/all_lab_results.sql</destinationFile>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
