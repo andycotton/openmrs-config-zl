@@ -31,6 +31,4 @@ WHERE
 UPDATE temp_hiv_visit t SET pregnant = (SELECT value_coded FROM obs o WHERE voided = 0 AND concept_id = CONCEPT_FROM_MAPPING("PIH", "PREGNANCY STATUS") AND o.encounter_id = t.encounter_id);
 UPDATE temp_hiv_visit t SET next_visit_date = (SELECT DATE(value_datetime) FROM obs o WHERE voided = 0 AND concept_id = CONCEPT_FROM_MAPPING("PIH", "RETURN VISIT DATE") AND o.encounter_id = t.encounter_id);
 
-SELECT *,
-       @siteName as site,
-       @partitionNum as partition_num FROM temp_hiv_visit;
+SELECT * FROM temp_hiv_visit;

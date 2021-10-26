@@ -196,7 +196,5 @@ SELECT
 	tobacco,
 	transfer_from_other_facility,
 	transfer_facility_name,
-	contact_case_14d,
-    @siteName as site,
-    @partitionNum as partition_num
+	contact_case_14d
 FROM temp_covid_admission_encounter ORDER BY patient_id;

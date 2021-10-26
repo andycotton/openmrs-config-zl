@@ -20,8 +20,6 @@ SELECT
     date_completed,
     outcome,
     p.date_created,
-    p.date_changed,
-    @siteName as site,
-    @partitionNum as partition_num
+    p.date_changed
 FROM
 datakind_patient_program p JOIN program pp ON p.program_id = pp.program_id order by patient_id;

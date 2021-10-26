@@ -1,1 +1,0 @@
-CALL echocardiogram_export(null, null);

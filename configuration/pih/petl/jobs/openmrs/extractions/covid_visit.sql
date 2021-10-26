@@ -605,9 +605,7 @@ SELECT
         IF(mh_referral like "%Yes%", 1, NULL)               mh_referral,
         mh_note,
         index_asc,
-        index_desc,
-        @siteName as site,
-        @partitionNum as partition_num
+        index_desc
 FROM temp_covid_visit tcv
 -- index ascending
 LEFT JOIN temp_index_asc on tcv.encounter_id = temp_index_asc.encounter_id

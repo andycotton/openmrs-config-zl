@@ -244,7 +244,5 @@ SELECT
     patient_disposition,
     transfer,
     index_asc,
-    index_desc,
-    @siteName as site,
-    @partitionNum as partition_num
+    index_desc
 FROM temp_mch_status order by patient_id;

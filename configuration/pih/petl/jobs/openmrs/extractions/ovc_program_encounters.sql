@@ -520,7 +520,5 @@ SELECT
 	index_asc_program_status,
 	index_desc_program_status,
 	index_asc_enrollment,
-	index_desc_enrollment,
-    @siteName as site,
-    @partitionNum as partition_num
+	index_desc_enrollment
  FROM temp_ovc_program_status_encounters ORDER BY person_id, patient_program_id, state, encounter_date;

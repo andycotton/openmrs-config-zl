@@ -135,7 +135,5 @@ birth_apgar,
 birth_outcome,
 birth_weight,
 birth_neonatal_resuscitation,
-birth_macerated_fetus,
-@siteName as site,
-@partitionNum as partition_num
+birth_macerated_fetus
 FROM temp_mch_birth_final ORDER BY patient_id, encounter_id, birth_number;

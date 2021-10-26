@@ -87,8 +87,6 @@ SELECT
     t.date_changed,
     t.obs_count,
     index_asc,
-    index_desc,
-    @siteName as site,
-    @partitionNum as partition_num
+    index_desc
 FROM temp_datakind_enc t JOIN temp_datakind_index_asc td ON t.encounter_id = td.encounter_id
 JOIN temp_datakind_index_desc te ON t.encounter_id = te.encounter_id;

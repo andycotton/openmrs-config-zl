@@ -345,6 +345,5 @@ LEFT OUTER JOIN
 temp_covid_lab_specimen_source lss ON ls.obs_id = lss.obs_group_id
 ORDER BY ls.person_id, ls.encounter_id, lspd.value_datetime;
 
-SELECT *, @siteName as site, @partitionNum as partition_num FROM temp_final_query
-UNION ALL
-SELECT *, @siteName as site, @partitionNum as partition_num FROM temp_covid_lab_app_result;
+SELECT * FROM
+(SELECT * FROM temp_final_query q UNION ALL SELECT * FROM temp_covid_lab_app_result r) a;

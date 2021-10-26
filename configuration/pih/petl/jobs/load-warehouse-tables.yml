@@ -52,6 +52,9 @@ configuration:
                         datasource: "openmrs-${siteName}.yml"
                         query:  "openmrs/extractions/${tableName}.sql"
                         context: "openmrs/extractions/context.sql"
+                        extraColumns:
+                          site: "'${siteName}'"
+                          partition_num: "${partitionNum}"
                       load:
                         datasource: "warehouse.yml"
                         table: "${tableName}${tableSuffix}"

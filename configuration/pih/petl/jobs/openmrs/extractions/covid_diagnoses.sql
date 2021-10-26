@@ -213,9 +213,7 @@ SELECT
   dor.diagnosis_order,
   d.diagnosis,
   dc.diagnosis_confirmation,
-  ce.covid19_diagnosis,
-  @siteName as site,
-  @partitionNum as partition_num
+  ce.covid19_diagnosis
 FROM
 temp_covid_encounters ce
 LEFT JOIN

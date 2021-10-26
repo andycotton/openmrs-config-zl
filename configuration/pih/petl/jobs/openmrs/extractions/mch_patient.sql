@@ -194,7 +194,5 @@ SELECT
     locality,
     antenatal_visit,
     estimated_delivery_date,
-    pregnant,
-    @siteName as site,
-    @partitionNum as partition_num
+    pregnant
 FROM temp_mch_patient;

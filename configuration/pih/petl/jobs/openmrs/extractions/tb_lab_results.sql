@@ -372,8 +372,6 @@ SELECT
         test_result_numeric,
         index_asc,
         index_desc,
-        date_created,
-        @siteName as site,
-        @partitionNum as partition_num
+        date_created
 FROM temp_tb_final_query tf
 ORDER BY patient_id, index_asc;

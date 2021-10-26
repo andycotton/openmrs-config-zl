@@ -8,9 +8,7 @@ SELECT
 	p.date_created 'patient_date_created',
     p.date_changed 'patient_date_changed',
     e.date_created 'encouter_date_created',
-    e.date_changed 'encounter_date_changed',
-    @siteName as site,
-    @partitionNum as partition_num
+    e.date_changed 'encounter_date_changed'
 FROM
     patient p
         LEFT JOIN

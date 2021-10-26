@@ -38,8 +38,6 @@ select
        date_enrolled,
        date_completed,
        location,
-       outcome,
-       @siteName as site,
-       @partitionNum as partition_num
+       outcome
 from temp_hiv_patient_program;
 

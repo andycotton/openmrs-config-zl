@@ -273,8 +273,6 @@ regimen_line_original,
 index_ascending_category,
 index_descending_category,
 index_ascending_patient,
-index_descending_patient,
-@siteName as site,
-@partitionNum as partition_num
+index_descending_patient
 from temp_HIV_regimens
 order by patient_id,  drug_category, encounter_datetime;

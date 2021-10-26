@@ -259,8 +259,6 @@ t.regimen_change,
 t.days_late_to_pickup,
 t.regimen_match,
 dispense_date_ascending,
-dispense_date_descending,
-@siteName as site,
-@partitionNum as partition_num
+dispense_date_descending
 from temp_HIV_dispensing t
 order by patient_id, dispense_date asc, encounter_id asc;

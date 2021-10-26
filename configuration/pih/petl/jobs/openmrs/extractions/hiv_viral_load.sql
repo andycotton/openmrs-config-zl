@@ -143,9 +143,7 @@ SELECT
         vl_type,
         DATEDIFF(NOW(), tvl.vl_sample_taken_date) days_since_vl,
         index_desc,
-        index_asc,
-        @siteName as site,
-        @partitionNum as partition_num
+        index_asc
 FROM temp_hiv_construct_encounters tvl
 -- index descending
 JOIN temp_vl_index_desc tid ON tvl.encounter_id = tid.encounter_id

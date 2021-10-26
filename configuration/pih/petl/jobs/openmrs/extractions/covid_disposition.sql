@@ -108,9 +108,7 @@ SELECT
 	disposition,				
 	discharge_condition,
 	index_asc,
-	index_desc,
-    @siteName as site,
-    @partitionNum as partition_num
+	index_desc
 FROM temp_covid_dispositon tcd
 -- index ascending
 LEFT JOIN temp_index_asc on tcd.encounter_id = temp_index_asc.encounter_id

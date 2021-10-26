@@ -257,8 +257,6 @@ SELECT
     index_program_ascending,
     index_program_descending,
     index_patient_ascending,
-    index_patient_descending,
-    @siteName as site,
-    @partitionNum as partition_num
+    index_patient_descending
 FROM temp_status
 ORDER BY patient_id,index_patient_ascending;

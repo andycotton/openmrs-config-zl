@@ -133,7 +133,5 @@ SELECT
       IF(corticosteroids like "%Yes%", 1, NULL)		corticosteroids,
       IF(antifungal_agent like "%Yes%", 1, NULL)    	antifungal_agent,
       IF(paracetamol like "%Yes%", 1, NULL)		paracetamol,
-      other_medications,
-      @siteName as site,
-      @partitionNum as partition_num
+      other_medications
 from temp_covid_discharge order by patient_id;

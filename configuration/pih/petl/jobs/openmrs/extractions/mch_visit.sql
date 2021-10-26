@@ -853,9 +853,7 @@ SELECT
     IF(fp_counseling_received LIKE '%Family planning counseling%', 1, NULL),
     risk_factors,
     index_asc,
-    index_desc,
-    @siteName as site,
-    @partitionNum as partition_num
+    index_desc
 FROM
     temp_obgyn_visit
 ORDER BY patient_id , index_asc;

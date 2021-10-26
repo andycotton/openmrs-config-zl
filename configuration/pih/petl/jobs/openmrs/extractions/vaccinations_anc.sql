@@ -296,9 +296,7 @@ SELECT p.patient_id,
        e.tetanus_2         as 'DT dose 2',
        e.tetanus_3         as 'DT dose 3',
        e.tetanus_booster_1 as 'DT Booster 1',
-       e.tetanus_booster_2 as 'DT Booster 2',
-       @siteName as site,
-       @partitionNum as partition_num
+       e.tetanus_booster_2 as 'DT Booster 2'
 FROM temp_encounter e
          INNER JOIN temp_patient p on e.patient_id = p.patient_id
 ;

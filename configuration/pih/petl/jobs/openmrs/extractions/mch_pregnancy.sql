@@ -111,6 +111,4 @@ UPDATE temp_mch_pregancy t SET pregnancy_10_outcome = OBS_FROM_GROUP_ID_VALUE_CO
 UPDATE temp_mch_pregancy t SET pmtct_club = OBS_VALUE_CODED_LIST(t.encounter_id, 'PIH', '13262', 'en');
 UPDATE temp_mch_pregancy t SET  delivery_location_plan = OBS_VALUE_CODED_LIST(t.encounter_id, 'CIEL', '159758', 'en');
 
-SELECT *,
-       @siteName as site,
-       @partitionNum as partition_num FROM temp_mch_pregancy;
+SELECT * FROM temp_mch_pregancy;

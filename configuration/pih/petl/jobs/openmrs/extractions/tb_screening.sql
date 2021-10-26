@@ -159,8 +159,6 @@ IF(chest_pain_result_concept = @present,'yes',IF(chest_pain_result_concept = @ab
 COALESCE(tb_screening, tb_screening_bool) "tb_screening_result",
 tb_screening_date,
 index_ascending,
-index_descending,
-@siteName as site,
-@partitionNum as partition_num
+index_descending
 FROM temp_TB_screening
 ORDER BY patient_id ASC, tb_screening_date ASC, encounter_id ASC;
