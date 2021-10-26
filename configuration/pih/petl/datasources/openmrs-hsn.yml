@@ -1,0 +1,7 @@
+databaseType: "mysql"
+host: ${datasources.hsn.host}
+port: ${datasources.hsn.port}
+databaseName: ${datasources.hsn.databaseName}
+user: ${datasources.hsn.user}
+password: ${datasources.hsn.password}
+options: ${datasources.hsn.options}

@@ -1,0 +1,7 @@
+databaseType: "mysql"
+host: ${datasources.cange.host}
+port: ${datasources.cange.port}
+databaseName: ${datasources.cange.databaseName}
+user: ${datasources.cange.user}
+password: ${datasources.cange.password}
+options: ${datasources.cange.options}

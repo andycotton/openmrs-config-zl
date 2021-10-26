@@ -1,0 +1,7 @@
+databaseType: "mysql"
+host: ${datasources.hinche.host}
+port: ${datasources.hinche.port}
+databaseName: ${datasources.hinche.databaseName}
+user: ${datasources.hinche.user}
+password: ${datasources.hinche.password}
+options: ${datasources.hinche.options}

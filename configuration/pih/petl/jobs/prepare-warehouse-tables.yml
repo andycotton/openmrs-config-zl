@@ -1,0 +1,71 @@
+# This is responsible for setting up the target warehouse schema with appropriate partition schemes,
+# partition functions, and table schemas prior to loading in data from each of the sites
+type: "job-pipeline"
+configuration:
+  jobs:
+
+    # First step is to prepare the target warehouse with partitions, functions, and procedures that are used by later jobs
+    - type: "sql-execution"
+      configuration:
+        datasource: "warehouse.yml"
+        scripts:
+          - "warehouse/scripts/create-partitions-if-needed.sql"
+
+    # Next, iterate over each of the tables we plan to load in, and create schemas for each site
+    - type: "iterating-job"
+      configuration:
+        execution:
+          maxConcurrentJobs: 1
+        jobTemplate:
+          type: "job-pipeline"
+          configuration:
+            jobs:
+
+              # Create a new table called <tableName>_temp and replace <tableName> with it if the schema has changed
+              - type: "sql-execution"
+                configuration:
+                  datasource: "warehouse.yml"
+                  variables:
+                    tableSuffix: "_temp"
+                  scripts:
+                    - "warehouse/tables/${tableName}.sql"
+                    - "warehouse/scripts/update-warehouse-table-schema.sql"
+        iterations:
+              #- tableName: "all_lab_orders"
+              #- tableName: "all_lab_results"
+              - tableName: "covid_admission"
+              - tableName: "covid_diagnoses"
+              - tableName: "covid_discharge"
+              - tableName: "covid_disposition"
+              - tableName: "covid_lab_test"
+              - tableName: "covid_visit"
+              - tableName: "datakind_encounter"
+              - tableName: "datakind_patient_program"
+              - tableName: "datakind_registration"
+              #- tableName: "diagnoses"
+              #- tableName: "echocardiogram"
+              - tableName: "hiv_dispensing"
+              - tableName: "hiv_patient"
+              - tableName: "hiv_patient_program"
+              - tableName: "hiv_regimens"
+              - tableName: "hiv_status"
+              - tableName: "hiv_viral_load"
+              - tableName: "hiv_visit"
+              - tableName: "mch_birth"
+              #- tableName: "mch_delivery"
+              - tableName: "mch_patient"
+              - tableName: "mch_pregnancy"
+              - tableName: "mch_status"
+              - tableName: "mch_visit"
+              - tableName: "ovc_program_encounters"
+              - tableName: "tb_lab_results"
+              - tableName: "tb_screening"
+              - tableName: "vaccinations_anc"
+
+  execution:
+    # This must be set to 1, as we need this pipeline to ensure that the first 2 jobs execute before the final job
+    maxConcurrentJobs: 1
+# If you never want this to execute on a schedule, but rather plan to execute it only from startup.jobs, you can remove this schedule property
+# If you wish to execute the job on a different schedule, you can adjust that here
+schedule:
+  cron: "0 0 5 ? * *"
