@@ -52,8 +52,8 @@
     </repositories>
 
     <properties>
-        <dataExportSqlDir>${build.directory}/openmrs-packager-config/configuration/reports/reportdescriptors/dataexports/sql/</dataExportSqlDir>
-        <petlOpenmrsExtractionsSqlDir>${build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/openmrs/extractions/</petlOpenmrsExtractionsSqlDir>
+        <dataExportSqlDir>${project.build.directory}/openmrs-packager-config/configuration/reports/reportdescriptors/dataexports/sql/</dataExportSqlDir>
+        <petlOpenmrsExtractionsSqlDir>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/openmrs/extractions/</petlOpenmrsExtractionsSqlDir>
     </properties>
 
     <build>
@@ -134,6 +134,30 @@
                                     <destinationFile>${petlOpenmrsExtractionsSqlDir}/all_lab_results.sql</destinationFile>
                                 </fileSet>
                             </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-liquibase-sql-to-petl</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/openmrs/sql</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/openmrs-packager-config/configuration/pih/liquibase/sql/</directory>
+                                    <includes>
+                                        <include>*.sql</include>
+                                    </includes>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>

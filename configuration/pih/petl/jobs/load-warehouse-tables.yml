@@ -24,14 +24,14 @@ configuration:
             datasource: "openmrs-${siteName}.yml"
             delimiter: ";"
             scripts:
-              - "../../liquibase/sql/create_views.sql"
+              - "openmrs/sql/create_views.sql"
         - type: "sql-execution"
           configuration:
             datasource: "openmrs-${siteName}.yml"
             delimiter: "#"
             scripts:
-              - "../../liquibase/sql/create_functions.sql"
-              - "../../liquibase/sql/global_metadata.sql"
+              - "openmrs/sql/create_functions.sql"
+              - "openmrs/sql/global_metadata.sql"
         - type: "iterating-job"
           configuration:
             execution:
