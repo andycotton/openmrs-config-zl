@@ -1,7 +1,7 @@
 databaseType: "mysql"
-host: ${datasources.hsn.host}
-port: ${datasources.hsn.port}
-databaseName: ${datasources.hsn.databaseName}
-user: ${datasources.hsn.user}
-password: ${datasources.hsn.password}
-options: ${datasources.hsn.options}
+host: ${datasources.openmrs.hsn.host}
+port: ${datasources.openmrs.hsn.port}
+databaseName: ${datasources.openmrs.hsn.databaseName}
+user: ${datasources.openmrs.hsn.user}
+password: ${datasources.openmrs.hsn.password}
+options: ${datasources.openmrs.hsn.options}

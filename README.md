@@ -32,7 +32,6 @@ and finally deploying the changes to the server specified by [serverId].
 *both* the config-pihemr and config-zl projects for changes and redeploy when there are changes.  It runs
 indefinitely, so you will need to cancel it with a "Ctrl-C".
 
-
 ### General usage
 
 `mvn clean compile` - Will generate your configurations into "target/openmrs-packager-config/configuration"

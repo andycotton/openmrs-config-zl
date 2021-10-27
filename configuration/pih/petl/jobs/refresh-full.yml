@@ -4,5 +4,6 @@ configuration:
   jobs:
     - path: "prepare-warehouse-tables.yml"
     - path: "load-warehouse-tables.yml"
+    - path: "hivmigration/job.yml"
   execution:
     maxConcurrentJobs: 1
