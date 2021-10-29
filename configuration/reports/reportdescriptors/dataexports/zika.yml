@@ -18,3 +18,4 @@ config:
   order: 1001
   components:
     - "zika"
+  privilege: "Task: clinical.reports"

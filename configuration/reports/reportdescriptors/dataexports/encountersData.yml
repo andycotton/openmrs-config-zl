@@ -30,3 +30,4 @@ designs:
 config:
   category: "dataExport"
   order: "4"
+  privilege: "Task: clinical.reports"
