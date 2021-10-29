@@ -29,7 +29,7 @@ configuration:
           - tableName: "hiv_viral_load"
           - tableName: "hiv_visit"
           - tableName: "ovc_program_encounters"
-          - tableName: "hivmigration_data_warnings.sql"
+          - tableName: "hivmigration_data_warnings"
 
     - type: "sqlserver-bulk-import"
       configuration:
@@ -39,5 +39,5 @@ configuration:
         load:
           datasource: "warehouse.yml"
           table: "hivmigration_aggregrate_data_warnings"
-          schema: "sql/tables/hivmigration_aggregrate_data_warnings.sql"
+          schema: "sql/schemas/hivmigration_aggregrate_data_warnings.sql"
           dropAndRecreateTable: "false"
