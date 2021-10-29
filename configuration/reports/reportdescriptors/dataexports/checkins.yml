@@ -25,5 +25,5 @@ config:
   components:
     - "checkIn"
     - "allDataExports"
-
+  privilege: "Task: archive.reports"
 

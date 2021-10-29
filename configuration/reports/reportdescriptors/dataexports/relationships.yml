@@ -18,3 +18,4 @@ config:
   order: 1003
   components:
     - "dataExports"
+  privilege: "Task: archive.reports"
