@@ -53,7 +53,7 @@
 
     <properties>
         <dataExportSqlDir>${project.build.directory}/openmrs-packager-config/configuration/reports/reportdescriptors/dataexports/sql/</dataExportSqlDir>
-        <petlOpenmrsExtractionsSqlDir>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/extractions/</petlOpenmrsExtractionsSqlDir>
+        <petlJobExtractionSqlDir>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/sql/extractions/</petlJobExtractionSqlDir>
     </properties>
 
     <build>
@@ -115,23 +115,23 @@
                             <fileSets>
                                 <fileSet>
                                     <sourceFile>${dataExportSqlDir}/echocardiogram.sql</sourceFile>
-                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/echocardiogram.sql</destinationFile>
+                                    <destinationFile>${petlJobExtractionSqlDir}/echocardiogram.sql</destinationFile>
                                 </fileSet>
                                 <fileSet>
                                     <sourceFile>${dataExportSqlDir}/delivery.sql</sourceFile>
-                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/mch_delivery.sql</destinationFile>
+                                    <destinationFile>${petlJobExtractionSqlDir}/mch_delivery.sql</destinationFile>
                                 </fileSet>
                                 <fileSet>
                                     <sourceFile>${dataExportSqlDir}/diagnoses.sql</sourceFile>
-                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/diagnoses.sql</destinationFile>
+                                    <destinationFile>${petlJobExtractionSqlDir}/diagnoses.sql</destinationFile>
                                 </fileSet>
                                 <fileSet>
                                     <sourceFile>${dataExportSqlDir}/labOrdersReport.sql</sourceFile>
-                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/all_lab_orders.sql</destinationFile>
+                                    <destinationFile>${petlJobExtractionSqlDir}/all_lab_orders.sql</destinationFile>
                                 </fileSet>
                                 <fileSet>
                                     <sourceFile>${dataExportSqlDir}/labResultsExport.sql</sourceFile>
-                                    <destinationFile>${petlOpenmrsExtractionsSqlDir}/all_lab_results.sql</destinationFile>
+                                    <destinationFile>${petlJobExtractionSqlDir}/all_lab_results.sql</destinationFile>
                                 </fileSet>
                             </fileSets>
                         </configuration>
@@ -149,7 +149,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/templates/create-source-views-and-functions/</outputDirectory>
+                            <outputDirectory>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/sql/utils/</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}/openmrs-packager-config/configuration/pih/liquibase/sql/</directory>

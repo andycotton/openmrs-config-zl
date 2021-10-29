@@ -1,0 +1,53 @@
+type: "iterating-job"
+configuration:
+  execution:
+    maxConcurrentJobs: 1  # Import into up to 5 sites concurrently
+    maxRetriesPerJob: 10
+    retryInterval: 30
+    retryIntervalUnit: "MINUTES"
+  iterations:
+    - siteName: "cange"   #siteName is populated in each table and also used to identify the appropriate data source
+      partitionNum: "1"   #partitionNum is used to identify the sqlserver partition that this site's data is loaded into
+    - siteName: "hinche"
+      partitionNum: "2"
+    - siteName: "saint_marc_hsn"
+      partitionNum: "3"
+    #- siteName: "lacolline"
+    #  partitionNum: "4"
+    #  tableSuffix: "_4"
+    #- siteName: "thomonde"
+    #  partitionNum: "5"
+    #  tableSuffix: "_5"
+    #- siteName: "mirebalais"
+    #  partitionNum: "6"
+    #  tableSuffix: "_6"
+  jobTemplate:
+    type: "job-pipeline"
+    configuration:
+      jobs:
+        - path: "create-source-views-and-functions.yml"
+        - type: "iterating-job"
+          configuration:
+            execution:
+              maxConcurrentJobs: 1  # Import into up to 1 tables concurrently
+            jobTemplate:
+              path: "import-to-table-partition.yml"
+            iterations:
+              - tableName: "all_lab_orders"
+              - tableName: "all_lab_results"
+              - tableName: "covid_admission"
+              - tableName: "covid_diagnoses"
+              - tableName: "covid_discharge"
+              - tableName: "covid_disposition"
+              - tableName: "covid_lab_test"
+              - tableName: "covid_visit"
+              - tableName: "echocardiogram"
+              - tableName: "mch_birth"
+              - tableName: "mch_delivery"
+              - tableName: "mch_patient"
+              - tableName: "mch_pregnancy"
+              - tableName: "mch_status"
+              - tableName: "mch_visit"
+              - tableName: "tb_lab_results"
+              - tableName: "tb_screening"
+              - tableName: "vaccinations_anc"
