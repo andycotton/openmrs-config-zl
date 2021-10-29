@@ -1,4 +1,4 @@
-CREATE TABLE hiv_visit${tableSuffix}
+CREATE TABLE hiv_visit
 (
     encounter_id    INT,
     patient_id      INT,
@@ -6,11 +6,5 @@ CREATE TABLE hiv_visit${tableSuffix}
     pregnant        BIT,
     visit_date      DATE,
     next_visit_date DATE,
-    code_site       INT,
-    site            VARCHAR(50),
-    partition_num   INT
-)
-    ON psSite
-(
-    partition_num
+    code_site       INT
 );

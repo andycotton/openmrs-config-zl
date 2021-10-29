@@ -53,7 +53,7 @@
 
     <properties>
         <dataExportSqlDir>${project.build.directory}/openmrs-packager-config/configuration/reports/reportdescriptors/dataexports/sql/</dataExportSqlDir>
-        <petlOpenmrsExtractionsSqlDir>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/openmrs/extractions/</petlOpenmrsExtractionsSqlDir>
+        <petlOpenmrsExtractionsSqlDir>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/extractions/</petlOpenmrsExtractionsSqlDir>
     </properties>
 
     <build>
@@ -149,7 +149,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/openmrs/sql</outputDirectory>
+                            <outputDirectory>${project.build.directory}/openmrs-packager-config/configuration/pih/petl/jobs/templates/create-source-views-and-functions/</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.build.directory}/openmrs-packager-config/configuration/pih/liquibase/sql/</directory>

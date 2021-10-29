@@ -1,0 +1,20 @@
+# Template that takes in the following parameters
+
+# ${tableName}
+
+# The purpose of this job is to create a given table schema, or recreate it if it's schema has changed
+#
+# 1. Creates a new table with schema at /warehouse/tables/${tableName}.sql, named ${tableName}_temp
+# 2. Checks if ${tableName} doesn't exist, or has columns with different names or datatypes from ${tableName}_temp
+# 3. If there is a difference, it drops ${tableName} and renames ${tableName}_temp to ${tableName}
+# 4. It drops ${tableName}_temp otherwise
+
+type: "sql-execution"
+parameters:
+  tableSuffix: "_temp"
+configuration:
+  datasource: "warehouse.yml"
+  scripts:
+    - "templates/import-to-table-partition/drop-table-if-exists.sql"
+    - "tables/${tableName}.sql"
+    - "templates/recreate-table-if-schema-changed/update-schema.sql"

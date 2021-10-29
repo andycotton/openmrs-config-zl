@@ -1,4 +1,4 @@
-create table hiv_regimens${tableSuffix}
+create table hiv_regimens
 (
     order_id                  int,
     previous_order_id         int,
@@ -20,11 +20,5 @@ create table hiv_regimens${tableSuffix}
     index_ascending_category  int,
     index_descending_category int,
     index_ascending_patient   int,
-    index_descending_patient  int,
-    site                      VARCHAR(50),
-    partition_num             INT
-)
-    ON psSite
-(
-    partition_num
+    index_descending_patient  int
 );

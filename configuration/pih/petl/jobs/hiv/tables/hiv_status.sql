@@ -1,4 +1,4 @@
-create table hiv_status${tableSuffix}
+create table hiv_status
 (
     status_id                 int,
     patient_id                int,
@@ -13,11 +13,5 @@ create table hiv_status${tableSuffix}
     index_program_ascending   int,
     index_program_descending  int,
     index_patient_ascending   int,
-    index_patient_descending  int,
-    site                      VARCHAR(50),
-    partition_num             INT
-)
-    ON psSite
-(
-    partition_num
+    index_patient_descending  int
 );

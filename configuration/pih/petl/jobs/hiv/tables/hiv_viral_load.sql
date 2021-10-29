@@ -1,4 +1,4 @@
-CREATE TABLE hiv_viral_load${tableSuffix}
+CREATE TABLE hiv_viral_load
 (
     hiv_patient_id                 INT,
     encounter_id                   INT,
@@ -13,11 +13,5 @@ CREATE TABLE hiv_viral_load${tableSuffix}
     vl_type                        VARCHAR(255),
     days_since_vl                  INT,
     order_desc                     INT,
-    order_asc                      INT,
-    site                           VARCHAR(50),
-    partition_num                  INT
-)
-    ON psSite
-(
-    partition_num
+    order_asc                      INT
 );

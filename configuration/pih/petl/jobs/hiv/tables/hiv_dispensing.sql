@@ -1,4 +1,4 @@
-create table hiv_dispensing${tableSuffix}
+create table hiv_dispensing
 (
     patient_id                  int,
     encounter_id                int,
@@ -26,11 +26,5 @@ create table hiv_dispensing${tableSuffix}
     days_late_to_pickup         int,
     regimen_match               char(1),
     dispense_date_ascending     int,
-    dispense_date_descending    int,
-    site                        VARCHAR(50),
-    partition_num               INT
-)
-    ON psSite
-(
-    partition_num
+    dispense_date_descending    int
 );

@@ -1,9 +1,0 @@
-# Execute a full refresh of the warehouse from all sites
-type: "job-pipeline"
-configuration:
-  jobs:
-    - path: "prepare-warehouse-tables.yml"
-    - path: "load-warehouse-tables.yml"
-    - path: "hivmigration/job.yml"
-  execution:
-    maxConcurrentJobs: 1

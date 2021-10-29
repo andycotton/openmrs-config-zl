@@ -1,4 +1,4 @@
-CREATE TABLE ovc_program_encounters${tableSuffix}
+CREATE TABLE ovc_program_encounter
 (
     patient_id                  INT,
     emr_id                      VARCHAR(50),
@@ -24,8 +24,4 @@ CREATE TABLE ovc_program_encounters${tableSuffix}
     index_desc_enrollment       INT,
     site                        VARCHAR(50),
     partition_num               INT
-)
-    ON psSite
-(
-    partition_num
 );

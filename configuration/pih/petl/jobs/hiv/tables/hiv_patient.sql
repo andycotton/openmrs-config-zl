@@ -1,4 +1,4 @@
-create table hiv_patient${tableSuffix}
+create table hiv_patient
 (
     patient_id                     INT,
     zl_emr_id                      VARCHAR(255),
@@ -70,11 +70,5 @@ create table hiv_patient${tableSuffix}
     last_pickup_months_dispensed   FLOAT,
     last_pickup_treatment_line     VARCHAR(5),
     next_pickup_date               DATE,
-    days_late_to_pickup            FLOAT,
-    site                           VARCHAR(50),
-    partition_num                  INT
-)
-    ON psSite
-(
-    partition_num
+    days_late_to_pickup            FLOAT
 );
