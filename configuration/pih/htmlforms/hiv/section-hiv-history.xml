@@ -173,19 +173,19 @@
     -->
 
     <section id="complete-forms-questions-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.completeFormsQuestions">
+             headerCode="zl.completeFormsQuestions">
         <div class="section-container-color">
             <div id="complete-forms-questions-section-details">
                     <p class="side-by-side">
                         <obs id="arv-form-signed"
                              conceptId="PIH:ARV CONSENT FORM SIGNED" style="radio"
-                             labelCode="pihcore.ARVConsentFormSigned"
+                             labelCode="zl.ARVConsentFormSigned"
                              answerSeparator=""/>
                     </p>
                     <p class="side-by-side">
                         <obs id="location-form-complete"
                              conceptId="PIH:LOCATION FORM COMPLETED" style="radio"
-                             labelCode="pihcore.locationFormComplete"
+                             labelCode="zl.locationFormComplete"
                              answerSeparator=""/>
                     </p>
             </div>
@@ -1115,6 +1115,7 @@
                     <render concept="PIH:SURGERY" name="surgery" />
                     <render concept="PIH:CHOLERA" name="cholera" />
                     <render concept="CIEL:120742" name="chikungunya"/>
+                    <render concept="CIEL:165623" name="covid-19"/>
                     <render concept="PIH:OTHER" name="other" />
                 </repeat>
             </table>
@@ -1363,7 +1364,7 @@
                              labelCode="pihcore.tbscreen.{0}"
                              labelCssClass="tb-screening-question-label"
                              conceptLabels="coreapps.yes,coreapps.no"
-                             style="radio" />
+                             style="radio" required="true" />
                     </div>
                 </repeat>
             </div>
