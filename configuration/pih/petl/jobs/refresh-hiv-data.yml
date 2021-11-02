@@ -3,13 +3,17 @@
 type: "job-pipeline"
 parameters:
   siteName: "hiv"
+schedule:
+  cron: "0 0 5 ? * *"
+errorHandling:
+  maxAttempts: 10
+  retryInterval: 1
+  retryIntervalUnit: "MINUTES"
 configuration:
   jobs:
     - path: "create-source-views-and-functions.yml"
     - type: "iterating-job"
       configuration:
-        execution:
-          maxConcurrentJobs: 1  # Import into up to 1 tables concurrently
         jobTemplate:
           type: "sqlserver-bulk-import"
           configuration:
