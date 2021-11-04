@@ -453,8 +453,8 @@
         </div>
     </section>
 
-    <section id="syphilis-section" sectionTag="fieldset"
-             headerStyle="title" headerCode="SYPHILIS">
+    <section id="syphilis-section" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="Syphilis">
 
         <div class="section-container">
             <p>
@@ -506,7 +506,7 @@
 
     </section>
 
-    <section id="obgyn-section" sectionTag="fieldset"
+    <section id="obgyn-section" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="OB/GYN">
         <div class="section-container">
 
@@ -753,7 +753,7 @@
         </div>
     </section>
 
-    <section id="family-history" sectionTag="fieldset" headerStyle="title"
+    <section id="family-history" sectionTag="fieldset" headerStyle="title" headerTag="legend"
              headerCode="zl.consultNote.familyHistory.title">
         <div class="section-container">
             <familyHistoryRelativeCheckboxes concept="PIH:ASTHMA" relatives="PIH:FATHER,PIH:MOTHER,PIH:SIBLING,PIH:OTHER"/>
