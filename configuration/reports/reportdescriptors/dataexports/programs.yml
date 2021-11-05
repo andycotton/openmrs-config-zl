@@ -18,3 +18,4 @@ config:
   order: 1000
   components:
     - "dataExports"
+  privilege: "Task: clinical.reports"
