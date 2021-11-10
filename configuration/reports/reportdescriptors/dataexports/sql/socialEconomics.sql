@@ -77,11 +77,12 @@ create temporary table temp_social_econ
   currently_employed varchar(50),
   recieved_assistance text,
   recommended_assistance text,
+  partners_support varchar(50),
   other_recommended_or_recieved_assistance_name text,
   recieved_other_assistance varchar(50),
   recommended_other_assistance varchar(50),
   socio_economic_assistance_comment text,
-  undernourishment varchar(255),
+    undernourishment varchar(255),
   infant_mortality varchar(255),
   completed_six_years_schooling varchar(255),
   not_attending_school varchar(255),
@@ -244,6 +245,9 @@ left join
 obs o3 on o3.encounter_id = tsn.encounter_id and o3.voided = 0 and o3.concept_id = @recommended_assistance and value_coded = @other
 set tsn.recommended_other_assistance =  if(o3.value_coded = @other, "Yes", null);
 
+update temp_social_econ tsn
+set partners_support = obs_value_coded_list(tsn.encounter_id, 'PIH','13747',@locale);
+
 -- socio_economic_assistance_comment
 update temp_social_econ tsn
 left join obs o on o.encounter_id = tsn.encounter_id and voided = 0 and o.concept_id = @socio_economic_assistance_comment
@@ -336,6 +340,7 @@ ability_to_perform_main_daily_activity_since_illness,
 currently_employed,
 recieved_assistance,
 recommended_assistance,
+partners_support,
 other_recommended_or_recieved_assistance_name,
 recieved_other_assistance,
 recommended_other_assistance,
