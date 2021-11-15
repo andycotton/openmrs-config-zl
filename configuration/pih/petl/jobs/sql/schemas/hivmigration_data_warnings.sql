@@ -13,5 +13,3 @@
     field_value VARCHAR(1000),
     flag_for_review BIT
 );
-
-

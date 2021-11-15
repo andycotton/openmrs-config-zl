@@ -1,0 +1,47 @@
+# For the HIV Server, we only execute the "hiv", "ovc", and "hivmigration" ETL jobs
+
+type: "job-pipeline"
+parameters:
+  siteName: "hiv"
+schedule:
+  cron: "0 0 5 ? * *"
+errorHandling:
+  maxAttempts: 10
+  retryInterval: 1
+  retryIntervalUnit: "MINUTES"
+configuration:
+  jobs:
+    - path: "create-source-views-and-functions.yml"
+    - type: "iterating-job"
+      configuration:
+        jobTemplate:
+          type: "sqlserver-bulk-import"
+          configuration:
+            extract:
+              datasource: "openmrs-${siteName}.yml"
+              query:  "sql/extractions/${tableName}.sql"
+            load:
+              datasource: "warehouse-hiv.yml"
+              table: "${tableName}"
+              schema: "sql/schemas/${tableName}.sql"
+        iterations:
+          - tableName: "hiv_dispensing"
+          - tableName: "hiv_patient"
+          - tableName: "hiv_patient_program"
+          - tableName: "hiv_regimens"
+          - tableName: "hiv_status"
+          - tableName: "hiv_viral_load"
+          - tableName: "hiv_visit"
+          - tableName: "ovc_program_encounters"
+          - tableName: "hivmigration_data_warnings"
+
+    - type: "sqlserver-bulk-import"
+      configuration:
+        extract:
+          datasource: "openmrs-${siteName}.yml"
+          query:  "sql/extractions/hivmigration_aggregrate_data_warnings.sql"
+        load:
+          datasource: "warehouse-hiv.yml"
+          table: "hivmigration_aggregrate_data_warnings"
+          schema: "sql/schemas/hivmigration_aggregrate_data_warnings.sql"
+          dropAndRecreateTable: "false"
