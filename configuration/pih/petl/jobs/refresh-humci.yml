@@ -1,0 +1,4 @@
+path: "refresh-base-tables.yml"
+parameters:
+  siteName: "humci"
+  partitionNum: "1"
