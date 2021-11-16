@@ -21,31 +21,4 @@ configuration:
     - siteName: "mirebalais"
       partitionNum: "6"
   jobTemplate:
-    type: "job-pipeline"
-    configuration:
-      jobs:
-        - path: "create-source-views-and-functions.yml"
-        - type: "iterating-job"
-          configuration:
-            maxConcurrentJobs: 1  # Import into up to 1 tables concurrently
-            jobTemplate:
-              path: "import-to-table-partition.yml"
-            iterations:
-              - tableName: "all_lab_orders"
-              - tableName: "all_lab_results"
-              - tableName: "covid_admission"
-              - tableName: "covid_diagnoses"
-              - tableName: "covid_discharge"
-              - tableName: "covid_disposition"
-              - tableName: "covid_lab_test"
-              - tableName: "covid_visit"
-              - tableName: "echocardiogram"
-              - tableName: "mch_birth"
-              - tableName: "mch_delivery"
-              - tableName: "mch_patient"
-              - tableName: "mch_pregnancy"
-              - tableName: "mch_status"
-              - tableName: "mch_visit"
-              - tableName: "tb_lab_results"
-              - tableName: "tb_screening"
-              - tableName: "vaccinations_anc"
+    path: "refresh-base-tables.yml"
