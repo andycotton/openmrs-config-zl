@@ -1,3 +1,6 @@
+-- set @startDate='2020-11-01';
+-- set @endDate='2021-12-21';
+
 drop temporary table if exists temp_social_econ;
 
 set sql_safe_updates = 0;
@@ -77,12 +80,25 @@ create temporary table temp_social_econ
   currently_employed varchar(50),
   recieved_assistance text,
   recommended_assistance text,
-  partners_support varchar(50),
-  other_recommended_or_recieved_assistance_name text,
-  recieved_other_assistance varchar(50),
-  recommended_other_assistance varchar(50),
+  transport_assistance_received boolean,
+  transport_assistance_recommended boolean,
+  nutritional_assistance_received boolean,
+  nutritional_assistance_recommended boolean,
+  food_package_received boolean,
+  food_package_recommended boolean,
+  school_assistance_received boolean,
+  school_assistance_recommended boolean,
+  housing_assistance_received boolean,
+  housing_assistance_recommended boolean,
+  home_care_kit_received boolean,
+  home_care_kit_recommended boolean,
+  cash_transfer_received boolean,
+  cash_transfer_recommended boolean,
+  other_assistance_received boolean,
+  other_assistance_recommended boolean,
+  partners_support boolean,
   socio_economic_assistance_comment text,
-    undernourishment varchar(255),
+  undernourishment varchar(255),
   infant_mortality varchar(255),
   completed_six_years_schooling varchar(255),
   not_attending_school varchar(255),
@@ -227,26 +243,57 @@ group by encounter_id
 ) o1 on tsn.encounter_id = o1.encounter_id
 set tsn.recommended_assistance = o1.names;
 
-
--- this is not model the way it appears on the paper form
 update temp_social_econ tsn
-left join
-obs o1 on o1.concept_id = @other_recommended_or_recieved_assistance_name and voided = 0 and tsn.encounter_id = o1.encounter_id
-set tsn.other_recommended_or_recieved_assistance_name = o1.value_text;
-
+set transport_assistance_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','990') is null, '0','1');
 
 update temp_social_econ tsn
-left join
-obs o2 on o2.encounter_id = tsn.encounter_id and o2.voided = 0 and o2.concept_id = @recieved_assistance and o2.value_coded = @other
-set tsn.recieved_other_assistance = if(o2.value_coded = @other, "Yes", null);
+set transport_assistance_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','990') is null,'0','1');
 
 update temp_social_econ tsn
-left join
-obs o3 on o3.encounter_id = tsn.encounter_id and o3.voided = 0 and o3.concept_id = @recommended_assistance and value_coded = @other
-set tsn.recommended_other_assistance =  if(o3.value_coded = @other, "Yes", null);
+set nutritional_assistance_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','1400') is null, '0','1');
 
 update temp_social_econ tsn
-set partners_support = obs_value_coded_list(tsn.encounter_id, 'PIH','13747',@locale);
+set nutritional_assistance_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','1400') is null,'0','1');
+
+update temp_social_econ tsn
+set food_package_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','1847') is null, '0','1');
+
+update temp_social_econ tsn
+set food_package_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','1847') is null,'0','1');
+
+update temp_social_econ tsn
+set school_assistance_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','2863') is null, '0','1');
+
+update temp_social_econ tsn
+set school_assistance_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','2863') is null,'0','1');
+
+update temp_social_econ tsn
+set housing_assistance_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','2864') is null, '0','1');
+
+update temp_social_econ tsn
+set housing_assistance_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','2864') is null,'0','1');
+
+update temp_social_econ tsn
+set home_care_kit_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','12886') is null, '0','1');
+
+update temp_social_econ tsn
+set home_care_kit_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','12886') is null,'0','1');
+
+update temp_social_econ tsn
+set cash_transfer_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','12885') is null, '0','1');
+
+update temp_social_econ tsn
+set cash_transfer_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','12885') is null,'0','1');
+
+
+update temp_social_econ tsn
+set other_assistance_received = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2156', 'PIH','5622') is null, '0','1');
+
+update temp_social_econ tsn
+set other_assistance_recommended = if(obs_single_value_coded(tsn.encounter_id, 'PIH','2157', 'PIH','5622') is null,'0','1');
+
+update temp_social_econ tsn
+set partners_support = if(obs_value_coded_list(tsn.encounter_id, 'PIH','13747',@locale) is null,'0','1');
 
 -- socio_economic_assistance_comment
 update temp_social_econ tsn
@@ -340,10 +387,23 @@ ability_to_perform_main_daily_activity_since_illness,
 currently_employed,
 recieved_assistance,
 recommended_assistance,
+transport_assistance_received,
+transport_assistance_recommended,
+nutritional_assistance_received,
+nutritional_assistance_recommended,
+food_package_received,
+food_package_recommended,
+school_assistance_received,
+school_assistance_recommended,
+housing_assistance_received,
+housing_assistance_recommended,
+home_care_kit_received,
+home_care_kit_recommended,
+cash_transfer_received,
+cash_transfer_recommended,
 partners_support,
-other_recommended_or_recieved_assistance_name,
-recieved_other_assistance,
-recommended_other_assistance,
+other_assistance_received,
+other_assistance_recommended,
 socio_economic_assistance_comment,
 undernourishment,
 infant_mortality,
