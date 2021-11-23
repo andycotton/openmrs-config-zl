@@ -86,9 +86,12 @@ set art_start_date =
 -- active on art
 update temp_eid t
 inner join orders o on o.patient_id = t.patient_id  and o.order_reason = concept_from_mapping('PIH','11197')
-	and o.date_activated < NOW() and o.date_stopped is null
-set is_active_on_art = if(o.order_id is null, '0','1') 
+	and ifnull(o.scheduled_date, o.date_activated) <= NOW()
+	and (ifnull(o.date_stopped, o.auto_expire_date) is null 
+		or (ifnull(o.date_stopped, o.auto_expire_date) > now()))
+set is_active_on_art = 1 
 ;
+
 -- is ltfu
 update temp_eid t 
 set next_dispensing_date = date(obs_value_datetime(latestEnc(patient_id, @hivDispEncName, null),'PIH','5096'));
