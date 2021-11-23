@@ -79,7 +79,7 @@ set pcr_result = concept_name(o.value_coded,@locale);
 -- art start date
 update temp_eid t
 set art_start_date = 
-	(select min(o.date_activated) from orders o
+	(select min(ifnull(o.scheduled_date, o.date_activated)) from orders o
 	where o.patient_id  = t.patient_id
 	and o.order_reason = concept_from_mapping('PIH','11197'));
 
