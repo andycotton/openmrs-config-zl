@@ -1271,6 +1271,7 @@
                             <uimessage code="pihcore.result" />:
                         </label>
                         <obs conceptId="CIEL:159391"  />
+                        <br/>
                     </div>
                 </div>
 
@@ -1320,7 +1321,7 @@
                                         <obs conceptId="CIEL:1190"/>
                                     </td>
                                     <td class="{regimen}">
-                                        <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                                        <obs conceptId="CIEL:1191" allowFutureDates="false"/>
                                     </td>
                                     <td id="{regimen}">
                                         <p class="radio">
@@ -1514,7 +1515,7 @@
                                     <obs conceptId="CIEL:1190"/>
                                 </td>
                                 <td class="{hivMedHx}">
-                                    <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                                    <obs conceptId="CIEL:1191" allowFutureDates="false"/>
                                 </td>
                             </tr>
                         </obsgroup>
@@ -1536,7 +1537,7 @@
                             <obs conceptId="CIEL:1190"/>
                         </td>
                         <td class="otherHivMedHx">
-                            <obs conceptId="CIEL:1191" allowFutureDates="true"/>
+                            <obs conceptId="CIEL:1191" allowFutureDates="false"/>
                         </td>
                     </tr>
                 </obsgroup>
@@ -1592,7 +1593,7 @@
                                         <obs conceptId="CIEL:163757"/>
                                     </td>
                                     <td class="{comment}-date">
-                                        <obs conceptId="CIEL:163758" allowFutureDates="true"/>
+                                        <obs conceptId="CIEL:163758" allowFutureDates="false"/>
                                     </td>
                                 </tr>
                             </obsgroup>
@@ -1620,7 +1621,7 @@
                                 <obs conceptId="CIEL:163757"/>
                             </td>
                             <td class="other-fp">
-                                <obs conceptId="CIEL:163758" allowFutureDates="true"/>
+                                <obs conceptId="CIEL:163758" allowFutureDates="false"/>
                             </td>
                         </tr>
                     </obsgroup>
