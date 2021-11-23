@@ -262,53 +262,61 @@
     <section id="hiv-serology" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.hiv.serology.title">
         <div class="section-container">
-            <div class="two-columns">
-                <label>
-                    <uimessage code="pihcore.testOrderedBy"/>
-                </label>
-
-                <repeat>
-                    <template>
-                        <obs conceptId="CIEL:159936"
-                             answerConceptId="{point}" answerCode="{message}"/>
-                    </template>
-
-                    <render point="CIEL:159940" message="pihcore.testLocation.vct" comment="vct"/>
-                    <render point="CIEL:159937" message="pihcore.testLocation.mch" comment="MCH"/>
-                    <render point="CIEL:160542" message="pihcore.testLocation.primary" comment="Outpatient"/>
-                    <render point="CIEL:159939" message="pihcore.testLocation.mobile" comment="Mobile"/>
-                    <render point="PIH:2714" message="pihcore.testLocation.familyPlan" comment="Family planning clinic"/>
-                    <render point="PIH:2235" message="pihcore.testLocation.maternity" comment="inpatient maternity"/>
-                    <render point="PIH:6298" message="pihcore.testLocation.surgery" comment="surgery"/>
-                    <render point="PIH:7891" message="pihcore.testLocation.intMed" comment="inpatient internal med"/>
-                    <render point="PIH:2717" message="pihcore.testLocation.pedWard" comment="inpatient peds"/>
-                 </repeat>
-
-                <obs conceptId="CIEL:159936"
-                     answerConceptId="CIEL:5622" answerCode="pihcore.other"
-                     commentFieldCode="zl.ifOtherSpecify" />
-
-                <p>
+            <div class="two-column">
+                <div>
                     <label>
-                        <uimessage code="pihcore.hiv.testDate"/>
-                    </label>
-                    <obs conceptId="CIEL:164400"/>
-                </p>
-
-                    <br/>
-                    <br/>
-                    <br/>
-
-                <!-- Partner -->
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.partnerTesting"/>
+                        <uimessage code="pihcore.testOrderedBy"/>
                     </label>
 
-                    <obs conceptId="CIEL:159381"
-                        answerConceptIds="CIEL:1066,CIEL:1065,PIH:NO PARTNER"
-                        style="radio" answerSeparator="" />
-                </p>
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:159936"
+                                 answerConceptId="{point}" answerCode="{message}"/>
+                        </template>
+
+                        <render point="CIEL:159940" message="pihcore.testLocation.vct" comment="vct"/>
+                        <render point="CIEL:159937" message="pihcore.testLocation.mch" comment="MCH"/>
+                        <render point="CIEL:160542" message="pihcore.testLocation.primary" comment="Outpatient"/>
+                        <render point="CIEL:159939" message="pihcore.testLocation.mobile" comment="Mobile"/>
+                        <render point="PIH:2714" message="pihcore.testLocation.familyPlan"
+                                comment="Family planning clinic"/>
+                        <render point="PIH:2235" message="pihcore.testLocation.maternity"
+                                comment="inpatient maternity"/>
+                        <render point="PIH:6298" message="pihcore.testLocation.surgery" comment="surgery"/>
+                        <render point="PIH:7891" message="pihcore.testLocation.intMed"
+                                comment="inpatient internal med"/>
+                        <render point="PIH:2717" message="pihcore.testLocation.pedWard" comment="inpatient peds"/>
+                    </repeat>
+
+                    <obs conceptId="CIEL:159936"
+                         answerConceptId="CIEL:5622" answerCode="pihcore.other"
+                         commentFieldCode="zl.ifOtherSpecify"/>
+                </div>
+
+                <div>
+
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.hiv.testDate"/>
+                        </label>
+                        <obs conceptId="CIEL:164400"/>
+                    </p>
+
+                    <br/>
+                    <br/>
+
+                    <!-- Partner -->
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.hiv.partnerTesting"/>
+                        </label>
+                        <br/>
+
+                        <obs conceptId="CIEL:159381"
+                             answerConceptIds="CIEL:1066,CIEL:1065,PIH:NO PARTNER"
+                             style="radio" />
+                    </p>
+                </div>
             </div>
 
             <includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 8) &amp;&amp; $patient.gender == 'F' ">
@@ -852,7 +860,7 @@
                     <render mode="Rapports sexuels avec une femme" cId="CIEL:163291" toggle="women" />
                     <render mode="Injection de drogues" cId="CIEL:105" toggle="drugs"/>
                     <render mode="Bénéficier de sang/dérivé sanguin" cId="CIEL:1063" toggle="blood" />
-                    <render mode="Transmission mère a enfant" cId="CIEL:163273" toggle="pmtct "/>
+                    <render mode="Transmission mère a enfant" cId="CIEL:163273" toggle="pmtct"/>
                     <render mode="Accident d'exposition au sang" cId="CIEL:163274" toggle="accident-blood"/>
                     <render mode="Rapports hétérosexuelles avec personne SIDA/VIH+" cId="CIEL:163289" toggle="hiv-person" />
                     <render mode="Rapports hétérosexuelles avec personne qui s'injecte de la drogue" cId="PIH:11534" toggle="with-drug-person" />
