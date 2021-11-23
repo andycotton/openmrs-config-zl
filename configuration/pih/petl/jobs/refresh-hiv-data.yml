@@ -34,6 +34,7 @@ configuration:
           - tableName: "hiv_visit"
           - tableName: "ovc_program_encounters"
           - tableName: "hivmigration_data_warnings"
+          - tableName: "pmtct_infant_delivery"
 
     - type: "sqlserver-bulk-import"
       configuration:
