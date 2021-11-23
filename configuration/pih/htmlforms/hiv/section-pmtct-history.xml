@@ -507,7 +507,7 @@
     </section>
 
     <section id="obgyn-section" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="OB/GYN">
+             headerStyle="title" headerCode="Ob/Gyn">
         <div class="section-container">
 
             <div class="two-columns">
@@ -746,6 +746,7 @@
                     <render concept="PIH:DIABETES" name="diabetes" />
                     <render concept="PIH:SURGERY" name="surgery" />
                     <render concept="PIH:CHOLERA" name="cholera" />
+                    <render concept="CIEL:165623" name="covid" />
                     <render concept="CIEL:120742" name="chikungunya"/>
                     <render concept="PIH:OTHER" name="other" />
                 </repeat>
@@ -1241,7 +1242,8 @@
              </div>
          </section>
 
-    <section id="id-ev-treatment-cont" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.evaluation.title">
+    <section id="id-ev-treatment-cont" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="pihcore.evaluation">
         <div class="section-container-color">
                 <div>
                     <p class="side-by-side">
