@@ -7,9 +7,9 @@
     hivemr_v1_id INT,
     hiv_dossier_id VARCHAR(255),
     warning_type VARCHAR(255),
-    warning_details VARCHAR(1000),
+    warning_details TEXT,
     encounter_date DATE,
     field_name VARCHAR(100),
-    field_value VARCHAR(1000),
+    field_value TEXT,
     flag_for_review BIT
 );
