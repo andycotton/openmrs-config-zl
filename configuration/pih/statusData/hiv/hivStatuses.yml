@@ -1,0 +1,46 @@
+# These status data definitions are what define the HIV STATUS widget on the HIV Program Dashboard
+
+- id: "nextMedicationPickupDate"
+  labelCode: "zl.status.medPickups.nextScheduledDate"
+  statusDataQuery: "nextMedicationPickupDate.sql"
+  valueExpression: "#if($numPickups == 0)$fn.translate('zl.status.medPickups.none')#{else}$fn.formatDate($nextPickupDate)#end"
+  formatExpression: "#if($numPickups == 0 || $fn.daysSince($nextPickupDate) > 28)status-data-alert#{else}#end"
+
+- id: "nextHivAppointmentDate"
+  labelCode: "zl.status.appointment.nextScheduledDate"
+  statusDataQuery: "nextAppointmentDate.sql"
+  valueExpression: "$fn.formatDate($nextVisitDate)"
+  formatExpression: "#if($nextVisitDate && $fn.daysSince($nextVisitDate) > 0)status-data-alert#{else}#end"
+
+- id: "lastViralLoadTestDate"
+  labelCode: "zl.status.lastViralLoad.testDate"
+  statusDataQuery: "lastViralLoad.sql"
+  valueExpression: "#if($vlEncounterDate)$fn.format($vlEncounterDate)#{else}$fn.translate('zl.status.lastViralLoad.none')#end"
+  formatExpression: "#if($dueForVl == 1)status-data-alert#end"
+
+- id: "lastViralLoadResult"
+  labelCode: "zl.status.lastViralLoad.result"
+  statusDataQuery: "lastViralLoad.sql"
+  conditionExpression: "#if($vlEncounterDate)true#{else}false#end"
+  valueExpression: "#if($vlDetectable != 1 || !$vlQuantitativeResult)$fn.format($fn.concept($vlQualitativeResult))#{else}$vlQuantitativeResult#end"
+  formatExpression: ""
+
+- id: "pregnancyStatus"
+  labelCode: "zl.status.pregnancyStatus.result"
+  statusDataQuery: "lastPregnancyStatus.sql"
+  conditionExpression: "#if($gender == 'F')true#{else}false#end"
+  valueExpression: "#if($pregnant == 1)$fn.translate('pihcore.pregnant')#{else}$fn.translate('pihcore.notPregnant')#end"
+  formatExpression: "#if($pregnant == 1)status-data-alert#end"
+
+- id: "pregnancyDueDate"
+  labelCode: "zl.status.pregnancyStatus.dueDate"
+  statusDataQuery: "lastPregnancyStatus.sql"
+  conditionExpression: "#if($gender == 'F' && $pregnant == 1)true#{else}false#end"
+  valueExpression: "$fn.format($dueDate)"
+  formatExpression: "#if($pregnant == 1)status-data-alert#end"
+
+- id: "lastCd4Result"
+  labelCode: "zl.status.lastCd4.result"
+  statusDataQuery: "lastCd4.sql"
+  valueExpression: "#if($cd4)$cd4 $fn.translate('general.onDate') $fn.formatDate($cd4Date)#{else}$fn.translate('zl.status.lastCd4.none')#end"
+  formatExpression: ""
