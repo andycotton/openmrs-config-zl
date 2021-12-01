@@ -3,7 +3,35 @@
   "site": "CERCA_LA_SOURCE",
   "dossierIdentifierPrefix": "CLS",
 
+  "components": [
+    "allergies",
+    "checkIn",
+    "checkInHomepageApp",
+    "clinicianDashboard",
+    "dataExports",
+    "echocardiogram",
+    "exportPatients",
+    "importPatients",
+    "markPatientDead",
+    "mch",
+    "monitoringReports",
+    "myAccount",
+    "ncd",
+    "obgyn",
+    "overviewReports",
+    "patientRegistration",
+    "programs",
+    "relationships",
+    "socioEconomics",
+    "systemAdministration",
+    "todaysVisits",
+    "visitManagement",
+    "visitNote",
+    "uhmVitals"
+  ],
+
   "globalProperties": {
+    "haiti.checkIn.reasonsForVisit":"PIH:9359,PIH:5489,PIH:11504",
     "coreapps.defaultPatientIdentifierLocation": "c741e25d-eb07-4efc-89e4-38ac73948ae1"
   },
 
