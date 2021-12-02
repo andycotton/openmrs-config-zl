@@ -1,4 +1,4 @@
-CREATE TABLE mch_kellogg_data
+CREATE TABLE mch_j9_data
 (
 patient_id int,
 patient_age int ,
