@@ -1,7 +1,6 @@
 -- set @locale = 'en';  -- uncomment for testing
 
 set sql_safe_updates = 0;
-set session group_concat_max_len = 100000;
 
 select program_id into @mchProgram from program where uuid = '41a2715e-8a14-11e8-9a94-a6cf71072f73';
 select encounter_type('de844e58-11e1-11e8-b642-0ed5f89f718b') into @socioEncName;
