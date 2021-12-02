@@ -4,12 +4,10 @@ set sql_safe_updates = 0;
 set session group_concat_max_len = 100000;
 
 select program_id into @mchProgram from program where uuid = '41a2715e-8a14-11e8-9a94-a6cf71072f73';
-select concept_name(concept_from_mapping('PIH','YES'),@locale) into @yes;
-select concept_name(concept_from_mapping('PIH','NO'),@locale) into @no;
-select name into @socioEncName from encounter_type where uuid = 'de844e58-11e1-11e8-b642-0ed5f89f718b';
+select encounter_type('de844e58-11e1-11e8-b642-0ed5f89f718b') into @socioEncName;
+select encounter_type('d83e98fd-dc7b-420f-aa3f-36f648b4483d') into @ob_gyn_enc_id;
 select program_workflow_id into @mchWorkflow from program_workflow where uuid = '41a277d0-8a14-11e8-9a94-a6cf71072f73';
 set @past_med_finding = concept_from_mapping('PIH','10140');
-select encounter_type_id into @ob_gyn_enc_id from encounter_type where uuid = 'd83e98fd-dc7b-420f-aa3f-36f648b4483d';
 
 drop temporary table if exists temp_j9;
 
@@ -81,16 +79,13 @@ set patient_age = current_age_in_years(patient_id);
 -- columns from socioeconomic form
 -- education level
 update temp_j9
-set education_level = latest_obs_value_coded(patient_id, 'CIEL','1712',@locale);
+set education_level = value_coded_name(latest_obs(patient_id,'CIEL','1712'),@locale);
+
+
 
 -- able to read or write
 update temp_j9
-set able_read_write = 
-CASE latest_obs_value_coded(patient_id, 'CIEL','166855',@locale)
-when @yes then 1
-when @no then 0
-END
-;
+set able_read_write = value_coded_boolean(latest_obs(patient_id, 'CIEL','166855'));
 
 -- family support checkbox
 update temp_j9 t
@@ -100,44 +95,30 @@ inner join obs o on o.encounter_id = last_socio_encounter_id and o.voided = 0
 set family_support = if(o.obs_id is null,null,1 );
 
 -- partner support checkbox
-update temp_j9
-set partner_support_anc = 
-CASE latest_obs_value_coded(patient_id, 'PIH','13747',@locale)
-when @yes then 1
-when @no then 0
-END
+update temp_j9 
+set partner_support_anc = value_coded_boolean(latest_obs(patient_id, 'PIH','13747'));
 ;
 
 -- currently employed checkbox
 update temp_j9
-set employment_status = 
-CASE latest_obs_value_coded(patient_id, 'PIH','3395',@locale)
-when @yes then 1
-when @no then 0
-END
-;
+set employment_status = value_coded_boolean(latest_obs(patient_id, 'PIH','3395'));
 
 -- number household members
 update temp_j9
-set number_household_members = latest_obs_value_numeric(patient_id, 'CIEL','1474');
+set number_household_members = value_numeric(latest_obs(patient_id, 'CIEL','1474'));
 
 -- access to transpoirt
 update temp_j9
-set access_transport = 
-CASE latest_obs_value_coded(patient_id, 'PIH','13746',@locale)
-when @yes then 1
-when @no then 0
-END
-;
+set access_transport = value_coded_boolean(latest_obs(patient_id, 'PIH','13746'));
 
 -- mode of transport
 update temp_j9
-set mode_transport = latest_obs_value_coded(patient_id,'PIH','975',@locale);
+set mode_transport = value_coded_name(latest_obs(patient_id,'PIH','975'),@locale);
 
 -- columns from obgyn form
 -- expected delivery date
 update temp_j9
-set expected_delivery_date = latest_obs_value_datetime(patient_id,'PIH','5596');
+set expected_delivery_date = value_datetime(latest_obs(patient_id,'PIH','5596'));
 
 -- need to retrieve the highest birth number from prior births entered
 -- to derive prior birth columns 
@@ -256,15 +237,15 @@ set number_family_planning_visits = s.count_visits;
 
 -- marital status
 update temp_j9 t 
-set marital_status = latest_obs_value_coded(t.patient_id, 'PIH','1054',@locale);
+set marital_status = value_coded_name(latest_obs(t.patient_id, 'PIH','1054'),@locale);
 
 -- religion
 update temp_j9 t 
-set religion = latest_obs_value_coded(t.patient_id, 'PIH','10154',@locale);
+set religion = value_coded_name(latest_obs(t.patient_id, 'PIH','10154'),@locale);
 
 -- number of older children
 update temp_j9 t 
-set number_older_children = latest_obs_value_numeric(t.patient_id, 'PIH','11117');
+set number_older_children = value_numeric(latest_obs(t.patient_id, 'PIH','11117'));
 
 -- patient's address
 update temp_j9 t 
@@ -284,11 +265,11 @@ set address_street_landmark = person_address_two(patient_id);
 
 -- traditional healer
 update temp_j9 t 
-set traditional_healer = latest_obs_value_coded(t.patient_id, 'PIH','13242',@locale);
+set traditional_healer = value_coded_name(latest_obs(t.patient_id, 'PIH','13242'),@locale);
 
 -- used prenatal teas
 update temp_j9 t 
-set prenatal_teas = latest_obs_value_coded(t.patient_id, 'PIH','13737',@locale);
+set prenatal_teas = value_coded_name(latest_obs(t.patient_id, 'PIH','13737'),@locale);
 
 -- final output
 Select
