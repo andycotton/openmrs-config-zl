@@ -27,6 +27,7 @@ configuration:
           - tableName: "mch_pregnancy"
           - tableName: "mch_status"
           - tableName: "mch_visit"
+          - tableName: "mch_j9_data"
           - tableName: "tb_lab_results"
           - tableName: "tb_screening"
           - tableName: "vaccinations_anc"
