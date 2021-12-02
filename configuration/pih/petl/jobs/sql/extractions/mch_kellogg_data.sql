@@ -82,7 +82,7 @@ set education_level = value_coded_name(latest_obs(patient_id,'CIEL','1712'),@loc
 
 -- able to read or write
 update temp_j9
-set able_read_write = value_coded_boolean(latest_obs(patient_id, 'CIEL','166855'));
+set able_read_write = value_coded_as_boolean(latest_obs(patient_id, 'CIEL','166855'));
 
 -- family support checkbox
 update temp_j9 t
@@ -93,12 +93,12 @@ set family_support = if(o.obs_id is null,null,1 );
 
 -- partner support checkbox
 update temp_j9 
-set partner_support_anc = value_coded_boolean(latest_obs(patient_id, 'PIH','13747'));
+set partner_support_anc = value_coded_as_boolean(latest_obs(patient_id, 'PIH','13747'));
 ;
 
 -- currently employed checkbox
 update temp_j9
-set employment_status = value_coded_boolean(latest_obs(patient_id, 'PIH','3395'));
+set employment_status = value_coded_as_boolean(latest_obs(patient_id, 'PIH','3395'));
 
 -- number household members
 update temp_j9
@@ -106,7 +106,7 @@ set number_household_members = value_numeric(latest_obs(patient_id, 'CIEL','1474
 
 -- access to transpoirt
 update temp_j9
-set access_transport = value_coded_boolean(latest_obs(patient_id, 'PIH','13746'));
+set access_transport = value_coded_as_boolean(latest_obs(patient_id, 'PIH','13746'));
 
 -- mode of transport
 update temp_j9
