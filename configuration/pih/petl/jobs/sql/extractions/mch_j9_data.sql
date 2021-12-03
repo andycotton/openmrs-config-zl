@@ -78,8 +78,6 @@ set patient_age = current_age_in_years(patient_id);
 update temp_j9
 set education_level = value_coded_name(latest_obs(patient_id,'CIEL','1712'),@locale);
 
-
-
 -- able to read or write
 update temp_j9
 set able_read_write = value_coded_as_boolean(latest_obs(patient_id, 'CIEL','166855'));
@@ -94,7 +92,6 @@ set family_support = if(o.obs_id is null,null,1 );
 -- partner support checkbox
 update temp_j9 
 set partner_support_anc = value_coded_as_boolean(latest_obs(patient_id, 'PIH','13747'));
-;
 
 -- currently employed checkbox
 update temp_j9
