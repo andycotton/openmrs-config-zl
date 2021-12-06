@@ -52,12 +52,9 @@ inner join
 	group by patient_id,pp.date_enrolled) s on s.patient_id = t.patient_id and s.date_enrolled = t.hiv_enrollment_date
 set	pmtct_initiation_date = s.pregnant_start_date;
 
--- uses mininum start date of ARV order as art start date
+-- art start date 
 update temp_contacts t
-set art_start_date = 
-	(select min(ifnull(o.scheduled_date, o.date_activated)) from orders o
-	where o.patient_id  = t.patient_id
-	and o.order_reason = concept_from_mapping('PIH','11197'));
+set art_start_date = orderReasonStartDate(t.patient_id,'PIH','11197');
 
 -- contact type
 update temp_contacts t 
