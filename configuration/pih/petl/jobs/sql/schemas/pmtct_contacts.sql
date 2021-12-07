@@ -1,6 +1,7 @@
 CREATE TABLE pmtct_contacts
 (
 patient_id int,
+zlemrid varchar(255),
 age int, 
 hiv_enrollment_date datetime,
 pmtct_initiation_date datetime,
@@ -9,7 +10,6 @@ reference_date datetime,
 contact_index int,
 contact_type varchar(255),
 contact_gender varchar(255),
-contact_bond varchar(255),
 contact_dob datetime,
 contact_has_posttest_counseling varchar(255),
 contact_hiv_status_cat varchar(255),
