@@ -719,7 +719,7 @@
                         <td>
                             <uimessage code="B6" />:
                             <span class="small hidden">
-                                <obs conceptId="PIH:1535" answerConceptId="PIH:3120" defaultValue="PIH:3120"></obs>
+                                <obs conceptId="PIH:1535" answerConceptId="CIEL:82912" defaultValue="CIEL:82912"></obs>
                             </span>
                         </td>
                         <td>
