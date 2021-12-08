@@ -11,6 +11,7 @@
     "dataExports",
     "exportPatients",
     "importPatients",
+    "labResults",
     "markPatientDead",
     "monitoringReports",
     "myAccount",
@@ -22,10 +23,9 @@
     "socioEconomics",
     "systemAdministration",
     "todaysVisits",
-    "visitManagement",
-    "visitNote",
     "uhmVitals",
-    "labResults"
+    "visitManagement",
+    "visitNote"
   ],
 
   "globalProperties": {
