@@ -213,7 +213,7 @@ function setButtonsDisabled(val){
  * We have a ticket for the above work, see: https://issues.openmrs.org/browse/HTML-799 , and if we implement this
  * we could potentially rework this function to just be about hiding/showing the date
  *
- * @param badDateInTheFutureMsg
+ * @param widgetId
  */
 function setUpObsWithObsDateTime(widgetId){
     getField(widgetId + '.date').hide();
