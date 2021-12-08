@@ -9,15 +9,13 @@
     "checkInHomepageApp",
     "clinicianDashboard",
     "dataExports",
-    "echocardiogram",
     "exportPatients",
     "importPatients",
+    "labResults",
     "markPatientDead",
-    "mch",
     "monitoringReports",
     "myAccount",
     "ncd",
-    "obgyn",
     "overviewReports",
     "patientRegistration",
     "programs",
@@ -25,9 +23,9 @@
     "socioEconomics",
     "systemAdministration",
     "todaysVisits",
+    "uhmVitals",
     "visitManagement",
-    "visitNote",
-    "uhmVitals"
+    "visitNote"
   ],
 
   "globalProperties": {
