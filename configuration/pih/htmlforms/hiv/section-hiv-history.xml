@@ -211,7 +211,7 @@
         <div class="section-container-color">
             <obsgroup groupingConceptId="PIH:13169">
                 <label>
-                    <uimessage code="pihcore.externalTransferQuestion"/>
+                    <uimessage code="pihcore.externalReferInQuestion"/>
                 </label>
                 <p class="side-by-side">
                     <obs id="transfer-referral-spots"
@@ -236,7 +236,7 @@
 
                     <p id="internal-out">
                         <label>
-                            <uimessage code="pihcore.internalLocation"/>
+                            <uimessage code="pihcore.internalTransferLocation"/>
                         </label>
                         <obs conceptId="PIH:8621" style="location" answerLocationTags="Program Location"/>
                         <includeIf velocityTest="$patient.gender == 'F' ">
@@ -247,7 +247,7 @@
 
                     <p id="external-out">
                         <label>
-                            <uimessage code="pihcore.externalLocation"/>
+                            <uimessage code="pihcore.externalTransferLocation"/>
                         </label>
                         <obs conceptId="PIH:11483"/>
                         <obs conceptId="PIH:PEPFAR partner site"
