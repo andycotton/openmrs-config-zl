@@ -1,0 +1,26 @@
+# These status data definitions are what define the TB Status widget on the HIV Program Dashboard
+
+- id: "lastScreening"
+  labelCode: "zl.status.hivTb.lastTbScreening"
+  statusDataQuery: "lastScreening.sql"
+  valueExpression: "#if($lastScreeningDate)$fn.formatDate($lastScreeningDate), $fn.translate($screeningResult)#{else}$fn.translate('zl.status.hivTb.neverScreened')#end"
+  formatExpression: "#if(!$lastScreeningDate || $screeningResult == 'zl.status.hivTb.symptomatic')status-data-alert#end"
+
+- id: "lastTbTestDate"
+  labelCode: "zl.status.hivTb.lastTbTest"
+  statusDataQuery: "lastTbTest.sql"
+  valueExpression: "#if($testDate)$fn.formatDate($testDate), $fn.format($fn.concept($testType))#{else}$fn.translate('zl.status.hivTb.neverTested')#end"
+  formatExpression: ""
+
+- id: "lastTbTestResult"
+  labelCode: "zl.status.hivTb.lastTbTestResult"
+  statusDataQuery: "lastTbTest.sql"
+  conditionExpression: "#if($testDate)true#{else}false#end"
+  valueExpression: "$fn.format($fn.concept($testResult))"
+  formatExpression: ""
+
+- id: "inhStatus"
+  labelCode: "zl.status.hivTb.inhStatus"
+  statusDataQuery: "inhStatus.sql"
+  valueExpression: "#if($startDate)$duration $fn.translate('zl.days')#{else}$fn.translate('zl.status.hivTb.inhNotStarted')#end"
+  formatExpression: ""
