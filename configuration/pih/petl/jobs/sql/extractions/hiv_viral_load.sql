@@ -52,8 +52,7 @@ patient_id IN (
 
 -- visit location
 update temp_hiv_construct_encounters tvl
-inner join visit v on v.visit_id = tvl.visit_id
-set tvl.visit_location = location_name(v.location_id);
+set visit_location = location_name(hivEncounterLocationId(encounter_id));
 
 -- is specimen collection date estimated
 UPDATE temp_hiv_construct_encounters tvl INNER JOIN obs o ON o.voided = 0 AND tvl.encounter_id = o.encounter_id AND concept_id = concept_from_mapping('PIH', '11781')
