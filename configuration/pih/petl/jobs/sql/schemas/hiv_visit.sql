@@ -6,5 +6,5 @@ CREATE TABLE hiv_visit
     pregnant        BIT,
     visit_date      DATE,
     next_visit_date DATE,
-    code_site       INT
+    visit_location  varchar(255)
 );
