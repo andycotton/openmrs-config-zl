@@ -11,11 +11,11 @@ emr_id			VARCHAR(25),
 pregnant		BIT,
 visit_date		DATE,
 next_visit_date	DATE,
-code_site		INT
+visit_location	varchar(255)
 );
 
-INSERT INTO temp_hiv_visit(patient_id, encounter_id, emr_id, visit_date, code_site)
-SELECT patient_id, encounter_id, ZLEMR(patient_id),  DATE(encounter_datetime), location_id FROM encounter WHERE voided = 0 AND encounter_type IN (@hiv_intake, @hiv_followup);
+INSERT INTO temp_hiv_visit(patient_id, encounter_id, emr_id, visit_date)
+SELECT patient_id, encounter_id, ZLEMR(patient_id),  DATE(encounter_datetime) FROM encounter WHERE voided = 0 AND encounter_type IN (@hiv_intake, @hiv_followup);
 
 DELETE FROM temp_hiv_visit
 WHERE
@@ -27,6 +27,8 @@ WHERE
         person_attribute_type t ON a.person_attribute_type_id = t.person_attribute_type_id
             AND a.value = 'true'
             AND t.name = 'Test Patient');
+
+update temp_hiv_visit t set visit_location = location_name(hivEncounterLocationId(encounter_id));           
 
 UPDATE temp_hiv_visit t SET pregnant = (SELECT value_coded FROM obs o WHERE voided = 0 AND concept_id = CONCEPT_FROM_MAPPING("PIH", "PREGNANCY STATUS") AND o.encounter_id = t.encounter_id);
 UPDATE temp_hiv_visit t SET next_visit_date = (SELECT DATE(value_datetime) FROM obs o WHERE voided = 0 AND concept_id = CONCEPT_FROM_MAPPING("PIH", "RETURN VISIT DATE") AND o.encounter_id = t.encounter_id);
