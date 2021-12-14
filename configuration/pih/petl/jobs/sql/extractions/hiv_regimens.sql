@@ -97,7 +97,7 @@ set t.end_reasons = 'Revised order'
 where t.end_date is not null;
 
 -- visit location
-update temp_HIV_regimens t set visit_location = encounter_location_name(encounter_id);
+update temp_HIV_regimens t set visit_location = location_name(hivEncounterLocationId(encounter_id));
 
 -- drug category
 update temp_HIV_regimens 

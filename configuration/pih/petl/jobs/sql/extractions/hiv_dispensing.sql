@@ -37,13 +37,12 @@ regimen_match char(1)
  create index temp_HIV_dispensing_dispense_date on temp_HIV_dispensing (dispense_date);
  create index temp_HIV_dispensing_encounter_id on temp_HIV_dispensing (encounter_id);
 
- insert into temp_HIV_dispensing (patient_id, encounter_id, dispense_date, encounter_location_id)
- select patient_id, encounter_id,encounter_datetime,location_id from encounter
+ insert into temp_HIV_dispensing (patient_id, encounter_id, dispense_date)
+ select patient_id, encounter_id,encounter_datetime from encounter
  where encounter_type = @HIV_dispensing and voided = 0;
 
 update temp_HIV_dispensing t
-inner join location l on l.location_id = t.encounter_location_id
-set dispense_site = l.name;
+set dispense_site = location_name(hivEncounterLocationId(encounter_id));
 
 update temp_HIV_dispensing t
 inner join person p on p.person_id = t.patient_id
@@ -224,8 +223,7 @@ CREATE TEMPORARY TABLE dup_HIV_dispensing SELECT * FROM temp_HIV_dispensing;
 update temp_HIV_dispensing t
 left outer join dup_HIV_dispensing d on d.patient_id=t.patient_id and d.dispense_date_ascending = 1
 set t.regimen_change = if(d.arv_1_med_short_name = t.arv_1_med_short_name,0,1)  -- need to change this to FULL NAME when drugs are captured?
-where t.dispense_date_descending = 1
-;
+where t.dispense_date_descending = 1;
 
 update temp_HIV_dispensing t
 left outer join dup_HIV_dispensing d on d.patient_id=t.patient_id and d.dispense_date_descending = 2
