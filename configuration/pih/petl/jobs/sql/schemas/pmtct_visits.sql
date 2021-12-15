@@ -1,4 +1,4 @@
-CREATE TABLE pmtct_visit (
+CREATE TABLE pmtct_visits (
     visit_id                    INT,
     encounter_id                INT,
     patient_id                  INT,
