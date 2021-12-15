@@ -40,7 +40,7 @@ employment_status varchar(255),
 religion varchar(255),
 family_support boolean,  
 partner_support_anc boolean,
-number_older_children int, 
+number_living_children int, 
 number_household_members int,
 address_department varchar(255),
 address_commune varchar(255),
@@ -163,11 +163,8 @@ set history_type_2_diabetes = answerEverExists(t.patient_id, 'PIH','10140','PIH'
 update temp_j9 t
 set history_gestational_diabetes = answerEverExists(t.patient_id, 'PIH','10140','PIH','6693',null);
 
-/*
 update temp_j9 t
-set history_post_partum_hemorrhage = 
-  ADDING TICKET TO ADD POST PARTUM HEMORRHAGE CHECKBOX ON OBsGYN FORM
-**/
+set history_post_partum_hemorrhage = answerEverExists(t.patient_id, 'PIH','10140','PIH','49',null);
 
 -- Counts number of ANC visits (OBGYN visits with type = ANC)
 update temp_j9 t
@@ -237,9 +234,9 @@ set marital_status = value_coded_name(latest_obs(t.patient_id, 'PIH','1054'),@lo
 update temp_j9 t 
 set religion = value_coded_name(latest_obs(t.patient_id, 'PIH','10154'),@locale);
 
--- number of older children
+-- number of living children
 update temp_j9 t 
-set number_older_children = value_numeric(latest_obs(t.patient_id, 'PIH','11117'));
+set number_living_children = value_numeric(latest_obs(t.patient_id, 'PIH','11117'));
 
 -- patient's address
 update temp_j9 t 
@@ -293,7 +290,7 @@ employment_status,
 religion,
 family_support,
 partner_support_anc,
-number_older_children,
+number_living_children,
 number_household_members,
 address_department,
 address_commune,
