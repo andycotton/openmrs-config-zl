@@ -588,6 +588,7 @@
                    </td>
                 </tr>
                 </obsgroup>
+
                 <obsgroup groupingConceptId="CIEL:1442" >
                 <tr>
                     <td>
@@ -640,6 +641,35 @@
                     </td>
                 </tr>
                 </obsgroup>
+
+                <obsgroup groupingConceptId="CIEL:1442" >
+                    <tr>
+                        <td>
+                            <uimessage code="zl.arv3" />:
+                            <span class="small hidden">
+                                <obs conceptId="PIH:1535" answerConceptId="PIH:13960" defaultValue="PIH:13960"></obs>
+                            </span>
+                        </td>
+                        <td>
+                            <obs id="arv3Drug" conceptId="CIEL:1282"
+                                 answerDrugIds="
+                                 d2e0e9cb-bff1-483c-8bb9-c47a6b3533af,
+                                 38bcc178-6290-4998-b6b6-5b11eefbe0b8,
+                                 29c9dd27-25f2-45c6-9708-93fe142a46ba,
+                                 db9beb07-fb5e-426e-815b-6b89fe5037f6"
+
+                                 answerLabels="
+                                 DRV 600mg,
+                                 DRV 75mg,
+                                 ETV 100mg,
+                                 RAL 25mg" />
+                        </td>
+                        <td>
+                            <obs conceptId="CIEL:1443" />
+                        </td>
+                    </tr>
+                </obsgroup>
+
                 <obsgroup groupingConceptId="CIEL:1442" >
                 <tr>
                     <td>
