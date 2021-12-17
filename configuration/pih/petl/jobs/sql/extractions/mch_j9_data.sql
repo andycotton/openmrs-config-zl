@@ -1,7 +1,7 @@
 -- set @locale = 'en';  -- uncomment for testing
 
 select program_id into @mchProgram from program where uuid = '41a2715e-8a14-11e8-9a94-a6cf71072f73';
-select encounter_type('de844e58-11e1-11e8-b642-0ed5f89f718b') into @socioEncName;
+select name into @socioEncName from encounter_type where uuid = 'de844e58-11e1-11e8-b642-0ed5f89f718b' ;
 select encounter_type('d83e98fd-dc7b-420f-aa3f-36f648b4483d') into @ob_gyn_enc_id;
 select program_workflow_id into @mchWorkflow from program_workflow where uuid = '41a277d0-8a14-11e8-9a94-a6cf71072f73';
 set @past_med_finding = concept_from_mapping('PIH','10140');
