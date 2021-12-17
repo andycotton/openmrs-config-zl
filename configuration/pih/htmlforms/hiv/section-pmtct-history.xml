@@ -36,6 +36,11 @@
                 width: 50%;
             }
 
+            .three-columns > div {
+                display: table-cell;
+                width: 33%;
+            }
+
             .four-columns > div {
               display: table-cell;
               width: 25%;
@@ -292,7 +297,7 @@
                         <obs id="contact-age-{0}" conceptId="PIH:AGE" labelCode="pihcore.age"/>
                     </div>
 
-                    <div class="two-columns">
+                    <div class="three-columns">
                         <div>
                             <label>
                                 <uimessage code="pihcore.gender"/>
@@ -301,58 +306,13 @@
                                 <obs id="contact-gender-{0}" conceptId="PIH:2845" style="radio"/>
                             </p>
                         </div>
-                        <div>
-                            <label>
-                                <uimessage code="pihcore.hiv_test_received"/>
-                            </label>
-                            <p class="side-by-side">
-                                <obs id="contact-hiv_test_received-{0}" conceptId="CIEL:164848" 
-                                answerConceptIds="CIEL:1066,CIEL:1065"
-                                answerCodes="general.no,general.yes,pihcore.unknown" style="radio"/>
-                            </p>
+
+                        <div class="contact-hiv-phone-{0}">
+                            <obs id="contact-hiv-phone-{0}" conceptId="PIH:TELEPHONE NUMBER OF CONTACT"
+                                 labelCode="pihcore.telephone"/>
+                            <span id="contact-phone-error-message-{0}" class="text-danger"></span>
                         </div>
-                    </div>
-                    <div class="one-column">
-                       
-                        <div>
-                            <label>
-                                <uimessage code="pihcore.hiv_status_cat"/>
-                            </label>
-                            <p class="side-by-side">
-                                <obs id="contact-hiv_status_cat-{0}" conceptId="PIH:13955" 
-                                answerConceptIds="CIEL:164971,PIH:13956,CIEL:664" style="radio"/>
-                            </p>
-                        </div>
-                       
-                    </div>  
-                    <div class="two-columns">
-                        <div>
-                            <label>
-                                <uimessage code="pihcore.has_posttest_counseling"/>
-                            </label>
-                            <p class="side-by-side">
-                                <obs id="contact-hiv_test_received-{0}" 
-                                conceptId="CIEL:165328"
-                                answerConceptIds="CIEL:1066,CIEL:1065"
-                                 style="radio"/>
-                            </p>
-                        </div>
-                        <div>
-                            
-                            <label>
-                                <uimessage code="pihcore.services_status"/>
-                            </label>
-                            <p class="side-by-side">
-                                <obs id="contact-services_status-{0}"
-                                     conceptId="PIH:13957" style="radio"
-                                     answerConceptIds="PIH:13959,PIH:13958"
-                                     answerSeparator=""/>
-                            </p>
-                            
-                    </div>
-                        
-                    </div>
-                    <div class="two-columns">
+
                         <div>
                             <label>
                                 <uimessage code="pihcore.dead"/>
@@ -365,6 +325,18 @@
                                      style="radio" answerSeparator=""/>
                             </p>
                         </div>
+                    </div>
+
+                    <div class="three-columns">
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.hiv.testDate"/>
+                            </label>
+                            <p>
+                                <obs id="contact-hiv-test-date-{0}" conceptId="CIEL:164400"/>
+                            </p>
+                        </div>
+
                         <div>
                             <label>
                                 <uimessage code="pihcore.hiv.serologicalStatus"/>
@@ -375,11 +347,57 @@
                                      style="radio" answerSeparator=""/>
                             </p>
                         </div>
+
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.hiv_test_received"/>
+                            </label>
+                            <p class="side-by-side">
+                                <obs id="contact-hiv_test_received-{0}" conceptId="CIEL:164848"
+                                     answerConceptIds="CIEL:1066,CIEL:1065"
+                                     answerCodes="general.no,general.yes,pihcore.unknown" style="radio"/>
+                            </p>
+                        </div>
                     </div>
-                    <div class="contact-hiv-phone-{0}">
-                        <obs id="contact-hiv-phone-{0}" conceptId="PIH:TELEPHONE NUMBER OF CONTACT"
-                             labelCode="pihcore.telephone"/>
-                        <span id="contact-phone-error-message-{0}" class="text-danger"></span>
+
+                    <div class="one-column">
+                       
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.hiv_status_cat"/>
+                            </label>
+                            <p class="side-by-side">
+                                <obs id="contact-hiv_status_cat-{0}" style="radio"
+                                     conceptId="PIH:13955"
+                                     answerConceptIds="CIEL:164971,PIH:13956,CIEL:664"
+                                     answerCodes="pihcore.hivNew,pihcore.hivKnown,pihcore.hivNeg" />
+                            </p>
+                        </div>
+                       
+                    </div>  
+                    <div class="two-columns">
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.has_posttest_counseling"/>
+                            </label>
+                            <p class="side-by-side">
+                                <obs id="contact-hiv_test_received-{0}"
+                                     conceptId="CIEL:165328"
+                                     answerConceptIds="CIEL:1066,CIEL:1065"
+                                     style="radio"/>
+                            </p>
+                        </div>
+                        <div>
+                            <label>
+                                <uimessage code="pihcore.services_status"/>
+                            </label>
+                            <p class="side-by-side">
+                                <obs id="contact-services_status-{0}"
+                                     conceptId="PIH:13957" style="radio"
+                                     answerConceptIds="PIH:13959,PIH:13958"
+                                     answerSeparator=""/>
+                            </p>
+                        </div>
                     </div>
 
                 </obsgroup>

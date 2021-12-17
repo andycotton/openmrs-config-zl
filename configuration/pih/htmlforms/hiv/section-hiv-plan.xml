@@ -872,29 +872,32 @@
                     </div>
                     <div style="padding:0px;">
                         <orderProperty name="drug" label="pihcore.drugOrders.drug">
-                            <option value="d2e0e9cb-bff1-483c-8bb9-c47a6b3533af" label="DRV 600 mg" />
-                            <option value="38bcc178-6290-4998-b6b6-5b11eefbe0b8" label="DRV 75 mg" />
-                            <option value="78fab02a-dfbe-11e9-8a34-2a2ae2dbcce4" label="DTG 50 mg"/>
-                            <option value="78faac2e-dfbe-11e9-8a34-2a2ae2dbcce4" label="DTG/3TC/TDF 50/300/300 mg"/>
-                            <option value="ac6a5bab-7df4-4275-af88-acdad53ccc97" label="FTC/TDF 200/300 mg" />
-                            <option value="29c9dd27-25f2-45c6-9708-93fe142a46ba" label="ETV 100 mg"/>
-                            <option value="78f968e6-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT/3TC 300/150 mg"/>
-                            <option value="78f95e78-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 200/50 mg"/>
-                            <option value="db9beb07-fb5e-426e-815b-6b89fe5037f6" label="RAL 25 mg" />
-                            <option value="78f96a76-dfbe-11e9-8a34-2a2ae2dbcce4" label="TDF/3TC 300/300 mg"/>
+                            <option value="78f9712e-dfbe-11e9-8a34-2a2ae2dbcce4" label="ABC/3TC 600/300mg" />
+                            <option value="d2e0e9cb-bff1-483c-8bb9-c47a6b3533af" label="DRV 600mg" />
+                            <option value="38bcc178-6290-4998-b6b6-5b11eefbe0b8" label="DRV 75mg" />
+                            <option value="78fab02a-dfbe-11e9-8a34-2a2ae2dbcce4" label="DTG 50mg"/>
+                            <option value="78faac2e-dfbe-11e9-8a34-2a2ae2dbcce4" label="DTG/3TC/TDF 50/300/300mg"/>
+                            <option value="ac6a5bab-7df4-4275-af88-acdad53ccc97" label="FTC/TDF 200/300mg" />
+                            <option value="29c9dd27-25f2-45c6-9708-93fe142a46ba" label="ETV 100mg"/>
+                            <option value="78f968e6-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT/3TC 300/150mg"/>
+                            <option value="78f95e78-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 200/50mg"/>
+                            <option value="db9beb07-fb5e-426e-815b-6b89fe5037f6" label="RAL 25mg" />
+                            <option value="78f96a76-dfbe-11e9-8a34-2a2ae2dbcce4" label="TDF/3TC 300/300mg"/>
 
-                            <option value="a6985b15-5fd6-4bdf-93f6-62930a438464" label="ABC/3TC 120/60 mg"/>
-                            <option value="6058eb5c-c7bb-445b-9a9a-14e73e8ab5a9" label="DTG 5 mg"/>
-                            <option value="8c35a0cd-9e2a-40eb-aa57-f589c25f17bf" label="DTG 10 mg"/>
-                            <option value="78f95fa4-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT/3TC 60/30 mg"/>
-                            <option value="78f97cfa-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT/3TC/NVP 60/30/50 mg"/>
-                            <option value="78f96684-dfbe-11e9-8a34-2a2ae2dbcce4" label="3TC 10 mg/mL sp"/>
-                            <option value="78f976c4-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 100/25 mg"/>
-                            <option value="78faaaf8-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 40/10 mg"/>
-                            <option value="78faa710-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 80/20 mg/mL"/>
-                            <option value="78f967ba-dfbe-11e9-8a34-2a2ae2dbcce4" label="NVP 10 mg/mL sp"/>
-                            <option value="78f96526-dfbe-11e9-8a34-2a2ae2dbcce4" label="NVP 50 mg"/>
-                            <option value="78f95bc6-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT 10 mg/mL sp"/>
+                            <option value="78f95d38-dfbe-11e9-8a34-2a2ae2dbcce4" label="ATV/r 300/100mg"/>
+
+                            <option value="a6985b15-5fd6-4bdf-93f6-62930a438464" label="ABC/3TC 120/60mg"/>
+                            <option value="6058eb5c-c7bb-445b-9a9a-14e73e8ab5a9" label="DTG 5mg"/>
+                            <option value="8c35a0cd-9e2a-40eb-aa57-f589c25f17bf" label="DTG 10mg"/>
+                            <option value="78f95fa4-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT/3TC 60/30mg"/>
+                            <option value="78f97cfa-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT/3TC/NVP 60/30/50mg"/>
+                            <option value="78f96684-dfbe-11e9-8a34-2a2ae2dbcce4" label="3TC 10mg/mL sp"/>
+                            <option value="78f976c4-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 100/25mg"/>
+                            <option value="78faaaf8-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 40/10mg"/>
+                            <option value="78faa710-dfbe-11e9-8a34-2a2ae2dbcce4" label="LPV/r 80/20mg/mL"/>
+                            <option value="78f967ba-dfbe-11e9-8a34-2a2ae2dbcce4" label="NVP 10mg/mL sp"/>
+                            <option value="78f96526-dfbe-11e9-8a34-2a2ae2dbcce4" label="NVP 50mg"/>
+                            <option value="78f95bc6-dfbe-11e9-8a34-2a2ae2dbcce4" label="AZT 10mg/mL sp"/>
                         </orderProperty>
                     </div>
                     <!-- ToDo:  UHM-5974 Remove old meds?  Checking with Valery
