@@ -19,6 +19,7 @@ able_read_write  boolean,
 date_enrolled datetime,
 date_completed datetime,
 program_state varchar(255),
+mothers_group text,
 expected_delivery_date datetime,
 highest_birth_number_obs_group int,
 highest_birth_number int,
@@ -68,6 +69,9 @@ set last_socio_encounter_id = latestEnc(patient_id, @socioEncName, null);
 update temp_j9 t
 set program_state = currentProgramState(t.patient_program_id, @mchWorkflow, @locale);
 
+-- mothers group
+update temp_j9 t 
+set mothers_group = value_text(latest_obs(patient_id,'PIH','11665'));
 
 -- patient age
 update temp_j9
@@ -271,6 +275,7 @@ able_read_write,
 date_enrolled,
 date_completed,
 program_state,
+mothers_group,
 expected_delivery_date,
 prior_birth_delivery_type,
 prior_birth_neonatal_status,
