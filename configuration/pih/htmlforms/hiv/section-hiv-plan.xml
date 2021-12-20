@@ -1225,14 +1225,14 @@
 
                     <p id="internal-transfer-out">
                         <label>
-                            <uimessage code="pihcore.internalTransferLocation" />
+                            <uimessage code="pihcore.transferReferralLocation" />
                         </label>
                         <obs conceptId="PIH:8621" style="location" answerLocationTags="Program Location" />
                     </p>
 
                     <p id="external-transfer-out">
                         <label>
-                            <uimessage code="pihcore.externalTransferLocation"/>
+                            <uimessage code="pihcore.transferReferralLocation"/>
                         </label>
                         <obs conceptId="PIH:11483" />
                         <obs conceptId="PIH:PEPFAR partner site"
