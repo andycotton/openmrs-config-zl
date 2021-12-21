@@ -18,17 +18,13 @@ hiv_enrollment_date datetime,
 pmtct_initiation_date datetime,
 art_start_date datetime,
 reference_date datetime,
-contact_type varchar(255),
-contact_gender varchar(50), -- need to add to form
 contact_index int,
-contact_dob datetime,  -- need to add to form
-contact_has_posttest_counseling varchar(255),   -- need to add to form
-contact_hiv_status_cat varchar(255),  -- need to add to form
-contact_hiv_test_date datetime,  -- need to add to form
-contact_hiv_test_result varchar(255),  -- need to add to form
-contact_hiv_status varchar(255), 
-contact_is_active_on_art varchar(255),  -- need to add to form
-contact_posttest_counseling_date datetime  -- need to add to form
+contact_type varchar(255),
+contact_gender varchar(50),
+contact_death_status varchar(255),
+contact_age int,  
+contact_posttest_services varchar(255),   
+contact_hiv_status_cat varchar(255) 
 );
 
 -- loads temp table with all contacts entered
@@ -75,9 +71,34 @@ set art_start_date = orderReasonStartDate(t.patient_id,'PIH','11197');
 update temp_contacts t 
 set contact_type = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','13265',@locale);
 
+-- contact gender
+update temp_contacts t 
+set contact_gender = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','2845',@locale);
+
 -- contact hiv status
 update temp_contacts t 
-set contact_hiv_status = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','2169',@locale);
+set contact_hiv_status_cat = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','13955',@locale);
+
+update temp_contacts t 
+set contact_death_status= obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','11333',@locale);
+
+update temp_contacts t 
+set contact_age= obs_from_group_id_value_numeric(t.concept_obs_group_id, 'PIH','3467');
+
+update temp_contacts t 
+set contact_posttest_services= obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','13955',@locale);
+
+
+
+/*
+ contact_index int,
+contact_type varchar(255),
+contact_gender varchar(50),
+contact_dead boolean,
+contact_age datetime,  
+contact_posttest_services varchar(255),   
+ varchar(255), 
+ */
 
 select 
 patient_id,
@@ -90,13 +111,9 @@ reference_date,
 contact_index,
 contact_type,
 contact_gender,
-contact_dob,
-contact_has_posttest_counseling,
-contact_hiv_status_cat,
-contact_hiv_test_date,
-contact_hiv_test_result,
-contact_hiv_status,
-contact_is_active_on_art,
-contact_posttest_counseling_date
+contact_death_status,
+contact_age,  
+contact_posttest_services,   
+contact_hiv_status_cat 
 from temp_contacts
 ;
