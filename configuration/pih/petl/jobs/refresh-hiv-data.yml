@@ -13,6 +13,10 @@ configuration:
   jobs:
     - path: "create-source-views-and-functions.yml"
     - type: "iterating-job"
+      errorHandling:
+        maxAttempts: 10
+        retryInterval: 1
+        retryIntervalUnit: "MINUTES"
       configuration:
         jobTemplate:
           type: "sqlserver-bulk-import"
@@ -33,7 +37,7 @@ configuration:
           - tableName: "hiv_viral_load"
           - tableName: "hiv_visit"
           - tableName: "ovc_program_encounters"
-          - tableName: "pmtct_infant_delivery" 
+          - tableName: "pmtct_infant_delivery"
           - tableName: "pmtct_contacts"
           - tableName: "pmtct_visits"
           - tableName: "pmtct_labs"
