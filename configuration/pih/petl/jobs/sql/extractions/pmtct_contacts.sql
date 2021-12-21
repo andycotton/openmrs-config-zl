@@ -14,6 +14,7 @@ zlemrid varchar(255),
 concept_obs_group_id int,
 age int,
 latest_patient_program_id int, 
+latest_pmtct_patient_state_id int,
 hiv_enrollment_date datetime,
 pmtct_initiation_date datetime,
 art_start_date datetime,
@@ -27,6 +28,8 @@ contact_posttest_services varchar(255),
 contact_hiv_status_cat varchar(255) 
 );
 
+create index temp_contacts_pp_id on temp_contacts (latest_patient_program_id);
+
 -- loads temp table with all contacts entered
 -- note that the contact_index numbers the contacts within patients 
 insert into temp_contacts (contact_index,patient_id,concept_obs_group_id,reference_date)
@@ -34,7 +37,21 @@ select @r:= IF(@u = person_id, @r + 1,1),@u:=person_id, obs_id, obs_datetime
 from obs o 
 where o.voided = 0
 and concept_id = concept_from_mapping('PIH','13182')
-order by person_id, o.obs_datetime asc, obs_id asc;
+order by person_id, o.obs_datetime asc, obs_id asc
+;
+
+update temp_contacts t
+set latest_patient_program_id = mostRecentPatientProgramId(t.patient_id, @hivProgram);
+
+update temp_contacts t
+set hiv_enrollment_date = programStartDate(latest_patient_program_id);
+
+update temp_contacts t
+set t.latest_pmtct_patient_state_id = mostRecentPatientStateId(t.latest_patient_program_id,@patientPregnantState);
+
+update temp_contacts t
+set t.pmtct_initiation_date = patientStateStartDate(latest_pmtct_patient_state_id);
+
 
 -- zl emr id
 update temp_contacts
@@ -43,25 +60,6 @@ set zlemrid = zlemr(patient_id);
 -- current age
 update temp_contacts
 set age = current_age_in_years(patient_id);
-
--- populates latest patient program for HIV for each patient
-update temp_contacts t
-inner join patient_program pp on pp.patient_program_id =
-	(select patient_program_id from patient_program pp2 
-	where pp2.patient_id = t.patient_id
-	and pp2.program_id = @hivProgram
-	order by date_enrolled desc limit 1)
-set latest_patient_program_id = pp.patient_program_id,
-	hiv_enrollment_date = pp.date_enrolled ;
-
--- set pmtct initiation date to most recent start of patient pregant state for the patient program id
-update temp_contacts t 
-inner join patient_state ps on ps.patient_state_id =
-	(select patient_state_id from patient_state ps2
-	where ps2.patient_program_id = t.latest_patient_program_id
-	and ps2.state =  @patientPregnantState
-	order by ps2.start_date desc limit 1)
-set pmtct_initiation_date = ps.start_date ;
 
 -- art start date as the start date of orders with order reason of hiv
 update temp_contacts t
@@ -87,18 +85,6 @@ set contact_age= obs_from_group_id_value_numeric(t.concept_obs_group_id, 'PIH','
 
 update temp_contacts t 
 set contact_posttest_services= obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','13955',@locale);
-
-
-
-/*
- contact_index int,
-contact_type varchar(255),
-contact_gender varchar(50),
-contact_dead boolean,
-contact_age datetime,  
-contact_posttest_services varchar(255),   
- varchar(255), 
- */
 
 select 
 patient_id,
