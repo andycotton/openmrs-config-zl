@@ -5,10 +5,6 @@ parameters:
   siteName: "hiv"
 schedule:
   cron: "${executeCron.refreshHivData}"
-errorHandling:
-  maxAttempts: 10
-  retryInterval: 1
-  retryIntervalUnit: "MINUTES"
 configuration:
   jobs:
     - path: "create-source-views-and-functions.yml"
@@ -28,7 +24,6 @@ configuration:
               datasource: "warehouse-hiv.yml"
               table: "${tableName}"
               schema: "sql/schemas/${tableName}.sql"
-            conditional: "select if(count(*)>0,true,false) from information_schema.tables where table_name = '${tableName}'"
         iterations:
           - tableName: "hiv_dispensing"
           - tableName: "hiv_patient"
