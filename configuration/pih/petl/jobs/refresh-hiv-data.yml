@@ -5,14 +5,14 @@ parameters:
   siteName: "hiv"
 schedule:
   cron: "${executeCron.refreshHivData}"
+errorHandling:
+    maxAttempts: 10
+    retryInterval: 1
+    retryIntervalUnit: "MINUTES"
 configuration:
   jobs:
     - path: "create-source-views-and-functions.yml"
     - type: "iterating-job"
-      errorHandling:
-        maxAttempts: 10
-        retryInterval: 1
-        retryIntervalUnit: "MINUTES"
       configuration:
         jobTemplate:
           type: "sqlserver-bulk-import"
