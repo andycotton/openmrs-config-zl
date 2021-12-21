@@ -293,11 +293,11 @@
                     <div>
                         <obs id="contact-last-name-{0}" conceptId="PIH:LAST NAME" labelCode="pihcore.lastName"/>
                     </div>
-                    <div>
-                        <obs id="contact-age-{0}" conceptId="PIH:AGE" labelCode="pihcore.age"/>
-                    </div>
 
                     <div class="three-columns">
+                        <div>
+                            <obs id="contact-age-{0}" conceptId="PIH:AGE" labelCode="pihcore.age"/>
+                        </div>
                         <div>
                             <label>
                                 <uimessage code="pihcore.gender"/>
@@ -312,47 +312,7 @@
                                  labelCode="pihcore.telephone"/>
                             <span id="contact-phone-error-message-{0}" class="text-danger"></span>
                         </div>
-
-                        <div>
-                            <label>
-                                <uimessage code="pihcore.dead"/>
-                            </label>
-                            <p class="side-by-side">
-                                <!-- Health status of contact -->
-                                <obs id="contact-life-{0}" conceptId="CIEL:163533"
-                                     answerConceptIds="PIH:ALIVE,PIH:DEATH,PIH:UNKNOWN"
-                                     answerCodes="general.no,general.yes,pihcore.unknown"
-                                     style="radio" answerSeparator=""/>
-                            </p>
-                        </div>
                     </div>
-
-                    <div class="two-columns">
-                        <div>
-                            <label>
-                                <uimessage code="pihcore.hiv_status_cat"/>
-                            </label>
-                            <p class="side-by-side">
-                                <obs id="contact-hiv_status_cat-{0}" style="radio"
-                                     conceptId="PIH:13955"
-                                     answerConceptIds="CIEL:164971,PIH:13956,CIEL:664,CIEL:1067"
-                                     answerCodes="pihcore.hivNew,pihcore.hivKnown,pihcore.hivNeg,pihcore.unknown" />
-                            </p>
-                        </div>
-
-                        <div>
-                            <label>
-                                <uimessage code="pihcore.services_status"/>
-                            </label>
-                            <p class="side-by-side">
-                                <obs id="contact-services_status-{0}"
-                                     conceptId="PIH:13957" style="radio"
-                                     answerConceptIds="PIH:13959,PIH:13958"
-                                     answerSeparator=""/>
-                            </p>
-                        </div>
-                    </div>
-
                 </obsgroup>
             </span>
         </repeat>
