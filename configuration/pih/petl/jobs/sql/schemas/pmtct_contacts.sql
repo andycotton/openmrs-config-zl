@@ -9,13 +9,9 @@ art_start_date datetime,
 reference_date datetime,
 contact_index int,
 contact_type varchar(255),
-contact_gender varchar(255),
-contact_dob datetime,
-contact_has_posttest_counseling varchar(255),
-contact_hiv_status_cat varchar(255),
-contact_hiv_test_date datetime,
-contact_hiv_test_result varchar(255),
-contact_hiv_status varchar(255),
-contact_is_active_on_art varchar(255),
-contact_posttest_counseling_date datetime
+contact_gender varchar(50),
+contact_death_status varchar(255),
+contact_age int,  
+contact_posttest_services varchar(255),   
+contact_hiv_status_cat varchar(255)  
 );
