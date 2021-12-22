@@ -10,8 +10,5 @@ reference_date datetime,
 contact_index int,
 contact_type varchar(255),
 contact_gender varchar(50),
-contact_death_status varchar(255),
-contact_age int,  
-contact_posttest_services varchar(255),   
-contact_hiv_status_cat varchar(255)  
+contact_age int
 );
