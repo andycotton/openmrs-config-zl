@@ -22,10 +22,7 @@ reference_date datetime,
 contact_index int,
 contact_type varchar(255),
 contact_gender varchar(50),
-contact_death_status varchar(255),
-contact_age int,  
-contact_posttest_services varchar(255),   
-contact_hiv_status_cat varchar(255) 
+contact_age int 
 );
 
 create index temp_contacts_pp_id on temp_contacts (latest_patient_program_id);
@@ -73,18 +70,9 @@ set contact_type = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'P
 update temp_contacts t 
 set contact_gender = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','2845',@locale);
 
--- contact hiv status
-update temp_contacts t 
-set contact_hiv_status_cat = obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','13955',@locale);
-
-update temp_contacts t 
-set contact_death_status= obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','11333',@locale);
-
+-- contact age
 update temp_contacts t 
 set contact_age= obs_from_group_id_value_numeric(t.concept_obs_group_id, 'PIH','3467');
-
-update temp_contacts t 
-set contact_posttest_services= obs_from_group_id_value_coded_list(t.concept_obs_group_id, 'PIH','13955',@locale);
 
 select 
 patient_id,
@@ -97,9 +85,6 @@ reference_date,
 contact_index,
 contact_type,
 contact_gender,
-contact_death_status,
-contact_age,  
-contact_posttest_services,   
-contact_hiv_status_cat 
+contact_age 
 from temp_contacts
 ;
