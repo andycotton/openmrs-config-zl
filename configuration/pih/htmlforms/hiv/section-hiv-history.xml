@@ -496,10 +496,11 @@
         <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.feedingAndVaccination" >
             <div class="section-container">
-                <p>
+                <p class="radio">
                     <label>
                         <uimessage code="pihcore.specifyTypeFeeding"/>
                     </label>
+                    <br/>
                     <obs conceptId="CIEL:1151"
                          answerConceptIds="CIEL:5526,CIEL:5254,CIEL:6046" style="radio"
                          answerCodes="zl.breastfeedExclusively,pihcore.formulaExclusively,zl.mixedFeeding"
@@ -629,7 +630,7 @@
             <div class="section-container">
                 <div class="two-column">
                     <div>
-                        <p class="radio">
+                        <p class="side-by-side">
                             <label>
                                 <uimessage code="pihcore.hiv.motherSerology" />
                             </label>
@@ -647,17 +648,16 @@
                 </div>
 
                 <!-- Mother's ARV information -->
-
-                    <label>
-                        <uimessage code="pihcore.hiv.motherRecvARV" />
-                    </label>
-                    <p class="small">
-                        <obs id="mom-rcvd-arv" conceptId="CIEL:163783" style="radio" answerSeparator=""
-                             answerConceptIds="CIEL:1065,CIEL:1066" >
-                             <controls>
-                                 <when value="CIEL:1065" thenDisplay="#mom-arv-section"/>
-                             </controls>
-                        </obs>
+                <label>
+                    <uimessage code="pihcore.hiv.motherRecvARV" />
+                </label>
+                <p class="side-by-side">
+                    <obs id="mom-rcvd-arv" conceptId="CIEL:163783" style="radio" answerSeparator=""
+                         answerConceptIds="CIEL:1065,CIEL:1066" >
+                         <controls>
+                             <when value="CIEL:1065" thenDisplay="#mom-arv-section"/>
+                         </controls>
+                    </obs>
 
                     <div id="mom-arv-section">
                         <p class="radio">
@@ -683,7 +683,6 @@
                         </label>
                         <obs conceptId="CIEL:166086" style="text" />
                         <br/>
-
 
                         <label>
                             <uimessage code="pihcore.motherSideEffects" />
@@ -715,7 +714,7 @@
                     <label>
                         <uimessage code="pihcore.motherTBtreatment" />
                     </label>
-                    <p class="small">
+                    <p class="side-by-side">
 
                         <obs id="mom-tb" conceptId="CIEL:159398"
                              style="radio" answerSeparator=""
