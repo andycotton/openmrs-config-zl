@@ -386,107 +386,146 @@
         <section id="birth-history" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.birth-history" >
             <div class="section-container">
-                <div class="two-columns" >
-                    <p class="radio">
-                        <label>
-                            <uimessage code="pihcore.premature" />
-                        </label>
-                        <br/>
-                        <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                             style="radio" />
-                    </p>
+                <div class="two-column">
+                    <div>
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.premature"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="CIEL:159908" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 style="radio"/>
+                        </p>
 
-                    <p>
-                        <label>
-                            <uimessage code="pihcore.gestation"/>
-                        </label>
+                        <p>
+                            <label>
+                                <uimessage code="pihcore.gestation"/>
+                            </label>
 
-                        <span class="small">
-                            <field>
-                                <obs conceptId="CIEL:1409" showUnits="true"/>
-                            </field>
-                        </span>
-                    </p>
+                            <span class="small">
+                                <field>
+                                    <obs conceptId="CIEL:1409" showUnits="true"/>
+                                </field>
+                            </span>
+                        </p>
 
-                    <!-- Delivery type -->
-                    <p class="radio">
-                        <label>
-                            <uimessage code="pihcore.mch.deliveryType"/>
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:11663"
-                             answerConceptIds="CIEL:162595,CIEL:155884"
-                             answerCodes="pihcore.vaginal,pihcore.c-section"
-                             style="radio"  />
-                    </p>
+                        <p>
+                            <label>
+                                <uimessage code="pihcore.birthweight"/>
+                            </label>
+                            <span class="small">
+                                <field>
+                                    <!-- ToDo: Fix units to show on the right-side of the box - not the next line css -->
+                                    <obs conceptId="CIEL:5916" showUnits="true"/>
+                                </field>
+                            </span>
+                        </p>
 
-                    <p class="radio">
-                        <label>
-                            <uimessage code="pihcore.deliveryLocation" />
-                        </label>
-                        <br/>
-                        <obs conceptId="CIEL:163774" answerConceptIds="CIEL:1589,CIEL:1536,CIEL:5622"
-                             style="radio"  />
-                    </p>
+                        <!-- Delivery type -->
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.mch.deliveryType"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:11663"
+                                 answerConceptIds="CIEL:162595,CIEL:155884"
+                                 answerCodes="pihcore.vaginal,pihcore.c-section"
+                                 style="radio"/>
+                        </p>
 
-                    <p>
-                        <label>
-                            <uimessage code="pihcore.birthweight" />
-                        </label>
-                        <span class="small">
-                            <field>
-                                <!-- ToDo: Fix units to show on the right-side of the box - not the next line css -->
-                                <obs conceptId="CIEL:5916" showUnits="true" />
-                            </field>
-                        </span>
-                    </p>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.deliveryLocation"/>
+                            </label>
+                            <br/>
+                            <obs id="delivery-locale" conceptId="CIEL:163774" style="radio"
+                                 answerConceptIds="CIEL:1589,CIEL:1536,CIEL:5622">
+                                <controls>
+                                    <when value="CIEL:1589" thenDisplay="#birth-zl-site"/>
+                                </controls>
+                            </obs>
+                        </p>
 
-                    <br/><br/>
+                        <div id="birth-zl-site">
+                            <p class="radio">
+                                <label>
+                                    <uimessage code="disposition.emrapi.transferOutOfHospital.sites.zlSite"/>
+                                </label>
+                                <br/>
+                                <!-- ToDo:  Fix answerLocationTags.  UHM-6047 to use 'Health Facility Location' -->
+                                <obs conceptId="CIEL:163529"
+                                     style="location" answerLocationTags="Program Location"/>
+                            </p>
 
-                    <p class="radio">
-                        <!-- Problem for newborn -->
-                        <label>
-                            <uimessage code="pihcore.neonatalComplications" />
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                             style="radio"  />
-                    </p>
+                            <p class="radio">
+                                <label>
+                                    <uimessage code="pihcore.partogram" />
+                                </label>
+                                <obs conceptId="PIH:13964" style="radio"
+                                     answerConceptIds="CIEL:1065,CIEL:1066" />
+                            </p>
+                        </div>
 
-                    <p>
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:164122"
-                                     answerConceptId="{concept}" style="checkbox" />
-                            </template>
-                            <render concept="CIEL:112215" name="Obstetrical trauma" />
-                            <render concept="CIEL:115866" name="Meconial Fluid" />
-                            <render concept="CIEL:113027" name="Septicemia neonatal" />
-                            <render concept="CIEL:124954" name="Neonatal tetanus" />
-                            <render concept="CIEL:145548" name="Chorioamnionitis" />
-                            <render concept="CIEL:162131" name="Neonatal resuscitation" />
-                            <render concept="CIEL:121255" name="Bacterial meningitis" />
-                        </repeat>
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.hivTestLocation" />
+                            </label>
+                            <br/>
+                            <!-- ToDo:  maybe change the concept question -->
+                            <obs conceptId="CIEL:164851" style="radio"
+                                 answerConceptIds="CIEL:1622,CIEL:164850,CIEL:1180"
+                                 answerCodes="pihcore.anc,pihcore.laborDelivery,pihcore.postnatal"/>
+                        </p>
 
-                        <!-- Other -->
-                        <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
-                             style="checkbox" showCommentField="true" commentFieldCode="" />
-                    </p>
 
-                    <p class="radio">
-                        <label>
-                            <uimessage code="pihcore.maternalcomplication" />
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:3334"  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                             style="radio" />
-                        <br/>
-                        <!-- If yes, which ones -->
-                        <label>
-                            <uimessage code="pihcore.yesSpecify" />
-                        </label>
-                        <obs conceptId="PIH:13094" style="textarea"/>
-                    </p>
+                    </div>
+                    <div>
+
+                        <p class="radio">
+                            <!-- Problem for newborn -->
+                            <label>
+                                <uimessage code="pihcore.neonatalComplications"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:12564" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 style="radio"/>
+                        </p>
+
+                        <p>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="CIEL:164122"
+                                         answerConceptId="{concept}" style="checkbox"/>
+                                </template>
+                                <render concept="CIEL:112215" name="Obstetrical trauma"/>
+                                <render concept="CIEL:115866" name="Meconial Fluid"/>
+                                <render concept="CIEL:113027" name="Septicemia neonatal"/>
+                                <render concept="CIEL:124954" name="Neonatal tetanus"/>
+                                <render concept="CIEL:145548" name="Chorioamnionitis"/>
+                                <render concept="CIEL:162131" name="Neonatal resuscitation"/>
+                                <render concept="CIEL:121255" name="Bacterial meningitis"/>
+                            </repeat>
+
+                            <!-- Other -->
+                            <obs conceptId="CIEL:164122" answerConceptId="CIEL:5622"
+                                 style="checkbox" showCommentField="true" commentFieldCode=""/>
+                        </p>
+
+                        <p class="radio">
+                            <label>
+                                <uimessage code="pihcore.maternalcomplication"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:3334" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 style="radio"/>
+                            <br/>
+                            <!-- If yes, which ones -->
+                            <label>
+                                <uimessage code="pihcore.yesSpecify"/>
+                            </label>
+                            <obs conceptId="PIH:13094" style="textarea"/>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
