@@ -468,14 +468,22 @@
 
                         <p class="radio">
                             <label>
-                                <uimessage code="pihcore.hivTestLocation" />
+                                <uimessage code="pihcore.motherHivTestLocation" />
                             </label>
                             <br/>
-                            <!-- ToDo:  maybe change the concept question -->
                             <obs conceptId="CIEL:164851" style="radio"
                                  answerConceptIds="CIEL:1622,CIEL:164850,CIEL:1180"
                                  answerCodes="pihcore.anc,pihcore.laborDelivery,pihcore.postnatal"/>
                         </p>
+
+                        <!-- ToDo:  Add relationship to Mother (not parent)
+                        <p>
+                            <label>
+                                <uimessage code="pihcore.Mother" />
+                            </label>
+                            <relationship type="8d91a210-c2cc-11de-8d13-0010c6dffd0f"
+                                          whoAmI="B" changeExistingRelationship="false" />
+                        </p> -->
 
 
                     </div>
