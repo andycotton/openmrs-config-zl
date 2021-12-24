@@ -53,6 +53,7 @@ set age_cat_infant =
 case 
 	when infant_age_in_months<2 then '<2 mo'
 	when infant_age_in_months>=2 and infant_age_in_months<=12 then '2-12 mo'
+	else '> 2 mo'	
 end;	
 
 -- hiv rapid testing info
