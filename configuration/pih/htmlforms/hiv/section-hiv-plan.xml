@@ -786,30 +786,30 @@
                 <label>
                     <uimessage code="pihcore.syph.needTreatment"/>
                 </label>
-                <p class="small">
+                <p class="side-by-side">
                     <obs id="syph-treatment-need"
                          conceptId="CIEL:165331" style="radio"
                          answerConceptIds="CIEL:1065,CIEL:1066"
-                         answerCodes="emr.yes,emr.no"
-                         answerSeparator="">
+                         answerCodes="emr.yes,emr.no">
                         <controls>
                             <when value="CIEL:1065" thenDisplay="#start-date-syph-treatment"/>
                         </controls>
                     </obs>
                 </p>
 
-                <div id="start-date-syph-treatment">
+                <div id="start-date-syph-treatment" class="narrow">
                     <label>
-                        <uimessage code="pihcore.ifYesStartDate"/>
+                        <uimessage code="pihcore.startDate"/>
                     </label>
                     <obs conceptId="PIH:13023"/>
+                    <br/>
                 </div>
 
                 <!--Other STD -->
                 <label>
                     <uimessage code="pihcore.treatmentNeededOtherSTI"/>?
                 </label>
-                <p class="small">
+                <p class="side-by-side">
                     <obs id="other-sti-treatment-need"
                          conceptId="PIH:13077" style="radio"
                          answerConceptIds="CIEL:1065,CIEL:1066"
@@ -820,38 +820,42 @@
                     </obs>
                 </p>
 
-                <div id="other-sti-details">
+                <div id="other-sti-details" class="two-column">
                     <obsgroup groupingConceptId="PIH:13027">
-                        <label>
-                            <uimessage code="pihcore.mch.otherSTI"/>
-                        </label>
-                        <repeat>
-                            <template>
-                                <p>
-                                    <obs conceptId="PIH:13076"
-                                         answerConceptId="{stiDiag}"
-                                         style="checkbox"/>
-                                </p>
-                            </template>
-                            <render stiDiag="PIH:7247" comment="Chlamydia"/>
-                            <render stiDiag="CIEL:117767" comment="Gonorrhea"/>
-                            <render stiDiag="CIEL:117829" comment="GenitalHerpes"/>
-                            <render stiDiag="CIEL:1213" comment="HPV"/>
-                            <render stiDiag="CIEL:111759" comment="HepB"/>
-                        </repeat>
-
-                        <p>
-                            <obs conceptId="PIH:13076"
-                                 answerConceptId="CIEL:5622"
-                                 style="checkbox" showCommentField="true" commentFieldLabel=""/>
-                        </p>
-
-                        <p class="narrow">
+                        <div>
                             <label>
-                                <uimessage code="pihcore.startDate"/>
+                                <uimessage code="pihcore.mch.otherSTI"/>
                             </label>
-                            <obs conceptId="CIEL:1428"/>
-                        </p>
+                            <repeat>
+                                <template>
+                                    <p>
+                                        <obs conceptId="PIH:13076"
+                                             answerConceptId="{stiDiag}"
+                                             style="checkbox"/>
+                                    </p>
+                                </template>
+                                <render stiDiag="PIH:7247" comment="Chlamydia"/>
+                                <render stiDiag="CIEL:117767" comment="Gonorrhea"/>
+                                <render stiDiag="CIEL:117829" comment="GenitalHerpes"/>
+                                <render stiDiag="CIEL:1213" comment="HPV"/>
+                                <render stiDiag="CIEL:111759" comment="HepB"/>
+                            </repeat>
+
+                            <p>
+                                <obs conceptId="PIH:13076"
+                                     answerConceptId="CIEL:5622"
+                                     style="checkbox" showCommentField="true" commentFieldLabel=""/>
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="narrow">
+                                <label>
+                                    <uimessage code="pihcore.startDate"/>
+                                </label>
+                                <obs conceptId="CIEL:1428"/>
+                            </p>
+                        </div>
                     </obsgroup>
                 </div>
           </div>
