@@ -309,7 +309,7 @@
 
                         <div class="contact-hiv-phone-{0}">
                             <obs id="contact-hiv-phone-{0}" conceptId="PIH:TELEPHONE NUMBER OF CONTACT"
-                                 labelCode="pihcore.telephone"/>
+                                 labelCode="pihcore.telephone" placeholder="xxxx xxxx"/>
                             <span id="contact-phone-error-message-{0}" class="text-danger"></span>
                         </div>
                     </div>
