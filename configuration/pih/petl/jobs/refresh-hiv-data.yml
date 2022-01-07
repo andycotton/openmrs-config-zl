@@ -20,6 +20,7 @@ configuration:
             extract:
               datasource: "openmrs-${siteName}.yml"
               query:  "sql/extractions/${tableName}.sql"
+              conditional: "select if(count(*)>0,true,false) from information_schema.tables where table_name = '${tableName}'"
             load:
               datasource: "warehouse-hiv.yml"
               table: "${tableName}"
@@ -44,6 +45,7 @@ configuration:
         extract:
           datasource: "openmrs-${siteName}.yml"
           query:  "sql/extractions/hivmigration_aggregrate_data_warnings.sql"
+          conditional: "select if(count(*)>0,true,false) from information_schema.tables where table_name = 'hivmigration_data_warnings'"
         load:
           datasource: "warehouse-hiv.yml"
           table: "hivmigration_aggregrate_data_warnings"
