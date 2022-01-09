@@ -38,6 +38,7 @@ configuration:
           - tableName: "pmtct_contacts"
           - tableName: "pmtct_visits"
           - tableName: "pmtct_labs"
+          - tableName: "pmtct_pregnancy"
           - tableName: "hivmigration_data_warnings"
 
     - type: "sqlserver-bulk-import"
