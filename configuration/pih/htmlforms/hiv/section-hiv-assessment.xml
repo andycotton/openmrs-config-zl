@@ -268,7 +268,7 @@
                     <render symptom="CIEL:143264" comment="Cough"/>
                 </repeat>
 
-                <obsgroup groupingConceptId="CIEL:1727">
+                <obsgroup groupingConceptId="CIEL:1727" showIfEmpty="false" >
                     <tr>
                         <td colspan="4">
                             <obs conceptId="CIEL:1728" answerConceptId="CIEL:5622"
@@ -323,7 +323,7 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
+                                 style="checkbox" answerSeparator="" />
                             <br/>
                         </template>
                             <render whoDef="CIEL:5332"   name="WeightLossLess10%" />
@@ -342,7 +342,7 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
+                                 style="checkbox" answerSeparator="" />
                             <br/>
                         </template>
                         <render whoDef="CIEL:160436" name="PersistentHepatosplenomegaly" />
@@ -370,7 +370,7 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
+                                 style="checkbox" answerSeparator="" />
                             <br/>
                         </template>
                             <render whoDef="CIEL:5339"   name="WeightLossMore10%" />
@@ -390,7 +390,7 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
+                                 style="checkbox" answerSeparator="" />
                             <br/>
                         </template>
                         <render whoDef="CIEL:134722" name="ModMalnutrition" />
@@ -420,7 +420,7 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
+                                 style="checkbox" answerSeparator="" />
                             <br/>
                         </template>
                         <render whoDef="CIEL:823"    name="Wasting" />
@@ -452,7 +452,7 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator=""/>
+                                 style="checkbox" answerSeparator="" />
                             <br/>
                         </template>
                         <render whoDef="CIEL:164086" name="Stunting" />
@@ -487,57 +487,59 @@
                      answerConceptId="CIEL:1107" answerCode="pihcore.noOI"  />
             </p>
 
-            <p class="small">
-                <label>
-                    <uimessage code="pihcore.listOI" />
-                </label>
-                <div class="four-columns small">
-                    Tuberculose <br/>
-                    Tuberculose pulmonaire <br/>
-                    Tuberculose extra-pulmonaire <br/>
-                    Pneumonie bactérienne <br/>
-                    Pneumocystose <br/>
-                    Entérite <br/>
-                    Fièvre Typhoïde <br/>
-                    Dysenterie bacillaire <br/>
-                    Candidose <br/>
-                    Candidose buccale <br/>
-                    Candidiasis de l'œsophage <br/>
-                    Candidose vaginale <br/>
-                    Diarrhée <br/>
-                    Diarrhée parasitaire <br/>
-                    Diarrhée bactérienne <br/>
-                    Méningite bactérienne <br/>
-                    Méningite à cryptocoques <br/>
-                    Méningite tuberculeuse <br/>
-                    Eruption cutanées <br/>
-                    Prurigo nodulaire <br/>
-                    Zona <br/>
-                    Sarcome de Kaposi <br/>
-                    Toxoplasmose <br/>
-                    Lymphome du cerveau <br/>
-                    Malaria célébrale <br/>
-                    Encéphalopathie <br/>
-                    Encéphalite présumée due au VIH <br/>
-                    Encéphalopathie à VIH <br/>
-                    Neurosyphilis <br/>
-                    Leishmaniose <br/>
-                    Isosporose <br/>
-                    Infection à Mycobacterium Avium<br/>
-                    Pénicilliose <br/>
-                    Trouble génito-urinaire<br/>
-                    Maladie inflammatoire pelvienne <br/>
-                    Herpès simplex <br/>
-                    LGV<br/>
-                    Condylomes<br/>
-                    Ecoulement urétral <br/>
-                    Trichomonase <br/>
-                    Gonorrhée <br/>
-                    Perte de poids <br/>
-                    Carcinome cellulaire squameux<br/>
-                    Infection au cytomegalovirus
-                </div>
-            </p>
+            <ifMode mode="VIEW" include="false">
+                <p class="small">
+                    <label>
+                        <uimessage code="pihcore.listOI" />
+                    </label>
+                    <div class="four-columns small">
+                        Tuberculose <br/>
+                        Tuberculose pulmonaire <br/>
+                        Tuberculose extra-pulmonaire <br/>
+                        Pneumonie bactérienne <br/>
+                        Pneumocystose <br/>
+                        Entérite <br/>
+                        Fièvre Typhoïde <br/>
+                        Dysenterie bacillaire <br/>
+                        Candidose <br/>
+                        Candidose buccale <br/>
+                        Candidiasis de l'œsophage <br/>
+                        Candidose vaginale <br/>
+                        Diarrhée <br/>
+                        Diarrhée parasitaire <br/>
+                        Diarrhée bactérienne <br/>
+                        Méningite bactérienne <br/>
+                        Méningite à cryptocoques <br/>
+                        Méningite tuberculeuse <br/>
+                        Eruption cutanées <br/>
+                        Prurigo nodulaire <br/>
+                        Zona <br/>
+                        Sarcome de Kaposi <br/>
+                        Toxoplasmose <br/>
+                        Lymphome du cerveau <br/>
+                        Malaria célébrale <br/>
+                        Encéphalopathie <br/>
+                        Encéphalite présumée due au VIH <br/>
+                        Encéphalopathie à VIH <br/>
+                        Neurosyphilis <br/>
+                        Leishmaniose <br/>
+                        Isosporose <br/>
+                        Infection à Mycobacterium Avium<br/>
+                        Pénicilliose <br/>
+                        Trouble génito-urinaire<br/>
+                        Maladie inflammatoire pelvienne <br/>
+                        Herpès simplex <br/>
+                        LGV<br/>
+                        Condylomes<br/>
+                        Ecoulement urétral <br/>
+                        Trichomonase <br/>
+                        Gonorrhée <br/>
+                        Perte de poids <br/>
+                        Carcinome cellulaire squameux<br/>
+                        Infection au cytomegalovirus
+                    </div>
+                </p>
+            </ifMode>
 
             <div id="data-collection" >
                 <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
