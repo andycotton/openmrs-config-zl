@@ -1,6 +1,8 @@
 <htmlform formUuid="db041f90-938b-44b2-ae70-2ef0da6c693e"
           formName="PMTCT History" formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
+
     <style type="text/css">
         <ifMode mode="VIEW" include="false">
 
