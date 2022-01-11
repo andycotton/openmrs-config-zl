@@ -1,6 +1,8 @@
 <htmlform formUuid="db041f90-938b-44b2-ae70-2ef0da6c693e"
           formName="PMTCT History" formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
+
     <style type="text/css">
         <ifMode mode="VIEW" include="false">
 
@@ -164,7 +166,7 @@
     <section id="transferIn" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.transferReferralIn">
         <div class="section-container-color">
-            <obsgroup groupingConceptId="PIH:13169">
+            <obsgroup groupingConceptId="PIH:13169" showIfEmpty="false">
                 <label>
                     <uimessage code="pihcore.externalReferInQuestion"/>
                 </label>
@@ -340,7 +342,7 @@
             </tr>
             <repeat>
                 <template>
-                    <obsgroup groupingConceptId="CIEL:163288">
+                    <obsgroup groupingConceptId="CIEL:163288" showIfEmpty="false">
                     <tr>
                         <td>
                             <obs conceptId="CIEL:160581"
@@ -366,7 +368,7 @@
                 <render mode="Rapports hétérosexuelles avec personne bénéficier de sang/dérivé sanguin" cId="CIEL:165434" toggle="with-blood-person" />
             </repeat>
 
-            <obsgroup groupingConceptId="CIEL:163288">
+            <obsgroup groupingConceptId="CIEL:163288" showIfEmpty="false">
                 <tr>
                     <td>
                         <obs conceptId="CIEL:160581"
@@ -397,7 +399,7 @@
                 </tr>
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="CIEL:163292">
+                        <obsgroup groupingConceptId="CIEL:163292" showIfEmpty="false">
                             <tr>
                                 <td>
                                     <label>
@@ -429,7 +431,7 @@
                     <render mode="sexWorker" cId="CIEL:160579" toggle="sexWorker"/>
                 </repeat>
 
-                <obsgroup groupingConceptId="CIEL:163288">
+                <obsgroup groupingConceptId="CIEL:163288" showIfEmpty="false">
                     <tr>
                         <td colspan="2">
                             <obs conceptId="CIEL:160581"
@@ -474,7 +476,7 @@
 
             <div class="two-columns">
                 <div>
-                    <obsgroup groupingConceptId="CIEL:166557">
+                    <obsgroup groupingConceptId="CIEL:166557" showIfEmpty="false">
                         <p>
                             <obs conceptId="CIEL:1628" style="checkbox"
                                  answerConceptId="CIEL:112493"
@@ -489,7 +491,7 @@
                 </div>
 
                 <div>
-                    <obsgroup groupingConceptId="CIEL:166558">
+                    <obsgroup groupingConceptId="CIEL:166558" showIfEmpty="false">
                         <p>
                             <obs conceptId="CIEL:1628" style="checkbox"
                                  answerConceptId="CIEL:112493"
@@ -624,7 +626,7 @@
                         <uimessage code="pihcore.adverseEvent"/>?
                     </b>
                 </label>
-                <obsgroup groupingConceptId="PIH:1295">
+                <obsgroup groupingConceptId="PIH:1295" showIfEmpty="false">
                     <obs conceptId="PIH:1297" style="checkbox"
                          answerConceptId="CIEL:121764"
                          answerCode="emr.yes" toggle="ae" />
@@ -652,7 +654,7 @@
                     </tr>
 
                     <repeat with="[1],[2],[3]">
-                        <obsgroup groupingConceptId="PIH:1295">
+                        <obsgroup groupingConceptId="PIH:1295" showIfEmpty="false">
                             <tr>
                                 <td id="ae-med-{0}">
                                     <obs conceptId="CIEL:160632" />
@@ -701,7 +703,7 @@
                 </tr>
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="CIEL:1633">
+                        <obsgroup groupingConceptId="CIEL:1633" showIfEmpty="false">
                             <tr>
                                 <td id="{name}-mhf">
                                     <!-- Past medical history finding -->
@@ -854,7 +856,7 @@
 
                     <repeat>
                         <template>
-                            <obsgroup groupingConceptId="PIH:1589">
+                            <obsgroup groupingConceptId="PIH:1589" showIfEmpty="false">
                                 <tr>
                                     <td>
                                         <obs id="{obs_id}" conceptId="CIEL:1282" answerConceptId="{concept}"
@@ -956,7 +958,7 @@
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:1501">
+                        <obsgroup groupingConceptId="PIH:1501" showIfEmpty="false">
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
@@ -977,7 +979,7 @@
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:1501">
+                        <obsgroup groupingConceptId="PIH:1501" showIfEmpty="false">
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
@@ -1002,7 +1004,7 @@
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:1501">
+                        <obsgroup groupingConceptId="PIH:1501" showIfEmpty="false">
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
@@ -1047,7 +1049,7 @@
 
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:1590">
+                        <obsgroup groupingConceptId="PIH:1590" showIfEmpty="false">
                             <tr>
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{concept}"
@@ -1069,7 +1071,7 @@
                 </repeat>
 
                 <!-- Other HIV regimen -->
-                <obsgroup groupingConceptId="PIH:1590">
+                <obsgroup groupingConceptId="PIH:1590" showIfEmpty="false">
                     <tr>
                         <td>
                             <obs conceptId="CIEL:1282" answerConceptId="CIEL:5622"
@@ -1120,7 +1122,7 @@
                     <uimessage code="pihcore.fpMethod"/>:
                 </label>
                 <br/>
-                <obsgroup groupingConceptId="PIH:Family planning construct">
+                <obsgroup groupingConceptId="PIH:Family planning construct" showIfEmpty="false">
                     <obs conceptId="CIEL:374"
                          answerConceptIds="CIEL:159783,CIEL:80784,CIEL:5277,CIEL:190,CIEL:907,CIEL:5275,CIEL:1873,CIEL:1472,CIEL:136163"
                          answerCodes="COC,COP,pihcore.fp.rhythm,Condoms,Depo-provera,pihcore.fp.iud,Implant,pihcore.fp.tubalLig,pihcore.fp.breast"
@@ -1169,7 +1171,7 @@
                           ['Pelvic (U/S)', 'CIEL:161283', 'pelvicUS'],
                           ['Abdominal (U/S)','CIEL:845','abUS']">
                 <p>
-                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct" showIfEmpty="false">
                         <obs conceptId="PIH:Radiology procedure performed"
                              answerConceptId="{1}" toggle="{2}"
                              answerCode="pihcore.rad.{2}"
@@ -1187,7 +1189,7 @@
                 <label>
                     <uimessage code="zl.ifOtherSpecify"/>
                 </label>
-                <obsgroup groupingConceptId="PIH:Radiology report construct">
+                <obsgroup groupingConceptId="PIH:Radiology report construct" showIfEmpty="false">
                     <obs conceptId="PIH:Radiology procedure performed"
                          answerClasses="Radiology/Imaging Procedure"
                          style="checkbox"/>
