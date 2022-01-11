@@ -358,7 +358,7 @@
                 <render mode="Rapports sexuels avec une femme" cId="CIEL:163291" toggle="women" />
                 <render mode="Injection de drogues" cId="CIEL:105" toggle="drugs"/>
                 <render mode="Bénéficier de sang/dérivé sanguin" cId="CIEL:1063" toggle="blood" />
-                <render mode="Transmission mère a enfant" cId="CIEL:163273" toggle="pmtct "/>
+                <render mode="Transmission mère a enfant" cId="CIEL:163273" toggle="mom-fetus"/>
                 <render mode="Accident d'exposition au sang" cId="CIEL:163274" toggle="accident-blood"/>
                 <render mode="Rapports hétérosexuelles avec personne SIDA/VIH+" cId="CIEL:163289" toggle="hiv-person" />
                 <render mode="Rapports hétérosexuelles avec personne qui s'injecte de la drogue" cId="PIH:11534" toggle="with-drug-person" />
@@ -545,7 +545,7 @@
                     <span id="calculated-edd-wrapper">
                         <span id="calculated-edd-label">
                             <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                        </span>
+                        </span><br/>
                         <span id='calculated-edd' class="value"></span>
                     </span>
                 </div>
