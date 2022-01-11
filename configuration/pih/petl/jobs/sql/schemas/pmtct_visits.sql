@@ -2,6 +2,7 @@ CREATE TABLE pmtct_visits (
     visit_id                    INT,
     encounter_id                INT,
     patient_id                  INT,
+    emr_id 					    VARCHAR(25),
     visit_date                  DATE,
     health_facility             VARCHAR(100),
     hiv_test_date               DATE,
