@@ -27,19 +27,19 @@ SELECT visit_id, encounter_id, patient_id, zlemr(patient_id) FROM encounter WHER
 -- visit date
 UPDATE temp_pmtct_visit t SET t.visit_date = VISIT_DATE(t.encounter_id);
 
--- facility where healthcare is recieved
+-- facility where healthcare is received
  UPDATE temp_pmtct_visit t SET t.health_facility = ENCOUNTER_LOCATION_NAME(t.encounter_id);
  
 -- Hiv test date
 UPDATE  temp_pmtct_visit t SET hiv_test_date = OBS_VALUE_DATETIME(t.encounter_id, 'PIH', 'HIV TEST DATE');
 
 -- contacts
-SET @relationship = CONCEPT_FROM_MAPPING();
-SET @first_name = CONCEPT_FROM_MAPPING();
-SET @last_name = CONCEPT_FROM_MAPPING();
-SET @phone = CONCEPT_FROM_MAPPING();
-UPDATE temp_pmtct_visit t SET has_provided_contact = (select 1 from obs where voide = 0 and o.encounter_id = t.encounter_id and
-where concept_id in (@relationship, @first_name, @last_name, @phone); 
+SET @relationship = CONCEPT_FROM_MAPPING('PIH', '13265');
+SET @first_name = CONCEPT_FROM_MAPPING('PIH', 'FIRST NAME');
+SET @last_name = CONCEPT_FROM_MAPPING('PIH', 'LAST NAME');
+SET @phone = CONCEPT_FROM_MAPPING('PIH', 'TELEPHONE NUMBER OF CONTACT');
+UPDATE temp_pmtct_visit t SET has_provided_contact = (select 1 from obs o where voided = 0 and o.encounter_id = t.encounter_id and 
+o.concept_id in (@relationship, @first_name, @last_name, @phone) group by o.encounter_id); 
 
 
 
