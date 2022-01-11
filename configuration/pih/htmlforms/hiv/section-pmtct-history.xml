@@ -626,7 +626,7 @@
                         <uimessage code="pihcore.adverseEvent"/>?
                     </b>
                 </label>
-                <obsgroup groupingConceptId="PIH:1295" showIfEmpty="false">
+                <obsgroup groupingConceptId="PIH:1295" >
                     <obs conceptId="PIH:1297" style="checkbox"
                          answerConceptId="CIEL:121764"
                          answerCode="emr.yes" toggle="ae" />
@@ -654,7 +654,7 @@
                     </tr>
 
                     <repeat with="[1],[2],[3]">
-                        <obsgroup groupingConceptId="PIH:1295" showIfEmpty="false">
+                        <obsgroup groupingConceptId="PIH:1295" >
                             <tr>
                                 <td id="ae-med-{0}">
                                     <obs conceptId="CIEL:160632" />
@@ -663,14 +663,14 @@
                                     <repeat>
                                         <template>
                                             <obs conceptId="PIH:1297"
-                                                 answerConceptId="{concept}"
+                                                 answerConceptId="{aeconcept}"
                                                  style="checkbox" />
                                         </template>
-                                        <render concept="CIEL:512"    name="Rash" />
-                                        <render concept="CIEL:148888" name="Anaphylaxis"/>
-                                        <render concept="CIEL:148787" name="Angioedema"/>
-                                        <render concept="CIEL:118983" name="Neuropathy"/>
-                                        <render concept="CIEL:116986" name="Hepatitis" />
+                                        <render aeconcept="CIEL:512"    aename="Rash" />
+                                        <render aeconcept="CIEL:148888" aename="Anaphylaxis"/>
+                                        <render aeconcept="CIEL:148787" aename="Angioedema"/>
+                                        <render aeconcept="CIEL:118983" aename="Neuropathy"/>
+                                        <render aeconcept="CIEL:116986" aename="Hepatitis" />
                                     </repeat>
                                     <obs conceptId="PIH:1297" answerConceptId="CIEL:5622"
                                          commentFieldCode="zl.ifOtherSpecify" style="checkbox" />
