@@ -626,11 +626,9 @@
                         <uimessage code="pihcore.adverseEvent"/>?
                     </b>
                 </label>
-                <obsgroup groupingConceptId="PIH:1295" >
-                    <obs conceptId="PIH:1297" style="checkbox"
-                         answerConceptId="CIEL:121764"
-                         answerCode="emr.yes" toggle="ae" />
-                </obsgroup>
+                <obs conceptId="CIEL:121764" style="checkbox"
+                     answerConceptId="CIEL:1065"
+                     answerCode="emr.yes" toggle="ae" />
             </p>
 
             <div id="ae">
@@ -653,13 +651,17 @@
                         </th>
                     </tr>
 
-                    <repeat with="[1],[2],[3]">
+                    <!-- delete
+                    <repeat with="['1'],['2'],['3']">
+                    </repeat> -->
+
                         <obsgroup groupingConceptId="PIH:1295" >
                             <tr>
-                                <td id="ae-med-{0}">
+                                <td>
+                                    <!-- Medication name (free-text) -->
                                     <obs conceptId="CIEL:160632" />
                                 </td>
-                                <td id="ae-{0}">
+                                <td>
                                     <repeat>
                                         <template>
                                             <obs conceptId="PIH:1297"
@@ -675,12 +677,12 @@
                                     <obs conceptId="PIH:1297" answerConceptId="CIEL:5622"
                                          commentFieldCode="zl.ifOtherSpecify" style="checkbox" />
                                 </td>
-                                <td id="ae-date-{0}">
+                                <td>
                                     <obs conceptId="PIH:1300" />
                                 </td>
                             </tr>
                         </obsgroup>
-                    </repeat>
+
                 </table>
             </div>
         </div>
@@ -1107,7 +1109,7 @@
         <div id="fp-area" class="section-container">
             <div class="two-columns">
                 <div>
-                    <obs conceptId="CIEL:163560" style="checkbox"
+                    <obs conceptId="CIEL:165309" style="checkbox"
                          answerConceptId="CIEL:1382" answerCode="pihcore.mch.counselling.familyPlanning" />
                 </div>
                 <div>
