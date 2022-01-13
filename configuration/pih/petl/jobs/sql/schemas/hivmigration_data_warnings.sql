@@ -1,5 +1,5 @@
   CREATE TABLE hivmigration_data_warnings (
-    id INT PRIMARY KEY,
+    id INT,
     openmrs_patient_id INT,
     openmrs_encounter_id INT,
     hiv_emr_encounter_id INT,
