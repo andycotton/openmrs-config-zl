@@ -4,6 +4,7 @@ SELECT patient_identifier_type_id INTO @zl_emr_id FROM patient_identifier_type W
 SELECT patient_identifier_type_id INTO @dossier FROM patient_identifier_type WHERE uuid = 'e66645eb-03a8-4991-b4ce-e87318e37566';
 SELECT patient_identifier_type_id INTO @hiv_id FROM patient_identifier_type WHERE uuid = '139766e8-15f5-102d-96e4-000c29c2a5d7';
 
+SET @hiv_program_id = (SELECT program_id FROM program WHERE retired = 0 AND uuid = 'b1cb1fc1-5190-4f7a-af08-48870975dafc');
 SET @ovc_baseline_encounter_type = ENCOUNTER_TYPE('OVC Intake');
 SET @socio_economics_encounter_type = ENCOUNTER_TYPE('Socio-economics');
 SET @hiv_initial_encounter_type = ENCOUNTER_TYPE('HIV Intake');
@@ -16,6 +17,7 @@ DROP TABLE IF EXISTS temp_patient;
 CREATE TABLE temp_patient
 (
     patient_id                  INT(11),
+    patient_program_id			INT(11),
     zl_emr_id                   VARCHAR(255),
     hivemr_v1_id                VARCHAR(255),
     hiv_dossier_id              VARCHAR(255),
@@ -23,6 +25,13 @@ CREATE TABLE temp_patient
     family_name                 VARCHAR(50),
     gender                      VARCHAR(50),
     birthdate                   DATE,
+    birthplace_commune          VARCHAR(100),
+    birthplace_sc               VARCHAR(100),
+    birthplace_locality         VARCHAR(100),
+    birthplace_province         VARCHAR(100),
+    initial_health_center       VARCHAR(100),
+    program_location_id         INT,
+    current_reporting_health_center VARCHAR(100),
     dead                        VARCHAR(1),
     death_date                  DATE,
     cause_of_death              VARCHAR(255),
@@ -110,6 +119,25 @@ t.section_communal = c.section_communal,
 t.locality = c.locality,
 t.street_landmark = c.street_landmark,
 t.age = ROUND(DATEDIFF(NOW(),c.birthdate) / 365.25 , 1);
+
+## locations
+-- initial_health_center : The registration location for the patient
+-- current_reporting_health_center:  The current location of the hiv program
+UPDATE temp_patient t SET initial_health_center = LOC_REGISTERED(t.patient_id);
+UPDATE temp_patient t SET patient_program_id = (SELECT patient_program_id FROM patient_program p WHERE t.patient_id = p.patient_id AND 
+voided = 0 AND date_completed IS NULL AND program_id = @hiv_program_id);
+UPDATE temp_patient t SET program_location_id = PROGRAMLOCATIONID(t.patient_program_id);
+UPDATE temp_patient t SET current_reporting_health_center = LOCATION_NAME(t.program_location_id);
+
+## birth address
+UPDATE temp_patient t JOIN obs o ON t.patient_id = o.person_id AND o.voided = 0 AND o.concept_id = CONCEPT_FROM_MAPPING('PIH', 'City Village')
+SET birthplace_commune = o.value_text;
+UPDATE temp_patient t JOIN obs o ON t.patient_id = o.person_id AND o.voided = 0 AND o.concept_id = CONCEPT_FROM_MAPPING('PIH', 'Address3')
+SET birthplace_sc = o.value_text;
+UPDATE temp_patient t JOIN obs o ON t.patient_id = o.person_id AND o.voided = 0 AND o.concept_id = CONCEPT_FROM_MAPPING('PIH', 'Address1')
+SET birthplace_locality = o.value_text;	
+UPDATE temp_patient t JOIN obs o ON t.patient_id = o.person_id AND o.voided = 0 AND o.concept_id = CONCEPT_FROM_MAPPING('PIH', 'State Province')
+SET birthplace_province = o.value_text;
 
 UPDATE temp_patient t JOIN obs m ON t.patient_id = m.person_id AND 
 m.voided = 0 AND concept_id = CONCEPT_FROM_MAPPING('PIH','CIVIL STATUS')
@@ -505,15 +533,15 @@ UPDATE temp_hiv_last_viral t SET months_since_last_vl = TIMESTAMPDIFF(MONTH, las
 DROP TEMPORARY TABLE IF EXISTS temp_hiv_next_visit_date;
 CREATE TEMPORARY TABLE temp_hiv_next_visit_date
 (
-person_id int,
-next_visit_date datetime,
-days_late_to_visit double
+person_id INT,
+next_visit_date DATETIME,
+days_late_to_visit DOUBLE
 );
-insert into temp_hiv_next_visit_date (person_id, next_visit_date)
+INSERT INTO temp_hiv_next_visit_date (person_id, next_visit_date)
 SELECT person_id, MAX(value_datetime) FROM obs WHERE voided = 0 AND concept_id = CONCEPT_FROM_MAPPING("PIH", "RETURN VISIT DATE")
 AND encounter_id IN (SELECT encounter_id FROM encounter WHERE encounter_type IN (@hiv_initial_encounter_type, @hiv_followup_encounter_type) AND voided = 0) GROUP BY person_id;
 
-update temp_hiv_next_visit_date t set days_late_to_visit =  TIMESTAMPDIFF(DAY, next_visit_date, NOW());
+UPDATE temp_hiv_next_visit_date t SET days_late_to_visit =  TIMESTAMPDIFF(DAY, next_visit_date, NOW());
 
 --
 DROP TABLE IF EXISTS temp_hiv_diagnosis_date;
@@ -597,6 +625,12 @@ t.family_name,
 t.gender,
 t.birthdate,
 t.age,
+t.birthplace_commune,
+t.birthplace_sc,
+t.birthplace_locality,
+t.birthplace_province,
+t.initial_health_center,
+t.current_reporting_health_center,
 t.marital_status,
 t.occupation,
 tehd.agent,
