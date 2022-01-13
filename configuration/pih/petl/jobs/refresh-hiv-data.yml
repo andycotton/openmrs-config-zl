@@ -1,6 +1,7 @@
 # For the HIV Server, we only execute the "hiv", "ovc", and "hivmigration" ETL jobs
 
 type: "job-pipeline"
+description: "Refresh HIV Data for ${siteName}"
 parameters:
   siteName: "hiv"
 schedule:
@@ -9,9 +10,11 @@ configuration:
   jobs:
     - path: "create-source-views-and-functions.yml"
     - type: "iterating-job"
+      description: "Load HIV Data from all tables for ${siteName}"
       configuration:
         jobTemplate:
           type: "sqlserver-bulk-import"
+          description: "Load HIV Data for ${tableName} for ${siteName}"
           configuration:
             extract:
               datasource: "openmrs-${siteName}.yml"
@@ -48,6 +51,7 @@ configuration:
           dropAndRecreateTable: "false"
 
     - type: "sqlserver-bulk-import"
+      description: "Load hivmigration_aggregrate_data_warnings for ${siteName}"
       configuration:
         extract:
           datasource: "openmrs-${siteName}.yml"
