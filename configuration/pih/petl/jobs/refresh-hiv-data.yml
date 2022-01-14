@@ -49,7 +49,7 @@ configuration:
           datasource: "warehouse-hiv.yml"
           table: "hivmigration_data_warnings"
           schema: "sql/schemas/hivmigration_data_warnings.sql"
-          dropAndRecreateTable: "false"
+          dropAndRecreateTable: "true"
 
     - type: "sqlserver-bulk-import"
       description: "Load hivmigration_aggregrate_data_warnings for ${siteName}"
