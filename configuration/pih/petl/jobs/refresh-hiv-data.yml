@@ -39,6 +39,7 @@ configuration:
           - tableName: "pmtct_pregnancy"
 
     - type: "sqlserver-bulk-import"
+      description: "Load hivmigration_data_warnings for ${siteName}"
       configuration:
         extract:
           datasource: "openmrs-${siteName}.yml"
