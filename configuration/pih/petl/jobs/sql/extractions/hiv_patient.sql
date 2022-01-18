@@ -123,7 +123,7 @@ t.age = ROUND(DATEDIFF(NOW(),c.birthdate) / 365.25 , 1);
 ## locations
 -- initial_health_center : The registration location for the patient
 -- current_reporting_health_center:  The current location of the hiv program
-UPDATE temp_patient t SET initial_health_center = LOC_REGISTERED(t.patient_id);
+UPDATE temp_patient t SET initial_health_center = initialProgramLocation(t.patient_id, @hiv_program_id);
 UPDATE temp_patient t SET patient_program_id = (SELECT patient_program_id FROM patient_program p WHERE t.patient_id = p.patient_id AND 
 voided = 0 AND date_completed IS NULL AND program_id = @hiv_program_id);
 UPDATE temp_patient t SET program_location_id = PROGRAMLOCATIONID(t.patient_program_id);
