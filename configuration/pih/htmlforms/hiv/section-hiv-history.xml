@@ -1051,11 +1051,9 @@
                         <uimessage code="pihcore.adverseEvent"/>?
                     </b>
                 </label>
-                <obsgroup groupingConceptId="PIH:1295">
-                    <obs conceptId="PIH:1297" style="checkbox"
-                         answerConceptId="CIEL:121764"
-                         answerCode="emr.yes" toggle="ae" />
-                </obsgroup>
+                <obs conceptId="PIH:1297" style="checkbox"
+                     answerConceptId="CIEL:121764"
+                     answerCode="emr.yes" toggle="ae" />
             </p>
 
             <div id="ae">

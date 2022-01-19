@@ -651,17 +651,13 @@
                         </th>
                     </tr>
 
-                    <!-- delete
-                    <repeat with="['1'],['2'],['3']">
-                    </repeat> -->
-
+                    <repeat with="[1],[2],[3]">
                         <obsgroup groupingConceptId="PIH:1295" >
                             <tr>
-                                <td>
-                                    <!-- Medication name (free-text) -->
+                                <td id="ae-med-{0}">
                                     <obs conceptId="CIEL:160632" />
                                 </td>
-                                <td>
+                                <td id="ae-{0}">
                                     <repeat>
                                         <template>
                                             <obs conceptId="PIH:1297"
@@ -677,12 +673,12 @@
                                     <obs conceptId="PIH:1297" answerConceptId="CIEL:5622"
                                          commentFieldCode="zl.ifOtherSpecify" style="checkbox" />
                                 </td>
-                                <td>
+                                <td id="ae-date-{0}">
                                     <obs conceptId="PIH:1300" />
                                 </td>
                             </tr>
                         </obsgroup>
-
+                    </repeat>
                 </table>
             </div>
         </div>
