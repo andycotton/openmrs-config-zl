@@ -6,7 +6,6 @@ CREATE TABLE hiv_tests (
     result_date                 DATE,
     concept_name                VARCHAR(100),
     value_coded                 VARCHAR(255),
-    value_numeric               FLOAT,
     index_asc                   INT,
     index_desc                  INT
 );
