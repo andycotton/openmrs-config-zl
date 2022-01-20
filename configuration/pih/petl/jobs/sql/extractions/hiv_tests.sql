@@ -203,7 +203,7 @@ FROM (SELECT
             FROM temp_lab_tests_final,
                     (SELECT @r:= 1) AS r,
                     (SELECT @u:= 0) AS u
-            ORDER BY person_id, encounter_id ASC, specimen_collection_date ASC, date_created ASC
+            ORDER BY person_id, encounter_id ASC, specimen_collection_date ASC, date_created ASC, test_type ASC
         ) index_ascending );
 
 DROP TEMPORARY TABLE IF EXISTS temp_hiv_lab_index_desc;
@@ -227,7 +227,7 @@ FROM (SELECT
             FROM temp_lab_tests_final,
                     (SELECT @r:= 1) AS r,
                     (SELECT @u:= 0) AS u
-            ORDER BY person_id, encounter_id DESC, specimen_collection_date DESC, date_created DESC
+            ORDER BY person_id, encounter_id DESC, specimen_collection_date DESC, date_created DESC, test_type DESC
         ) index_descending );
 
 UPDATE temp_lab_tests_final tbf JOIN temp_hiv_lab_index_asc tbia ON tbf.encounter_id = tbia.encounter_id AND tbf.test_type = tbia.test_type
