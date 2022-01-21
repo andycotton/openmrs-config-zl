@@ -192,10 +192,13 @@
         };
 
     jq("#medsTable select").on('change', function() {
-        if( this.value.length > 0 ) {
-            // a med has been selected
+            // a med has been selected or unselected
             jq("#missingMedsError").text("").hide();
-        }
+    });
+
+    jq(".drugQty input").on('change', function() {
+        // quantity for a med was entered
+        jq("#missingMedsError").text("").hide();
     });
 
     jq("#dispensedTo").click(function () {
@@ -276,6 +279,26 @@
 
             return true;
 
+        });
+
+        beforeValidation.push(function() {
+            let $j_drugs = jq("#medsTable select");
+            let returnValue = true;
+            $j_drugs.each( function(){
+                let drugName = (jq(this).val());
+                // look for the Amount input box associated with this drug
+                let drugQtyElem = jq(this).closest("td").next().find('.drugQty').children('input').first();
+                let druQtyVal = null;
+                if (typeof drugQtyElem !== "undefined" &amp;&amp; drugQtyElem !== null) {
+                  druQtyVal = jq(drugQtyElem).val();
+                }
+                // if both the drug name and corresponding quantity are empty or they both have values
+                if (((drugName == false &amp;&amp; druQtyVal == false) || (drugName.length > 0 &amp;&amp; druQtyVal.length > 0)) != true ) {
+                    jq("#missingMedsError").text("<uimessage code='zl.select.drug.qty'/>").show();
+                    returnValue =false;
+                }
+            });
+            return returnValue;
         });
 
         // The CHW name is required when dispensed to CHW radio button is checked
@@ -585,7 +608,7 @@
                                 ABC/3TC 120/60 mg" />
                    </td>
                    <td>
-                       <obs conceptId="CIEL:1443" />
+                       <obs class="drugQty" conceptId="CIEL:1443" />
                    </td>
                 </tr>
                 </obsgroup>
@@ -637,7 +660,7 @@
                                 DRV/ETV 300/100 mg" />
                     </td>
                     <td>
-                        <obs conceptId="CIEL:1443" />
+                        <obs class="drugQty" conceptId="CIEL:1443" />
                     </td>
                 </tr>
                 </obsgroup>
@@ -663,7 +686,7 @@
                                 TMS 240 mg sp" />
                     </td>
                     <td>
-                        <obs conceptId="CIEL:1443" />
+                        <obs class="drugQty" conceptId="CIEL:1443" />
                     </td>
                 </tr>
                 </obsgroup>
@@ -685,7 +708,7 @@
                                 INH 300 mg" />
                     </td>
                     <td>
-                        <obs conceptId="CIEL:1443" />
+                        <obs class="drugQty" conceptId="CIEL:1443" />
                     </td>
                 </tr>
                 </obsgroup>
