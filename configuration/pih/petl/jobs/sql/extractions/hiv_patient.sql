@@ -31,7 +31,7 @@ CREATE TABLE temp_patient
     birthplace_province         VARCHAR(100),
     initial_health_center       VARCHAR(100),
     program_location_id         INT,
-    current_reporting_health_center VARCHAR(100),
+    latest_enrollment_location VARCHAR(100),
     dead                        VARCHAR(1),
     death_date                  DATE,
     cause_of_death              VARCHAR(255),
@@ -122,12 +122,12 @@ t.age = ROUND(DATEDIFF(NOW(),c.birthdate) / 365.25 , 1);
 
 ## locations
 -- initial_health_center : The registration location for the patient
--- current_reporting_health_center:  The current location of the hiv program
-UPDATE temp_patient t SET initial_health_center = initialProgramLocation(t.patient_id, @hiv_program_id);
+-- latest_enrollment_location:  The current location of the hiv program
+UPDATE temp_patient t SET initial_enrollment_location = initialProgramLocation(t.patient_id, @hiv_program_id);
 UPDATE temp_patient t SET patient_program_id = (SELECT patient_program_id FROM patient_program p WHERE t.patient_id = p.patient_id AND 
 voided = 0 AND date_completed IS NULL AND program_id = @hiv_program_id);
 UPDATE temp_patient t SET program_location_id = PROGRAMLOCATIONID(t.patient_program_id);
-UPDATE temp_patient t SET current_reporting_health_center = LOCATION_NAME(t.program_location_id);
+UPDATE temp_patient t SET latest_enrollment_location = currentProgramLocation(t.patient_id, @hiv_program_id);
 
 ## birth address
 UPDATE temp_patient t JOIN obs o ON t.patient_id = o.person_id AND o.voided = 0 AND o.concept_id = CONCEPT_FROM_MAPPING('PIH', 'City Village')
@@ -630,7 +630,7 @@ t.birthplace_sc,
 t.birthplace_locality,
 t.birthplace_province,
 t.initial_health_center,
-t.current_reporting_health_center,
+t.latest_enrollment_location,
 t.marital_status,
 t.occupation,
 tehd.agent,
