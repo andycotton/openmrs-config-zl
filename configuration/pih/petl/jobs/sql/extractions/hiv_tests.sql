@@ -63,7 +63,6 @@ result_date     DATETIME,
 result_date1    DATETIME,
 concept_name    VARCHAR(100),
 value_coded     VARCHAR(100),
-
 date_created    DATETIME
 );
 
@@ -171,6 +170,7 @@ SET tbf.index_desc = tbia.index_desc;
 SELECT
 	person_id,
     emr_id,
+    patient_identifier(person_id, '139766e8-15f5-102d-96e4-000c29c2a5d7') hivemr_v1_id,
     encounter_id,
     DATE(specimen_collection_date),
     DATE(result_date),

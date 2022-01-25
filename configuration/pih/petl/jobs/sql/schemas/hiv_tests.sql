@@ -1,11 +1,12 @@
 CREATE TABLE hiv_tests (
-    person_id                   INT,
+    patient_id                  INT,
     emr_id                      VARCHAR(25),
+    hivemr_v1_id                VARCHAR(25),
     encounter_id                INT,
     specimen_collection_date    DATE,
     result_date                 DATE,
-    concept_name                VARCHAR(100),
-    value_coded                 VARCHAR(255),
+    test_type                   VARCHAR(100),
+    test_result                 VARCHAR(10),
     index_asc                   INT,
     index_desc                  INT
 );
