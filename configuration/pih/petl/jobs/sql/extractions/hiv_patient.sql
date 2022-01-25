@@ -29,7 +29,7 @@ CREATE TABLE temp_patient
     birthplace_sc               VARCHAR(100),
     birthplace_locality         VARCHAR(100),
     birthplace_province         VARCHAR(100),
-    initial_health_center       VARCHAR(100),
+    initial_enrollment_location VARCHAR(100),
     program_location_id         INT,
     latest_enrollment_location VARCHAR(100),
     dead                        VARCHAR(1),
@@ -121,7 +121,7 @@ t.street_landmark = c.street_landmark,
 t.age = ROUND(DATEDIFF(NOW(),c.birthdate) / 365.25 , 1);
 
 ## locations
--- initial_health_center : The registration location for the patient
+-- initial_enrollment_location : The registration location for the patient
 -- latest_enrollment_location:  The current location of the hiv program
 UPDATE temp_patient t SET initial_enrollment_location = initialProgramLocation(t.patient_id, @hiv_program_id);
 UPDATE temp_patient t SET patient_program_id = (SELECT patient_program_id FROM patient_program p WHERE t.patient_id = p.patient_id AND 
@@ -629,7 +629,7 @@ t.birthplace_commune,
 t.birthplace_sc,
 t.birthplace_locality,
 t.birthplace_province,
-t.initial_health_center,
+t.initial_enrollment_location,
 t.latest_enrollment_location,
 t.marital_status,
 t.occupation,
