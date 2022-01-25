@@ -1051,8 +1051,8 @@
                         <uimessage code="pihcore.adverseEvent"/>?
                     </b>
                 </label>
-                <obs conceptId="PIH:1297" style="checkbox"
-                     answerConceptId="CIEL:121764"
+                <obs conceptId="CIEL:121764" style="checkbox"
+                     answerConceptId="CIEL:1065"
                      answerCode="emr.yes" toggle="ae" />
             </p>
 
