@@ -12,6 +12,8 @@ CREATE TABLE pmtct_pregnancy(
     is_active_on_art        BIT,
     transfer_status         BIT,
     cd4_count_assessed      FLOAT,
+    post_test_counseling_date           DATE,
+    hiv_known_before_current_pregnancy  BIT,
     index_asc               INT,
     index_desc              INT
 );
