@@ -28,6 +28,10 @@ transfer_status                 BIT,
 cd4_count_assessed_obs          FLOAT,
 cd4_count_assessed              DOUBLE,
 health_facility                 VARCHAR(255),
+post_test_counseling_date_latest_obs INT,
+post_test_counseling_date 		DATETIME,
+hiv_known_before_current_pregnancy_latest_obs INT,
+hiv_known_before_current_pregnancy BIT,
 index_asc                       INT,
 index_desc                      INT
 );
@@ -148,6 +152,19 @@ UPDATE temp_pmtct_encounter t SET location_id = (SELECT location_id FROM encount
 
 UPDATE temp_pmtct_pregnancy t SET health_facility = (SELECT  LOCATION_NAME(location_id) FROM temp_pmtct_encounter tp WHERE tp.patient_id = t.patient_id);
 
+## Post-Test Counseling Date
+## note this approach may not account 
+## for retrospective data entry in cases
+## where there could be more than 1 intake form
+SET @post_test_counseling_date_concept_id_in = CONCEPT_FROM_MAPPING('PIH', 11525);
+UPDATE temp_pmtct_pregnancy t SET post_test_counseling_date_latest_obs = LATESTOBS(t.patient_id, @post_test_counseling_date_concept_id_in, t.start_date);
+UPDATE temp_pmtct_pregnancy t SET post_test_counseling_date = VALUE_DATETIME(t.post_test_counseling_date_latest_obs);
+
+
+SET @hiv_known_before_current_pregnancy_concept_id = CONCEPT_FROM_MAPPING('PIH', 13955);
+UPDATE temp_pmtct_pregnancy t SET hiv_known_before_current_pregnancy_latest_obs = LATESTOBS(t.patient_id, @hiv_known_before_current_pregnancy_concept_id, t.start_date);
+UPDATE temp_pmtct_pregnancy t SET hiv_known_before_current_pregnancy = VALUE_CODED_AS_BOOLEAN(hiv_known_before_current_pregnancy_latest_obs);
+
 ## indexes
 ## This is based on the date when the pregnancy per woman is reported
 -- index asc
@@ -207,6 +224,8 @@ SELECT
     is_active_on_art,
     transfer_status,
     cd4_count_assessed,
+    DATE(post_test_counseling_date) post_test_counseling_date,
+    hiv_known_before_current_pregnancy,
     index_asc,
     index_desc
 FROM temp_pmtct_pregnancy;
