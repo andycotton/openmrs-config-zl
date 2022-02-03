@@ -67,17 +67,26 @@
                 line-height: 1.5em; /*add this for vertical spacing between elements*/
             }
 
-            .section-container input[type="checkbox"] {
+            .section-container input[type="checkbox"],
+            .section-container-color input[type="checkbox"] {
                 margin: 0px 5px; /*changed values to vertical, horizontal*/
                 top:5px; /*added to offset the checkbox position to line up*/
             }
 
-            .section-container label { /*new definition to override labels inside section-containers*/
+            .section-container label,
+            .section-container-color label {
+                /*new definition to override labels inside section-containers*/
                 margin: 0px;
             }
 
            - .section {
                 width: 100%;
+            }
+
+            .who-stage {
+                background: #F2F2F2;
+                padding: 10px 5px 10px 15px;
+                line-height: 1.5em; /*add this for vertical spacing between elements*/
             }
         </ifMode>
     </style>
@@ -104,6 +113,14 @@
                     window.htmlForm.submitHtmlForm();
                 })
 
+            });
+        </script>
+    </ifMode>
+
+    <ifMode mode="VIEW" include="true">
+        <script type="text/javascript">
+            jq(document).ready(function() {
+            hideIfEmpty(".who-stage");
             });
         </script>
     </ifMode>
@@ -282,7 +299,7 @@
 
     <section id="hiv-who-stages" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.hiv.whoStages">
-        <div class="section-container">
+        <div class="section-container-color">
             <p class="radio">
                 <label>
                     <b>
@@ -295,7 +312,7 @@
                      answerSeparator="&amp;nbsp;" style="radio" />
             </p>
 
-            <p>
+            <div class="who-stage">
                 <label>
                     <uimessage code="pihcore.hiv.whoStage1"/>
                 </label>
@@ -304,15 +321,20 @@
                 <repeat>
                     <template>
                         <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                             style="checkbox" answerSeparator="" />
-                        <br/>
+                             style="checkbox" />
+                        <ifMode mode="VIEW" include="false">
+                            <br/>
+                        </ifMode>
                     </template>
                     <render whoDef="CIEL:5327" name="Asymptomatic" />
                     <render whoDef="CIEL:5328" name="PersistGenLymph" />
                 </repeat>
-            </p>
+                <ifMode mode="VIEW" include="true">
+                    <br/><br/>
+                </ifMode>
+            </div>
 
-            <p>
+            <div class="who-stage">
                 <label>
                     <uimessage code="pihcore.hiv.whoStage2"/>
                 </label>
@@ -323,8 +345,10 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator="" />
-                            <br/>
+                                 style="checkbox" />
+                            <ifMode mode="VIEW" include="false">
+                                <br/>
+                            </ifMode>
                         </template>
                             <render whoDef="CIEL:5332"   name="WeightLossLess10%" />
                             <render whoDef="CIEL:127784" name="RecurrantURI" />
@@ -342,8 +366,10 @@
                     <repeat>
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
-                                 style="checkbox" answerSeparator="" />
-                            <br/>
+                                 style="checkbox" />
+                            <ifMode mode="VIEW" include="false">
+                                <br/>
+                            </ifMode>
                         </template>
                         <render whoDef="CIEL:160436" name="PersistentHepatosplenomegaly" />
                         <render whoDef="CIEL:128321" name="Prurigo nodularis" />
@@ -357,9 +383,12 @@
                         <render whoDef="PIH:106"     name="URI" />
                     </repeat>
                 </includeIf>
-            </p>
+                <ifMode mode="VIEW" include="true">
+                    <br/><br/>
+                </ifMode>
+            </div>
 
-            <p>
+            <div class="who-stage">
                 <label>
                     <uimessage code="pihcore.hiv.whoStage3"/>
                 </label>
@@ -371,7 +400,9 @@
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
                                  style="checkbox" answerSeparator="" />
-                            <br/>
+                            <ifMode mode="VIEW" include="false">
+                                <br/>
+                            </ifMode>
                         </template>
                             <render whoDef="CIEL:5339"   name="WeightLossMore10%" />
                             <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
@@ -391,7 +422,9 @@
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
                                  style="checkbox" answerSeparator="" />
-                            <br/>
+                            <ifMode mode="VIEW" include="false">
+                                <br/>
+                            </ifMode>
                         </template>
                         <render whoDef="CIEL:134722" name="ModMalnutrition" />
                         <render whoDef="CIEL:5018"   name="DiarrheaMore1Month" />
@@ -407,9 +440,12 @@
                         <render whoDef="PIH:2582"    name="UnexplainedAnemiaEtc" />
                     </repeat>
                 </includeIf>
-            </p>
+                <ifMode mode="VIEW" include="true">
+                    <br/><br/>
+                </ifMode>
+            </div>
 
-            <p>
+            <div class="who-stage">
                 <label>
                     <uimessage code="pihcore.hiv.whoStage4"/>
                 </label>
@@ -421,7 +457,9 @@
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
                                  style="checkbox" answerSeparator="" />
-                            <br/>
+                            <ifMode mode="VIEW" include="false">
+                                <br/>
+                            </ifMode>
                         </template>
                         <render whoDef="CIEL:823"    name="Wasting" />
                         <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
@@ -453,7 +491,9 @@
                         <template>
                             <obs conceptId="CIEL:6042" answerConceptId="{whoDef}"
                                  style="checkbox" answerSeparator="" />
-                            <br/>
+                            <ifMode mode="VIEW" include="false">
+                                <br/>
+                            </ifMode>
                         </template>
                         <render whoDef="CIEL:164086" name="Stunting" />
                         <render whoDef="CIEL:130021" name="PneumocystisPneumonia" />
@@ -475,7 +515,7 @@
                         <render whoDef="CIEL:5046"   name="LeukoEnceph" />
                     </repeat>
                 </includeIf>
-            </p>
+            </div>
         </div>
     </section>
 
