@@ -713,7 +713,7 @@
                 <tr>
                     <td>
                         <uimessage code="zl.dispensing.inhPrimary" />:
-                        <span class="small hidden"><!-- hidden, automatically checked/unchecked by beforeSubmit defined above -->
+                        <span class="small hidden"><!-- hidden, automatically checked/unchecked by beforeSubmit defined above, be sure not to change ids of the next two obs (inhP, inhPDrug)-->
                             <obs id="inhP" conceptId="PIH:13786" answerConceptId="CIEL:159943"></obs>
                         </span>
                     </td>
@@ -735,7 +735,7 @@
                     <tr>
                         <td>
                             <uimessage code="zl.dispensing.inhSecondary" />:
-                            <span class="small hidden"> <!-- hidden, automatically checked by beforeSubmit defined above -->
+                            <span class="small hidden"> <!-- hidden, automatically checked/unchecked by beforeSubmit defined above, be sure not to change ids of the next two obs (inhS, inhSDrug)-->
                                 <obs id="inhS" conceptId="PIH:13786" answerConceptId="CIEL:159944"></obs>
                             </span>
                         </td>
