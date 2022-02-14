@@ -1,0 +1,9 @@
+{
+  "components": [
+    "homeVisitsOnClinicianDashboard",
+    "j9"
+  ],
+  "rebuildSearchIndexOnStartup": true,
+  "localZlIdentifierGeneratorEnabled": "true",
+  "localZlIdentifierGeneratorPrefix": "Y"
+}
