@@ -30,3 +30,4 @@ config:
   order: 1
   components:
     - "j9"
+    - "allDataExports"

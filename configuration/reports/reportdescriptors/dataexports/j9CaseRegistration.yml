@@ -18,4 +18,5 @@ config:
   order: 1007
   components:
     - "j9"
+    - "allDataExports"
   privilege: "Task: clinical.reports"
