@@ -121,9 +121,11 @@
         <script type="text/javascript">
             jq(function() {
                 setUpEdd('<lookup expression="encounter.getEncounterDatetime().getTime()"/>', '<uimessage code="pihcore.weeks"/>');
-                setUpNextButtonForSections('hiv-history');
                 setUpExpandableContacts('<uimessage code="pihcore.invalid.phoneNumber"/>');
                 setUpDatepickerStartAndEndDateValidation();
+
+                // handlers for next and submit buttons, see nextAndSubmitButtons.js
+                setUpNextAndSubmitButtons();
             });
         </script>
     </ifMode>

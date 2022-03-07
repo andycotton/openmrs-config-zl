@@ -171,9 +171,11 @@
                     '<uimessage code="pihcore.weeks"/>'
                 );
 
-                setUpNextButtonForSections('hiv-state');
                 setUpDatepickerStartAndEndDateValidation();
                 setUpObsWithObsDateTime('syph-checkbox');
+
+                // handlers for next and submit buttons, see nextAndSubmitButtons.js
+                setUpNextAndSubmitButtons();
             });
         </script>
     </ifMode>
