@@ -1001,7 +1001,7 @@
                         <orderProperty name="drugNonCoded" label="Non-coded Formulation"/>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="orderReason" label="Order Reason">
+                        <orderProperty name="orderReason" label="pihcore.orderReason">
                             <option value="3ccca7cc-26fe-102b-80cb-0017a47871b2" label="pihcore.tbTreatment" />
                             <option value="cae011d4-e3e7-4cab-9550-d85c60d903cc" label="pihcore.tbProphylaxis"/>
                             <option value="9508115e-54ca-4f39-a117-a33cb328cdd6" label="pihcore.stiTreatment" />
