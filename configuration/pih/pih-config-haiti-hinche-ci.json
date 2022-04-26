@@ -25,10 +25,10 @@
     "socioEconomics",
     "systemAdministration",
     "todaysVisits",
+    "uhmVitals",
     "visitManagement",
     "visitNote",
-    "vitalsHomepageApp",
-    "uhmVitals"
+    "vitalsHomepageApp"
   ],
 
   "rebuildSearchIndexOnStartup": true,
