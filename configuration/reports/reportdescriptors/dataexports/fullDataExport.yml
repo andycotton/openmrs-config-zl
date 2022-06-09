@@ -23,7 +23,7 @@ datasets:
   - {key: "radiologyOrderEncounters", type: "sql", config: "sql/radiologyOrderEncounters.sql"}
   - {key: "radiologyStudyEncounters", type: "sql", config: "sql/radiologyStudyEncounters.sql"}
   - {key: "radiologyReportEncounters", type: "sql", config: "sql/radiologyReportEncounters.sql"}
-  - {key: "dispensing", type: "dispensingDataSetManager"}
+  - {key: "dispensing", type: "sql", config: "sql/dispensingData.sql"}
   - {key: "encounters", type: "haitiEncounterDataSetManager"}
 designs:
   - type: "csv"
