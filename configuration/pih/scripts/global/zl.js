@@ -131,14 +131,14 @@ function setUpPhoneNumberRegex(badPhoneNumberMsg) {
 
         jq(this).change(function (e) {
             let phone = e.target.value;
-            if (phone.match(phoneNumberPattern().pattern1) || phone.match(phoneNumberPattern().pattern2)) {
+            if (phone.match(phoneNumberPattern().pattern1) || phone.match(phoneNumberPattern().pattern2) || phone.match(phoneNumberPattern().pattern3) ) {
                 jq(this).find('span').first().hide();
                 jq(this).find('span').first().text('');
                 setButtonsDisabled(false);
             } else {
                 jq(this).find('span').first().show();
                 jq(this).find('span').first().text(badPhoneNumberMsg);
-                setButtonsDisabled(true);
+                setButtonsDisabled(true);setUpPhoneNumberRegex
             }
         })
     })
@@ -147,7 +147,8 @@ function setUpPhoneNumberRegex(badPhoneNumberMsg) {
 function phoneNumberPattern(){
     return{
         pattern1:/^\d{8}$/,
-        pattern2:/^\d{4}(?:\)|[-|\s])?\s*?\d{4}$/
+        pattern2:/^\d{4}(?:\)|[-|\s])?\s*?\d{4}$/,
+        pattern3:/^\+?(?:\d ?){6,14}\d$/
     }
 }
 
