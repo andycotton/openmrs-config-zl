@@ -184,3 +184,33 @@ function setUpObsWithObsDateTime(widgetId){
       })
     }
 }
+
+function returnVisitDateValidation(encounterDate,returnVisitDateLessThanEncounterDateMsg,badReturnVisitDateMsg){
+
+   const domEl= jq("#apptDate").find("input[type=text]");
+   const yrRange = encounterDate.getFullYear() + ":" + (new Date().getFullYear() + 1);
+   domEl.datepicker('option','yearRange', yrRange); 
+   domEl.prop("readonly", "readonly"); 
+
+  jq(domEl).change(function(){
+    const nextVisitDate = domEl.datepicker('getDate');
+    const months = (nextVisitDate.getFullYear() - encounterDate.getFullYear()) * 12;
+
+    if(months < 12  && nextVisitDate > encounterDate){
+      jq("#return-visit-date-error-message").text('')
+      jq('.submit').prop("disabled", false);
+    }
+    else if(months == 12 && nextVisitDate.getMonth() <= encounterDate.getMonth()){
+      jq("#return-visit-date-error-message").text('')
+      jq('.submit').prop("disabled", false);
+    }else if(months <= 0 && encounterDate > nextVisitDate){
+        jq("#return-visit-date-error-message").text(returnVisitDateLessThanEncounterDateMsg)
+        jq('.submit').prop("disabled", true);
+    }
+    else{
+      jq("#return-visit-date-error-message").text(badReturnVisitDateMsg)
+      jq('.submit').prop("disabled", true);
+    }
+
+  })        
+}
