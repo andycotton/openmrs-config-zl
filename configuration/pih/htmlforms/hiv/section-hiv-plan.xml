@@ -111,10 +111,10 @@
         </h1>
         <script type="text/javascript">
             jq(function () {
-                    returnVisitDateValidation(new Date('<lookup expression="encounter.getEncounterDatetime()"/>'),
+                    setupReturnVisitDateValidation(new Date('<lookup expression="encounter.getEncounterDatetime()"/>'),
                                                         '<uimessage code="pihcore.returnVisitDateLessThanEncounterDate"/>',
                                                         '<uimessage code="pihcore.invalid.returnVisitDate"/>'
-                                                        ); 
+                                                        );
             });
         </script>
     </ifMode>
@@ -1281,7 +1281,6 @@
                     <lookup expression="fn.getConcept('PIH:RETURN VISIT DATE').name"/>
                 </label>
                 <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate"/>
-                <span id="return-visit-date-error-message" class="text-danger"></span>
             </p>
 
         </div>
