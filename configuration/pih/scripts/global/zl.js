@@ -194,17 +194,17 @@ function setupReturnVisitDateValidation(encounterDate,returnVisitDateLessThanEnc
 
    const returnVisitDateValidation = function() {
      const nextVisitDate = domEl.datepicker('getDate');
-     const months = (nextVisitDate.getFullYear() - encounterDate.getFullYear()) * 12;
+     const differnenceInYears = nextVisitDate.getFullYear() - encounterDate.getFullYear();
 
-     if (months < 12  && nextVisitDate > encounterDate) {
+     if (differnenceInYears < 1  && nextVisitDate > encounterDate) {
        getField('apptDate.error').text('').hide();
        return true;
      }
-     else if(months == 12 && nextVisitDate.getMonth() <= encounterDate.getMonth()) {
+     else if(differnenceInYears == 1 && nextVisitDate.getMonth() <= encounterDate.getMonth()) {
        getField('apptDate.error').text('').hide();
        return true;
      }
-     else if(months <= 0 && encounterDate > nextVisitDate) {
+     else if(differnenceInYears <= 0 && encounterDate > nextVisitDate) {
        getField('apptDate.error').text(returnVisitDateLessThanEncounterDateMsg).show();
        return false;
      }
