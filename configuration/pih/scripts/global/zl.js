@@ -185,6 +185,7 @@ function setUpObsWithObsDateTime(widgetId) {
   }
 }
 
+<<<<<<< HEAD
 function setupReturnVisitDateValidation(encounterDate, returnVisitDateLessThanEncounterDateMsg, badReturnVisitDateMsg) {
 
   const domEl = getField('apptDate.value');
@@ -222,4 +223,37 @@ function setupReturnVisitDateValidation(encounterDate, returnVisitDateLessThanEn
   jq(domEl).change(returnVisitDateValidation);
   beforeSubmit.push(returnVisitDateValidation);
 
+=======
+function setupReturnVisitDateValidation(encounterDate,returnVisitDateLessThanEncounterDateMsg,badReturnVisitDateMsg){
+
+   const domEl= getField('apptDate.value');
+   const yrRange = encounterDate.getFullYear() + ":" + (new Date().getFullYear() + 1);
+   domEl.datepicker('option','yearRange', yrRange);
+   domEl.prop("readonly", "readonly");
+
+   const returnVisitDateValidation = function() {
+     const nextVisitDate = domEl.datepicker('getDate');
+     const differnenceInYears = nextVisitDate.getFullYear() - encounterDate.getFullYear();
+
+     if (differnenceInYears < 1  && nextVisitDate > encounterDate) {
+       getField('apptDate.error').text('').hide();
+       return true;
+     }
+     else if(differnenceInYears == 1 && nextVisitDate.getMonth() <= encounterDate.getMonth()) {
+       getField('apptDate.error').text('').hide();
+       return true;
+     }
+     else if(differnenceInYears <= 0 && encounterDate > nextVisitDate) {
+       getField('apptDate.error').text(returnVisitDateLessThanEncounterDateMsg).show();
+       return false;
+     }
+     else {
+       getField('apptDate.error').text(badReturnVisitDateMsg).show();
+       return false;
+     }
+   }
+
+    jq(domEl).change(returnVisitDateValidation);
+    beforeSubmit.push(returnVisitDateValidation);
+>>>>>>> 3fbbbcf5943813de6a8d63e7616694b588bbaf50
 }
