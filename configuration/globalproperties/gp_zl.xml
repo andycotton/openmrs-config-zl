@@ -34,7 +34,7 @@
         <globalProperty>
             <property>orderentryowa.labOrderablesConceptSet</property>
             <!-- Concept: ZL laboratory categories -->
-            <value>52ceab591-9edc-4ef1-a409-e437cfe65271</value>
+            <value>2ceab591-9edc-4ef1-a409-e437cfe65271</value>
         </globalProperty>
 
         <!-- Lab Workflow OWA -->
