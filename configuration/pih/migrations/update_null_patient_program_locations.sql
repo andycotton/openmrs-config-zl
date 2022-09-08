@@ -9,7 +9,8 @@ location_id			int(11));
 -- load temp table with all patient_program_ids with null location 
 insert into temp_null_location_programs(patient_program_id, patient_id)
 select patient_program_id, pp.patient_id from patient_program pp
-where pp.location_id is null;
+where pp.location_id is null
+and pp.voided = 0;
 
 -- update location id on temp table with:
 --  * location of earliest encounter for each patient (excluding encounters with null location) 
@@ -25,5 +26,5 @@ set t.location_id = IFNULL(e.location_id,1) ;
 
 -- update patient_program table from temp table
 update patient_program pp 
-inner join temp_null_location_programs t on t.
+inner join temp_null_location_programs t on pp.patient_program_id  = t.patient_program_id 
 set pp.location_id = t.location_id;
