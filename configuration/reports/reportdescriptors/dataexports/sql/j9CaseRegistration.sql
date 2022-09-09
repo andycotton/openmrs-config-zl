@@ -142,7 +142,7 @@ inner join obs o on o.obs_id =
 	(select o2.obs_id from temp_edd_obs o2
 	where o2.person_id = t.patient_id
 	order by o2.obs_datetime desc limit 1)
-set t.estimated_delivery_date = o.obs_datetime;
+set t.estimated_delivery_date = date(o.obs_datetime);
 
 -- ------------- latest actual delivery date -------------------------
 DROP TEMPORARY TABLE IF EXISTS temp_add_obs;
@@ -160,7 +160,7 @@ inner join obs o on o.obs_id =
 	(select o2.obs_id from temp_add_obs o2
 	where o2.person_id = t.patient_id
 	order by o2.obs_datetime desc limit 1)
-set t.actual_delivery_date = o.obs_datetime;
+set t.actual_delivery_date = date(o.obs_datetime);
 
 -- Baby's mother: return dossier id of mother (parent who is female) if the patient is < 1 year
 update temp_J9_patients t
