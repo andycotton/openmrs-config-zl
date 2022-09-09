@@ -32,11 +32,11 @@ create temporary table temp_J9_patients
     section_communal varchar(255),
     locality varchar(255),
     street_landmark varchar(255),
-    j9_enrollment_date datetime
+    j9_enrollment_date date
 );
 
 insert into temp_J9_patients (patient_id, patient_program_id, j9_enrollment_date)
-select pp.patient_id, pp.patient_program_id ,pp.date_enrolled  from patient_program pp
+select pp.patient_id, pp.patient_program_id , date(pp.date_enrolled)  from patient_program pp
 where pp.patient_program_id =
          	(select pp2.patient_program_id from patient_program pp2
          	where pp2.patient_id = pp.patient_id 
