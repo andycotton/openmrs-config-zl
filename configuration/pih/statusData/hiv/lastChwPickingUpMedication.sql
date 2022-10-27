@@ -21,6 +21,8 @@ where o.person_id = @patientId
 and e.encounter_type = @hivDrugDispensing
 and o2.concept_id = @dispensingConstruct
 and o.concept_id = @medicationCategory
+and o.voided = 0
+and o2.voided = 0
 and (o.value_coded = @arv1 or o.value_coded = @arv2 or o.value_coded = @arv3)
 group by o.encounter_id
 order by e.encounter_datetime desc
@@ -29,6 +31,7 @@ limit 1;
 select o.value_text into @chw
 from obs o
 where o.concept_id = @chwConceptId
+and o.voided = 0
 and o.encounter_id= @encounterId;
 
 select
