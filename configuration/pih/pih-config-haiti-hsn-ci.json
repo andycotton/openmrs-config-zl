@@ -1,4 +1,36 @@
 {
   "localZlIdentifierGeneratorEnabled": "true",
-  "localZlIdentifierGeneratorPrefix": "Y"
+  "localZlIdentifierGeneratorPrefix": "Y",
+
+  "components": [
+    "allergies",
+    "checkIn",
+    "checkInHomepageApp",
+    "clinicianDashboard",
+    "covid19",
+    "dataExports",
+    "dispensing",
+    "echocardiogram",
+    "exportPatients",
+    "importPatients",
+    "labResults",
+    "markPatientDead",
+    "mch",
+    "mentalHealth",
+    "monitoringReports",
+    "myAccount",
+    "ncd",
+    "obgyn",
+    "overviewReports",
+    "patientRegistration",
+    "programs",
+    "relationships",
+    "socioEconomics",
+    "systemAdministration",
+    "todaysVisits",
+    "uhmVitals",
+    "visitManagement",
+    "visitNote",
+    "vitalsHomepageApp"
+  ]
 }
