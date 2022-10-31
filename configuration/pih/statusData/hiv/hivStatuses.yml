@@ -62,3 +62,9 @@
   statusDataQuery: "lastPrescribedHivMedication.sql"
   valueExpression: "#if(!$drugNames) $fn.translate('pihcore.none.label') #{else} $drugNames #end"
   formatExpression: ""
+  
+- id: "lastChwPickingUpMedication"
+  labelCode: "zl.status.lastChwPickingUpMedication"
+  statusDataQuery: "lastChwPickingUpMedication.sql"
+  valueExpression: "#if(!$chwName) $fn.translate('pihcore.none.label') #{else} $chwName #end"
+  formatExpression: ""
