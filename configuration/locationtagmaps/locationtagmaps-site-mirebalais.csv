@@ -11,14 +11,14 @@ CDI Klinik Ekstèn Jeneral Sal Pwosedi,,TRUE,TRUE,,TRUE,TRUE,,,,,,,,,TRUE,TRUE,,
 Achiv Santral,,,,TRUE,,,,,,,,,,,TRUE,,,TRUE,,,,,,,,,,,TRUE,,,,,,,
 Bank Pou San,,,,,,,,,,,,,,,TRUE,,TRUE,TRUE,,,,,,,,,,,,,,,,,,
 Biwo Resepsyon,,,,,,,,,,,,,,,TRUE,,,TRUE,,,,,,,,,,,TRUE,,,,,,,
-Onkoloji,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,,,,,,,TRUE,TRUE,,TRUE,,,,,TRUE,TRUE,TRUE,,,,,,,,,,,TRUE
+Onkoloji,TRUE,,TRUE,,,TRUE,TRUE,TRUE,,,,,,,,TRUE,TRUE,TRUE,,,,,TRUE,TRUE,TRUE,,,,,,,,,,,TRUE
 COVID-19 | Izolman,TRUE,,,,TRUE,TRUE,,,,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,,,,TRUE,,,TRUE,TRUE,,,TRUE
 COVID-19 | UMI,TRUE,,,,TRUE,TRUE,,,,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,,,,TRUE,,,TRUE,TRUE,,,TRUE
 Dantis,,,TRUE,,,TRUE,,TRUE,,,,,,,TRUE,TRUE,,TRUE,,,,,,TRUE,TRUE,,,,,TRUE,,,TRUE,,,TRUE
 Ijans,,,,,TRUE,TRUE,,,,TRUE,TRUE,TRUE,,,TRUE,TRUE,,TRUE,,,,,,TRUE,TRUE,,,,,TRUE,,,TRUE,,,TRUE
 Ijans | Sante Fanm,,TRUE,,,TRUE,TRUE,,TRUE,,,,,,,TRUE,TRUE,,TRUE,TRUE,,TRUE,,,TRUE,TRUE,,,TRUE,,,,,TRUE,,,TRUE
 Ijans Resepsyon,,,,,,,,,,,,,,,TRUE,,,TRUE,,,,,,,,,,,TRUE,,,,,,,
-Klinik Ekstèn,,,TRUE,,TRUE,TRUE,,TRUE,,TRUE,,,TRUE,,TRUE,TRUE,TRUE,TRUE,,,TRUE,TRUE,TRUE,TRUE,TRUE,,,TRUE,,TRUE,,,TRUE,,,TRUE
+Klinik Ekstèn,,,TRUE,,TRUE,TRUE,,TRUE,,TRUE,,,TRUE,,TRUE,TRUE,TRUE,TRUE,,,TRUE,TRUE,,TRUE,TRUE,,,TRUE,,TRUE,,,TRUE,,,TRUE
 Klinik Ekstèn Famasi,,,TRUE,,,,,,TRUE,,,,,,,,,TRUE,,,,,,,,,,,,,,,,,,
 Klinik MNT,,,,,TRUE,,,TRUE,,TRUE,,,,,,TRUE,,TRUE,,,,TRUE,,,,TRUE,,,,,,,,,,
 Laboratwa Ekstèn pou Fanm,,,TRUE,,,,,TRUE,,,,,,,TRUE,TRUE,TRUE,TRUE,,,,,,,,,,,,,,,,,,
@@ -29,7 +29,7 @@ Sal Aprè Akouchman,TRUE,TRUE,,,TRUE,TRUE,,TRUE,,,,,,,TRUE,TRUE,,TRUE,TRUE,,TRUE
 Sal Aprè Operasyon,TRUE,TRUE,,,TRUE,TRUE,,TRUE,,,,,,,TRUE,TRUE,,TRUE,,,,,,TRUE,TRUE,,,,,TRUE,TRUE,,TRUE,,,TRUE
 Sal Aprè Operasyon | Sante Fanm,TRUE,TRUE,,,TRUE,,,TRUE,,,,,,,TRUE,,,TRUE,,,,,,TRUE,TRUE,,,,,TRUE,TRUE,,TRUE,,,TRUE
 Sal Avan Akouchman,TRUE,TRUE,,,TRUE,,,TRUE,,,,,,,TRUE,,,TRUE,TRUE,,TRUE,,,TRUE,TRUE,,,TRUE,,,,,TRUE,,,TRUE
-Sal Avan Operasyon | PACU,,,TRUE,,,TRUE,TRUE,,TRUE,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,TRUE,,,,,TRUE,,,,,
+Sal Avan Operasyon | PACU,,,TRUE,,,TRUE,,,TRUE,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,TRUE,,,,,TRUE,,,,,
 Sal Fanm,TRUE,TRUE,,,TRUE,,,TRUE,,TRUE,,,,,TRUE,TRUE,,TRUE,,,,,,TRUE,TRUE,,,,,,,,TRUE,,,TRUE
 Sal Fanm A,,TRUE,,,,,,TRUE,,,,,,,TRUE,,,,,,,,,TRUE,TRUE,,,,,,,,,,,TRUE
 Sal Fanm B,,TRUE,,,,,,TRUE,,,,,,,TRUE,,,,,,,,,TRUE,TRUE,,,,,,,,,,,TRUE
