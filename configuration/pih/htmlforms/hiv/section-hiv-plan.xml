@@ -111,7 +111,13 @@
         </h1>
         <script type="text/javascript">
             jq(function () {
-                    setupReturnVisitDateValidation(new Date('<lookup expression="encounter.getEncounterDatetime()"/>'),
+                var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                if (typeof encounterDate !== "undefined" &amp;&amp; encounterDate !== null &amp;&amp;
+                    (encounterDate.length > 0)) {
+                    currentEncounterDate = new Date(+encounterDate);
+                }
+                
+                setupReturnVisitDateValidation(currentEncounterDate,
                                                         "<uimessage code="pihcore.returnVisitDateLessThanEncounterDate"/>",
                                                         "<uimessage code="pihcore.invalid.returnVisitDate"/>"
                                                         );
