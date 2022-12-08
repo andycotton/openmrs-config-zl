@@ -13,7 +13,7 @@ Bank Pou San,,,,,,,,,,,,,,,TRUE,,TRUE,TRUE,,,,,,,,,,,,,,,,,,
 Biwo Resepsyon,,,,,,,,,,,,,,,TRUE,,,TRUE,,,,,,,,,,,TRUE,,,,,,,
 Onkoloji,TRUE,,TRUE,,,TRUE,TRUE,TRUE,,,,,,,,TRUE,TRUE,TRUE,,,,,TRUE,TRUE,TRUE,,,,,,,,,,,TRUE
 COVID-19 | Izolman,TRUE,,,,TRUE,TRUE,,,,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,,,,TRUE,,,TRUE,TRUE,,,TRUE
-UMI,TRUE,,,,TRUE,TRUE,,,,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,,,,TRUE,,,TRUE,TRUE,,,TRUE
+UMI,TRUE,TRUE,,,TRUE,TRUE,,TRUE,,,,,,,,TRUE,TRUE,TRUE,,,,,,,TRUE,,,,TRUE,,,TRUE,TRUE,,,TRUE
 Dantis,,,TRUE,,,TRUE,,TRUE,,,,,,,TRUE,TRUE,,TRUE,,,,,,TRUE,TRUE,,,,,TRUE,,,TRUE,,,TRUE
 Ijans,,,,,TRUE,TRUE,,,,TRUE,TRUE,TRUE,,,TRUE,TRUE,,TRUE,,,,,,TRUE,TRUE,,,,,TRUE,,,TRUE,,,TRUE
 Ijans | Sante Fanm,,TRUE,,,TRUE,TRUE,,TRUE,,,,,,,TRUE,TRUE,,TRUE,TRUE,,TRUE,,,TRUE,TRUE,,,TRUE,,,,,TRUE,,,TRUE
