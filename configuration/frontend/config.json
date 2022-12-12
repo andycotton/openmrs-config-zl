@@ -18,5 +18,8 @@
       "src": "${openmrsSpaBase}/site/zl-logo.png",
       "alt": "Zanmi Lasante"
     }
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#FF9800"
   }
 }
