@@ -5,6 +5,11 @@
 
         <script type="text/javascript">
 
+            function setButtonsDisabled(val){
+                jq("#next").prop("disabled",val)
+                jq("#submit,.confirm").prop("disabled",val)
+            }
+            
             jq(function() {
 
                 var personAddressWithHierarchy = {
