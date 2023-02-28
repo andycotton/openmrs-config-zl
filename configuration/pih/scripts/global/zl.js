@@ -126,22 +126,24 @@ function setUpDatepickerStartAndEndDateValidation() {
 }
 
 function setUpPhoneNumberRegex(badPhoneNumberMsg) {
-
+  
   jq('.phoneRegex').each(function (j, domEl) {
 
     jq(this).change(function (e) {
       let phone = e.target.value;
-      if (phone.match(phoneNumberPattern().pattern1) || phone.match(phoneNumberPattern().pattern2) || phone.match(phoneNumberPattern().pattern3)) {
+      if (phoneNumberRegex(phone)) {
         jq(this).find('span').first().hide();
         jq(this).find('span').first().text('');
-        setButtonsDisabled(false);
       } else {
         jq(this).find('span').first().show();
         jq(this).find('span').first().text(badPhoneNumberMsg);
-        setButtonsDisabled(true); setUpPhoneNumberRegex
       }
     })
   })
+}
+
+function phoneNumberRegex(phone) {
+  return phone.match(phoneNumberPattern().pattern1) || phone.match(phoneNumberPattern().pattern2) || phone.match(phoneNumberPattern().pattern3);
 }
 
 function phoneNumberPattern() {
