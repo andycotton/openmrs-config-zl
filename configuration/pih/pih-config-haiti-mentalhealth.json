@@ -6,6 +6,17 @@
   "specialty": "MENTAL_HEALTH",
   "site": "CROSS_SITE",
 
+  "authenticationConfig": {
+    "scheme": "2fa",
+    "schemes": {
+      "2fa": {
+        "config": {
+          "secondaryOptions": "secret,totp"
+        }
+      }
+    }
+  },
+
   "components": [
     "chwApp",
     "clinicianDashboard",
@@ -14,7 +25,7 @@
     "importPatients",
     "markPatientDead",
     "mentalHealth",
-    "myAccount",
+    "myAccounts",
     "patientRegistration",
     "programs",
     "systemAdministration",
