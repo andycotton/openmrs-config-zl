@@ -4,11 +4,13 @@
   "dossierIdentifierPrefix": "HNB",
 
   "components": [
-    "allergies",
+    "activeVisits",
     "adt",
+    "allergies",
     "checkIn",
     "checkInHomepageApp",
     "clinicianDashboard",
+    "consult",
     "dataExports",
     "dbevent",
     "dispensing",
