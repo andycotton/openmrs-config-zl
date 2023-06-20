@@ -1,7 +1,7 @@
 # These status data definitions are what define the HIV STATUS widget on the HIV Program Dashboard
 
 - id: "lastDisposition"
-  labelCode: "zl.status.lastDisposition"
+  labelCode: "pihcore.disposition.label"
   statusDataQuery: "lastDisposition.sql"
   valueExpression: "#if(!$disposition) $fn.translate('pihcore.none.label') #{else} $fn.translate($fn.format($fn.concept($disposition).getName())) #end"
   formatExpression: ""
