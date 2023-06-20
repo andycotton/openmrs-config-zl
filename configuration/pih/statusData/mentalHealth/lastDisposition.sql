@@ -3,7 +3,7 @@ into @dispositionCategory;
 
 
 
-# Get the latest obs_id with dispositionCategory 
+# Get the latest value_coded with dispositionCategory 
 SELECT o.value_coded  into @valueCoded
 FROM obs o
 join encounter e on e.encounter_id = o.encounter_id
