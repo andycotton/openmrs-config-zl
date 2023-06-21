@@ -3,5 +3,5 @@
 - id: "lastDisposition"
   labelCode: "pihcore.disposition.label"
   statusDataQuery: "lastDisposition.sql"
-  valueExpression: "#if(!$disposition) $fn.translate('pihcore.none.label') #{else} $fn.translate($fn.format($fn.concept($disposition).getName())) #end"
+  valueExpression: "#if(!$disposition) $fn.translate('pihcore.none.label') #{else} $fn.format($fn.concept($disposition).getName()) #end"
   formatExpression: ""
