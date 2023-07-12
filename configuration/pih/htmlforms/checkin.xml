@@ -96,6 +96,7 @@
 
                 // hack to make the datepicker show when the form is opened
                 getField('encounterDate.value').datepicker('show');
+                checkNumberTest();
 
             });
 
@@ -176,7 +177,9 @@
                                  answers="$paymentAmts" defaultValue="$paymentAmtDefault"/>
                         </p>
                 </fieldset>
-                <fieldset id="receipt-number-question">
+
+             
+                <fieldset id="receipt-number-question" class="required">
                     <legend>
                         <uimessage code="mirebalais.retrospectiveCheckin.receiptNumber.label"/>
                     </legend>
@@ -185,10 +188,14 @@
                     </h3>
 
                     <p class="left">
-                        <obs conceptId="PIH:Receipt number" id="receiptNumber" showUnits="false"
+                        <obs value="number" conceptId="PIH:Receipt number" id="receiptNumber" showUnits="false"
                              unitsCssClass="append-to-value" style="dropdown" />
+                        <br/>
+                        
                     </p>
+
                 </fieldset>
+
             </obsgroup>
 
             </section>

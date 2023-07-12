@@ -222,4 +222,39 @@ function setupReturnVisitDateValidation(encounterDate, returnVisitDateLessThanEn
 
   jq(domEl).change(returnVisitDateValidation);
   beforeSubmit.push(returnVisitDateValidation);
+  
+
+
+}
+
+function checkNumberTest() {
+  
+  jq('#receiptNumber input').attr('type','number')
+
+  // jq("#error").hide();
+  // jq('#receiptNumber input').each(function (j, domEl) {
+  //  console.log(domEl.i)
+  //   jq(this).keypress(function (event) {
+  //     const va = jq(domEl).val();
+  //     console.log(event.which)
+  //     if (/\D/.test(va)) {
+  //       while (event.which === 13) {
+  //         event.preventDefault();
+  //         alert("Enter key is Disable")
+  //         return false;
+  //       }
+    
+
+  //       jq("#error").show();
+  //       jq("#formBreadcrumb li:last-child").hide();
+  //       jq('#next-button').hide()
+  //       jq('#submitButton').hide();
+  //     } else {
+  //       jq('#submitButton').hide();
+  //       jq("#error").hide();
+  //       jq('#next-button').show()
+  //       jq("#formBreadcrumb li:last-child").show();
+  //     }
+  //   })
+  // })
 }
