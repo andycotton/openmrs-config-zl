@@ -227,10 +227,10 @@ function setupReturnVisitDateValidation(encounterDate, returnVisitDateLessThanEn
 
 }
 
-function allowNumericalNumber() {
+function restrictInputOnlyNumber(input_id) {
   
   // Track the id of the input and change the type to number
-  jq('#receiptNumber input').attr('type','number')
+  jq(`#${input_id} input`).attr('type','number')
 
 
 }

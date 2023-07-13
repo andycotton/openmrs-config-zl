@@ -96,7 +96,9 @@
 
                 // hack to make the datepicker show when the form is opened
                 getField('encounterDate.value').datepicker('show');
-               allowNumericalNumber()
+
+                //Calling the function to restrict only number in a input which takes the input id in parameter
+               restrictInputOnlyNumber("receiptNumber")
 
             });
 
@@ -188,8 +190,8 @@
                     </h3>
 
                     <p class="left">
-                        <obs value="number" conceptId="PIH:Receipt number" id="receiptNumber" showUnits="false"
-                             unitsCssClass="append-to-value" style="dropdown" />
+                        <obs conceptId="PIH:Receipt number" id="receiptNumber" showUnits="false"
+                             unitsCssClass="append-to-value"  />
                         <br/>
                         
                     </p>
