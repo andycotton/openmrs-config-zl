@@ -96,7 +96,7 @@
 
                 // hack to make the datepicker show when the form is opened
                 getField('encounterDate.value').datepicker('show');
-                checkNumberTest();
+               allowNumericalNumber()
 
             });
 
