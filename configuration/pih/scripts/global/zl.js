@@ -222,4 +222,15 @@ function setupReturnVisitDateValidation(encounterDate, returnVisitDateLessThanEn
 
   jq(domEl).change(returnVisitDateValidation);
   beforeSubmit.push(returnVisitDateValidation);
+  
+
+
+}
+
+function restrictInputOnlyNumber(input_id) {
+  
+  // Track the id of the input and change the type to number
+  jq(`#${input_id} input`).attr('type','number')
+
+
 }
