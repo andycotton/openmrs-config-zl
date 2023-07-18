@@ -178,6 +178,8 @@
 
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
+
+                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",[".inhStartDate",".inhEndDate"])
             });
         </script>
     </ifMode>
@@ -607,17 +609,17 @@
                                     <obs conceptId="PIH:2289" answerConceptId="{conceptMap}"
                                          answerLabel="{drugname}"
                                          toggle="{id: '{drugname}-current-treat', style: 'dim'}" id="{drugname}"/>
-                                    <p class="radio {drugname}-current-treat" id="treatmentId">
+                                    <p class="radio {drugname}-current-treat side-by-side" id="treatmentId">
                                         <obs conceptId="PIH:13786" style="radio"
                                              answerConceptIds="CIEL:159943, CIEL:159944"  id="treatmentLine"/>
                                     </p>
                                 </td>
-                                <td class="{drugname}-current-treat">
-                                    <obs conceptId="CIEL:163526" class="startDate" allowFutureDates="true" allowPastDates="true"/>
+                                <td>
+                                    <obs conceptId="CIEL:163526" class="startDate inhStartDate" allowFutureDates="true" allowPastDates="true"/>
                                 </td>
                                
-                                <td class="{drugname}-current-treat">
-                                    <obs conceptId="CIEL:164384" class="endDate" allowFutureDates="true" allowPastDates="true"/>
+                                <td>
+                                    <obs conceptId="CIEL:164384" class="endDate inhEndDate" allowFutureDates="true" allowPastDates="true"/>
                                     
                                 </td>
                             </tr>

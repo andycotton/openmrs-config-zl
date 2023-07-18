@@ -126,6 +126,8 @@
 
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
+
+                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",[".inhStartDate",".inhEndDate"])
             });
         </script>
     </ifMode>
@@ -1523,19 +1525,18 @@
                             <tr class="startDateEndDate">
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
-                                         answerLabel="{drugname}"
-                                         toggle="{id: '{drugname}-hx', style: 'dim'}" />
-                                    <p class="radio {drugname}-hx">
+                                         answerLabel="{drugname}" toggle="{id: '{drugname}-hx', style: 'dim'}" id="{drugname}"/>
+                                    <p class="radio {drugname}-hx side-by-side">
                                         <obs conceptId="PIH:13786" style="radio"
-                                             answerConceptIds="CIEL:159943, CIEL:159944" />
+                                             answerConceptIds="CIEL:159943, CIEL:159944" id="treatmentLine"/>
                                     </p>
                                 </td>
-                                 <td class="{drugname}-hx">
-                                    <obs conceptId="CIEL:1190" class="startDate" allowFutureDates="true" allowPastDates="true"/>
+                                 <td>
+                                    <obs conceptId="CIEL:1190" class="startDate inhStartDate" allowFutureDates="true" allowPastDates="true"/>
                                 </td>
                                
-                                <td class="{drugname}-hx">
-                                    <obs conceptId="CIEL:1191" class="endDate"  allowFutureDates="true" allowPastDates="true"/>
+                                <td>
+                                    <obs conceptId="CIEL:1191" class="endDate inhEndDate"  allowFutureDates="true" allowPastDates="true"/>
                                     
                                 </td>
                             </tr>

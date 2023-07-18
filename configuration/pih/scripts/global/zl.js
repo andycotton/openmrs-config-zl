@@ -126,7 +126,7 @@ function setUpDatepickerStartAndEndDateValidation() {
 }
 
 function setUpPhoneNumberRegex(badPhoneNumberMsg) {
-  
+
   jq('.phoneRegex').each(function (j, domEl) {
 
     jq(this).change(function (e) {
@@ -222,15 +222,77 @@ function setupReturnVisitDateValidation(encounterDate, returnVisitDateLessThanEn
 
   jq(domEl).change(returnVisitDateValidation);
   beforeSubmit.push(returnVisitDateValidation);
-  
+
 
 
 }
 
 function restrictInputOnlyNumber(input_id) {
-  
+
   // Track the id of the input and change the type to number
-  jq(`#${input_id} input`).attr('type','number')
+  jq(`#${input_id} input`).attr('type', 'number')
 
 
 }
+
+
+/**
+ * Manages the activation of widget inputs based on the state of a radio button.
+ *
+ * @param {string|null} checkboxId - The ID of the checkbox associated with the radio button (optional).
+ * @param {string} radioButtonId - The ID of the radio button controlling the widget inputs.
+ * @param {string[]} widgetIds - The IDs of the widgets whose inputs should be enabled or disabled.
+ */
+function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, widgetIds) {
+
+  setInputWidgetsDisabled(widgetIds, true)
+
+  //Check if the radio button displays when the checkbox button is checked.
+  if (checkboxId) {
+
+    setInputWidgetsDisabled(widgetIds, true)
+
+    jq(checkboxId).change(function () {
+
+      const elem = jq(this).find('input:checked');
+
+      if (elem.val() == undefined) {
+        setInputWidgetsDisabled(widgetIds, true)
+      }
+    })
+  }
+
+  // Enable input when the radio button is checked.
+  jq(radioButtonId).change(function () {
+
+    const elem = jq(this).find('input:checked');
+    if (elem.val()) {
+      setInputWidgetsDisabled(widgetIds, false)
+    } else {
+      setInputWidgetsDisabled(widgetIds, true)
+    }
+  })
+}
+
+
+/**
+ * Disables the input fields of the specified widgets.
+ *
+ * @param {string[]} widgetIds - The IDs of the widgets whose input fields should be disabled.
+ * @param {boolean} disabled - Indicates whether the input fields should be disabled (true) or enabled (false).
+ */
+function setInputWidgetsDisabled(widgetIds, disabled) {
+
+  if (disabled) {
+    jq(widgetIds).each(function (i, domEl) {
+      jq(domEl).find('input').first().prop('disabled', disabled);
+
+    })
+  } else {
+    jq(widgetIds).each(function (i, domEl) {
+      jq(domEl).find('input').first().prop('disabled', disabled);
+    })
+  }
+
+}
+
