@@ -288,9 +288,7 @@ function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, w
 
   // Function to determine if the input widgets specified by requiredWidgetIds are required.
   const returnRequiredInputWidgets = function () {
-
-
-
+    
     // Loop through each input widget of type text under the elements specified by widgetRequiredIds.
     jq(requiredWidgetIds + ' input[type=text]').each(function (i, domEl) {
 
