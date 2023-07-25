@@ -242,29 +242,42 @@ function restrictInputOnlyNumber(input_id) {
  * @param {string|null} checkboxId - The ID of the checkbox associated with the radio button (optional).
  * @param {string} radioButtonId - The ID of the radio button controlling the widget inputs.
  * @param {string[]} widgetIds - The IDs of the widgets whose inputs should be enabled or disabled.
+ * @param {string[]} requiredWidgetIds - The IDs of the input widgets that may be required based on the radio button state.
  */
-function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, widgetIds) {
+function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, widgetIds, requiredWidgetIds) {
 
-  setInputWidgetsDisabled(widgetIds, true)
+  let isRequired = true;
+  let checkboxValue = null;
+
+  setRequiredForTextInputs(requiredWidgetIds)
+
+  const radioButtonValue = jq(radioButtonId).find('input:checked').val();
+  // Check if the radio button has a value (i.e., it is checked).
+  if (radioButtonValue) {
+    setInputWidgetsDisabled(widgetIds, false)
+  } else {
+    setInputWidgetsDisabled(widgetIds, true)
+  }
 
   //Check if the radio button displays when the checkbox button is checked.
   if (checkboxId) {
 
-    setInputWidgetsDisabled(widgetIds, true)
+    checkboxValue = jq(checkboxId).find('input:checked').val();
 
     jq(checkboxId).change(function () {
-
       const elem = jq(this).find('input:checked');
-
       if (elem.val() == undefined) {
         setInputWidgetsDisabled(widgetIds, true)
+        checkboxValue = elem.val();
+      } else {
+        checkboxValue = elem.val();
+        setRequiredForRadioButton(radioButtonId, "true")
       }
     })
   }
 
   // Enable input when the radio button is checked.
   jq(radioButtonId).change(function () {
-
     const elem = jq(this).find('input:checked');
     if (elem.val()) {
       setInputWidgetsDisabled(widgetIds, false)
@@ -272,8 +285,35 @@ function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, w
       setInputWidgetsDisabled(widgetIds, true)
     }
   })
-}
 
+  // Function to determine if the input widgets specified by requiredWidgetIds are required.
+  const returnRequiredInputWidgets = function () {
+
+
+
+    // Loop through each input widget of type text under the elements specified by widgetRequiredIds.
+    jq(requiredWidgetIds + ' input[type=text]').each(function (i, domEl) {
+
+      const elem = jq(domEl);
+      if (checkboxValue == undefined) {
+        isRequired = true
+      }
+      else if (elem.val()) {
+        isRequired = true
+      } else {
+        isRequired = false
+      }
+    })
+
+    return isRequired;
+  }
+
+  // Attach the returnInputWidgetsRequired function as a change event handler to each element specified by requiredWidgetIds
+  jq(requiredWidgetIds).each(function (i, domEl) {
+    jq(domEl).change(returnRequiredInputWidgets)
+  })
+  beforeSubmit.push(returnRequiredInputWidgets);
+}
 
 /**
  * Disables the input fields of the specified widgets.
@@ -293,6 +333,22 @@ function setInputWidgetsDisabled(widgetIds, disabled) {
       jq(domEl).find('input').first().prop('disabled', disabled);
     })
   }
-
 }
 
+// Function to set 'required' attribute for input[type=text] elements under elements specified by requiredWidgetIds.
+function setRequiredForTextInputs(requiredWidgetIds) {
+  jq(requiredWidgetIds + ' input[type=text]').each(function (i, domEl) {
+    if (i >= 0) {
+      jq(domEl).prop('required', true);
+    }
+  })
+}
+
+
+/** Function to set the 'required' attribute for radio buttons under the specified radioButtonId.
+* @param {string} radioButtonId - The ID of the radio button element containing the radio buttons to set the 'required' attribute for.
+* @param {boolean} value - A boolean value indicating whether to set the 'required' attribute to true or false.
+*/
+function setRequiredForRadioButton(radioButtonId, value) {
+  jq(radioButtonId).find("input[type=radio]").prop('required', value);
+}

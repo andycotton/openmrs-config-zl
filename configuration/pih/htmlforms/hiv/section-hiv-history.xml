@@ -127,7 +127,7 @@
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
 
-                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",[".inhStartDate",".inhEndDate"])
+                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",[".inhStartDate",".inhEndDate"],[".inhStartDate"])
             });
         </script>
     </ifMode>
