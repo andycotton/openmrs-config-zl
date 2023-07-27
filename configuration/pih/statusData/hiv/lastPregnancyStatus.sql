@@ -1,25 +1,25 @@
-# This retrieves all of the data points needed to provide information as to
-# the last pregnancy status
-
 # Gender
 select gender into @gender from person where person_id = @patientId;
 
-# Pregnancy Status
-select e.encounter_id, o.value_coded into @pregnantEncounterId, @pregnantValueCoded
+# Estimated delivery date
+select o.value_datetime into @edd 
 from obs o
-inner join encounter e on o.encounter_id = e.encounter_id
-where o.person_id = @patientId
-and o.concept_id = concept_from_mapping('CIEL', '5272')
-and o.voided = 0
-and e.voided = 0
-order by e.encounter_datetime desc
-limit 1
-;
+where o.obs_id = latest_obs(@patientId, 'CIEL', '5596')
+and o.voided = 0;
 
-select obs_value_datetime(@pregnantEncounterId, 'CIEL', '5596') into @edd;
+# Date of last period
+select o.value_datetime into @dolp 
+from obs o
+where o.obs_id = latest_obs(@patientId, 'CIEL', '1427')
+and o.voided = 0;
+
+# Date of delivery
+select o.value_datetime into @dod 
+from obs o
+where o.obs_id = latest_obs(@patientId, 'CIEL', '5599')
+and o.voided = 0;
 
 select
     @gender as gender,
-    if (@pregnantValueCoded = concept_from_mapping('CIEL', '1065'), true, false) as pregnant,
-    if (@pregnantValueCoded = concept_from_mapping('CIEL', '1065'), date(@edd), null) as dueDate
-;
+    if (@dolp > ifnull(@dod, 0), true, false) as pregnant,
+    if (@dolp > ifnull(@dod, 0), date(@edd), null) as dueDate;
