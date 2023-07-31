@@ -19,7 +19,13 @@ from obs o
 where o.obs_id = latest_obs(@patientId, 'CIEL', '5599')
 and o.voided = 0;
 
+# Pregnancy Status
+select o.value_coded into @pregnantValueCoded 
+from obs o
+where o.obs_id = latest_obs(@patientId, 'CIEL', '5272')
+and o.voided = 0;
+
 select
     @gender as gender,
-    if (@dolp > ifnull(@dod, 0), true, false) as pregnant,
-    if (@dolp > ifnull(@dod, 0), date(@edd), null) as dueDate;
+    if (@pregnantValueCoded = concept_from_mapping('CIEL', '1065') and @dolp > ifnull(@dod, 0), true, false) as pregnant,
+    if (@pregnantValueCoded = concept_from_mapping('CIEL', '1065') and @dolp > ifnull(@dod, 0), date(@edd), null) as dueDate;
