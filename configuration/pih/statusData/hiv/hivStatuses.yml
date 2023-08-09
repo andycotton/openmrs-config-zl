@@ -35,9 +35,9 @@
 - id: "pregnancyDueDate"
   labelCode: "zl.status.pregnancyStatus.dueDate"
   statusDataQuery: "lastPregnancyStatus.sql"
-  conditionExpression: "#if($gender == 'F' && $pregnant == 1)true#{else}false#end"
-  valueExpression: "$fn.format($dueDate)"
-  formatExpression: "#if($pregnant == 1)status-data-alert#end"
+  conditionExpression: "#if($gender == 'F' && $dueDate)true#{else}false#end"
+  valueExpression: "$fn.formatDate($dueDate)"
+  formatExpression: "#if($dueDate)status-data-alert#end"
 
 - id: "lastCd4Result"
   labelCode: "zl.status.lastCd4.result"
