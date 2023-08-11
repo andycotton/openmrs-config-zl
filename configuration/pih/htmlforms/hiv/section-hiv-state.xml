@@ -179,7 +179,7 @@
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
 
-                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",[".inhStartDate",".inhEndDate"],[".inhStartDate"])
+                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",["#inhStartDate","#inhEndDate"],["#inhStartDate"],'<uimessage code="pihcore.required"/>')
             });
         </script>
     </ifMode>
@@ -615,11 +615,11 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <obs conceptId="CIEL:163526" class="startDate inhStartDate" allowFutureDates="true" allowPastDates="true"/>
+                                    <obs conceptId="CIEL:163526" class="startDate" allowFutureDates="true" allowPastDates="true" id="inhStartDate"/>
                                 </td>
                                
                                 <td>
-                                    <obs conceptId="CIEL:164384" class="endDate inhEndDate" allowFutureDates="true" allowPastDates="true"/>
+                                    <obs conceptId="CIEL:164384" class="endDate" allowFutureDates="true" allowPastDates="true" id="inhEndDate"/>
                                     
                                 </td>
                             </tr>

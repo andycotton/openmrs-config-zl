@@ -237,19 +237,20 @@ function restrictInputOnlyNumber(input_id) {
 
 
 /**
- * Manages the activation of widget inputs based on the state of a radio button.
+ * Manages the activation of widget inputs based on the state of a radio button and an optional checkbox.
  *
  * @param {string|null} checkboxId - The ID of the checkbox associated with the radio button (optional).
  * @param {string} radioButtonId - The ID of the radio button controlling the widget inputs.
  * @param {string[]} widgetIds - The IDs of the widgets whose inputs should be enabled or disabled.
  * @param {string[]} requiredWidgetIds - The IDs of the input widgets that may be required based on the radio button state.
+ * @param {string} requiredMsg - The message to display when a widget input is required.
  */
-function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, widgetIds, requiredWidgetIds) {
+function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, widgetIds, requiredWidgetIds, requiredMsg) {
 
   let isRequired = true;
   let checkboxValue = null;
-
-  setRequiredForTextInputs(requiredWidgetIds)
+  let radioButtonElm = jq(radioButtonId).find('input:checked');
+  let checkboxElm = jq(checkboxId).find('input:checked');
 
   const radioButtonValue = jq(radioButtonId).find('input:checked').val();
   // Check if the radio button has a value (i.e., it is checked).
@@ -268,10 +269,15 @@ function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, w
       const elem = jq(this).find('input:checked');
       if (elem.val() == undefined) {
         setInputWidgetsDisabled(widgetIds, true)
-        checkboxValue = elem.val();
+        checkboxElm = elem
+        radioButtonElm = jq(checkboxId).find('input:checked');
+        setRequiredForRadioButton(radioButtonId, requiredMsg, checkboxElm, radioButtonElm)
+        returnRequiredInputWidgets();
+
       } else {
-        checkboxValue = elem.val();
-        setRequiredForRadioButton(radioButtonId, "true")
+        checkboxElm = elem
+        setRequiredForRadioButton(radioButtonId, requiredMsg, checkboxElm, radioButtonElm)
+        returnRequiredInputWidgets()
       }
     })
   }
@@ -279,31 +285,52 @@ function manageInputActivationForRadioButton(checkboxId = null, radioButtonId, w
   // Enable input when the radio button is checked.
   jq(radioButtonId).change(function () {
     const elem = jq(this).find('input:checked');
-    if (elem.val()) {
-      setInputWidgetsDisabled(widgetIds, false)
-    } else {
+    if (elem.val() == undefined) {
       setInputWidgetsDisabled(widgetIds, true)
+      radioButtonElm = elem
+      setRequiredForRadioButton(radioButtonId, requiredMsg, checkboxElm, radioButtonElm)
+      returnRequiredInputWidgets()
+    } else {
+      radioButtonElm = elem
+      setInputWidgetsDisabled(widgetIds, false)
+      setRequiredForRadioButton(radioButtonId, requiredMsg, checkboxElm, radioButtonElm)
+      returnRequiredInputWidgets()
     }
   })
 
   // Function to determine if the input widgets specified by requiredWidgetIds are required.
   const returnRequiredInputWidgets = function () {
 
-    // Loop through each input widget of type text under the elements specified by widgetRequiredIds.
-    jq(requiredWidgetIds + ' input[type=text]').each(function (i, domEl) {
+    jq(requiredWidgetIds).each(function (i, domEl) {
 
-      const elem = jq(domEl);
-      if (checkboxValue == undefined) {
-        isRequired = true
-      }
-      else if (elem.val()) {
-        isRequired = true
+      let el = jq(domEl).find('input[type=text]')
+
+      if (checkboxElm.val() == undefined) {
+        setValue(`${domEl.substring(1)}.value`, '');
+        getField(`${domEl.substring(1)}.error`).text('').hide();
+        isRequired = true;
+      } else if (checkboxElm.val() == undefined && radioButtonElm.val() == undefined) {
+        setValue(`${domEl.substring(1)}.value`, '');
+        getField(`${domEl.substring(1)}.error`).text('').hide();
+        isRequired = true;
+      } else if (checkboxElm.val() != undefined && radioButtonElm.val() == undefined) {
+        setValue(`${domEl.substring(1)}.value`, '');
+        getField(`${domEl.substring(1)}.error`).text('').hide();
+        jq(radioButtonId).find('input[type="radio"]').focus()
+        isRequired = false;
       } else {
-        isRequired = false
+        if (el.val() && checkboxElm.val() != undefined && radioButtonElm.val() != undefined) {
+          getField(`${domEl.substring(1)}.error`).text('').hide();
+          isRequired = true;
+        } else {
+          getField(`${domEl.substring(1)}.error`).text(requiredMsg).show();
+          el.focus()
+          isRequired = false
+        }
       }
     })
-
     return isRequired;
+
   }
 
   // Attach the returnInputWidgetsRequired function as a change event handler to each element specified by requiredWidgetIds
@@ -333,22 +360,26 @@ function setInputWidgetsDisabled(widgetIds, disabled) {
   }
 }
 
-// Function to set 'required' attribute for input[type=text] elements under elements specified by requiredWidgetIds.
-function setRequiredForTextInputs(requiredWidgetIds) {
-  jq(requiredWidgetIds + ' input[type=text]').each(function (i, domEl) {
-    if (i >= 0) {
-      jq(domEl).prop('required', true);
-    }
-  })
-}
 
+/**
+ * Function to set the 'required' attribute for radio buttons under the specified radioButtonId.
+ * @param {string} radioButtonId - The ID of the radio button element containing the radio buttons to set the 'required' attribute for.
+ * @param {string} requiredMsg - The message to display when the radio buttons are required.
+ * @param {jQuery} checkboxElm - The jQuery object representing the checkbox element to be checked for presence.
+ * @param {jQuery} radioButtonElm - The jQuery object representing the radio button element.
+ */
+function setRequiredForRadioButton(radioButtonId, requiredMsg, checkboxElm, radioButtonElm) {
 
-/** Function to set the 'required' attribute for radio buttons under the specified radioButtonId.
-* @param {string} radioButtonId - The ID of the radio button element containing the radio buttons to set the 'required' attribute for.
-* @param {boolean} value - A boolean value indicating whether to set the 'required' attribute to true or false.
-*/
-function setRequiredForRadioButton(radioButtonId, value) {
-  jq(radioButtonId).find("input[type=radio]").prop('required', value);
+  if (checkboxElm.val() == undefined) {
+     // If the checkbox element is undefined, hide the error message.
+    getField(`${radioButtonId.substring(1)}.error`).text('').hide();
+  } else if (checkboxElm.val() != undefined && radioButtonElm.val() == undefined) {
+    // If checkbox is defined but radio button is not, show the required error message.
+    getField(`${radioButtonId.substring(1)}.error`).text(requiredMsg).show();
+  } else {
+    // Otherwise, hide the error message.
+    getField(`${radioButtonId.substring(1)}.error`).text('').hide();
+  }
 }
 
 
@@ -361,11 +392,13 @@ function anyCheckboxesSelected(containerSelector) {
 /**
  * Updates the required attribute of the last checkbox in the given container.
  * @param {string} containerSelector - The selector for the container containing checkboxes.
+ * @param {string} transRequiredMsgId - The selector for the element to display the required message.
+ * @param {string} requiredMsg - The message to display when the last checkbox is required.
  * @returns {boolean} - Returns true if the last checkbox is required, false otherwise.
  */
-function updateLastCheckboxRequired(containerSelector) {
+function updateLastCheckboxRequired(containerSelector, transRequiredMsgId, requiredMsg) {
   // Initialize the flag to keep track of the last checkbox state.
-  let islastCheckbox = true;
+  let islastCheckbox = false;
 
   // Function to update the required attribute of the last checkbox
   const updateLastCheckbox = function () {
@@ -373,12 +406,19 @@ function updateLastCheckboxRequired(containerSelector) {
     // Select the last checkbox within the container using the given selector
     let lastCheckbox = jq(`${containerSelector} input[type="checkbox"]`).last();
 
+     // Clear and hide the required message
+    jq(transRequiredMsgId).text('').hide()
+
     // Check if any checkboxes are selected within the container using the anyCheckboxesSelected function.
     if (!anyCheckboxesSelected(containerSelector)) {
-      lastCheckbox.prop('required', true);
+
+      // Display the required message and focus on the last checkbox
+      jq(transRequiredMsgId).text(requiredMsg).show()
+      lastCheckbox.focus()
       islastCheckbox = false;
+
     } else {
-      lastCheckbox.prop('required', false);
+      jq(transRequiredMsgId).text('').hide()
       islastCheckbox = true;
     }
     return islastCheckbox;
