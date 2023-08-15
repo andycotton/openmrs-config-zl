@@ -149,7 +149,8 @@
 
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
-                updateLastCheckboxRequired("#transmission")
+                manageInputActivationForRadioButton("#Isoniazide","#treatmentLine",["#inhStartDate","#inhEndDate"],["#inhStartDate"],'<uimessage code="pihcore.required"/>')
+                updateLastCheckboxRequired("#transmission","#trans-required-msg",'<uimessage code="pihcore.required"/>')
             });
         </script>
     </ifMode>
@@ -398,6 +399,9 @@
                 </tr>
             </obsgroup>
         </table>
+        <div>
+            <span id='trans-required-msg' class='error field-error'></span>
+        </div>
     </div>
     </section>
 
@@ -1008,17 +1012,17 @@
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
                                          answerLabel="{drugname}"
-                                         toggle="{id: '{drugname}-hx', style: 'dim'}" />
+                                         toggle="{id: '{drugname}-hx', style: 'dim'}" id="{drugname}"/>
                                     <p class="radio {drugname}-hx">
                                         <obs conceptId="PIH:13786" style="radio"
-                                             answerConceptIds="CIEL:159943, CIEL:159944" />
+                                             answerConceptIds="CIEL:159943, CIEL:159944" id="treatmentLine"/>
                                     </p>
                                 </td>
-                                <td class="{drugname}-hx">
-                                    <obs conceptId="CIEL:1190"/>
+                                <td>
+                                    <obs conceptId="CIEL:1190" class="startDate" allowFutureDates="true" allowPastDates="true" id="inhStartDate"/>
                                 </td>
-                                <td class="{drugname}-hx">
-                                    <obs conceptId="CIEL:1191" />
+                                <td>
+                                    <obs conceptId="CIEL:1191"  class="endDate"  allowFutureDates="true" allowPastDates="true" id="inhEndDate"/>
                                 </td>
                             </tr>
                         </obsgroup>
