@@ -12,6 +12,7 @@ parameters:
   - key: "patient_id"
     type: "java.lang.String"
     label: "Patient"
+    required: false
   - key: "locale"
     type: "java.lang.String"
     label: "Locale"
