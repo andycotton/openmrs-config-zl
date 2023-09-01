@@ -56,11 +56,14 @@
     "spaPreview",
     "surgery",
     "systemAdministration",
-    "todaysVisits",
+    "uhmVitals",
+    "vaccination",
+    "vct",
     "visitManagement",
     "visitNote",
     "vitalsHomepageApp",
-    "waitingForConsult"
+    "wristbands",
+    "zika"
   ],
 
   "scheduleMonthlyDataExports": true,
