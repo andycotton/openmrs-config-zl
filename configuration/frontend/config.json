@@ -3,9 +3,6 @@
     "logo": {
       "src": "${openmrsSpaBase}/site/pih-logo.png",
       "alt": "Partners in Health"
-    },
-    "links": {
-      "loginSuccess": "${openmrsBase}/pihcore/home.page"
     }
   },
   "@pih/esm-refapp-navbar-app": {
