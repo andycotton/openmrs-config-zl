@@ -475,6 +475,7 @@ function patientDossierEditAlert() {
 //Save teh clinician Location in localStorage
 function saveSelectedLocation() {
   document.addEventListener("DOMContentLoaded", function () {
+
     var spanElement = document.getElementById("selected-location");
     var locationText = spanElement.textContent;
     localStorage.setItem("location", locationText);
