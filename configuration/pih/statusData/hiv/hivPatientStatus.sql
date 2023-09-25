@@ -1,7 +1,4 @@
 
-SELECT concept_name(concept_from_mapping('PIH', '10364'),'en')
-INTO @currentTreatment
-;
 SELECT pp.outcome_concept_id into @outcomeConceptId from  patient_program pp 
 WHERE pp.patient_id =@patientId
 order by pp.date_created  desc limit 1 ;
@@ -12,19 +9,18 @@ WHERE pp.patient_id=@patientId
 order by pp.date_created desc limit 1
 ;
 
-SELECT DATE(e.encounter_datetime) into @latestDispencingDate from encounter e 
-WHERE e.patient_id=@patientId
-ORDER BY e.encounter_datetime LIMIT 1 ;
+select value_datetime(latestObs(@patientId, concept_from_mapping('PIH','5096'),null))  into @nextDispensingDate;
+select program_id into @hivProgramId from program where uuid='b1cb1fc1-5190-4f7a-af08-48870975dafc';
+select  programStartDate( patientProgramId(@patientId, @hivProgramId,NOW())) into @enrollmentDate;
+select program_workflow_id  into @hivTreatmentWorkflow  from program_workflow pw where concept_id = concept_from_mapping('PIH','11449') and retired = 0;
 
-select e.encounter_datetime into @nextDispensingDate from encounter e 
-where  e.uuid ='cc1720c9-3e4c-4fa8-a7ec-40eeaad1958c' and e.patient_id=@patientId
-;
+select currentProgramState(patientProgramId(@patientId, @hivProgramId,NOW()), @hivTreatmentWorkflow,'en') into @currentStatus;
 
 SELECT 
     CASE 
-        WHEN @patientProgramDate is null or @outcomeConceptId is null then 'Program outcome'
         WHEN @patientProgramDate is not null or @outcomeConceptId is not null then concept_name(@outcomeConceptId,'en')
-        WHEN DATEDIFF(NOW(), @nextDispensingDate) < 28 THEN 'active - on arvs'
+        WHEN DATEDIFF(NOW(), COALESCE(@nextDispensingDate,@enrollmentDate),GETDATE()) <= 28 THEN 'active - on arvs' 
+        WHEN DATEDIFF(NOW(), COALESCE(@nextDispensingDate,@enrollmentDate),GETDATE()) >= 28 THEN @currentStatus
         ELSE 'ltfu' 
     END into @status;
 
