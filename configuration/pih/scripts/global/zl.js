@@ -434,7 +434,7 @@ function updateLastCheckboxRequired(containerSelector, transRequiredMsgId, requi
   // Add the updateLastCheckboxRequired function to the beforeSubmit array to call it before form submission.
   beforeSubmit.push(updateLastCheckbox);
 }
-patientDossierEditAlert();
+/*patientDossierEditAlert();
 saveSelectedLocation();
 //Creating this function to alert the clinician when He/She wants to modify
 // Patient info which is not in the same location
@@ -586,6 +586,6 @@ function saveSelectedLocation() {
   });
 
 
-}
+}*/
 
 
