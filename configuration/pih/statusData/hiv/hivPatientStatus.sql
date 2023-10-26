@@ -20,7 +20,7 @@ SELECT
     CASE 
         WHEN @patientProgramDate is not null or @outcomeConceptId is not null then concept_name(@outcomeConceptId,'en')
         WHEN DATEDIFF(NOW(), COALESCE(@nextDispensingDate,@enrollmentDate)) <= 28 THEN 'active - on arvs' 
-        WHEN DATEDIFF(NOW(), COALESCE(@nextDispensingDate,@enrollmentDate)) >= 28 THEN @currentStatus
+        WHEN DATEDIFF(NOW(), COALESCE(@nextDispensingDate,@enrollmentDate)) >= 28 AND @currentStatus IS NOT NULL THEN @currentStatus
         ELSE 'ltfu' 
     END into @status;
 
