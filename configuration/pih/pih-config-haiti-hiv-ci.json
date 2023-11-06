@@ -1,5 +1,5 @@
 {
-  "rebuildSearchIndexOnStartup": true,
+  "rebuildSearchIndexConfig": -1,
   "localZlIdentifierGeneratorEnabled": "true",
   "localZlIdentifierGeneratorPrefix": "Y"
 }
