@@ -4,22 +4,30 @@
   "dossierIdentifierPrefix": "TH",
 
   "components": [
+    "activeVisits",
+    "adt",
     "allergies",
     "checkIn",
     "checkInHomepageApp",
     "clinicianDashboard",
     "dataExports",
     "dbevent",
+    "dispensing",
     "echocardiogram",
+    "edConsult",
+    "edTriage",
+    "edTriageQueue",
     "exportPatients",
     "growthChart",
     "importPatients",
+    "labResults",
+    "labs",
     "markPatientDead",
+    "mch",
     "mentalHealth",
     "monitoringReports",
     "myAccount",
     "ncd",
-    "labResults",
     "overviewReports",
     "patientRegistration",
     "primaryCare",
@@ -46,5 +54,7 @@
     "matchUrl": "http://192.168.1.111:9000/match",
     "scanUrl": "https://localhost:9443/fingerprint/scan",
     "devicesUrl": "https://localhost:9443/fingerprint/devices"
-  }
+  },
+
+  "dispositionConfig": "file:configuration/pih/pih-dispositions-haiti-inpatient.json"
 }
