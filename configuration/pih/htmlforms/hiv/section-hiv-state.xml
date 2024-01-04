@@ -1,6 +1,8 @@
 <htmlform formUuid="3959f956-b83a-11e7-abc4-cec278b6b50a"
           formName="HIV Clinical State" formVersion="4.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
+
     <style type="text/css">
         <ifMode mode="VIEW" include="false">
 
