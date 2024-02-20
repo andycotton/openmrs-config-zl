@@ -37,7 +37,6 @@ CREATE TEMPORARY TABLE temp_soc
  cost_of_transport                     double,       
  travel_time_to_clinic                 varchar(255), 
  transportation_comment                text,         
- access_to_transportation              varchar(255), 
  main_daily_activities                 text,         
  ability_to_perform_activity           text,         
  currently_employed                    varchar(255), 
@@ -62,15 +61,17 @@ CREATE TEMPORARY TABLE temp_soc
  other_assistance_received             boolean,      
  other_assistance_recommended          boolean,      
  other_assistance                      text,         
- socio_economic_assistance_comment     text,         
+ socio_economic_assistance_comment     text,
+ family_support_received               boolean,
+ household_supports_anc                boolean,
  undernourishment                      varchar(255), 
  infant_mortality                      varchar(255), 
- completed_six_years_schooling         varchar(255), 
+ less_than_6yrs_school                 varchar(255), 
  not_attending_school                  varchar(255), 
  cooks_with_dung_wood_charcoal_or_coal varchar(255), 
- household_sanitation_improvement      varchar(255), 
- improved_drinking_water               varchar(255), 
- electricity                           varchar(255), 
+ no_sanitation_improvement             varchar(255), 
+ no_water                              varchar(255), 
+ no_electricity                        varchar(255), 
  inadequate_housing_materials          varchar(255), 
  household_no_assets                   varchar(255)  
 );
@@ -251,6 +252,12 @@ set provides_financial_support = obs_value_coded_list(encounter_id, 'PIH','13967
 
 update  temp_soc tv 
 set provides_nonfinancial_support = obs_value_coded_list(encounter_id, 'PIH','13969', @locale);
+
+update  temp_soc tv 
+set family_support_received = answer_exists_in_encounter(encounter_id, 'PIH','2156','PIH','10642');
+
+update  temp_soc tv 
+set household_supports_anc = obs_value_coded_as_boolean(encounter_id, 'PIH','13747');
  
 -- GMPI columns
 update  temp_soc tv 
@@ -260,7 +267,7 @@ update  temp_soc tv
 set infant_mortality = obs_value_coded_list(encounter_id, 'CIEL', '165492', @locale);
 
 update  temp_soc tv 
-set completed_six_years_schooling = obs_value_coded_list(encounter_id, 'CIEL', '165493', @locale);
+set less_than_6yrs_school = obs_value_coded_list(encounter_id, 'CIEL', '165493', @locale);
 
 update  temp_soc tv 
 set not_attending_school = obs_value_coded_list(encounter_id, 'CIEL', '165494', @locale);
@@ -269,13 +276,13 @@ update  temp_soc tv
 set cooks_with_dung_wood_charcoal_or_coal = obs_value_coded_list(encounter_id, 'CIEL', '165495', @locale);
 
 update  temp_soc tv 
-set household_sanitation_improvement = obs_value_coded_list(encounter_id, 'CIEL', '165496', @locale);
+set no_sanitation_improvement = obs_value_coded_list(encounter_id, 'CIEL', '165496', @locale);
 
 update  temp_soc tv 
-set improved_drinking_water = obs_value_coded_list(encounter_id, 'CIEL', '165497', @locale);
+set no_water = obs_value_coded_list(encounter_id, 'CIEL', '165497', @locale);
 
 update  temp_soc tv 
-set electricity = obs_value_coded_list(encounter_id, 'CIEL', '165498', @locale);
+set no_electricity = obs_value_coded_list(encounter_id, 'CIEL', '165498', @locale);
 
 update  temp_soc tv 
 set inadequate_housing_materials = obs_value_coded_list(encounter_id, 'CIEL', '165499', @locale);
@@ -311,7 +318,6 @@ select
 	cost_of_transport,
 	travel_time_to_clinic,
 	transportation_comment,
-	access_to_transportation,
 	main_daily_activities,
 	ability_to_perform_activity,
 	currently_employed,
@@ -337,14 +343,16 @@ select
 	other_assistance_recommended,
 	other_assistance,
 	socio_economic_assistance_comment,
+    family_support_received,
+    household_supports_anc,
 	undernourishment,
 	infant_mortality,
-	completed_six_years_schooling,
+	less_than_6yrs_school,
 	not_attending_school,
 	cooks_with_dung_wood_charcoal_or_coal,
-	household_sanitation_improvement,
-	improved_drinking_water,
-	electricity,
+	no_sanitation_improvement,
+	no_water,
+	no_electricity,
 	inadequate_housing_materials,
 	household_no_assets
 from temp_soc;
