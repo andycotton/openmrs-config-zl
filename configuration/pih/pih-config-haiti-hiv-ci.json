@@ -1,4 +1,33 @@
 {
+  "components": [
+    "allergies",
+    "clinicianDashboard",
+    "commentForm",
+    "dataExports",
+    "dbevent",
+    "exportPatients",
+    "exposedInfant",
+    "hiv",
+    "hivProgramLocationWarning",
+    "importPatients",
+    "labResults",
+    "labs",
+    "markPatientDead",
+    "myAccount",
+    "oclConcepts",
+    "patientRegistration",
+    "pmtct",
+    "programs",
+    "relationships",
+    "socioEconomics",
+    "systemAdministration",
+    "todaysVisits",
+    "vct",
+    "visitManagement",
+    "visitNote",
+    "vitals"
+  ],
+
   "rebuildSearchIndexConfig": -1,
   "localZlIdentifierGeneratorEnabled": "true",
   "localZlIdentifierGeneratorPrefix": "Y"
