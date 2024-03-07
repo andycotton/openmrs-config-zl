@@ -3,13 +3,7 @@ SET @partition = '${partitionNum}';
 SET @locale = GLOBAL_PROPERTY_VALUE('default_locale', 'en');
 
 SET @obgyn_encounter = (SELECT encounter_type_id FROM encounter_type WHERE uuid = 'd83e98fd-dc7b-420f-aa3f-36f648b4483d');
-/*
-SET @visit_diagnosis_concept_id = CONCEPT_FROM_MAPPING('PIH', 'Visit Diagnoses');
-SET @diagnosis_order = CONCEPT_FROM_MAPPING('PIH', 'Diagnosis order');
-SET @primary_diagnosis = CONCEPT_FROM_MAPPING('PIH', 'primary');
-SET @secondary_diagnosis = CONCEPT_FROM_MAPPING('PIH', 'secondary');
-SET @diagnosis = CONCEPT_FROM_MAPPING('PIH', 'DIAGNOSIS');
-*/
+
 DROP TEMPORARY TABLE IF EXISTS temp_obgyn_visit;
 CREATE TEMPORARY TABLE temp_obgyn_visit
 (
@@ -68,7 +62,9 @@ INSERT INTO temp_obgyn_visit(patient_id, encounter_id,encounter_datetime, visit_
 SELECT DISTINCT e.patient_id, e.encounter_id, e.encounter_datetime, visit_id 
 FROM encounter e
 INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.voided = 0 -- ensure that only rows with obs are included
-WHERE e.voided = 0 AND encounter_type = @obgyn_encounter;
+WHERE e.voided = 0 AND encounter_type = @obgyn_encounter
+AND ((date(e.encounter_datetime) >=@startDate) or @startDate is null)
+AND ((date(e.encounter_datetime) <=@endDate)  or @endDate is null);
 
 CREATE INDEX temp_obgyn_visit_patient_id ON temp_obgyn_visit (patient_id);
 CREATE INDEX temp_obgyn_visit_encounter_id ON temp_obgyn_visit (encounter_id);
@@ -115,8 +111,6 @@ v.last_name = t.last_name,
 v.mothers_first_name = t.mothers_first_name,
 v.date_of_birth = t.date_of_birth,
 v.address = t.address;
-
-
 
 DROP TEMPORARY TABLE IF EXISTS temp_obs;
 CREATE TEMPORARY TABLE temp_obs 
