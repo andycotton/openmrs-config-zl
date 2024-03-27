@@ -186,7 +186,6 @@ update temp_dx_patient set gender = gender(patient_id);
 
 update temp_dx_patient t
 set age = round(current_age_in_years(t.patient_id));
-;
 
 update temp_diagnoses t
 inner join temp_dx_patient d on d.patient_id = t.patient_id
