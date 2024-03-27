@@ -1,8 +1,11 @@
--- set  @startDate = '1924-02-01';
--- set  @endDate = '2024-12-29';
+-- set  @startDate = '2024-02-01';
+-- set  @endDate = '2024-02-29';
+
 SET  @locale = GLOBAL_PROPERTY_VALUE('default_locale', 'en');
 
 set  @diagnosis = concept_from_mapping('PIH','3064');
+
+
 set @cholera = concept_from_mapping('PIH','CHOLERA');
 set @diphtheria_probable = concept_from_mapping('PIH','Diphtheria');
 set @viral_meningitis = concept_from_mapping('PIH','VIRAL MENINGITIS');
@@ -102,8 +105,8 @@ o.value_coded
 from obs o 
 where concept_id = @diagnosis
 AND o.voided = 0
--- AND ((date(o.obs_datetime) >=@startDate) or @startDate is null)
--- AND ((date(o.obs_datetime) <=@endDate)  or @endDate is null)
+AND ((date(o.obs_datetime) >=@startDate) or @startDate is null)
+AND ((date(o.obs_datetime) <=@endDate)  or @endDate is null)
 and o.value_coded in (
 @cholera,
 @diphtheria_probable,
@@ -421,7 +424,7 @@ insert into temp_output(dx,hl5,fl5,hl14,fl14,hl50,fl50,hG50,fG50,htotal,ftotal)
 Select
 'Infection Sexuellement Transmissable (IST)',SUM(hl5), SUM(fl5), SUM(hl14),SUM(fl14), SUM(hl50), SUM(fl50), SUM(hG50),SUM(fG50), SUM(htotal), SUM(ftotal)
 from temp_diagnoses t
-where diagnosis_concept_id in (@filariose_probable,@ist)
+where diagnosis_concept_id in (@ist)
 group by 1;
 
 insert into temp_output(dx,hl5,fl5,hl14,fl14,hl50,fl50,hG50,fG50,htotal,ftotal)
