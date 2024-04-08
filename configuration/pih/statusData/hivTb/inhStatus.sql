@@ -31,19 +31,31 @@ and o.voided = 0
 order by o.date_created desc
 limit 1;
 
-SELECT
-    CASE 
-        WHEN @dateActivated > @startdate then @dateActivated
-        WHEN @dateActivated < @startdate THEN @startdate
-        ELSE null 
-    END into @start;
 
 SELECT
     CASE 
-        WHEN @dateActivated > @startdate then @autoExpireDate
-        WHEN @dateActivated < @startdate THEN @endDate
-        ELSE null 
-    END into @end;
+        WHEN @dateActivated IS NOT NULL AND @startdate IS NOT NULL THEN
+            CASE 
+                WHEN @dateActivated > @startdate THEN @dateActivated
+                ELSE @startdate
+            END
+        WHEN @dateActivated IS NOT NULL THEN @dateActivated
+        WHEN @startdate IS NOT NULL THEN @startdate
+        ELSE NULL 
+    END INTO @start;
+
+
+SELECT
+    CASE 
+        WHEN @dateActivated IS NOT NULL AND @startdate IS NOT NULL THEN
+            CASE 
+                WHEN @dateActivated > @startdate THEN @autoExpireDate
+                ELSE @endDate
+            END
+        WHEN @dateActivated IS NOT NULL THEN @autoExpireDate
+        WHEN @startdate IS NOT NULL THEN @endDate
+        ELSE NULL 
+    END INTO @end;
 
 select
     date(@start) as startDate,
