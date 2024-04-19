@@ -1,0 +1,44 @@
+{
+  "welcomeMessage": "Bienvenue dans l'EMR de SSPE",
+  "site": "SSPE_SAINT_MARC",
+  "dossierIdentifierPrefix": "SSPE",
+
+  "components": [
+    "activeVisits",
+    "allergies",
+    "checkIn",
+    "checkInHomepageApp",
+    "clinicianDashboard",
+    "dbevent",
+    "dispensing",
+    "edConsult",
+    "edTriage",
+    "edTriageQueue",
+    "growthChart",
+    "labResults",
+    "labs",
+    "markPatientDead",
+    "mch",
+    "mentalHealth",
+    "myAccount",
+    "ncd",
+    "overviewReports",
+    "patientDocuments",
+    "patientRegistration",
+    "primaryCare",
+    "programs",
+    "relationships",
+    "socioEconomics",
+    "systemAdministration",
+    "vaccination",
+    "visitManagement",
+    "visitNote",
+    "vitalsHomepageApp",
+    "vitals"
+  ],
+
+  "globalProperties": {
+    "coreapps.defaultPatientIdentifierLocation": "209c84cf-4cd7-4908-a946-030499c1ff75"
+  }
+
+}
