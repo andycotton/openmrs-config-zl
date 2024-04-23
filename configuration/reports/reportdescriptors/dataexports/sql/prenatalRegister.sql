@@ -395,8 +395,8 @@ set enrolled_in_mother_support_group = if(value_coded_as_boolean(obs_id_from_tem
 -- This is because it is coded to match the physical prenatal register as much as possible
 select 
 dossier_id "1 - # Dossier",
-first_name "2 - Code Prénatal",
-last_name "3- Prénom(s) Nom(s) (Surnoms)",
+first_name "3 - Prénom(s)",
+last_name "3- Surnoms",
 mothers_first_name "4 - Prénom de la mère",
 DATE_FORMAT(date_of_birth,'%d/%m/%Y') "5- Date de Naissance",
 age_at_encounter "6 - Âge",
