@@ -385,7 +385,7 @@
                             <label><uimessage code="general.fromDate" />:</label>
                             <span id="lastRecordedCHWEncounter" class="value"></span>
                             <br />
-                            <ifMode mode="EDIT" include="true">
+                            <ifMode mode="VIEW" include="false">
                                 <div>
                                     <label>
                                         <uimessage code="pihcore.change.nameCHW" />? </label>
