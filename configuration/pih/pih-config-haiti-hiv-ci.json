@@ -1,6 +1,7 @@
 {
   "components": [
     "allergies",
+    "biometricsFingerPrints",
     "clinicianDashboard",
     "commentForm",
     "dataExports",
@@ -26,6 +27,15 @@
     "visitNote",
     "vitals"
   ],
+
+  "biometricsConfig": {
+    "biometricEngine": "restBiometricEngine",
+    "templateFormat": "PROPRIETARY",
+    "subjectUrl": "http://localhost:9000/subject",
+    "matchUrl": "http://localhost:9000/match",
+    "scanUrl": "https://localhost:9443/fingerprint/scan",
+    "devicesUrl": "https://localhost:9443/fingerprint/devices"
+  },
 
   "rebuildSearchIndexConfig": -1,
   "localZlIdentifierGeneratorEnabled": "true",
