@@ -41,7 +41,9 @@
   ],
 
   "globalProperties": {
-    "coreapps.defaultPatientIdentifierLocation": "209c84cf-4cd7-4908-a946-030499c1ff75"
+    "coreapps.defaultPatientIdentifierLocation": "209c84cf-4cd7-4908-a946-030499c1ff75",
+    "mirebalais.checkIn.paymentAmounts": "500,300,250,200,150,100,75,50,25,0",
+    "mirebalais.checkIn.paymentAmountLabels": "500,300,250,200,150,100,75,50,25,Exonéré"
   }
 
 }
