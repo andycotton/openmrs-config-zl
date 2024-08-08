@@ -1,42 +1,4 @@
 {
-  "components": [
-    "allergies",
-    "biometricsFingerPrints",
-    "clinicianDashboard",
-    "commentForm",
-    "dataExports",
-    "dbevent",
-    "exportPatients",
-    "exposedInfant",
-    "hiv",
-    "hivProgramLocationWarning",
-    "importPatients",
-    "labResults",
-    "labs",
-    "markPatientDead",
-    "myAccount",
-    "patientRegistration",
-    "pmtct",
-    "programs",
-    "relationships",
-    "socioEconomics",
-    "systemAdministration",
-    "todaysVisits",
-    "vct",
-    "visitManagement",
-    "visitNote",
-    "vitals"
-  ],
-
-  "biometricsConfig": {
-    "biometricEngine": "restBiometricEngine",
-    "templateFormat": "PROPRIETARY",
-    "subjectUrl": "http://localhost:9000/subject",
-    "matchUrl": "http://localhost:9000/match",
-    "scanUrl": "https://localhost:9443/fingerprint/scan",
-    "devicesUrl": "https://localhost:9443/fingerprint/devices"
-  },
-
   "rebuildSearchIndexConfig": -1,
   "localZlIdentifierGeneratorEnabled": "true",
   "localZlIdentifierGeneratorPrefix": "Y"
