@@ -659,7 +659,6 @@
                             <tr class="startDateEndDate">
                                 <td>
                                     <obs conceptId="PIH:2289" answerConceptId="{conceptMap}"
-                                         answerLabel="{drugname}"
                                          toggle="{id: '{drugname}-current-treat', style: 'dim'}"/>
                                 </td>
                                 <td class="{drugname}-current-treat">
@@ -671,6 +670,7 @@
                             </tr>
                         </obsgroup>
                     </template>
+                    <render conceptMap="CIEL:167692" drugname="Rifapentine"/>
                     <render conceptMap="CIEL:76488"  drugname="Fluconazole" />
                     <render conceptMap="CIEL:74250"  drugname="Dapsone" />
                 </repeat>

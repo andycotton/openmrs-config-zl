@@ -1645,7 +1645,6 @@
                             <tr class="startDateEndDate">
                                 <td>
                                     <obs conceptId="CIEL:1282" answerConceptId="{conceptH}"
-                                         answerLabel="{drugname}"
                                          toggle="{id: '{drugname}-hx', style: 'dim'}" />
                                 </td>
                                 <td class="{drugname}-hx">
@@ -1657,6 +1656,7 @@
                             </tr>
                         </obsgroup>
                     </template>
+                    <render conceptH="CIEL:167692" drugname="Rifapentine"/>
                     <render conceptH="CIEL:76488"  drugname="Fluconazole"/>
                     <render conceptH="CIEL:74250"  drugname="Dapsone" />
                 </repeat>
