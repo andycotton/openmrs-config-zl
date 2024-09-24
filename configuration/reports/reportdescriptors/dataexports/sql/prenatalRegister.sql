@@ -445,7 +445,7 @@ set visit_count =
  	and (c.encounter_datetime > t.latest_postpartum_datetime or t.latest_postpartum_datetime is null));
 
 -- select final output.  
--- Note that much of this is formatted in a non-standard way for our exports.,
+-- Note that much of this is formatted in a non-standard way for our exports.
 -- This is because it is coded to match the physical prenatal register as much as possible
 select 
 dossier_id "1 - # Dossier",
