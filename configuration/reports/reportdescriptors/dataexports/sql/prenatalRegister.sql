@@ -10,6 +10,8 @@ CREATE TEMPORARY TABLE temp_obgyn_visit
 (
 encounter_id                            int(11),      
 encounter_datetime                      datetime,     
+latest_new_prenatal_datetime            datetime,
+latest_postpartum_datetime               datetime,
 visit_id                                int(11),      
 vitals_encounter_id                     int(11),      
 patient_id                              int(11),      
@@ -63,13 +65,16 @@ accepts_accompanateur                   varchar(3),
 enrolled_in_mother_support_group        varchar(3)    
 );
 
+set @type_visit = concept_from_mapping('PIH','8879');
+set @prenatal = concept_from_mapping('PIH','6259');
 INSERT INTO temp_obgyn_visit(patient_id, encounter_id,encounter_datetime, visit_id)
 SELECT DISTINCT e.patient_id, e.encounter_id, e.encounter_datetime, visit_id 
 FROM encounter e
-INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.voided = 0 -- ensure that only rows with obs are included
+INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.voided = 0 and concept_id = @type_visit and value_coded = @prenatal
 WHERE e.voided = 0 AND encounter_type = @obgyn_encounter
 AND ((date(e.encounter_datetime) >=@startDate) or @startDate is null)
 AND ((date(e.encounter_datetime) <=@endDate)  or @endDate is null);
+
 
 CREATE INDEX temp_obgyn_visit_patient_id ON temp_obgyn_visit (patient_id);
 CREATE INDEX temp_obgyn_visit_encounter_id ON temp_obgyn_visit (encounter_id);
@@ -216,27 +221,6 @@ UPDATE temp_obgyn_visit te
 set syphillis_treatment_end_date = 
 	 if(obs_single_value_coded_from_temp(encounter_id, 'PIH','13024','PIH','1267') is not null, encounter_datetime,null) ;
 
--- visit count
-drop temporary table if exists temp_obgyn_visit_dup;
-create temporary table temp_obgyn_visit_dup
-select * from temp_obgyn_visit;
-
-create index temp_obgyn_visit_c1 on temp_obgyn_visit(patient_id, encounter_datetime, encounter_id );
-create index temp_obgyn_visit_dup_c1 on temp_obgyn_visit_dup(patient_id, encounter_datetime, encounter_id );
-
-drop temporary table if exists temp_visit_counts;
-create temporary table temp_visit_counts
-select t.patient_id, t.encounter_datetime, t.encounter_id , count(*) "count" 
-from temp_obgyn_visit t
-  inner join temp_obgyn_visit_dup d on d.patient_id = t.patient_id  and d.encounter_datetime <= t.encounter_datetime
-group by t.patient_id, t.encounter_datetime, t.encounter_id 
-order by t.patient_id, t.encounter_datetime, t.encounter_id ;
-
-create index temp_visit_counts_ei on temp_visit_counts(encounter_id);
-
-update temp_obgyn_visit t
-inner join temp_visit_counts c on c.encounter_id = t.encounter_id
-set t.visit_count = c.count;
 
 UPDATE temp_obgyn_visit t 
 set visit_date = date(t.encounter_datetime); 
@@ -390,8 +374,78 @@ set accepts_accompanateur = if(value_coded_as_boolean(obs_id_from_temp(te.encoun
 UPDATE temp_obgyn_visit te
 set enrolled_in_mother_support_group = if(value_coded_as_boolean(obs_id_from_temp(te.encounter_id, 'PIH','13261',0)),'Oui',null);
 
+set @type_visit = concept_from_mapping('PIH','8879');
+set @prenatal = concept_from_mapping('PIH','6259');
+set @postnatal = concept_from_mapping('PIH','6261');
+set @new_or_followup = concept_from_mapping('PIH','13236');
+set @new = concept_from_mapping('PIH','13235');
+
+DROP TEMPORARY TABLE IF EXISTS temp_visit_counts;
+CREATE TEMPORARY TABLE temp_visit_counts
+(
+patient_id int(11),
+encounter_id  int(11),
+visit_type int(11),
+new_or_followup int(11),
+encounter_datetime datetime
+);
+
+insert into temp_visit_counts (patient_id, encounter_id,encounter_datetime) 
+select distinct t.patient_id, e.encounter_id , e.encounter_datetime
+from temp_obgyn_visit t
+inner join encounter e on e.patient_id  = t.patient_id and e.voided = 0 AND encounter_type = @obgyn_encounter
+inner join obs o on o.encounter_id = e.encounter_id and o.voided = 0;
+
+create index temp_visit_counts_p on temp_visit_counts(patient_id);
+create index temp_visit_counts_e on temp_visit_counts(encounter_id);
+
+update temp_visit_counts t  
+inner join obs o on o.encounter_id = t.encounter_id 
+and o.concept_id = @type_visit
+and o.voided = 0
+set visit_type = value_coded ;
+
+update temp_visit_counts t  
+inner join obs o on o.encounter_id = t.encounter_id 
+and o.concept_id = @new_or_followup
+and o.voided = 0
+set new_or_followup = value_coded ;
+
+DROP TEMPORARY TABLE IF EXISTS temp_visit_counts_dup;
+create temporary table temp_visit_counts_dup
+select * from temp_visit_counts;
+
+create index temp_visit_counts_dup_c1 on temp_visit_counts_dup(patient_id, visit_type,  new_or_followup, encounter_datetime);
+
+update temp_obgyn_visit t
+inner join temp_visit_counts c on c.encounter_id = 
+	(select c2.encounter_id from temp_visit_counts_dup c2
+	where c2.patient_id = t.patient_id
+	and c2.visit_type = @prenatal
+	and c2.new_or_followup = @new
+	and c2.encounter_datetime < t.encounter_datetime
+	order by c2.encounter_datetime desc limit 1)
+set latest_new_prenatal_datetime = c.encounter_datetime;
+
+update temp_obgyn_visit t
+inner join temp_visit_counts c on c.encounter_id = 
+	(select c2.encounter_id from temp_visit_counts_dup c2
+	where c2.patient_id = t.patient_id
+	and c2.visit_type = @postnatal
+	and c2.encounter_datetime < t.encounter_datetime
+	order by c2.encounter_datetime desc limit 1)
+set latest_postpartum_datetime = c.encounter_datetime;
+
+update temp_obgyn_visit t
+set visit_count = 
+	(select count(*) from temp_visit_counts c
+	where c.patient_id = t.patient_id
+	and c.encounter_datetime <= t.encounter_datetime
+  	and (c.encounter_datetime >= latest_new_prenatal_datetime or latest_new_prenatal_datetime is null)
+ 	and (c.encounter_datetime > t.latest_postpartum_datetime or t.latest_postpartum_datetime is null));
+
 -- select final output.  
--- Note that much of this is formatted in a non-standard way for our exports.
+-- Note that much of this is formatted in a non-standard way for our exports.,
 -- This is because it is coded to match the physical prenatal register as much as possible
 select 
 dossier_id "1 - # Dossier",
