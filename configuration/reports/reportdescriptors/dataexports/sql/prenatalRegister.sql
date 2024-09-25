@@ -423,7 +423,7 @@ inner join temp_visit_counts c on c.encounter_id =
 	where c2.patient_id = t.patient_id
 	and c2.visit_type = @prenatal
 	and c2.new_or_followup = @new
-	and c2.encounter_datetime < t.encounter_datetime
+	and c2.encounter_datetime <= t.encounter_datetime
 	order by c2.encounter_datetime desc limit 1)
 set latest_new_prenatal_datetime = c.encounter_datetime;
 
