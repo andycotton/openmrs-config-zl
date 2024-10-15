@@ -204,10 +204,10 @@
         <encounterDiagnosesByObs required="true" selectedDiagnosesTarget="#encounter-diagnoses-target" allowNonCoded="false" />
 
         <p class="list-inline check-inline">
-            <obs conceptId="PIH:20580" style="checkbox" toggle="nonCodedDiagnosis"
+            <obs id="nonCodedDiagnosisToggle" conceptId="PIH:20580" style="checkbox" toggle="nonCodedDiagnosisDiv"
                  answerConceptId="CIEL:1065" answerCode="mirebalaisreports.noncodeddiagnoses.name" />
-            <div id="nonCodedDiagnosis">
-                <obs conceptId="PIH:7572" style="textarea" cols="28" rows="1"
+            <div id="nonCodedDiagnosisDiv">
+                <obs id="nonCodedDiagnosis" conceptId="PIH:7572" style="textarea" cols="28" rows="1"
                      labelCode="pihcore.ifNoncodedSpecify"/>
             </div>
         </p>
