@@ -1,0 +1,214 @@
+[
+  {
+    "id": "mch.dashboard.visits",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "order": 1,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "clinicianfacing/visitsSection"
+        }
+      }
+    ],
+    "config": {
+      "label": "coreapps.clinicianfacing.recentVisits"
+    }
+  },
+  {
+    "id": "mch.dashboard.obgynEncounters",
+    "icon": "fas fa-fw fa-user-md",
+    "label": "OB/GYN",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "order": 2,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.OB_GYN.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}"
+    }
+  },
+  {
+    "id": "mch.dashboard.mhEncounters",
+    "icon": "fas fa-fw fa-user",
+    "label": "pih.mentalHealth.caps",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "order": 3,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.MENTAL_HEALTH_ASSESSMENT.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}"
+    }
+  },
+  {
+    "id": "mch.dashboard.weightGraph",
+    "icon": "fas fa-fw fa-chart-bar",
+    "label": "WEIGHT",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 3,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ],
+    "config": {
+      "widget": "obsgraph",
+      "icon": "fas fa-fw fa-chart-bar",
+      "label": "pih.app.hivWeightGraph.title",
+      "conceptId": "${concept.weightKG.uuid}",
+      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}",
+      "maxResults": "100"
+    }
+  },
+  {
+    "id": "mch.dashboard.fundalHeightGraph",
+    "icon": "fas fa-fw fa-chart-bar",
+    "label": "FUNDAL HEIGHT",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 4,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ],
+    "config": {
+      "widget": "obsgraph",
+      "icon": "fas fa-fw fa-chart-bar",
+      "label": "pih.app.fundalHeightGraph.title",
+      "conceptId": "${concept.fundalHeightCM.uuid}",
+      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}",
+      "maxResults": "100"
+    }
+  },
+  {
+    "id": "mch.dashboard.riskFactors",
+    "icon": "fas fa-fw fa-exclamation-triangle",
+    "label": "pihcore.riskFactors.ucase",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 2,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/obsByEncounter"
+        }
+      }
+    ],
+    "config": {
+      "headers": [
+        "coreapps.date",
+        "pihcore.riskFactors"
+      ],
+      "concepts": [
+        "${concept.pregnancyRiskFactors.uuid}",
+        "${concept.complicationsAtDelivery.uuid}"
+      ],
+      "visitUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview" ,
+      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}"
+    }
+  },
+  {
+    "id": "mch.dashboard.allergies",
+    "icon": "fas fa-fw fa-allergies",
+    "label": "allergyui.allergies",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 5,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "allergyui",
+          "fragment": "allergies"
+        }
+      }
+    ],
+    "config": {}
+  },
+  {
+    "id": "mch.dashboard.conditions",
+    "icon": "fas fa-fw fa-user-tag",
+    "label": "coreapps.conditionui.conditions",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 1,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "conditionlist/conditions"
+        }
+      }
+    ],
+    "config": {}
+  },
+  {
+    "id": "mch.dashboard.dispensedMeds",
+    "icon": "fas fa-fw fa-pills",
+    "label": "mirebalais.dispensing.title",
+    "url": "dispensing/patient.page?patientId={{patient.uuid}}",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 6,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/medsDispensed"
+        }
+      }
+    ],
+    "config": {
+      "maxDatesToShow": 5,
+      "detailsUrl": "pihcore/meds/dispensingSummary.page?patientId={{patient.uuid}}"
+    }
+  }
+]
