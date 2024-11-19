@@ -27,7 +27,7 @@
         "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
         "order": 2,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
+        "require": "${expression.reproductiveAge}",
         "extensionParams": {
           "provider": "pihcore",
           "fragment": "dashboardwidgets/encounters"
@@ -54,7 +54,7 @@
         "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
         "order": 3,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
+        "require": "${expression.reproductiveAge}",
         "extensionParams": {
           "provider": "pihcore",
           "fragment": "dashboardwidgets/encounters"
@@ -107,7 +107,7 @@
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
         "order": 4,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
+        "require": "${expression.reproductiveAge}",
         "extensionParams": {
           "provider": "coreapps",
           "fragment": "dashboardwidgets/dashboardWidget"
@@ -133,7 +133,7 @@
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
         "order": 2,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
+        "require": "${expression.reproductiveAge}",
         "extensionParams": {
           "provider": "pihcore",
           "fragment": "dashboardwidgets/obsByEncounter"
