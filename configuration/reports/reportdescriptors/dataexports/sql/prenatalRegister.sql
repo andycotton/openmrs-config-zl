@@ -456,6 +456,7 @@ set visit_count =
 	where c.patient_id = t.patient_id
 	and c.encounter_datetime <= t.encounter_datetime
 	and c.visit_type = @prenatal
+	and c.encounter_datetime >= DATE_ADD(NOW(),INTERVAL -9 MONTH)
   	and (c.encounter_datetime >= latest_delivery_datetime_from_prev_pregnancy or latest_delivery_datetime_from_prev_pregnancy is null)
   	and (c.encounter_datetime >= latest_new_prenatal_datetime or latest_new_prenatal_datetime is null)
  	and (c.encounter_datetime > t.latest_postpartum_datetime or t.latest_postpartum_datetime is null));
