@@ -1,68 +1,69 @@
 SET sql_safe_updates = 0;
 SET @locale = GLOBAL_PROPERTY_VALUE('default_locale', 'en');
--- set @startDate = '2024-01-01'; -- for testing
--- set @endDate = '2024-01-31';
+ set @startDate = '2023-10-01'; -- for testing
+ set @endDate = '2024-10-31';
 
 SET @obgyn_encounter = (SELECT encounter_type_id FROM encounter_type WHERE uuid = 'd83e98fd-dc7b-420f-aa3f-36f648b4483d');
 
 DROP TEMPORARY TABLE IF EXISTS temp_obgyn_visit;
 CREATE TEMPORARY TABLE temp_obgyn_visit
 (
-encounter_id                            int(11),      
-encounter_datetime                      datetime,     
-latest_new_prenatal_datetime            datetime,
-latest_postpartum_datetime               datetime,
-visit_id                                int(11),      
-vitals_encounter_id                     int(11),      
-patient_id                              int(11),      
-dossier_id                              varchar(50),  
-first_name                              varchar(50),  
-last_name                               varchar(50),  
-mothers_first_name                      varchar(50),  
-date_of_birth                           datetime,     
-age_at_encounter                        double,       
-address                                 text,         
-date_of_last_menstrual_period           datetime,     
-gestational_age                         int,          
-estimated_delivery_date                 datetime,     
-gravida                                 int,          
-parity                                  int,          
-abortus                                 int,             
-living_children                         int,          
-referral_source                         varchar(255), 
-visit_count                             int,          
-visit_date                              datetime,     
-anti_tetanus_dose                       int,          
-anti_tetanus_vaccination_datetime       datetime,     
-anti_tetanus_vaccination                text,         
-high_risks_for_the_pregnancy            text,         
-hiv_test_obs_id_labs                    int(11),
-hiv_test_encounter_id_labs              int(11),      
-hiv_test_date_labs                      datetime,     
-hiv_test_result_date_labs               datetime,     
-result_labs                             varchar(255), 
-hiv_test_date_form                      datetime,     
-result_form                             varchar(255), 
-pre_counseling_date                     datetime,     
-hiv_test_date                           datetime,     
-hiv_test_result_date                    datetime,     
-result                                  varchar(255), 
-not_tested_for_hiv                      varchar(1),   
-syphillis_details_not_tracked_in_emr    varchar(50),  
-syphiliss_treatment_start_date          datetime,     
-syphillis_treatment_end_date            datetime,     
-on_art_for_hiv_prior_to_pregnancy       varchar(3),   
-additional_hiv_details_not_in_the_emr   varchar(50),  
-weight_in_kg                            double,       
-height_in_m                             double,       
-upper_arm_circumference                 double,       
-malnutrition_malaria_details_not_in_emr varchar(50),  
-malnutrition                            varchar(3),   
-iron_deficiency_anemia                  varchar(3),   
-malaria                                 varchar(3),   
-birth_plan                              varchar(3),   
-accepts_accompanateur                   varchar(3),   
-enrolled_in_mother_support_group        varchar(3)    
+encounter_id                                 int(11),       
+encounter_datetime                           datetime,      
+latest_new_prenatal_datetime                 datetime,     
+latest_postpartum_datetime                   datetime,     
+latest_delivery_datetime_from_prev_pregnancy datetime,     
+visit_id                                     int(11),       
+vitals_encounter_id                          int(11),       
+patient_id                                   int(11),       
+dossier_id                                   varchar(50),   
+first_name                                   varchar(50),   
+last_name                                    varchar(50),   
+mothers_first_name                           varchar(50),   
+date_of_birth                                datetime,      
+age_at_encounter                             double,        
+address                                      text,          
+date_of_last_menstrual_period                datetime,      
+gestational_age                              int,           
+estimated_delivery_date                      datetime,      
+gravida                                      int,           
+parity                                       int,           
+abortus                                      int,           
+living_children                              int,           
+referral_source                              varchar(255),  
+visit_count                                  int,           
+visit_date                                   datetime,      
+anti_tetanus_dose                            int,           
+anti_tetanus_vaccination_datetime            datetime,      
+anti_tetanus_vaccination                     text,          
+high_risks_for_the_pregnancy                 text,          
+hiv_test_obs_id_labs                         int(11),      
+hiv_test_encounter_id_labs                   int(11),       
+hiv_test_date_labs                           datetime,      
+hiv_test_result_date_labs                    datetime,      
+result_labs                                  varchar(255),  
+hiv_test_date_form                           datetime,      
+result_form                                  varchar(255),  
+pre_counseling_date                          datetime,      
+hiv_test_date                                datetime,      
+hiv_test_result_date                         datetime,      
+result                                       varchar(255),  
+not_tested_for_hiv                           varchar(1),    
+syphillis_details_not_tracked_in_emr         varchar(50),   
+syphiliss_treatment_start_date               datetime,      
+syphillis_treatment_end_date                 datetime,      
+on_art_for_hiv_prior_to_pregnancy            varchar(3),    
+additional_hiv_details_not_in_the_emr        varchar(50),   
+weight_in_kg                                 double,        
+height_in_m                                  double,        
+upper_arm_circumference                      double,        
+malnutrition_malaria_details_not_in_emr      varchar(50),   
+malnutrition                                 varchar(3),    
+iron_deficiency_anemia                       varchar(3),    
+malaria                                      varchar(3),    
+birth_plan                                   varchar(3),    
+accepts_accompanateur                        varchar(3),    
+enrolled_in_mother_support_group             varchar(3)     
 );
 
 set @type_visit = concept_from_mapping('PIH','8879');
@@ -73,7 +74,8 @@ FROM encounter e
 INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.voided = 0 and concept_id = @type_visit and value_coded = @prenatal
 WHERE e.voided = 0 AND encounter_type = @obgyn_encounter
 AND ((date(e.encounter_datetime) >=@startDate) or @startDate is null)
-AND ((date(e.encounter_datetime) <=@endDate)  or @endDate is null);
+AND ((date(e.encounter_datetime) <=@endDate)  or @endDate is null)
+;
 
 
 CREATE INDEX temp_obgyn_visit_patient_id ON temp_obgyn_visit (patient_id);
@@ -380,6 +382,18 @@ set @postnatal = concept_from_mapping('PIH','6261');
 set @new_or_followup = concept_from_mapping('PIH','13236');
 set @new = concept_from_mapping('PIH','13235');
 
+-- latest_delivery_datetime_from_prev_pregnancy
+select concept_id into @add from concept where uuid = '5599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+
+set @firstDayCurrentMonth = date(date_add(now(),interval -DAY(now())+1 DAY));
+UPDATE temp_obgyn_visit t
+set latest_delivery_datetime_from_prev_pregnancy = 
+	(select max(value_datetime)
+	from obs o 
+	where o.person_id = t.patient_id
+	and o.concept_id = @add
+	and o.value_datetime < @firstDayCurrentMonth);
+
 DROP TEMPORARY TABLE IF EXISTS temp_visit_counts;
 CREATE TEMPORARY TABLE temp_visit_counts
 (
@@ -393,7 +407,7 @@ encounter_datetime datetime
 insert into temp_visit_counts (patient_id, encounter_id,encounter_datetime) 
 select distinct t.patient_id, e.encounter_id , e.encounter_datetime
 from temp_obgyn_visit t
-inner join encounter e on e.patient_id  = t.patient_id and e.voided = 0 AND encounter_type = @obgyn_encounter
+inner join encounter e on e.patient_id  = t.patient_id and e.voided = 0 AND encounter_type = @obgyn_encounter and DATEDIFF(t.encounter_datetime, e.encounter_datetime) < 270 
 inner join obs o on o.encounter_id = e.encounter_id and o.voided = 0;
 
 create index temp_visit_counts_p on temp_visit_counts(patient_id);
@@ -441,6 +455,8 @@ set visit_count =
 	(select count(*) from temp_visit_counts c
 	where c.patient_id = t.patient_id
 	and c.encounter_datetime <= t.encounter_datetime
+	and c.visit_type = @prenatal
+  	and (c.encounter_datetime >= latest_delivery_datetime_from_prev_pregnancy or latest_delivery_datetime_from_prev_pregnancy is null)
   	and (c.encounter_datetime >= latest_new_prenatal_datetime or latest_new_prenatal_datetime is null)
  	and (c.encounter_datetime > t.latest_postpartum_datetime or t.latest_postpartum_datetime is null));
 
@@ -488,4 +504,4 @@ birth_plan "51 - Plan d'accouchement élaboré",
 accepts_accompanateur "52 - Acceptation accompagnateur",
 enrolled_in_mother_support_group "53 - Inscription club de mères"
 from temp_obgyn_visit
-order by encounter_datetime desc;
+order by visit_date desc;
