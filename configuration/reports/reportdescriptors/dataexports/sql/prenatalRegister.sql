@@ -467,7 +467,6 @@ set visit_count =
 -- Note that much of this is formatted in a non-standard way for our exports.
 -- This is because it is coded to match the physical prenatal register as much as possible
 select 
-patient_id,
 dossier_id "1 - # Dossier",
 first_name "3 - Prénom(s)",
 last_name "3- Surnoms",
