@@ -1,7 +1,7 @@
 SET sql_safe_updates = 0;
 SET @locale = GLOBAL_PROPERTY_VALUE('default_locale', 'en');
--- set @startDate = '2023-10-01'; -- for testing
--- set @endDate = '2024-10-31';
+-- set @startDate = '2024-05-01'; -- for testing
+-- set @endDate = '2024-05-31';
 
 SET @obgyn_encounter = (SELECT encounter_type_id FROM encounter_type WHERE uuid = 'd83e98fd-dc7b-420f-aa3f-36f648b4483d');
 
@@ -385,7 +385,7 @@ set @new = concept_from_mapping('PIH','13235');
 -- latest_delivery_datetime_from_prev_pregnancy
 select concept_id into @add from concept where uuid = '5599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 
-set @firstDayCurrentMonth = date(date_add(now(),interval -DAY(now())+1 DAY));
+set @firstDayCurrentMonth = date(date_add(ifnull(@endDate, NOW()),interval -DAY(ifnull(@endDate, NOW()))+1 DAY));
 UPDATE temp_obgyn_visit t
 set latest_delivery_datetime_from_prev_pregnancy = 
 	(select max(value_datetime)
@@ -408,7 +408,9 @@ insert into temp_visit_counts (patient_id, encounter_id,encounter_datetime)
 select distinct t.patient_id, e.encounter_id , e.encounter_datetime
 from temp_obgyn_visit t
 inner join encounter e on e.patient_id  = t.patient_id and e.voided = 0 AND encounter_type = @obgyn_encounter and DATEDIFF(t.encounter_datetime, e.encounter_datetime) < 270 
-inner join obs o on o.encounter_id = e.encounter_id and o.voided = 0;
+	 and e.encounter_datetime <= t.encounter_datetime
+inner join obs o on o.encounter_id = e.encounter_id and o.voided = 0
+;
 
 create index temp_visit_counts_p on temp_visit_counts(patient_id);
 create index temp_visit_counts_e on temp_visit_counts(encounter_id);
@@ -456,7 +458,7 @@ set visit_count =
 	where c.patient_id = t.patient_id
 	and c.encounter_datetime <= t.encounter_datetime
 	and c.visit_type = @prenatal
-	and c.encounter_datetime >= DATE_ADD(NOW(),INTERVAL -9 MONTH)
+	and c.encounter_datetime >= DATE_ADD(ifnull(@endDate, NOW()),INTERVAL -9 MONTH)
   	and (c.encounter_datetime >= latest_delivery_datetime_from_prev_pregnancy or latest_delivery_datetime_from_prev_pregnancy is null)
   	and (c.encounter_datetime >= latest_new_prenatal_datetime or latest_new_prenatal_datetime is null)
  	and (c.encounter_datetime > t.latest_postpartum_datetime or t.latest_postpartum_datetime is null));
@@ -465,6 +467,7 @@ set visit_count =
 -- Note that much of this is formatted in a non-standard way for our exports.
 -- This is because it is coded to match the physical prenatal register as much as possible
 select 
+patient_id,
 dossier_id "1 - # Dossier",
 first_name "3 - Prénom(s)",
 last_name "3- Surnoms",
