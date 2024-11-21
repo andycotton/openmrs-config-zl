@@ -172,24 +172,6 @@
     "config": {}
   },
   {
-    "id": "mch.dashboard.conditions",
-    "icon": "fas fa-fw fa-user-tag",
-    "label": "coreapps.conditionui.conditions",
-    "extensions": [
-      {
-        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 1,
-        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
-        "extensionParams": {
-          "provider": "coreapps",
-          "fragment": "conditionlist/conditions"
-        }
-      }
-    ],
-    "config": {}
-  },
-  {
     "id": "mch.dashboard.dispensedMeds",
     "icon": "fas fa-fw fa-pills",
     "label": "mirebalais.dispensing.title",
