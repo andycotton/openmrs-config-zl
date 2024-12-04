@@ -72,6 +72,60 @@
     }
   },
   {
+    "id": "mch.dashboard.labResults",
+    "description": "pih.app.lab.results",
+    "order": 0,
+    "icon": "fas fa-vial",
+    "label": "pihcore.lab.lab_results.caps",
+    "config": {
+      "encounterTypes": "${encounterType.LAB_SPECIMEN_COLLECTION.uuid},${encounterType.LAB_RESULTS.uuid},${encounterType.COVID19_INTAKE.uuid},${encounterType.COVID19_FOLLOWUP.uuid},${encounterType.HIV_INTAKE.uuid},${encounterType.HIV_FOLLOWUP.uuid}",
+      "detailsUrl": "owa/labworkflow/index.html?patient={{patient.uuid}}&returnUrl=/openmrs/coreapps/clinicianfacing/patient.page?patientId={{patient.uuid}}#/LabResults",
+      "obsTypes": "LabSet,Test",
+      "labCategoriesSet": "${concept.laboratoryCategories.uuid}",
+      "maxToDisplay": "5"
+    },
+    "extensions": [
+      {
+        "id": "pih.app.lab.results.firstColumn",
+        "appId": "mch.dashboard.labResults",
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "type": "link",
+        "label": "pihcore.lab.lab_results.caps",
+        "url": null,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "order": 8,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/labResults"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mch.dashboard.momStatus",
+    "order": 1,
+    "config": {
+      "widget": "latestobsforconceptlist",
+      "icon": "fas fa-fw fa-female",
+      "label": "pihcore.status.ucase",
+      "concepts": "${concept.momGroup.uuid},${concept.lastHIVTest.uuid}"
+    },
+    "extensions": [
+      {
+        "id": "mch.dashboard.momStatus.extension",
+        "appId": "mch.dashboard.momStatus",
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 1,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "${expression.reproductiveAge}",
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ]
+  },
+  {
     "id": "mch.dashboard.weightGraph",
     "icon": "fas fa-fw fa-chart-bar",
     "label": "WEIGHT",
@@ -129,6 +183,8 @@
     "label": "pihcore.riskFactors.ucase",
     "extensions": [
       {
+        "id": "mch.dashboard.riskFactors",
+        "appId": "mch.dashboard.riskFactors",
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
         "order": 2,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
