@@ -126,6 +126,52 @@
     ]
   },
   {
+    "id": "mch.dashboard.babyStatus",
+    "order": 1,
+    "config": {
+      "widget": "latestobsforconceptlist",
+      "icon": "fas fa-fw fa-baby",
+      "label": "pihcore.status.ucase",
+      "concepts": "${concept.feedingMethod.uuid}"
+    },
+    "extensions": [
+      {
+        "id": "mch.dashboard.babyStatus.extension",
+        "appId": "mch.dashboard.babyStatus",
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 1,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "${expression.baby}",
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ]
+  },
+  {
+  "id": "mch.dashboard.conditionList",
+  "description": "coreapps.conditionList",
+  "icon": "fas fa-fw fa-user-tag",
+  "label": "coreapps.conditionui.conditions",
+  "order": 2,
+  "requiredPrivilege": "Task: Manage Condition Lists",
+  "extensions": [
+    {
+      "id": "coreapps.conditionList.firstColumn",
+      "appId": "mch.dashboard.conditionList",
+      "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+      "type": "link",
+      "order": 2,
+      "requiredPrivilege": "Task: Manage Condition Lists",
+      "extensionParams": {
+        "fragment": "conditionlist/conditions",
+        "provider": "coreapps"
+      }
+    }
+  ]
+},
+  {
     "id": "mch.dashboard.weightGraph",
     "icon": "fas fa-fw fa-chart-bar",
     "label": "WEIGHT",
@@ -133,7 +179,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 3,
+        "order": 4,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": null,
         "extensionParams": {
@@ -159,7 +205,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 4,
+        "order": 6,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": "${expression.reproductiveAge}",
         "extensionParams": {
@@ -186,7 +232,7 @@
         "id": "mch.dashboard.riskFactors",
         "appId": "mch.dashboard.riskFactors",
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 2,
+        "order": 8,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": "${expression.reproductiveAge}",
         "extensionParams": {
@@ -216,7 +262,7 @@
         "id": "mch.dashboard.vitalTrends.extension",
         "appId": "mch.dashboard.vitalTrends",
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 3,
+        "order": 10,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": null,
         "extensionParams": {
@@ -242,7 +288,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 6,
+        "order": 12,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": null,
         "extensionParams": {
@@ -261,7 +307,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 7,
+        "order": 14,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": null,
         "extensionParams": {
