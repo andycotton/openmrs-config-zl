@@ -36,6 +36,12 @@
             <!-- Concept: ZL laboratory categories -->
             <value>2ceab591-9edc-4ef1-a409-e437cfe65271</value>
         </globalProperty>
+        <globalProperty>
+            <property>orderentryowa.orderReasonsMap</property>
+            <!-- maps viral load panel to the reason for test -->
+            <value>d760dcec-f2b3-46c5-a6af-7e83c2165fd1=164126AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+        </globalProperty>
+
 
         <!-- Lab Workflow OWA -->
         <globalProperty>
