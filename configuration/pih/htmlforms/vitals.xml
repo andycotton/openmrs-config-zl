@@ -649,122 +649,126 @@
 				<obs conceptId="CIEL:163187" id="muac_mm" showUnits="emr.units.millimeters" unitsCssClass="append-to-value" />
 			</p>
 		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.map.short" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.map" />
-			</h3>
-			<!-- only show/handle the lbs field if we are in 'ENTER' or 'EDIT' mode -->
-			<p class="left">
-				<obs conceptId="PIH:HEIGHT (CM)" id="height_cm" showUnits="mmHg" unitsCssClass="append-to-value" />
-			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.bood.glucose" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.bood.glucose" />
-			</h3>
-			<ifMode mode="VIEW" include="false">
+
+		<ifMode mode="VIEW" include="false">
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="mirebalais.vitals.map.short" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.map" />
+				</h3>
+				<!-- only show/handle the lbs field if we are in 'ENTER' or 'EDIT' mode -->
 				<p class="left">
-					<span class="obs-field">
-						<input type="text" id="milligramme" class="number numeric-range milligramme " />
-						<span class="append-to-value">
-							<uimessage code="mg/dL" />
+					<obs conceptId="PIH:HEIGHT (CM)" id="height_cm" showUnits="mmHg" unitsCssClass="append-to-value" />
+				</p>
+			</fieldset>
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="mirebalais.vitals.blood.glucose" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.blood.glucose" />
+				</h3>
+				<ifMode mode="VIEW" include="false">
+					<p class="left">
+						<span class="obs-field">
+							<input type="text" id="milligramme" class="number numeric-range milligramme " />
+							<span class="append-to-value">
+								<uimessage code="mg/dL" />
+							</span>
+							<span class="error field-error" style="display: none" />
 						</span>
-						<span class="error field-error" style="display: none" />
-					</span>
-				</p>
+					</p>
+					<p class="left">
+						<uimessage code="mirebalais.vitals.or" />
+					</p>
+				</ifMode>
 				<p class="left">
-					<uimessage code="mirebalais.vitals.or" />
+					<obs conceptId="CIEL:887" id="milimole" showUnits="mmol/L" unitsCssClass="append-to-value" />
 				</p>
-			</ifMode>
-			<p class="left">
-				<obs conceptId="CIEL:887" id="milimole" showUnits="mmol/L" unitsCssClass="append-to-value" />
-			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.oxygen.flow.rate" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.oxygen.flow.rate" />
-			</h3>
-			<p class="left">
-				<obs conceptId="CIEL:165986" showUnits=" lt" />
-			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.gcs.short" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.gcs" />
-			</h3>
-			<p class="left">
-				<obs conceptId="CIEL:160347" />
-			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.rass.short" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.rass" />
-			</h3>
-			<p class="left">
-				<obs conceptId="PIH:20664" />
-			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="pihcore.pain" />
-			</legend>
-			<h5>
-				<uimessage code="mirebalais.vitals.pain.scale" />
-			</h5>
-			<p class="left">
-				<obs conceptId="PIH:20668" />
-			</p>
-			<br />
-			<br />
-			<h5>
-				<uimessage code="mirebalais.vitals.svs" />
-			</h5>
-			<p class="left">
-				<obs conceptId="PIH:20665" />
-			</p>
-			<br />
-			<br />
-			<h5>
-				<uimessage code="mirebalais.vitals.nrs" />
-			</h5>
-			<p class="left">
-				<obs conceptId="PIH:20667" />
-			</p>
-			<br />
-			<br />
-			<h5>
-				<uimessage code="mirebalais.vitals.bps" />
-			</h5>
-			<p class="left">
-				<obs conceptId="PIH:20668" />
-			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.fetal.heart.rate.short" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.fetal.heart.rate" />
-			</h3>
-			<p class="left">
-				<obs conceptId="CIEL:1440" />
-			</p>
-		</fieldset>
+			</fieldset>
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="mirebalais.vitals.oxygen.flow.rate" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.oxygen.flow.rate" />
+				</h3>
+				<p class="left">
+					<obs conceptId="CIEL:165986" showUnits=" lt" />
+				</p>
+			</fieldset>
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="mirebalais.vitals.gcs.short" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.gcs" />
+				</h3>
+				<p class="left">
+					<obs conceptId="CIEL:160347" />
+				</p>
+			</fieldset>
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="mirebalais.vitals.rass.short" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.rass" />
+				</h3>
+				<p class="left">
+					<obs conceptId="PIH:20664" />
+				</p>
+			</fieldset>
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="pihcore.pain" />
+				</legend>
+				<h5>
+					<uimessage code="mirebalais.vitals.pain.scale" />
+				</h5>
+				<p class="left">
+					<obs conceptId="PIH:20668" />
+				</p>
+				<br />
+				<br />
+				<h5>
+					<uimessage code="mirebalais.vitals.svs" />
+				</h5>
+				<p class="left">
+					<obs conceptId="PIH:20665" />
+				</p>
+				<br />
+				<br />
+				<h5>
+					<uimessage code="mirebalais.vitals.nrs" />
+				</h5>
+				<p class="left">
+					<obs conceptId="PIH:20667" />
+				</p>
+				<br />
+				<br />
+				<h5>
+					<uimessage code="mirebalais.vitals.bps" />
+				</h5>
+				<p class="left">
+					<obs conceptId="PIH:20668" />
+				</p>
+			</fieldset>
+			<fieldset field-separator=" ">
+				<legend>
+					<uimessage code="mirebalais.vitals.fhr" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.fetal.heart.rate" />
+				</h3>
+				<p class="left">
+					<obs conceptId="CIEL:1440" />
+				</p>
+			</fieldset>
+		</ifMode>
+
 		<!-- only show Head circumference if patient is less than 3 years old (on the encounterDate) -->
 		<includeIf velocityTest="3 > $patient.getAge($encounter.getEncounterDatetime())">
 			<fieldset>
@@ -800,17 +804,20 @@
 				</p>
 			</fieldset>
 		</includeIf>
-		<fieldset>
-			<legend>
-				<uimessage code="mirebalais.vitals.complaint.title" />
-			</legend>
-			<h3>
-				<uimessage code="mirebalais.vitals.complaint.title" />
-			</h3>
-			<p>
-				<obs conceptId="CIEL:160531" id="chief_complaint" />
-			</p>
-		</fieldset>
+
+		<ifMode mode="VIEW" include="false">
+			<fieldset>
+				<legend>
+					<uimessage code="mirebalais.vitals.complaint.title" />
+				</legend>
+				<h3>
+					<uimessage code="mirebalais.vitals.complaint.title" />
+				</h3>
+				<p>
+					<obs conceptId="CIEL:160531" id="chief_complaint" />
+				</p>
+			</fieldset>
+		</ifMode>
 	</section>
 	<submit />
 </htmlform>
