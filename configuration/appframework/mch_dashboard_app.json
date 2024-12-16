@@ -109,7 +109,7 @@
       "widget": "latestobsforconceptlist",
       "icon": "fas fa-fw fa-female",
       "label": "pihcore.status.ucase",
-      "concepts": "${concept.momGroup.uuid},${concept.lastHIVTest.uuid}"
+      "concepts": "${concept.momGroup.uuid},${concept.fPmethod.uuid}"
     },
     "extensions": [
       {
