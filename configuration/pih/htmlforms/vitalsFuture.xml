@@ -11,7 +11,8 @@
 ~
 ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
 -->
-<htmlform id="vitals-form" formUuid="68728aa6-4985-11e2-8815-657001b58a90" formName="Vitals" formEncounterType="4fb47712-34a6-40d2-8ed3-e153abbd25b7" formVersion="2.2">
+<htmlform id="vitals-form-future" formUuid="b0ed8e1a-3722-431b-9122-f06e458de281" formName="Vitals"
+		  formEncounterType="17c41bd2-0caf-40e1-994c-4c8ef43cf716" formVersion="2.2">
 	<translations defaultLocale="en">
 		<code name="o2Sat">
 			<variant locale="en" value="O&lt;sub>2&lt;/sub> Sat" />
@@ -756,7 +757,7 @@
 					<obs conceptId="PIH:20668" />
 				</p>
 			</fieldset>
-			
+
 			<includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 12) &amp;&amp; $patient.gender == 'F'">
 				<fieldset field-separator=" ">
 					<legend>
