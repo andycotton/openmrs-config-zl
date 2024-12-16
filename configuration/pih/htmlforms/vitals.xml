@@ -756,17 +756,20 @@
 					<obs conceptId="PIH:20668" />
 				</p>
 			</fieldset>
-			<fieldset field-separator=" ">
-				<legend>
-					<uimessage code="mirebalais.vitals.fhr" />
-				</legend>
-				<h3>
-					<uimessage code="mirebalais.vitals.fetal.heart.rate" />
-				</h3>
-				<p class="left">
-					<obs conceptId="CIEL:1440" />
-				</p>
-			</fieldset>
+			
+			<includeIf velocityTest="($patient.getAge($encounter.getEncounterDatetime()) &gt; 12) &amp;&amp; $patient.gender == 'F'">
+				<fieldset field-separator=" ">
+					<legend>
+						<uimessage code="mirebalais.vitals.fhr" />
+					</legend>
+					<h3>
+						<uimessage code="mirebalais.vitals.fetal.heart.rate" />
+					</h3>
+					<p class="left">
+						<obs conceptId="CIEL:1440" />
+					</p>
+				</fieldset>
+			</includeIf>
 		</ifMode>
 
 		<!-- only show Head circumference if patient is less than 3 years old (on the encounterDate) -->
