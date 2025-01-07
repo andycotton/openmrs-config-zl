@@ -938,7 +938,7 @@
                         <orderProperty name="drugNonCoded" label="Non-coded Formulation"/>
                     </div>
                     <div style="padding:0px;">
-                        <orderProperty name="orderReason" label="Order Reason">
+                        <orderProperty name="orderReason" label="pihcore.orderReason">
                             <option value="138405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="pihcore.hiv.treatment"/>
                             <option value="163768AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="pihcore.hiv.prophylaxis" />
                             <option value="160538AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="pihcore.pmtct"/>
