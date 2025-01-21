@@ -651,7 +651,7 @@
 		</fieldset>
 		<fieldset field-separator=" ">
 			<legend>
-				<uimessage code="mirebalais.vitals.map" />
+				<uimessage code="mirebalais.vitals.map.short" />
 			</legend>
 			<h3>
 				<uimessage code="mirebalais.vitals.map" />
@@ -663,10 +663,10 @@
 		</fieldset>
 		<fieldset field-separator=" ">
 			<legend>
-				<uimessage code="mirebalais.vitals.bood.glucose" />
+				<uimessage code="mirebalais.vitals.blood.glucose" />
 			</legend>
 			<h3>
-				<uimessage code="mirebalais.vitals.bood.glucose" />
+				<uimessage code="mirebalais.vitals.blood.glucose" />
 			</h3>
 			<ifMode mode="VIEW" include="false">
 				<p class="left">
@@ -699,7 +699,7 @@
 		</fieldset>
 		<fieldset field-separator=" ">
 			<legend>
-				<uimessage code="mirebalais.vitals.gcs" />
+				<uimessage code="mirebalais.vitals.gcs.short" />
 			</legend>
 			<h3>
 				<uimessage code="mirebalais.vitals.gcs" />
@@ -710,7 +710,7 @@
 		</fieldset>
 		<fieldset field-separator=" ">
 			<legend>
-				<uimessage code="mirebalais.vitals.rass" />
+				<uimessage code="mirebalais.vitals.rass.short" />
 			</legend>
 			<h3>
 				<uimessage code="mirebalais.vitals.rass" />
@@ -719,9 +719,10 @@
 				<obs conceptId="PIH:20664" />
 			</p>
 		</fieldset>
+
 		<fieldset field-separator=" ">
 			<legend>
-				<uimessage code="mirebalais.vitals.pain.scale" />
+				<uimessage code="pihcore.pain" />
 			</legend>
 			<h3>
 				<uimessage code="mirebalais.vitals.pain.scale" />
@@ -729,33 +730,24 @@
 			<p class="left">
 				<obs conceptId="PIH:20668" />
 			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.svs" />
-			</legend>
+			<br/><br/>
+
 			<h3>
 				<uimessage code="mirebalais.vitals.svs" />
 			</h3>
 			<p class="left">
 				<obs conceptId="PIH:20665" />
 			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.nrs" />
-			</legend>
+			<br/><br/>
+
 			<h3>
 				<uimessage code="mirebalais.vitals.nrs" />
 			</h3>
 			<p class="left">
 				<obs conceptId="PIH:20667" />
 			</p>
-		</fieldset>
-		<fieldset field-separator=" ">
-			<legend>
-				<uimessage code="mirebalais.vitals.bps" />
-			</legend>
+			<br/><br/>
+
 			<h3>
 				<uimessage code="mirebalais.vitals.bps" />
 			</h3>
@@ -776,6 +768,7 @@
 				</p>
 			</fieldset>
 		</includeIf>
+
 		<!-- only show Head circumference if patient is less than 3 years old (on the encounterDate) -->
 		<includeIf velocityTest="3 > $patient.getAge($encounter.getEncounterDatetime())">
 			<fieldset>

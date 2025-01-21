@@ -663,10 +663,10 @@
 		</fieldset>
 		<fieldset field-separator=" ">
 			<legend>
-				<uimessage code="mirebalais.vitals.bood.glucose" />
+				<uimessage code="mirebalais.vitals.blood.glucose" />
 			</legend>
 			<h3>
-				<uimessage code="mirebalais.vitals.bood.glucose" />
+				<uimessage code="mirebalais.vitals.blood.glucose" />
 			</h3>
 			<ifMode mode="VIEW" include="false">
 				<p class="left">
