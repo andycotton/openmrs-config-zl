@@ -410,7 +410,7 @@
 					<span>
 						<p class="required">
 							<field>
-								<encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Vitals Location" />
+								<encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Vitals ANC Location" />
 							</field>
 						</p>
 					</span>
@@ -442,7 +442,7 @@
 					<span>
 						<p class="required">
 							<field>
-								<encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Vitals Location" />
+								<encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Vitals ANC Location" />
 							</field>
 						</p>
 					</span>
