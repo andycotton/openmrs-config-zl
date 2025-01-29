@@ -4,7 +4,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
-        "order": 1,
+        "order": 3,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": null,
         "extensionParams": {
@@ -14,7 +14,7 @@
       }
     ],
     "config": {
-      "label": "coreapps.clinicianfacing.recentVisits"
+      "label": "pihcore.allVisits"
     }
   },
   {
@@ -25,7 +25,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
-        "order": 2,
+        "order": 1,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": "${expression.reproductiveAge}",
         "extensionParams": {
@@ -53,7 +53,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
-        "order": 3,
+        "order": 2,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": "${expression.reproductiveAge}",
         "extensionParams": {
@@ -71,6 +71,36 @@
       ],
       "duringCurrentEnrollmentInProgram": "${program.mch.uuid}"
     }
+  },
+  {
+    "id": "mch.dashboard.labHemoglobin",
+    "description": "pih.app.lab.results.hemoglobin",
+    "order": 0,
+    "icon": "fas fa-tint",
+    "label": "pihcore.lab.hemoglobin.caps",
+    "config": {
+      "encounterTypes": "${encounterType.LAB_SPECIMEN_COLLECTION.uuid},${encounterType.LAB_RESULTS.uuid},${encounterType.COVID19_INTAKE.uuid},${encounterType.COVID19_FOLLOWUP.uuid},${encounterType.HIV_INTAKE.uuid},${encounterType.HIV_FOLLOWUP.uuid}",
+      "detailsUrl": "owa/labworkflow/index.html?patient={{patient.uuid}}&returnUrl=/openmrs/coreapps/clinicianfacing/patient.page?patientId={{patient.uuid}}#/LabResults",
+      "obsTypes": "LabSet,Test",
+      "labCategoriesSet": "${concept.hemoglobin.uuid}",
+      "maxToDisplay": "2"
+    },
+    "extensions": [
+      {
+        "id": "pih.app.lab.results.hb.firstColumn",
+        "appId": "mch.dashboard.labHemoglobin",
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "type": "link",
+        "label": "pihcore.lab.hemoglobin.caps",
+        "url": null,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "order": 4,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/labResults"
+        }
+      }
+    ]
   },
   {
     "id": "mch.dashboard.labResults",
@@ -151,27 +181,85 @@
     ]
   },
   {
-  "id": "mch.dashboard.conditionList",
-  "description": "coreapps.conditionList",
-  "icon": "fas fa-fw fa-user-tag",
-  "label": "coreapps.conditionui.conditions",
-  "order": 2,
-  "requiredPrivilege": "Task: Manage Condition Lists",
-  "extensions": [
-    {
-      "id": "coreapps.conditionList.firstColumn",
-      "appId": "mch.dashboard.conditionList",
-      "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-      "type": "link",
-      "order": 2,
-      "requiredPrivilege": "Task: Manage Condition Lists",
-      "extensionParams": {
-        "fragment": "conditionlist/conditions",
-        "provider": "coreapps"
+    "id": "mch.dashboard.vitalTrends",
+    "icon": "fas fa-fw fa-heartbeat",
+    "label": "mirebalais.vitalsTrend.label",
+    "extensions": [
+      {
+        "id": "mch.dashboard.vitalTrends.extension",
+        "appId": "mch.dashboard.vitalTrends",
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 2,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
       }
+    ],
+    "config": {
+      "widget": "obsacrossencounters",
+      "icon": "fas fa-fw fa-heartbeat",
+      "label": "mirebalais.vitalsTrend.label",
+      "headers": "coreapps.date,mirebalais.vitals.short.heartRate.title,mirebalais.vitals.short.temperature.title,mirebalais.vitals.systolic.bp.short.title,mirebalais.vitals.diastolic.bp.short.title,mirebalais.vitals.respiratoryRate.short.title",
+      "concepts": "${concept.pulse.uuid},${concept.temperature.uuid},${concept.systolicBloodPressure.uuid},${concept.diastolicBloodPressure.uuid},${concept.respiratoryRate.uuid}",
+      "encounterTypes": "${encounterType.VITALS.uuid},${encounterType.OB_GYN.uuid}",
+      "maxRecords": "2"
     }
-  ]
-},
+  },
+  {
+    "id": "mch.dashboard.riskFactors",
+    "icon": "fas fa-fw fa-exclamation-triangle",
+    "label": "pihcore.riskFactors.ucase",
+    "extensions": [
+      {
+        "id": "mch.dashboard.riskFactors",
+        "appId": "mch.dashboard.riskFactors",
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 4,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "${expression.reproductiveAge}",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/obsByEncounter"
+        }
+      }
+    ],
+    "config": {
+      "headers": [
+        "coreapps.date",
+        "pihcore.riskFactors"
+      ],
+      "concepts": [
+        "${concept.pregnancyRiskFactors.uuid}",
+        "${concept.complicationsAtDelivery.uuid}"
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}"
+    }
+  },
+  {
+    "id": "mch.dashboard.dispensedMeds",
+    "icon": "fas fa-fw fa-pills",
+    "label": "mirebalais.dispensing.title",
+    "url": "dispensing/patient.page?patientId={{patient.uuid}}",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
+        "order": 6,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/medsDispensed"
+        }
+      }
+    ],
+    "config": {
+      "maxDatesToShow": 5,
+      "detailsUrl": "pihcore/meds/dispensingSummary.page?patientId={{patient.uuid}}"
+    }
+  },
   {
     "id": "mch.dashboard.weightGraph",
     "icon": "fas fa-fw fa-chart-bar",
@@ -180,7 +268,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 4,
+        "order": 7,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": null,
         "extensionParams": {
@@ -206,7 +294,7 @@
     "extensions": [
       {
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 6,
+        "order": 8,
         "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
         "require": "${expression.reproductiveAge}",
         "extensionParams": {
@@ -225,62 +313,26 @@
     }
   },
   {
-    "id": "mch.dashboard.riskFactors",
-    "icon": "fas fa-fw fa-exclamation-triangle",
-    "label": "pihcore.riskFactors.ucase",
+    "id": "mch.dashboard.conditionList",
+    "description": "coreapps.conditionList",
+    "icon": "fas fa-fw fa-user-tag",
+    "label": "coreapps.conditionui.conditions",
+    "order": 9,
+    "requiredPrivilege": "Task: Manage Condition Lists",
     "extensions": [
       {
-        "id": "mch.dashboard.riskFactors",
-        "appId": "mch.dashboard.riskFactors",
+        "id": "coreapps.conditionList.firstColumn",
+        "appId": "mch.dashboard.conditionList",
         "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 8,
-        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": "${expression.reproductiveAge}",
+        "type": "link",
+        "order": 9,
+        "requiredPrivilege": "Task: Manage Condition Lists",
         "extensionParams": {
-          "provider": "pihcore",
-          "fragment": "dashboardwidgets/obsByEncounter"
+          "fragment": "conditionlist/conditions",
+          "provider": "coreapps"
         }
       }
-    ],
-    "config": {
-      "headers": [
-        "coreapps.date",
-        "pihcore.riskFactors"
-      ],
-      "concepts": [
-        "${concept.pregnancyRiskFactors.uuid}",
-        "${concept.complicationsAtDelivery.uuid}"
-      ],
-      "duringCurrentEnrollmentInProgram": "${program.mch.uuid}"
-    }
-  },
-  {
-    "id": "mch.dashboard.vitalTrends",
-    "icon": "fas fa-fw fa-heartbeat",
-    "label": "mirebalais.vitalsTrend.label",
-    "extensions": [
-      {
-        "id": "mch.dashboard.vitalTrends.extension",
-        "appId": "mch.dashboard.vitalTrends",
-        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 10,
-        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
-        "extensionParams": {
-          "provider": "coreapps",
-          "fragment": "dashboardwidgets/dashboardWidget"
-        }
-      }
-    ],
-    "config": {
-      "widget": "obsacrossencounters",
-      "icon": "fas fa-fw fa-heartbeat",
-      "label": "mirebalais.vitalsTrend.label",
-      "headers": "coreapps.date,mirebalais.vitals.short.heartRate.title,mirebalais.vitals.short.temperature.title,mirebalais.vitals.systolic.bp.short.title,mirebalais.vitals.diastolic.bp.short.title,mirebalais.vitals.respiratoryRate.short.title",
-      "concepts": "${concept.pulse.uuid},${concept.temperature.uuid},${concept.systolicBloodPressure.uuid},${concept.diastolicBloodPressure.uuid},${concept.respiratoryRate.uuid}",
-      "encounterTypes": "${encounterType.VITALS.uuid},${encounterType.OB_GYN.uuid}",
-      "maxRecords": "2"
-    }
+    ]
   },
   {
     "id": "mch.dashboard.allergies",
@@ -299,27 +351,5 @@
       }
     ],
     "config": {}
-  },
-  {
-    "id": "mch.dashboard.dispensedMeds",
-    "icon": "fas fa-fw fa-pills",
-    "label": "mirebalais.dispensing.title",
-    "url": "dispensing/patient.page?patientId={{patient.uuid}}",
-    "extensions": [
-      {
-        "extensionPointId": "${program.mch.uuid}.secondColumnFragments",
-        "order": 14,
-        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
-        "require": null,
-        "extensionParams": {
-          "provider": "pihcore",
-          "fragment": "dashboardwidgets/medsDispensed"
-        }
-      }
-    ],
-    "config": {
-      "maxDatesToShow": 5,
-      "detailsUrl": "pihcore/meds/dispensingSummary.page?patientId={{patient.uuid}}"
-    }
   }
 ]
