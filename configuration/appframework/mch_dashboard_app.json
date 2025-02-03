@@ -133,6 +133,57 @@
     ]
   },
   {
+    "id": "mch.dashboard.vaccinations.mother",
+    "icon": "fas fa-fw fa-syringe",
+    "label": "mirebalais.vaccinations.title",
+    "url": "/pihcore/patient/vaccinations.page?patientId={{patient.uuid}}",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "order": 9,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "${expression.reproductiveAge}",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/vaccinations",
+          "fragmentConfig": {
+            "vaccinations": [
+              "${concept.diptheriaTetanusVaccination.uuid}",
+              "${concept.measlesRubellaVaccination.uuid}"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "mch.dashboard.vaccinations.baby",
+    "icon": "fas fa-fw fa-syringe",
+    "label": "mirebalais.vaccinations.title",
+    "url": "/pihcore/patient/vaccinations.page?patientId={{patient.uuid}}",
+    "extensions": [
+      {
+        "extensionPointId": "${program.mch.uuid}.firstColumnFragments",
+        "order": 10,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "${expression.baby}",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/vaccinations",
+          "fragmentConfig": {
+            "vaccinations": [
+              "${concept.bcgVaccination.uuid}",
+              "${concept.pentavalentVaccination.uuid}",
+              "${concept.pneumococcalVaccination.uuid}",
+              "${concept.measlesRubellaVaccination.uuid}",
+              "${concept.polioVaccination.uuid}"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
     "id": "mch.dashboard.momStatus",
     "order": 1,
     "config": {
