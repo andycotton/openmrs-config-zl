@@ -205,7 +205,8 @@
       "headers": "coreapps.date,mirebalais.vitals.short.heartRate.title,mirebalais.vitals.short.temperature.title,mirebalais.vitals.systolic.bp.short.title,mirebalais.vitals.diastolic.bp.short.title,mirebalais.vitals.respiratoryRate.short.title",
       "concepts": "${concept.pulse.uuid},${concept.temperature.uuid},${concept.systolicBloodPressure.uuid},${concept.diastolicBloodPressure.uuid},${concept.respiratoryRate.uuid}",
       "encounterTypes": "${encounterType.VITALS.uuid},${encounterType.OB_GYN.uuid}",
-      "maxRecords": "2"
+      "maxRecords": "2",
+      "sortOrder": "desc"
     }
   },
   {
