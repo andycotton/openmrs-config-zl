@@ -1,0 +1,30 @@
+key: "mentalhealthdiagnoses"
+uuid: "46bacbfa-8b35-4338-b5f2-789892b81a4e"
+name: "mirebalaisreports.mentalhealthdiagnoses.name"
+description: "mirebalaisreports.mentalhealthdiagnoses.description"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "mentalhealthdiagnoses"
+    type: "sql"
+    config: "sql/mh_diagnoses.sql"
+designs:
+  - type: "csv"
+    properties:
+      "characterEncoding": "ISO-8859-1"
+      "blacklistRegex": "[^\\p{InBasicLatin}\\p{L}]"
+      "dateFormat": "dd-MMM-yyyy HH:mm:ss"
+config:
+  category: "dataExport"
+  countries:
+    - "HAITI"   
+  order: 70
+  components:
+    - "mentalHealth"
+    - "allDataExports"
+  privilege: "Task: clinical.reports"
