@@ -1,0 +1,30 @@
+key: "mentalhealthmedications"
+uuid: "400d1f36-f9fb-4287-b25c-5b19fe37e69f"
+name: "mirebalaisreports.mentalhealthmedications.name"
+description: "mirebalaisreports.mentalhealthmedications.description"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "mentalhealthmedications"
+    type: "sql"
+    config: "sql/mh_medications.sql"
+designs:
+  - type: "csv"
+    properties:
+      "characterEncoding": "ISO-8859-1"
+      "blacklistRegex": "[^\\p{InBasicLatin}\\p{L}]"
+      "dateFormat": "dd-MMM-yyyy HH:mm:ss"
+config:
+  category: "dataExport"
+  countries:
+    - "HAITI"   
+  order: 70
+  components:
+    - "mentalHealth"
+    - "allDataExports"
+  privilege: "Task: clinical.reports"
