@@ -18,8 +18,6 @@ medication_name varchar(500),
 dosage int,
 dosage_unit varchar(50)
 );
-set @startDate='2025-02-01';
-set @endDate='2025-03-05';
 
 DROP TABLE IF EXISTS temp_encounter;
 CREATE TEMPORARY TABLE temp_encounter AS 
